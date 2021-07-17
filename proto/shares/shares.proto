@@ -1,0 +1,30 @@
+syntax = "proto3"; // 指定proto版本
+
+package shares;     // 指定包名
+import "common/common_public.proto";
+
+option go_package = "rpc/shares"; // 指定路径
+
+// 定义shares服务
+service shares {
+    // Oauth 微信授权
+    rpc Oauth(OauthReq) returns (OauthResp) {}
+}
+
+// 定义shares服务
+service weixin {
+    // Oauth 微信授权
+    rpc Oauth(OauthReq) returns (OauthResp) {}
+}
+
+// OauthReq 微信授权
+message OauthReq {
+    string jscode = 1; // 微信端jscode
+}
+
+// OauthResp 微信授权返回值
+message OauthResp {
+    string sessionId = 1;// 用户sessionid 用于当前交互使用
+    string openId = 2;// openid
+	int64 overdueTime = 3;// 逾期时间点(时间戳)
+}
