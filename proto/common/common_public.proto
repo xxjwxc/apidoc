@@ -9,6 +9,10 @@ package common;     // 指定包名
 option go_package = "rpc/common"; // 指定包路径
 
 message ResultResp {
-	bool result = 1;
-	string msg = 2;
+	// bool status = 1;
+	string msg = 1;
+}
+
+message Empty {
+	
 }
