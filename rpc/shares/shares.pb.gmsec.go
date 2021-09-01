@@ -8,6 +8,9 @@ import (
 	client "github.com/gmsec/micro/client"
 	server "github.com/gmsec/micro/server"
 	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
+	common "rpc/common"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -25,6 +28,8 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type SharesClient interface {
+	// GetGroup 获取分组信息
+	GetGroup(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetGroupResp, error)
 }
 
 type sharesClient struct {
@@ -52,22 +57,65 @@ func NewSharesClient(cc client.Client) SharesClient {
 	return &sharesClient{cc}
 }
 
+func (c *sharesClient) GetGroup(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetGroupResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetGroupResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SharesServer is the server API for Shares service.
 type SharesServer interface {
+	// GetGroup 获取分组信息
+	GetGroup(context.Context, *common.Empty) (*GetGroupResp, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
 type UnimplementedSharesServer struct {
 }
 
+func (*UnimplementedSharesServer) GetGroup(context.Context, *common.Empty) (*GetGroupResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGroup not implemented")
+}
+
 func RegisterSharesServer(s server.Server, srv SharesServer) {
 	s.GetServer().RegisterService(&_Shares_serviceDesc, srv)
+}
+
+func _Shares_GetGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetGroup(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 var _Shares_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.shares",
 	HandlerType: (*SharesServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams:     []grpc.StreamDesc{},
-	Metadata:    "shares/shares.proto",
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetGroup",
+			Handler:    _Shares_GetGroup_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "shares/shares.proto",
 }

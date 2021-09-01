@@ -7,4 +7,27 @@ option go_package = "rpc/shares"; // 指定路径
 
 // 定义shares服务
 service shares {
+    // GetGroup 获取分组信息
+    rpc GetGroup(common.Empty) returns (GetGroupResp) {}
+}
+
+// SharesInfo 股票信息
+message SharesInfo{
+    string code = 1;// 股票代码
+	string simpleCode =2;// 股票代码简写
+    string ext = 3;// 后缀
+	string name = 4;// 股票名字
+    float price = 5;// 当前价格
+    int32 percent = 6;// 百分比
+    string color = 7;// 颜色
+}
+
+message Group {
+    string name = 1;// 分组名
+    repeated SharesInfo list = 2;// 列表
+}
+
+// GetGroupResp 请求结构
+message GetGroupResp {
+    repeated Group list = 1;// 列表 
 }
