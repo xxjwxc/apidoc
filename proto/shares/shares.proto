@@ -11,6 +11,12 @@ service shares {
     rpc GetGroup(common.Empty) returns (GetGroupResp) {}
      // Search 搜索
      rpc Search(SearchReq) returns (SearchResp) {}
+     // Gets 精确查找代码
+     rpc Gets(GetsReq) returns (GetsResp){}
+     // GetAllCodeName 获取所有中文
+     rpc GetAllCodeName(common.Empty) returns (GetAllCodeNameResp){}
+
+
 }
 
 // SharesInfo 股票信息
@@ -22,6 +28,7 @@ message SharesInfo{
     double price = 5;// 当前价格
     double percent = 6;// 百分比
     string color = 7;// 颜色
+    string img = 8;// 图片地址
 }
 
 message Group {
@@ -42,4 +49,30 @@ message SearchReq{
 // SearchReq 搜索请求
 message SearchResp{
     SharesInfo info = 1;// 返回信息
+}
+
+message GetsReq {
+    repeated string codes = 1;// 股票代码
+}
+
+// SimpleSharesInfo 股票信息
+message SimpleSharesInfo{
+    string code = 1;// 股票代码
+    double price = 5;// 当前价格
+    double percent = 6;// 百分比
+    string color = 7;// 颜色
+}
+
+
+message GetsResp {
+    repeated SimpleSharesInfo list = 2;// 列表(只返回价格相关的信息(code,price,percent,color))
+}
+
+message CodeNameInfo{
+    string code = 1;// 股票代码
+	string name = 4;// 股票名字
+}
+
+message GetAllCodeNameResp{
+    repeated CodeNameInfo list = 1;// 代码列表
 }

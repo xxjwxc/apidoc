@@ -34,6 +34,8 @@ type WeixinClient interface {
 	UpdateUserInfo(ctx context.Context, in *WxUserinfo, opts ...grpc.CallOption) (*common.Empty, error)
 	// GetQrcode 获取微信二维码
 	GetQrcode(ctx context.Context, in *GetQrcodeReq, opts ...grpc.CallOption) (*GetQrcodeResp, error)
+	// GetUserInfo 获取用户信息
+	GetUserInfo(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetUserInfoResp, error)
 }
 
 type weixinClient struct {
@@ -103,6 +105,20 @@ func (c *weixinClient) GetQrcode(ctx context.Context, in *GetQrcodeReq, opts ...
 	return out, nil
 }
 
+func (c *weixinClient) GetUserInfo(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetUserInfoResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetUserInfoResp)
+	err = conn.Invoke(ctx, "/shares.Weixin/GetUserInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WeixinServer is the server API for Weixin service.
 type WeixinServer interface {
 	// Oauth 微信授权获取登录信息
@@ -111,6 +127,8 @@ type WeixinServer interface {
 	UpdateUserInfo(context.Context, *WxUserinfo) (*common.Empty, error)
 	// GetQrcode 获取微信二维码
 	GetQrcode(context.Context, *GetQrcodeReq) (*GetQrcodeResp, error)
+	// GetUserInfo 获取用户信息
+	GetUserInfo(context.Context, *common.Empty) (*GetUserInfoResp, error)
 }
 
 // UnimplementedWeixinServer can be embedded to have forward compatible implementations.
@@ -125,6 +143,9 @@ func (*UnimplementedWeixinServer) UpdateUserInfo(context.Context, *WxUserinfo) (
 }
 func (*UnimplementedWeixinServer) GetQrcode(context.Context, *GetQrcodeReq) (*GetQrcodeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetQrcode not implemented")
+}
+func (*UnimplementedWeixinServer) GetUserInfo(context.Context, *common.Empty) (*GetUserInfoResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserInfo not implemented")
 }
 
 func RegisterWeixinServer(s server.Server, srv WeixinServer) {
@@ -185,6 +206,24 @@ func _Weixin_GetQrcode_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Weixin_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WeixinServer).GetUserInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.Weixin/GetUserInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WeixinServer).GetUserInfo(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Weixin_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.Weixin",
 	HandlerType: (*WeixinServer)(nil),
@@ -200,6 +239,10 @@ var _Weixin_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetQrcode",
 			Handler:    _Weixin_GetQrcode_Handler,
+		},
+		{
+			MethodName: "GetUserInfo",
+			Handler:    _Weixin_GetUserInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

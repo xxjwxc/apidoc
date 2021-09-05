@@ -16,6 +16,9 @@ service Weixin {
 
 	// GetQrcode 获取微信二维码
 	rpc GetQrcode(GetQrcodeReq) returns (GetQrcodeResp){}
+
+	// GetUserInfo 获取用户信息
+	rpc GetUserInfo(common.Empty) returns (GetUserInfoResp){}
 }
 
 
@@ -59,3 +62,18 @@ message GetQrcodeReq{
 message GetQrcodeResp{
 	string url = 1;// 二维码图片地址
 }
+
+// GetUserInfoResp 用户信息
+message GetUserInfoResp{
+	string  openid  = 1;// 用户openid   
+	string  nickName = 2;// 用户昵称 
+	string  avatarURL = 3;// 用户头像地址
+	string  gender = 4;// 用户的性别
+	string  city  = 5;// 用户所在城市    
+	string  province  = 6;// 用户所在省份
+	string  country  =7; // 用户所在国家 
+	string  Phone   = 8;// 用户手机号  
+	string  group =9;// 用户所在分组列表    
+	bool    rg   = 10;// 是否涨绿跌红     
+	int32     Capacity = 11;// 可用容量 
+ }

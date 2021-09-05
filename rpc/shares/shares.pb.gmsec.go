@@ -32,6 +32,10 @@ type SharesClient interface {
 	GetGroup(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetGroupResp, error)
 	// Search 搜索
 	Search(ctx context.Context, in *SearchReq, opts ...grpc.CallOption) (*SearchResp, error)
+	// Gets 精确查找代码
+	Gets(ctx context.Context, in *GetsReq, opts ...grpc.CallOption) (*GetsResp, error)
+	// GetAllCodeName 获取所有中文
+	GetAllCodeName(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetAllCodeNameResp, error)
 }
 
 type sharesClient struct {
@@ -87,12 +91,44 @@ func (c *sharesClient) Search(ctx context.Context, in *SearchReq, opts ...grpc.C
 	return out, nil
 }
 
+func (c *sharesClient) Gets(ctx context.Context, in *GetsReq, opts ...grpc.CallOption) (*GetsResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetsResp)
+	err = conn.Invoke(ctx, "/shares.shares/Gets", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sharesClient) GetAllCodeName(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetAllCodeNameResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetAllCodeNameResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetAllCodeName", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SharesServer is the server API for Shares service.
 type SharesServer interface {
 	// GetGroup 获取分组信息
 	GetGroup(context.Context, *common.Empty) (*GetGroupResp, error)
 	// Search 搜索
 	Search(context.Context, *SearchReq) (*SearchResp, error)
+	// Gets 精确查找代码
+	Gets(context.Context, *GetsReq) (*GetsResp, error)
+	// GetAllCodeName 获取所有中文
+	GetAllCodeName(context.Context, *common.Empty) (*GetAllCodeNameResp, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
@@ -104,6 +140,12 @@ func (*UnimplementedSharesServer) GetGroup(context.Context, *common.Empty) (*Get
 }
 func (*UnimplementedSharesServer) Search(context.Context, *SearchReq) (*SearchResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
+}
+func (*UnimplementedSharesServer) Gets(context.Context, *GetsReq) (*GetsResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Gets not implemented")
+}
+func (*UnimplementedSharesServer) GetAllCodeName(context.Context, *common.Empty) (*GetAllCodeNameResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllCodeName not implemented")
 }
 
 func RegisterSharesServer(s server.Server, srv SharesServer) {
@@ -146,6 +188,42 @@ func _Shares_Search_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_Gets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetsReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).Gets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/Gets",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).Gets(ctx, req.(*GetsReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Shares_GetAllCodeName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetAllCodeName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetAllCodeName",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetAllCodeName(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Shares_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.shares",
 	HandlerType: (*SharesServer)(nil),
@@ -157,6 +235,14 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Search",
 			Handler:    _Shares_Search_Handler,
+		},
+		{
+			MethodName: "Gets",
+			Handler:    _Shares_Gets_Handler,
+		},
+		{
+			MethodName: "GetAllCodeName",
+			Handler:    _Shares_GetAllCodeName_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
