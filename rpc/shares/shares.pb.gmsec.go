@@ -36,6 +36,8 @@ type SharesClient interface {
 	Gets(ctx context.Context, in *GetsReq, opts ...grpc.CallOption) (*GetsResp, error)
 	// GetAllCodeName 获取所有中文
 	GetAllCodeName(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetAllCodeNameResp, error)
+	// AddMyCode 给自己添加一个监听
+	AddMyCode(ctx context.Context, in *AddMyCodeReq, opts ...grpc.CallOption) (*AddMyCodeResp, error)
 }
 
 type sharesClient struct {
@@ -119,6 +121,20 @@ func (c *sharesClient) GetAllCodeName(ctx context.Context, in *common.Empty, opt
 	return out, nil
 }
 
+func (c *sharesClient) AddMyCode(ctx context.Context, in *AddMyCodeReq, opts ...grpc.CallOption) (*AddMyCodeResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(AddMyCodeResp)
+	err = conn.Invoke(ctx, "/shares.shares/AddMyCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SharesServer is the server API for Shares service.
 type SharesServer interface {
 	// GetGroup 获取分组信息
@@ -129,6 +145,8 @@ type SharesServer interface {
 	Gets(context.Context, *GetsReq) (*GetsResp, error)
 	// GetAllCodeName 获取所有中文
 	GetAllCodeName(context.Context, *common.Empty) (*GetAllCodeNameResp, error)
+	// AddMyCode 给自己添加一个监听
+	AddMyCode(context.Context, *AddMyCodeReq) (*AddMyCodeResp, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
@@ -146,6 +164,9 @@ func (*UnimplementedSharesServer) Gets(context.Context, *GetsReq) (*GetsResp, er
 }
 func (*UnimplementedSharesServer) GetAllCodeName(context.Context, *common.Empty) (*GetAllCodeNameResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllCodeName not implemented")
+}
+func (*UnimplementedSharesServer) AddMyCode(context.Context, *AddMyCodeReq) (*AddMyCodeResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddMyCode not implemented")
 }
 
 func RegisterSharesServer(s server.Server, srv SharesServer) {
@@ -224,6 +245,24 @@ func _Shares_GetAllCodeName_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_AddMyCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddMyCodeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).AddMyCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/AddMyCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).AddMyCode(ctx, req.(*AddMyCodeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Shares_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.shares",
 	HandlerType: (*SharesServer)(nil),
@@ -243,6 +282,10 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAllCodeName",
 			Handler:    _Shares_GetAllCodeName_Handler,
+		},
+		{
+			MethodName: "AddMyCode",
+			Handler:    _Shares_AddMyCode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

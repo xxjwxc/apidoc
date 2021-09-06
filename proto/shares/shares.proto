@@ -15,8 +15,8 @@ service shares {
      rpc Gets(GetsReq) returns (GetsResp){}
      // GetAllCodeName 获取所有中文
      rpc GetAllCodeName(common.Empty) returns (GetAllCodeNameResp){}
-
-
+     // AddMyCode 给自己添加一个监听
+     rpc AddMyCode(AddMyCodeReq) returns(AddMyCodeResp){}
 }
 
 // SharesInfo 股票信息
@@ -75,4 +75,21 @@ message CodeNameInfo{
 
 message GetAllCodeNameResp{
     repeated CodeNameInfo list = 1;// 代码列表
+}
+
+message AddMyCodeReq{
+    string code = 1;// 股票代码
+    bool kdj =2;// 日线金叉提醒
+	bool surge = 3;// 盘中急涨提醒
+	bool slump = 4;// 盘中急跌提醒
+	bool ai = 5;// AI智能提醒
+	int32 up = 6;// 估价涨到
+	int32 down = 7;// 估价跌到
+	double upPercent = 8;// 涨幅超
+	double downPercent = 9; // 跌幅超
+}
+
+message AddMyCodeResp{
+    bool status = 1;// 状态是否成功
+    string msg = 2;// 消息
 }
