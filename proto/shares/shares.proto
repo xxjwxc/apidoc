@@ -83,10 +83,11 @@ message AddMyCodeReq{
 	bool surge = 3;// 盘中急涨提醒
 	bool slump = 4;// 盘中急跌提醒
 	bool ai = 5;// AI智能提醒
-	int32 up = 6;// 估价涨到
-	int32 down = 7;// 估价跌到
-	double upPercent = 8;// 涨幅超
-	double downPercent = 9; // 跌幅超
+    bool public = 6;// AI智能提醒
+	double up = 7;// 估价涨到
+	double down = 8;// 估价跌到
+	double upPercent = 9;// 涨幅超
+	double downPercent = 10; // 跌幅超
 }
 
 message AddMyCodeResp{
