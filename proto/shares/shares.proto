@@ -17,6 +17,9 @@ service shares {
      rpc GetAllCodeName(common.Empty) returns (GetAllCodeNameResp){}
      // AddMyCode 给自己添加一个监听
      rpc AddMyCode(AddMyCodeReq) returns(AddMyCodeResp){}
+     // GetMyCode 获取我的监听,code不为空获取全部
+     rpc GetMyCode(GetMyCodeReq) returns(GetMyCodeResp){}
+     
 }
 
 // SharesInfo 股票信息
@@ -79,18 +82,42 @@ message GetAllCodeNameResp{
 
 message AddMyCodeReq{
     string code = 1;// 股票代码
-    bool kdj =2;// 日线金叉提醒
-	bool surge = 3;// 盘中急涨提醒
-	bool slump = 4;// 盘中急跌提醒
-	bool ai = 5;// AI智能提醒
-    bool public = 6;// AI智能提醒
-	double up = 7;// 估价涨到
-	double down = 8;// 估价跌到
-	double upPercent = 9;// 涨幅超
-	double downPercent = 10; // 跌幅超
+    double price = 2;// 当前价格
+    bool kdj =3;// 日线金叉提醒
+	bool surge = 4;// 盘中急涨提醒
+	bool slump = 5;// 盘中急跌提醒
+	bool ai = 6;// AI智能提醒
+    bool public = 7;// 是否推荐给组织
+	double up = 8;// 估价涨到
+	double down = 9;// 估价跌到
+	double upPercent = 10;// 涨幅超
+	double downPercent = 11; // 跌幅超
+    bool vaild = 12;// 是否有效
 }
 
 message AddMyCodeResp{
     bool status = 1;// 状态是否成功
     string msg = 2;// 消息
+}
+
+message GetMyCodeReq{
+    string code = 1;// 股票代码
+}
+
+message AddMyCodeInfo {
+    string code = 1;// 股票代码
+    double price = 2;// 当前价格
+    bool kdj =3;// 日线金叉提醒
+	bool surge = 4;// 盘中急涨提醒
+	bool slump = 5;// 盘中急跌提醒
+	bool ai = 6;// AI智能提醒
+    bool public = 7;// 是否推荐给组织
+	double up = 8;// 估价涨到
+	double down = 9;// 估价跌到
+	double upPercent = 10;// 涨幅超
+	double downPercent = 11; // 跌幅超
+}
+
+message GetMyCodeResp{
+    repeated AddMyCodeReq list = 1;
 }
