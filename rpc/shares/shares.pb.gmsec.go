@@ -38,7 +38,7 @@ type SharesClient interface {
 	GetAllCodeName(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetAllCodeNameResp, error)
 	// AddMyCode 给自己添加一个监听
 	AddMyCode(ctx context.Context, in *AddMyCodeReq, opts ...grpc.CallOption) (*AddMyCodeResp, error)
-	// GetMyCode 获取一个监听
+	// GetMyCode 获取我的监听,code不为空获取全部
 	GetMyCode(ctx context.Context, in *GetMyCodeReq, opts ...grpc.CallOption) (*GetMyCodeResp, error)
 }
 
@@ -163,7 +163,7 @@ type SharesServer interface {
 	GetAllCodeName(context.Context, *common.Empty) (*GetAllCodeNameResp, error)
 	// AddMyCode 给自己添加一个监听
 	AddMyCode(context.Context, *AddMyCodeReq) (*AddMyCodeResp, error)
-	// GetMyCode 获取一个监听
+	// GetMyCode 获取我的监听,code不为空获取全部
 	GetMyCode(context.Context, *GetMyCodeReq) (*GetMyCodeResp, error)
 }
 

@@ -36,6 +36,8 @@ type WeixinClient interface {
 	GetQrcode(ctx context.Context, in *GetQrcodeReq, opts ...grpc.CallOption) (*GetQrcodeResp, error)
 	// GetUserInfo 获取用户信息
 	GetUserInfo(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetUserInfoResp, error)
+	// UpsetUserInfo 更新用户信息
+	UpsetUserInfo(ctx context.Context, in *UpsetUserInfoReq, opts ...grpc.CallOption) (*common.Empty, error)
 }
 
 type weixinClient struct {
@@ -119,6 +121,20 @@ func (c *weixinClient) GetUserInfo(ctx context.Context, in *common.Empty, opts .
 	return out, nil
 }
 
+func (c *weixinClient) UpsetUserInfo(ctx context.Context, in *UpsetUserInfoReq, opts ...grpc.CallOption) (*common.Empty, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(common.Empty)
+	err = conn.Invoke(ctx, "/shares.Weixin/UpsetUserInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WeixinServer is the server API for Weixin service.
 type WeixinServer interface {
 	// Oauth 微信授权获取登录信息
@@ -129,6 +145,8 @@ type WeixinServer interface {
 	GetQrcode(context.Context, *GetQrcodeReq) (*GetQrcodeResp, error)
 	// GetUserInfo 获取用户信息
 	GetUserInfo(context.Context, *common.Empty) (*GetUserInfoResp, error)
+	// UpsetUserInfo 更新用户信息
+	UpsetUserInfo(context.Context, *UpsetUserInfoReq) (*common.Empty, error)
 }
 
 // UnimplementedWeixinServer can be embedded to have forward compatible implementations.
@@ -146,6 +164,9 @@ func (*UnimplementedWeixinServer) GetQrcode(context.Context, *GetQrcodeReq) (*Ge
 }
 func (*UnimplementedWeixinServer) GetUserInfo(context.Context, *common.Empty) (*GetUserInfoResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserInfo not implemented")
+}
+func (*UnimplementedWeixinServer) UpsetUserInfo(context.Context, *UpsetUserInfoReq) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsetUserInfo not implemented")
 }
 
 func RegisterWeixinServer(s server.Server, srv WeixinServer) {
@@ -224,6 +245,24 @@ func _Weixin_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Weixin_UpsetUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpsetUserInfoReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WeixinServer).UpsetUserInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.Weixin/UpsetUserInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WeixinServer).UpsetUserInfo(ctx, req.(*UpsetUserInfoReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Weixin_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.Weixin",
 	HandlerType: (*WeixinServer)(nil),
@@ -243,6 +282,10 @@ var _Weixin_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserInfo",
 			Handler:    _Weixin_GetUserInfo_Handler,
+		},
+		{
+			MethodName: "UpsetUserInfo",
+			Handler:    _Weixin_UpsetUserInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

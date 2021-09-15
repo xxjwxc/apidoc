@@ -19,6 +19,9 @@ service Weixin {
 
 	// GetUserInfo 获取用户信息
 	rpc GetUserInfo(common.Empty) returns (GetUserInfoResp){}
+
+	// UpsetUserInfo 更新用户信息
+	rpc UpsetUserInfo(UpsetUserInfoReq) returns (common.Empty) {}
 }
 
 
@@ -72,8 +75,13 @@ message GetUserInfoResp{
 	string  city  = 5;// 用户所在城市    
 	string  province  = 6;// 用户所在省份
 	string  country  =7; // 用户所在国家 
-	string  Phone   = 8;// 用户手机号  
+	string  phone   = 8;// 用户手机号  
 	string  group =9;// 用户所在分组列表    
 	bool    rg   = 10;// 是否涨绿跌红     
-	int32     Capacity = 11;// 可用容量 
+	int32   capacity = 11;// 可用容量 
+ }
+ 
+ message UpsetUserInfoReq{
+	 string key = 1;
+	 string value = 2;
  }

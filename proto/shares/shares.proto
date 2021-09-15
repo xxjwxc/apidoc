@@ -93,6 +93,13 @@ message AddMyCodeReq{
 	double upPercent = 10;// 涨幅超
 	double downPercent = 11; // 跌幅超
     bool vaild = 12;// 是否有效
+    
+    // 返回值用
+    string simpleCode =13;// 股票代码简写
+    string ext = 14;// 后缀
+	string name = 15;// 股票名字
+    double percent = 16;// 百分比
+    string color = 17;// 颜色
 }
 
 message AddMyCodeResp{
