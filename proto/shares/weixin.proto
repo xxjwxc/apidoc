@@ -22,6 +22,10 @@ service Weixin {
 
 	// UpsetUserInfo 更新用户信息
 	rpc UpsetUserInfo(UpsetUserInfoReq) returns (common.Empty) {}
+
+	// ReLogin 是否要重新登录
+	rpc ReLogin(common.Empty) returns (ReLoginResp){}
+
 }
 
 
@@ -84,4 +88,11 @@ message GetUserInfoResp{
  message UpsetUserInfoReq{
 	 string key = 1;
 	 string value = 2;
+ }
+
+ message ReLoginResp{
+	 bool relogin = 1;// 是否重新登录:true 重新登录
+	 string sessionId = 2;// 用户sessionid 用于当前交互使用
+	 string openId = 3;// openid
+	 int64 overdueTime = 4;// 逾期时间点(时间戳)
  }

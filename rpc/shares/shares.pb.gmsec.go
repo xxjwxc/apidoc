@@ -40,6 +40,14 @@ type SharesClient interface {
 	AddMyCode(ctx context.Context, in *AddMyCodeReq, opts ...grpc.CallOption) (*AddMyCodeResp, error)
 	// GetMyCode 获取我的监听,code不为空获取全部
 	GetMyCode(ctx context.Context, in *GetMyCodeReq, opts ...grpc.CallOption) (*GetMyCodeResp, error)
+	// GetMsg 获取消息
+	GetMsg(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetMsgResp, error)
+	// HaveNewMsg 是否有新消息
+	HaveNewMsg(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*HaveNewMsgResp, error)
+	// DeleteMyCode 删除一个监听
+	DeleteMyCode(ctx context.Context, in *DeleteMyCodeReq, opts ...grpc.CallOption) (*common.Empty, error)
+	// AddGroup 添加一个组织
+	AddGroup(ctx context.Context, in *AddGroupReq, opts ...grpc.CallOption) (*common.Empty, error)
 }
 
 type sharesClient struct {
@@ -151,6 +159,62 @@ func (c *sharesClient) GetMyCode(ctx context.Context, in *GetMyCodeReq, opts ...
 	return out, nil
 }
 
+func (c *sharesClient) GetMsg(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetMsgResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetMsgResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetMsg", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sharesClient) HaveNewMsg(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*HaveNewMsgResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(HaveNewMsgResp)
+	err = conn.Invoke(ctx, "/shares.shares/HaveNewMsg", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sharesClient) DeleteMyCode(ctx context.Context, in *DeleteMyCodeReq, opts ...grpc.CallOption) (*common.Empty, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(common.Empty)
+	err = conn.Invoke(ctx, "/shares.shares/DeleteMyCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sharesClient) AddGroup(ctx context.Context, in *AddGroupReq, opts ...grpc.CallOption) (*common.Empty, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(common.Empty)
+	err = conn.Invoke(ctx, "/shares.shares/AddGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SharesServer is the server API for Shares service.
 type SharesServer interface {
 	// GetGroup 获取分组信息
@@ -165,6 +229,14 @@ type SharesServer interface {
 	AddMyCode(context.Context, *AddMyCodeReq) (*AddMyCodeResp, error)
 	// GetMyCode 获取我的监听,code不为空获取全部
 	GetMyCode(context.Context, *GetMyCodeReq) (*GetMyCodeResp, error)
+	// GetMsg 获取消息
+	GetMsg(context.Context, *common.Empty) (*GetMsgResp, error)
+	// HaveNewMsg 是否有新消息
+	HaveNewMsg(context.Context, *common.Empty) (*HaveNewMsgResp, error)
+	// DeleteMyCode 删除一个监听
+	DeleteMyCode(context.Context, *DeleteMyCodeReq) (*common.Empty, error)
+	// AddGroup 添加一个组织
+	AddGroup(context.Context, *AddGroupReq) (*common.Empty, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
@@ -188,6 +260,18 @@ func (*UnimplementedSharesServer) AddMyCode(context.Context, *AddMyCodeReq) (*Ad
 }
 func (*UnimplementedSharesServer) GetMyCode(context.Context, *GetMyCodeReq) (*GetMyCodeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMyCode not implemented")
+}
+func (*UnimplementedSharesServer) GetMsg(context.Context, *common.Empty) (*GetMsgResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMsg not implemented")
+}
+func (*UnimplementedSharesServer) HaveNewMsg(context.Context, *common.Empty) (*HaveNewMsgResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HaveNewMsg not implemented")
+}
+func (*UnimplementedSharesServer) DeleteMyCode(context.Context, *DeleteMyCodeReq) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteMyCode not implemented")
+}
+func (*UnimplementedSharesServer) AddGroup(context.Context, *AddGroupReq) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddGroup not implemented")
 }
 
 func RegisterSharesServer(s server.Server, srv SharesServer) {
@@ -302,6 +386,78 @@ func _Shares_GetMyCode_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_GetMsg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetMsg(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetMsg",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetMsg(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Shares_HaveNewMsg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).HaveNewMsg(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/HaveNewMsg",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).HaveNewMsg(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Shares_DeleteMyCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteMyCodeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).DeleteMyCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/DeleteMyCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).DeleteMyCode(ctx, req.(*DeleteMyCodeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Shares_AddGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddGroupReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).AddGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/AddGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).AddGroup(ctx, req.(*AddGroupReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Shares_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.shares",
 	HandlerType: (*SharesServer)(nil),
@@ -329,6 +485,22 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMyCode",
 			Handler:    _Shares_GetMyCode_Handler,
+		},
+		{
+			MethodName: "GetMsg",
+			Handler:    _Shares_GetMsg_Handler,
+		},
+		{
+			MethodName: "HaveNewMsg",
+			Handler:    _Shares_HaveNewMsg_Handler,
+		},
+		{
+			MethodName: "DeleteMyCode",
+			Handler:    _Shares_DeleteMyCode_Handler,
+		},
+		{
+			MethodName: "AddGroup",
+			Handler:    _Shares_AddGroup_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

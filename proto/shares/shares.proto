@@ -19,7 +19,14 @@ service shares {
      rpc AddMyCode(AddMyCodeReq) returns(AddMyCodeResp){}
      // GetMyCode 获取我的监听,code不为空获取全部
      rpc GetMyCode(GetMyCodeReq) returns(GetMyCodeResp){}
-     
+     // GetMsg 获取消息
+     rpc GetMsg(common.Empty)returns(GetMsgResp){}
+     // HaveNewMsg 是否有新消息
+     rpc HaveNewMsg(common.Empty)returns(HaveNewMsgResp){}
+     // DeleteMyCode 删除一个监听
+     rpc DeleteMyCode(DeleteMyCodeReq) returns(common.Empty){}
+     // AddGroup 添加一个组织
+	 rpc AddGroup(AddGroupReq) returns (common.Empty){}
 }
 
 // SharesInfo 股票信息
@@ -127,4 +134,33 @@ message AddMyCodeInfo {
 
 message GetMyCodeResp{
     repeated AddMyCodeReq list = 1;
+}
+
+message Msg{
+    string code = 1;// 股票代码
+    string simpleCode =2;// 股票代码简写
+    string ext = 3;// 后缀
+	string name = 4;// 股票名字    
+    double price = 5;// 当前价格     
+    string key =6;// 标签        
+    string desc = 7;// 描述   
+    double percent = 8;// 百分比
+    string color = 9;// 颜色
+    string now = 10;// 当前时间
+}
+
+message GetMsgResp {
+    repeated Msg list = 1;// 消息列表
+}
+
+message HaveNewMsgResp{
+    bool badge = 1;// 是否有新消息
+}
+
+message DeleteMyCodeReq{
+    string code = 1;// 股票代码
+}
+
+message AddGroupReq{
+    string key = 1;// 分组key
 }
