@@ -41,6 +41,25 @@ message SharesInfo{
     string img = 8;// 图片地址
 }
 
+// SharesInfoDetails 股票详细信息
+message SharesInfoDetails{
+    string code = 1;// 股票代码
+	string simpleCode =2;// 股票代码简写
+    string ext = 3;// 后缀
+	string name = 4;// 股票名字
+    double price = 5;// 当前价格
+    double percent = 6;// 百分比
+    string color = 7;// 颜色
+    string img = 8;// 图片地址
+    double volume = 9;// 成交量（手）
+    double turnover = 10;// 成交额（万）
+    double turnoverRate = 11; // 换手率
+    double pe = 12; // 市盈率
+    double pb = 13;// 市净率
+    double total = 15;// 流通市值
+    double cap = 16;// 总市值
+}
+
 message Group {
     string name = 1;// 分组名
     repeated SharesInfo list = 2;// 列表
