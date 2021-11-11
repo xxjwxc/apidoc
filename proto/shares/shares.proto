@@ -58,7 +58,12 @@ message SharesInfoDetails{
     double pb = 13;// 市净率
     double total = 15;// 流通市值
     double cap = 16;// 总市值
+    double zljlr = 17;// 主力资金净流入
+    double openPrice = 18;// 开盘价
+    double closePrice = 19;// 收盘价
+    double macd = 20;// macd
 }
+
 
 message Group {
     string name = 1;// 分组名
@@ -73,6 +78,7 @@ message GetGroupResp {
 // SearchReq 搜索请求
 message SearchReq{
     string code = 1;// 股票代码
+    string tag = 2;// 标记(min,daily)
 }
 
 // SearchReq 搜索请求
@@ -166,6 +172,7 @@ message Msg{
     double percent = 8;// 百分比
     string color = 9;// 颜色
     string now = 10;// 当前时间
+    string tag = 11;// 标记(min,daily)
 }
 
 message GetMsgResp {
@@ -182,4 +189,8 @@ message DeleteMyCodeReq{
 
 message AddGroupReq{
     string key = 1;// 分组key
+}
+
+message CodeReq{
+    string code = 1;// 股票代码
 }
