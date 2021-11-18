@@ -9,6 +9,10 @@ option go_package = "rpc/shares"; // 指定路径
 service shares {
     // GetGroup 获取分组信息
     rpc GetGroup(common.Empty) returns (GetGroupResp) {}
+    // GetMyGroup 获取分组信息
+    rpc GetMyGroup(CodeReq) returns (GetMyGroupResp) {}
+    // UpsetGroupCode 更新分组信息
+    rpc UpsetGroupCode(UpsetGroupCodeReq) returns (common.Empty) {}
      // Search 搜索
      rpc Search(SearchReq) returns (SearchResp) {}
      // Gets 精确查找代码
@@ -193,4 +197,19 @@ message AddGroupReq{
 
 message CodeReq{
     string code = 1;// 股票代码
+}
+
+message GetMyGroupResp{
+    string code = 1;// 股票代码
+    string groupName = 2;// 分组名
+    string userName = 3;// 推荐人
+    int32 wi = 4;// 权重
+    repeated string group = 5;// 我的股票列表
+}
+
+message UpsetGroupCodeReq{
+    string code = 1;// 股票代码
+    string groupName = 2;// 分组名 
+    string userName = 3;// 推荐人
+    bool isAdd = 4;// 是否添加,false:删除
 }

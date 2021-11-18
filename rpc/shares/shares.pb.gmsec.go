@@ -30,6 +30,10 @@ const _ = grpc.SupportPackageIsVersion6
 type SharesClient interface {
 	// GetGroup 获取分组信息
 	GetGroup(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetGroupResp, error)
+	// GetMyGroup 获取分组信息
+	GetMyGroup(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetMyGroupResp, error)
+	// UpsetGroupCode 更新分组信息
+	UpsetGroupCode(ctx context.Context, in *UpsetGroupCodeReq, opts ...grpc.CallOption) (*common.Empty, error)
 	// Search 搜索
 	Search(ctx context.Context, in *SearchReq, opts ...grpc.CallOption) (*SearchResp, error)
 	// Gets 精确查找代码
@@ -83,6 +87,34 @@ func (c *sharesClient) GetGroup(ctx context.Context, in *common.Empty, opts ...g
 	defer conn.Close()
 	out := new(GetGroupResp)
 	err = conn.Invoke(ctx, "/shares.shares/GetGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sharesClient) GetMyGroup(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetMyGroupResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetMyGroupResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetMyGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sharesClient) UpsetGroupCode(ctx context.Context, in *UpsetGroupCodeReq, opts ...grpc.CallOption) (*common.Empty, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(common.Empty)
+	err = conn.Invoke(ctx, "/shares.shares/UpsetGroupCode", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -219,6 +251,10 @@ func (c *sharesClient) AddGroup(ctx context.Context, in *AddGroupReq, opts ...gr
 type SharesServer interface {
 	// GetGroup 获取分组信息
 	GetGroup(context.Context, *common.Empty) (*GetGroupResp, error)
+	// GetMyGroup 获取分组信息
+	GetMyGroup(context.Context, *CodeReq) (*GetMyGroupResp, error)
+	// UpsetGroupCode 更新分组信息
+	UpsetGroupCode(context.Context, *UpsetGroupCodeReq) (*common.Empty, error)
 	// Search 搜索
 	Search(context.Context, *SearchReq) (*SearchResp, error)
 	// Gets 精确查找代码
@@ -245,6 +281,12 @@ type UnimplementedSharesServer struct {
 
 func (*UnimplementedSharesServer) GetGroup(context.Context, *common.Empty) (*GetGroupResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGroup not implemented")
+}
+func (*UnimplementedSharesServer) GetMyGroup(context.Context, *CodeReq) (*GetMyGroupResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMyGroup not implemented")
+}
+func (*UnimplementedSharesServer) UpsetGroupCode(context.Context, *UpsetGroupCodeReq) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsetGroupCode not implemented")
 }
 func (*UnimplementedSharesServer) Search(context.Context, *SearchReq) (*SearchResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
@@ -292,6 +334,42 @@ func _Shares_GetGroup_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SharesServer).GetGroup(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Shares_GetMyGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CodeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetMyGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetMyGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetMyGroup(ctx, req.(*CodeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Shares_UpsetGroupCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpsetGroupCodeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).UpsetGroupCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/UpsetGroupCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).UpsetGroupCode(ctx, req.(*UpsetGroupCodeReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -465,6 +543,14 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetGroup",
 			Handler:    _Shares_GetGroup_Handler,
+		},
+		{
+			MethodName: "GetMyGroup",
+			Handler:    _Shares_GetMyGroup_Handler,
+		},
+		{
+			MethodName: "UpsetGroupCode",
+			Handler:    _Shares_UpsetGroupCode_Handler,
 		},
 		{
 			MethodName: "Search",
