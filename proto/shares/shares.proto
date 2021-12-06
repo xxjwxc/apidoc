@@ -66,6 +66,8 @@ message SharesInfoDetails{
     double openPrice = 18;// 开盘价
     double closePrice = 19;// 收盘价
     double macd = 20;// macd
+    double max = 21;// 当日最高点
+    double min = 22;// 当日最低
 }
 
 
