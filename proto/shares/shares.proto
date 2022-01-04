@@ -44,6 +44,7 @@ message SharesInfo{
     string color = 7;// 颜色
     string img = 8;// 图片地址
     string hy = 9;// 行业板块
+    string attach = 10;// 附加
 }
 
 // SharesInfoDetails 股票详细信息
