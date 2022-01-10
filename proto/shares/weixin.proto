@@ -81,8 +81,9 @@ message GetUserInfoResp{
 	string  country  =7; // 用户所在国家 
 	string  phone   = 8;// 用户手机号  
 	string  group =9;// 用户所在分组列表    
-	bool    rg   = 10;// 是否涨绿跌红     
-	int32   capacity = 11;// 可用容量 
+	bool    rg   = 10;// 是否涨绿跌红
+	bool 	only20 = 11;// 是否20日线     
+	int32   capacity = 12;// 可用容量 
  }
  
  message UpsetUserInfoReq{
