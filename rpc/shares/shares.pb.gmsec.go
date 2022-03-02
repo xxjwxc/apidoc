@@ -52,6 +52,8 @@ type SharesClient interface {
 	DeleteMyCode(ctx context.Context, in *DeleteMyCodeReq, opts ...grpc.CallOption) (*common.Empty, error)
 	// AddGroup 添加一个组织
 	AddGroup(ctx context.Context, in *AddGroupReq, opts ...grpc.CallOption) (*common.Empty, error)
+	// AddGroup 添加一个组织
+	GetDay(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDayResp, error)
 }
 
 type sharesClient struct {
@@ -247,6 +249,20 @@ func (c *sharesClient) AddGroup(ctx context.Context, in *AddGroupReq, opts ...gr
 	return out, nil
 }
 
+func (c *sharesClient) GetDay(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDayResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetDayResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetDay", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SharesServer is the server API for Shares service.
 type SharesServer interface {
 	// GetGroup 获取分组信息
@@ -273,6 +289,8 @@ type SharesServer interface {
 	DeleteMyCode(context.Context, *DeleteMyCodeReq) (*common.Empty, error)
 	// AddGroup 添加一个组织
 	AddGroup(context.Context, *AddGroupReq) (*common.Empty, error)
+	// AddGroup 添加一个组织
+	GetDay(context.Context, *common.Empty) (*GetDayResp, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
@@ -314,6 +332,9 @@ func (*UnimplementedSharesServer) DeleteMyCode(context.Context, *DeleteMyCodeReq
 }
 func (*UnimplementedSharesServer) AddGroup(context.Context, *AddGroupReq) (*common.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddGroup not implemented")
+}
+func (*UnimplementedSharesServer) GetDay(context.Context, *common.Empty) (*GetDayResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDay not implemented")
 }
 
 func RegisterSharesServer(s server.Server, srv SharesServer) {
@@ -536,6 +557,24 @@ func _Shares_AddGroup_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_GetDay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetDay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetDay",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetDay(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Shares_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.shares",
 	HandlerType: (*SharesServer)(nil),
@@ -587,6 +626,10 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddGroup",
 			Handler:    _Shares_AddGroup_Handler,
+		},
+		{
+			MethodName: "GetDay",
+			Handler:    _Shares_GetDay_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
