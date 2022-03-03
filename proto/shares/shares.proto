@@ -31,8 +31,10 @@ service shares {
      rpc DeleteMyCode(DeleteMyCodeReq) returns(common.Empty){}
      // AddGroup 添加一个组织
 	 rpc AddGroup(AddGroupReq) returns (common.Empty){}
-     // AddGroup 添加一个组织
+     // GetDay 添加一个组织
 	 rpc GetDay(common.Empty) returns (GetDayResp){}
+    // GetVip 添加一个组织
+	 rpc GetVip(common.Empty) returns (GetDayResp){}
 }
 
 // SharesInfo 股票信息
