@@ -1,7 +1,6 @@
 syntax = "proto3"; // 指定proto版本
 
 package shares;     // 指定包名
-import "common/common_public.proto";
 
 option go_package = "rpc/shares"; // 指定路径
 
@@ -10,7 +9,6 @@ option go_package = "rpc/shares"; // 指定路径
 service Analy {
     // AnalyCode 分析一直股票
     rpc AnalyCode(AnalyCodeReq) returns (AnalyCodeResp) {}
-
 }
 
 
