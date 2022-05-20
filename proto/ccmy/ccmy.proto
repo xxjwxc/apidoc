@@ -1,0 +1,75 @@
+syntax = "proto3"; // 指定proto版本
+
+package ccmy;     // 指定包名
+import "common/common_public.proto";
+
+option go_package = "rpc/ccmy"; // 指定路径
+
+// 定义ccmy服务
+service ccmy {
+    // GetStore 获取门店信息
+    rpc GetStore(common.Empty) returns (GetStoreResp) {}
+    // Add 添加一个
+    rpc Add(AddReq) returns (common.Empty) {}
+    // AddDoc 添加一个
+    rpc AddDoc(AddDocReq) returns (common.Empty) {}
+    // GetAllName 获取所有名字
+    rpc GetAllName(common.Empty) returns (GetAllNameResp) {}
+    // Search 搜索
+    rpc Search(SearchReq) returns (SearchResp) {}
+    // AddGroup 添加门店
+    rpc AddGroup(AddGroupReq) returns (common.Empty) {}
+    // UpdateUserGroup 更新门店信息
+    rpc UpdateUserGroup(UpdateUserGroupReq) returns (common.Empty) {}
+}
+
+message UpdateUserGroupReq{
+   repeated string store = 1;// 门店
+   string openid = 2;// 
+}
+message AddGroupReq {
+    string store = 1;// 门店
+}
+
+message AddDocReq{
+    string store = 1;// 门店
+    string name = 2;// 姓名
+    string url = 3;// 照片
+    string doc = 4;// 描述
+}
+
+message GetStoreResp {
+    repeated string list = 1;// 门店列表
+}
+
+message AddReq {
+    string store = 1;// 门店
+    string name = 2;// 姓名
+    string url = 3;// 照片
+    string doc = 4;// 描述
+}
+
+message NameResp {
+    string store = 1;// 门店
+    repeated string names = 2;//名字 
+}
+message GetAllNameResp {
+    repeated NameResp nameResp = 1;// 名字
+}
+
+message SearchReq{
+    string store = 1;// 门店
+    string name = 2;// 姓名
+}
+
+message DocInfo {
+    string tm = 1;// 时间
+    string doc = 2;// 描述
+}
+
+message SearchResp{
+    string store = 1;// 门店
+    string name = 2;// 姓名
+    string url = 3;// 照片
+    repeated DocInfo docs = 4;// 描述
+}

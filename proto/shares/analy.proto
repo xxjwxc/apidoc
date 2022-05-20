@@ -9,6 +9,8 @@ option go_package = "rpc/shares"; // 指定路径
 service Analy {
     // AnalyCode 分析一直股票
     rpc AnalyCode(AnalyCodeReq) returns (AnalyCodeResp) {}
+    // GetAllSp 获取票的特色数据
+    rpc GetAllSp(GetAllSpReq) returns (GetAllSpResp) {}
 }
 
 
@@ -20,4 +22,31 @@ message AnalyCodeReq{
 // AnalyCodeResp 返回
 message AnalyCodeResp{
 	repeated string msgs = 1;// 内容
+}
+
+// GetAllSpReq 请求
+message GetAllSpReq{
+    string code = 1;// 股票代码
+}
+
+message SpShowInfo{
+    string d1 = 1;// 名字
+    string d2 = 2;// 发布日
+    string d3 = 3;// 数量
+    string d4 = 4;// 描述
+    string color = 5;// 颜色
+}
+
+message AllSpInfo {
+ string title = 1;// 标签
+ string d1 = 2;// 名字
+ string d2 = 3;// 发布日
+ string d3 = 4;// 数量
+ string d4 = 5;// 描述
+ repeated SpShowInfo list =7;// 列表
+}
+
+// GetAllSpResp 
+message GetAllSpResp {
+    repeated AllSpInfo list =1;// 列表
 }

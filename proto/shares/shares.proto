@@ -37,6 +37,8 @@ service shares {
 	 rpc GetVip(common.Empty) returns (GetDayResp){}
     // GetFl 放量(打版)
 	rpc GetFl(common.Empty) returns (GetDayResp){}
+    // GetUp 趋势
+	rpc GetUp(common.Empty) returns (GetDayResp){}
 }
 
 // SharesInfo 股票信息
@@ -79,6 +81,7 @@ message SharesInfoDetails{
     double dea = 22;// 慢线
     double max = 23;// 当日最高点
     double min = 24;// 当日最低
+    int64 day0 = 25;// 当日0点时间戳
 }
 
 
@@ -232,4 +235,10 @@ message UpsetGroupCodeReq{
 // GetDayResp 请求结构
 message GetDayResp{
     repeated Group list = 1;// 列表 
+}
+
+// GetHyCodeResp 请求结构
+message GetHyCodeResp{
+    string doc = 1;// 当日净流入
+    repeated Group list = 2;// 列表 
 }
