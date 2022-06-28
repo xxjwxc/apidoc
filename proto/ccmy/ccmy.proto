@@ -21,6 +21,25 @@ service ccmy {
     rpc AddGroup(AddGroupReq) returns (common.Empty) {}
     // UpdateUserGroup 更新门店信息
     rpc UpdateUserGroup(UpdateUserGroupReq) returns (common.Empty) {}
+     // GetAllRequest 获取所有申请用户
+     rpc GetAllRequest(common.Empty) returns (GetAllRequestResp) {}
+    // Request 更新门店信息
+    rpc Request(RequestReq) returns (common.Empty) {}
+}
+
+message RequestReq{
+    string openId = 1;
+    int32 tag = 2;// 标记(0:申请，1:同意，-1：不同意)
+}
+
+message GetAllRequestResp{
+    repeated UInfo list = 1;// 门店
+}
+
+message UInfo{
+ string openId = 1;
+ string name = 2;
+ string url = 3;// 照片
 }
 
 message UpdateUserGroupReq{
@@ -36,6 +55,7 @@ message AddDocReq{
     string name = 2;// 姓名
     string url = 3;// 照片
     string doc = 4;// 描述
+    string type = 5;// 追加头
 }
 
 message GetStoreResp {

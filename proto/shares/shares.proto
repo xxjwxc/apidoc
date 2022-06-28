@@ -2,6 +2,7 @@ syntax = "proto3"; // 指定proto版本
 
 package shares;     // 指定包名
 import "common/common_public.proto";
+import "google/protobuf/any.proto";
 
 option go_package = "rpc/shares"; // 指定路径
 
@@ -241,4 +242,18 @@ message GetDayResp{
 message GetHyCodeResp{
     string doc = 1;// 当日净流入
     repeated Group list = 2;// 列表 
+}
+
+message HyTimeData {
+    repeated google.protobuf.Any data = 3;
+}
+
+message GetHyTimeReq{
+    int32 num=1;// 时间
+}
+
+message GetHyTimeResp{
+    string title = 1;// 标题
+    repeated string list =2;// 显示的名字
+    repeated HyTimeData data = 3;
 }

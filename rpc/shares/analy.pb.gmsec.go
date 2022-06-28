@@ -29,6 +29,8 @@ const _ = grpc.SupportPackageIsVersion6
 type AnalyClient interface {
 	// AnalyCode 分析一直股票
 	AnalyCode(ctx context.Context, in *AnalyCodeReq, opts ...grpc.CallOption) (*AnalyCodeResp, error)
+	// GetAllSp 获取票的特色数据
+	GetAllSp(ctx context.Context, in *GetAllSpReq, opts ...grpc.CallOption) (*GetAllSpResp, error)
 }
 
 type analyClient struct {
@@ -70,10 +72,26 @@ func (c *analyClient) AnalyCode(ctx context.Context, in *AnalyCodeReq, opts ...g
 	return out, nil
 }
 
+func (c *analyClient) GetAllSp(ctx context.Context, in *GetAllSpReq, opts ...grpc.CallOption) (*GetAllSpResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetAllSpResp)
+	err = conn.Invoke(ctx, "/shares.Analy/GetAllSp", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AnalyServer is the server API for Analy service.
 type AnalyServer interface {
 	// AnalyCode 分析一直股票
 	AnalyCode(context.Context, *AnalyCodeReq) (*AnalyCodeResp, error)
+	// GetAllSp 获取票的特色数据
+	GetAllSp(context.Context, *GetAllSpReq) (*GetAllSpResp, error)
 }
 
 // UnimplementedAnalyServer can be embedded to have forward compatible implementations.
@@ -82,6 +100,9 @@ type UnimplementedAnalyServer struct {
 
 func (*UnimplementedAnalyServer) AnalyCode(context.Context, *AnalyCodeReq) (*AnalyCodeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AnalyCode not implemented")
+}
+func (*UnimplementedAnalyServer) GetAllSp(context.Context, *GetAllSpReq) (*GetAllSpResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllSp not implemented")
 }
 
 func RegisterAnalyServer(s server.Server, srv AnalyServer) {
@@ -106,6 +127,24 @@ func _Analy_AnalyCode_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Analy_GetAllSp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllSpReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyServer).GetAllSp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.Analy/GetAllSp",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyServer).GetAllSp(ctx, req.(*GetAllSpReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Analy_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.Analy",
 	HandlerType: (*AnalyServer)(nil),
@@ -113,6 +152,10 @@ var _Analy_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AnalyCode",
 			Handler:    _Analy_AnalyCode_Handler,
+		},
+		{
+			MethodName: "GetAllSp",
+			Handler:    _Analy_GetAllSp_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

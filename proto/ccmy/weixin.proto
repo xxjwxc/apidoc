@@ -52,6 +52,7 @@ message WxUserinfo {
 	string province = 6;   //用户所在省份
 	string country = 7;    //用户所在国家
 	string language  = 8;   //用户的语言，简体中文为zh_CN
+	bool vip=9; // 是否vip
 }
 
 // WxUserinfoResp 用户信息返回
@@ -96,6 +97,7 @@ message GetUserInfoResp{
 	bool 	only20 = 11;// 是否20日线     
 	int32   capacity = 12;// 可用容量 
 	repeated userInfo userList = 13;// 用户列表
+	bool vip = 14;
  }
  
  message UpsetUserInfoReq{

@@ -42,6 +42,10 @@ type CcmyClient interface {
 	AddGroup(ctx context.Context, in *AddGroupReq, opts ...grpc.CallOption) (*common.Empty, error)
 	// UpdateUserGroup 更新门店信息
 	UpdateUserGroup(ctx context.Context, in *UpdateUserGroupReq, opts ...grpc.CallOption) (*common.Empty, error)
+	// GetAllRequest 获取所有申请用户
+	GetAllRequest(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetAllRequestResp, error)
+	// Request 更新门店信息
+	Request(ctx context.Context, in *RequestReq, opts ...grpc.CallOption) (*common.Empty, error)
 }
 
 type ccmyClient struct {
@@ -167,6 +171,34 @@ func (c *ccmyClient) UpdateUserGroup(ctx context.Context, in *UpdateUserGroupReq
 	return out, nil
 }
 
+func (c *ccmyClient) GetAllRequest(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetAllRequestResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetAllRequestResp)
+	err = conn.Invoke(ctx, "/ccmy.ccmy/GetAllRequest", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ccmyClient) Request(ctx context.Context, in *RequestReq, opts ...grpc.CallOption) (*common.Empty, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(common.Empty)
+	err = conn.Invoke(ctx, "/ccmy.ccmy/Request", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CcmyServer is the server API for Ccmy service.
 type CcmyServer interface {
 	// GetStore 获取门店信息
@@ -183,6 +215,10 @@ type CcmyServer interface {
 	AddGroup(context.Context, *AddGroupReq) (*common.Empty, error)
 	// UpdateUserGroup 更新门店信息
 	UpdateUserGroup(context.Context, *UpdateUserGroupReq) (*common.Empty, error)
+	// GetAllRequest 获取所有申请用户
+	GetAllRequest(context.Context, *common.Empty) (*GetAllRequestResp, error)
+	// Request 更新门店信息
+	Request(context.Context, *RequestReq) (*common.Empty, error)
 }
 
 // UnimplementedCcmyServer can be embedded to have forward compatible implementations.
@@ -209,6 +245,12 @@ func (*UnimplementedCcmyServer) AddGroup(context.Context, *AddGroupReq) (*common
 }
 func (*UnimplementedCcmyServer) UpdateUserGroup(context.Context, *UpdateUserGroupReq) (*common.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserGroup not implemented")
+}
+func (*UnimplementedCcmyServer) GetAllRequest(context.Context, *common.Empty) (*GetAllRequestResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllRequest not implemented")
+}
+func (*UnimplementedCcmyServer) Request(context.Context, *RequestReq) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Request not implemented")
 }
 
 func RegisterCcmyServer(s server.Server, srv CcmyServer) {
@@ -341,6 +383,42 @@ func _Ccmy_UpdateUserGroup_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Ccmy_GetAllRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CcmyServer).GetAllRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ccmy.ccmy/GetAllRequest",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CcmyServer).GetAllRequest(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Ccmy_Request_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CcmyServer).Request(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ccmy.ccmy/Request",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CcmyServer).Request(ctx, req.(*RequestReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Ccmy_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "ccmy.ccmy",
 	HandlerType: (*CcmyServer)(nil),
@@ -372,6 +450,14 @@ var _Ccmy_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUserGroup",
 			Handler:    _Ccmy_UpdateUserGroup_Handler,
+		},
+		{
+			MethodName: "GetAllRequest",
+			Handler:    _Ccmy_GetAllRequest_Handler,
+		},
+		{
+			MethodName: "Request",
+			Handler:    _Ccmy_Request_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
