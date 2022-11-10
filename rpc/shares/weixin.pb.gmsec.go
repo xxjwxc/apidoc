@@ -40,6 +40,8 @@ type WeixinClient interface {
 	UpsetUserInfo(ctx context.Context, in *UpsetUserInfoReq, opts ...grpc.CallOption) (*common.Empty, error)
 	// ReLogin 是否要重新登录
 	ReLogin(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*ReLoginResp, error)
+	// ReLogin 是否要重新登录
+	GetJsSign(ctx context.Context, in *GetJsSignReq, opts ...grpc.CallOption) (*GetJsSignResp, error)
 }
 
 type weixinClient struct {
@@ -151,6 +153,20 @@ func (c *weixinClient) ReLogin(ctx context.Context, in *common.Empty, opts ...gr
 	return out, nil
 }
 
+func (c *weixinClient) GetJsSign(ctx context.Context, in *GetJsSignReq, opts ...grpc.CallOption) (*GetJsSignResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetJsSignResp)
+	err = conn.Invoke(ctx, "/shares.Weixin/GetJsSign", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WeixinServer is the server API for Weixin service.
 type WeixinServer interface {
 	// Oauth 微信授权获取登录信息
@@ -165,6 +181,8 @@ type WeixinServer interface {
 	UpsetUserInfo(context.Context, *UpsetUserInfoReq) (*common.Empty, error)
 	// ReLogin 是否要重新登录
 	ReLogin(context.Context, *common.Empty) (*ReLoginResp, error)
+	// ReLogin 是否要重新登录
+	GetJsSign(context.Context, *GetJsSignReq) (*GetJsSignResp, error)
 }
 
 // UnimplementedWeixinServer can be embedded to have forward compatible implementations.
@@ -188,6 +206,9 @@ func (*UnimplementedWeixinServer) UpsetUserInfo(context.Context, *UpsetUserInfoR
 }
 func (*UnimplementedWeixinServer) ReLogin(context.Context, *common.Empty) (*ReLoginResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReLogin not implemented")
+}
+func (*UnimplementedWeixinServer) GetJsSign(context.Context, *GetJsSignReq) (*GetJsSignResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetJsSign not implemented")
 }
 
 func RegisterWeixinServer(s server.Server, srv WeixinServer) {
@@ -302,6 +323,24 @@ func _Weixin_ReLogin_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Weixin_GetJsSign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetJsSignReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WeixinServer).GetJsSign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.Weixin/GetJsSign",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WeixinServer).GetJsSign(ctx, req.(*GetJsSignReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Weixin_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.Weixin",
 	HandlerType: (*WeixinServer)(nil),
@@ -329,6 +368,10 @@ var _Weixin_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReLogin",
 			Handler:    _Weixin_ReLogin_Handler,
+		},
+		{
+			MethodName: "GetJsSign",
+			Handler:    _Weixin_GetJsSign_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -1,0 +1,15 @@
+syntax = "proto3"; // 指定proto版本
+
+package weibo;     // 指定包名
+import "common/common_public.proto";
+import "google/protobuf/any.proto";
+
+option go_package = "rpc/weibo"; // 指定路径
+
+// 定义weibo服务
+service weibo {
+    // Redirect 重定向
+    rpc Redirect(common.Empty) returns (GetGroupResp) {}
+    // Cancle 获取分组信息
+    rpc Cancle(CodeReq) returns (GetMyGroupResp) {}
+}

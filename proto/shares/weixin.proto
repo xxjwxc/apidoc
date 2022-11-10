@@ -25,9 +25,23 @@ service Weixin {
 
 	// ReLogin 是否要重新登录
 	rpc ReLogin(common.Empty) returns (ReLoginResp){}
+	
+	// ReLogin 是否要重新登录
+	rpc GetJsSign(GetJsSignReq) returns (GetJsSignResp){}
 
 }
 
+message GetJsSignReq{
+	string url = 1;
+}
+
+message GetJsSignResp{
+	string appid = 1;
+	string noncestr=2;
+	string timestamp=3;
+	string url=4;
+	string signature=5;
+}
 
 // OauthReq 请求结构
 message OauthReq {

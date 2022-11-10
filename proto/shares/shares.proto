@@ -53,8 +53,9 @@ message SharesInfo{
     string color = 7;// 颜色
     string img = 8;// 图片地址
     string hy = 9;// 行业板块
-    string attach = 10;// 附加
-    string peg = 11;// peg信息
+    string mainHy = 10;// 行业板块
+    string attach = 11;// 附加
+    string peg = 12;// peg信息
 }
 
 // SharesInfoDetails 股票详细信息
@@ -216,6 +217,7 @@ message AddGroupReq{
 
 message CodeReq{
     string code = 1;// 股票代码
+    string tp = 2;// 类型(k30,daily)
 }
 
 message GetMyGroupResp{
@@ -240,7 +242,7 @@ message GetDayResp{
 
 // GetHyCodeResp 请求结构
 message GetHyCodeResp{
-    string doc = 1;// 当日净流入
+    repeated string doc = 1;// 当日净流入
     repeated Group list = 2;// 列表 
 }
 
