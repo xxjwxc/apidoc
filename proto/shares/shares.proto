@@ -146,16 +146,19 @@ message AddMyCodeReq{
     bool public = 8;// 是否推荐给组织
 	double up = 9;// 估价涨到
 	double down = 10;// 估价跌到
-	double upPercent = 11;// 涨幅超
-	double downPercent = 12; // 跌幅超
-    bool vaild = 13;// 是否有效
+
+    bool vaild = 11;// 是否有效
     
     // 返回值用
-    string simpleCode =14;// 股票代码简写
-    string ext = 15;// 后缀
-	string name = 16;// 股票名字
-    double percent = 17;// 百分比
-    string color = 18;// 颜色
+    string simpleCode =12;// 股票代码简写
+    string ext = 13;// 后缀
+	string name = 14;// 股票名字
+    double percent = 15;// 百分比
+    string color = 16;// 颜色
+    double upPercent = 17;// 涨幅超
+    double upTo = 18;// 涨幅目标提醒
+    double downPercent = 19; // 跌幅超
+    double downTo = 20;// 涨幅目标提醒
 }
 
 message AddMyCodeResp{

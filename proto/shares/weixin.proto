@@ -96,8 +96,9 @@ message GetUserInfoResp{
 	string  phone   = 8;// 用户手机号  
 	string  group =9;// 用户所在分组列表    
 	bool    rg   = 10;// 是否涨绿跌红
-	bool 	only20 = 11;// 是否20日线     
-	int32   capacity = 12;// 可用容量 
+	bool 	only20 = 11;// 是否20日线
+	bool 	sendArtic = 14;// 是否发送每日复盘文章          
+	int32   capacity = 13;// 可用容量 
  }
  
  message UpsetUserInfoReq{
