@@ -60,6 +60,8 @@ type SharesClient interface {
 	GetFl(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDayResp, error)
 	// GetUp 趋势
 	GetUp(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDayResp, error)
+	// GetDailyCheck 每日复盘笔记
+	GetDailyCheck(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDailyCheckResp, error)
 }
 
 type sharesClient struct {
@@ -311,6 +313,20 @@ func (c *sharesClient) GetUp(ctx context.Context, in *common.Empty, opts ...grpc
 	return out, nil
 }
 
+func (c *sharesClient) GetDailyCheck(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDailyCheckResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetDailyCheckResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetDailyCheck", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SharesServer is the server API for Shares service.
 type SharesServer interface {
 	// GetGroup 获取分组信息
@@ -345,6 +361,8 @@ type SharesServer interface {
 	GetFl(context.Context, *common.Empty) (*GetDayResp, error)
 	// GetUp 趋势
 	GetUp(context.Context, *common.Empty) (*GetDayResp, error)
+	// GetDailyCheck 每日复盘笔记
+	GetDailyCheck(context.Context, *common.Empty) (*GetDailyCheckResp, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
@@ -398,6 +416,9 @@ func (*UnimplementedSharesServer) GetFl(context.Context, *common.Empty) (*GetDay
 }
 func (*UnimplementedSharesServer) GetUp(context.Context, *common.Empty) (*GetDayResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUp not implemented")
+}
+func (*UnimplementedSharesServer) GetDailyCheck(context.Context, *common.Empty) (*GetDailyCheckResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDailyCheck not implemented")
 }
 
 func RegisterSharesServer(s server.Server, srv SharesServer) {
@@ -692,6 +713,24 @@ func _Shares_GetUp_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_GetDailyCheck_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetDailyCheck(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetDailyCheck",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetDailyCheck(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Shares_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.shares",
 	HandlerType: (*SharesServer)(nil),
@@ -759,6 +798,10 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUp",
 			Handler:    _Shares_GetUp_Handler,
+		},
+		{
+			MethodName: "GetDailyCheck",
+			Handler:    _Shares_GetDailyCheck_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

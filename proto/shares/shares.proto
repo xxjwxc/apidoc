@@ -40,6 +40,20 @@ service shares {
 	rpc GetFl(common.Empty) returns (GetDayResp){}
     // GetUp 趋势
 	rpc GetUp(common.Empty) returns (GetDayResp){}
+    // GetDailyCheck 每日复盘笔记
+	rpc GetDailyCheck(common.Empty) returns (GetDailyCheckResp){}
+}
+
+
+message DailyCheckInfo{
+    string dayStr = 1;// 日期
+    string title = 2;// 标题
+    string digest = 3;// 简要描述
+    string img = 4;// 图片地址
+}
+
+message GetDailyCheckResp{
+    repeated DailyCheckInfo list = 1;// 每日复盘笔记
 }
 
 // SharesInfo 股票信息
