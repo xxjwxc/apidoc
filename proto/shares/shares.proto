@@ -50,6 +50,7 @@ message DailyCheckInfo{
     string title = 2;// 标题
     string digest = 3;// 简要描述
     string img = 4;// 图片地址
+    string url = 5;// 连接地址
 }
 
 message GetDailyCheckResp{
@@ -70,6 +71,7 @@ message SharesInfo{
     string mainHy = 10;// 行业板块
     string attach = 11;// 附加
     string peg = 12;// peg信息
+    string url = 13;// 地址
 }
 
 // SharesInfoDetails 股票详细信息
