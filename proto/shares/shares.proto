@@ -72,6 +72,8 @@ message SharesInfo{
     string attach = 11;// 附加
     string peg = 12;// peg信息
     string url = 13;// 地址
+    string hyDj = 14;// 行业叠加
+    repeated string hyDjDoc = 15;// 行业叠加描述
 }
 
 // SharesInfoDetails 股票详细信息
