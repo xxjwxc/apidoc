@@ -35,7 +35,7 @@ type WeixinClient interface {
 	// GetQrcode 获取微信二维码
 	GetQrcode(ctx context.Context, in *GetQrcodeReq, opts ...grpc.CallOption) (*GetQrcodeResp, error)
 	// GetUserInfo 获取用户信息
-	GetUserInfo(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetUserInfoResp, error)
+	GetUserInfo(ctx context.Context, in *GetUserInfoReq, opts ...grpc.CallOption) (*GetUserInfoResp, error)
 	// UpsetUserInfo 更新用户信息
 	UpsetUserInfo(ctx context.Context, in *UpsetUserInfoReq, opts ...grpc.CallOption) (*common.Empty, error)
 	// ReLogin 是否要重新登录
@@ -111,7 +111,7 @@ func (c *weixinClient) GetQrcode(ctx context.Context, in *GetQrcodeReq, opts ...
 	return out, nil
 }
 
-func (c *weixinClient) GetUserInfo(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetUserInfoResp, error) {
+func (c *weixinClient) GetUserInfo(ctx context.Context, in *GetUserInfoReq, opts ...grpc.CallOption) (*GetUserInfoResp, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
 		return nil, err
@@ -176,7 +176,7 @@ type WeixinServer interface {
 	// GetQrcode 获取微信二维码
 	GetQrcode(context.Context, *GetQrcodeReq) (*GetQrcodeResp, error)
 	// GetUserInfo 获取用户信息
-	GetUserInfo(context.Context, *common.Empty) (*GetUserInfoResp, error)
+	GetUserInfo(context.Context, *GetUserInfoReq) (*GetUserInfoResp, error)
 	// UpsetUserInfo 更新用户信息
 	UpsetUserInfo(context.Context, *UpsetUserInfoReq) (*common.Empty, error)
 	// ReLogin 是否要重新登录
@@ -198,7 +198,7 @@ func (*UnimplementedWeixinServer) UpdateUserInfo(context.Context, *WxUserinfo) (
 func (*UnimplementedWeixinServer) GetQrcode(context.Context, *GetQrcodeReq) (*GetQrcodeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetQrcode not implemented")
 }
-func (*UnimplementedWeixinServer) GetUserInfo(context.Context, *common.Empty) (*GetUserInfoResp, error) {
+func (*UnimplementedWeixinServer) GetUserInfo(context.Context, *GetUserInfoReq) (*GetUserInfoResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserInfo not implemented")
 }
 func (*UnimplementedWeixinServer) UpsetUserInfo(context.Context, *UpsetUserInfoReq) (*common.Empty, error) {
@@ -270,7 +270,7 @@ func _Weixin_GetQrcode_Handler(srv interface{}, ctx context.Context, dec func(in
 }
 
 func _Weixin_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(common.Empty)
+	in := new(GetUserInfoReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -282,7 +282,7 @@ func _Weixin_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: "/shares.Weixin/GetUserInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WeixinServer).GetUserInfo(ctx, req.(*common.Empty))
+		return srv.(WeixinServer).GetUserInfo(ctx, req.(*GetUserInfoReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }

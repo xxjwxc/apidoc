@@ -18,7 +18,7 @@ service Weixin {
 	rpc GetQrcode(GetQrcodeReq) returns (GetQrcodeResp){}
 
 	// GetUserInfo 获取用户信息
-	rpc GetUserInfo(common.Empty) returns (GetUserInfoResp){}
+	rpc GetUserInfo(GetUserInfoReq) returns (GetUserInfoResp){}
 
 	// UpsetUserInfo 更新用户信息
 	rpc UpsetUserInfo(UpsetUserInfoReq) returns (common.Empty) {}
@@ -82,6 +82,11 @@ message GetQrcodeReq{
 // GetQrcodeResp 获取二维码
 message GetQrcodeResp{
 	string url = 1;// 二维码图片地址
+}
+
+// GetUserInfoReq 用户信息
+message GetUserInfoReq{
+	bool isDebug = 1;// 是否调试模式
 }
 
 // GetUserInfoResp 用户信息
