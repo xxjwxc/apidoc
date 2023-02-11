@@ -10,6 +10,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	common "rpc/common"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -32,6 +33,7 @@ type AnalyClient interface {
 	// GetAllSp 获取票的特色数据
 	GetAllSp(ctx context.Context, in *GetAllSpReq, opts ...grpc.CallOption) (*GetAllSpResp, error)
 	GetSampleWdj(ctx context.Context, in *GetSampleWdjReq, opts ...grpc.CallOption) (*GetSampleWdjResp, error)
+	GetGjzb(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GjzbInfo, error)
 }
 
 type analyClient struct {
@@ -101,6 +103,20 @@ func (c *analyClient) GetSampleWdj(ctx context.Context, in *GetSampleWdjReq, opt
 	return out, nil
 }
 
+func (c *analyClient) GetGjzb(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GjzbInfo, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GjzbInfo)
+	err = conn.Invoke(ctx, "/shares.Analy/GetGjzb", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AnalyServer is the server API for Analy service.
 type AnalyServer interface {
 	// AnalyCode 分析一直股票
@@ -108,6 +124,7 @@ type AnalyServer interface {
 	// GetAllSp 获取票的特色数据
 	GetAllSp(context.Context, *GetAllSpReq) (*GetAllSpResp, error)
 	GetSampleWdj(context.Context, *GetSampleWdjReq) (*GetSampleWdjResp, error)
+	GetGjzb(context.Context, *common.Empty) (*GjzbInfo, error)
 }
 
 // UnimplementedAnalyServer can be embedded to have forward compatible implementations.
@@ -122,6 +139,9 @@ func (*UnimplementedAnalyServer) GetAllSp(context.Context, *GetAllSpReq) (*GetAl
 }
 func (*UnimplementedAnalyServer) GetSampleWdj(context.Context, *GetSampleWdjReq) (*GetSampleWdjResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSampleWdj not implemented")
+}
+func (*UnimplementedAnalyServer) GetGjzb(context.Context, *common.Empty) (*GjzbInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGjzb not implemented")
 }
 
 func RegisterAnalyServer(s server.Server, srv AnalyServer) {
@@ -182,6 +202,24 @@ func _Analy_GetSampleWdj_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Analy_GetGjzb_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyServer).GetGjzb(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.Analy/GetGjzb",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyServer).GetGjzb(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Analy_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.Analy",
 	HandlerType: (*AnalyServer)(nil),
@@ -197,6 +235,10 @@ var _Analy_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSampleWdj",
 			Handler:    _Analy_GetSampleWdj_Handler,
+		},
+		{
+			MethodName: "GetGjzb",
+			Handler:    _Analy_GetGjzb_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

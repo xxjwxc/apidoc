@@ -39,7 +39,7 @@ type WeixinClient interface {
 	// UpsetUserInfo 更新用户信息
 	UpsetUserInfo(ctx context.Context, in *UpsetUserInfoReq, opts ...grpc.CallOption) (*common.Empty, error)
 	// ReLogin 是否要重新登录
-	ReLogin(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*ReLoginResp, error)
+	ReLogin(ctx context.Context, in *GetUserInfoReq, opts ...grpc.CallOption) (*ReLoginResp, error)
 	// ReLogin 是否要重新登录
 	GetJsSign(ctx context.Context, in *GetJsSignReq, opts ...grpc.CallOption) (*GetJsSignResp, error)
 }
@@ -139,7 +139,7 @@ func (c *weixinClient) UpsetUserInfo(ctx context.Context, in *UpsetUserInfoReq, 
 	return out, nil
 }
 
-func (c *weixinClient) ReLogin(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*ReLoginResp, error) {
+func (c *weixinClient) ReLogin(ctx context.Context, in *GetUserInfoReq, opts ...grpc.CallOption) (*ReLoginResp, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
 		return nil, err
@@ -180,7 +180,7 @@ type WeixinServer interface {
 	// UpsetUserInfo 更新用户信息
 	UpsetUserInfo(context.Context, *UpsetUserInfoReq) (*common.Empty, error)
 	// ReLogin 是否要重新登录
-	ReLogin(context.Context, *common.Empty) (*ReLoginResp, error)
+	ReLogin(context.Context, *GetUserInfoReq) (*ReLoginResp, error)
 	// ReLogin 是否要重新登录
 	GetJsSign(context.Context, *GetJsSignReq) (*GetJsSignResp, error)
 }
@@ -204,7 +204,7 @@ func (*UnimplementedWeixinServer) GetUserInfo(context.Context, *GetUserInfoReq) 
 func (*UnimplementedWeixinServer) UpsetUserInfo(context.Context, *UpsetUserInfoReq) (*common.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpsetUserInfo not implemented")
 }
-func (*UnimplementedWeixinServer) ReLogin(context.Context, *common.Empty) (*ReLoginResp, error) {
+func (*UnimplementedWeixinServer) ReLogin(context.Context, *GetUserInfoReq) (*ReLoginResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReLogin not implemented")
 }
 func (*UnimplementedWeixinServer) GetJsSign(context.Context, *GetJsSignReq) (*GetJsSignResp, error) {
@@ -306,7 +306,7 @@ func _Weixin_UpsetUserInfo_Handler(srv interface{}, ctx context.Context, dec fun
 }
 
 func _Weixin_ReLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(common.Empty)
+	in := new(GetUserInfoReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -318,7 +318,7 @@ func _Weixin_ReLogin_Handler(srv interface{}, ctx context.Context, dec func(inte
 		FullMethod: "/shares.Weixin/ReLogin",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WeixinServer).ReLogin(ctx, req.(*common.Empty))
+		return srv.(WeixinServer).ReLogin(ctx, req.(*GetUserInfoReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }

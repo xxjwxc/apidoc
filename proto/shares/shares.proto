@@ -42,8 +42,18 @@ service shares {
 	rpc GetUp(common.Empty) returns (GetDayResp){}
     // GetDailyCheck 每日复盘笔记
 	rpc GetDailyCheck(common.Empty) returns (GetDailyCheckResp){}
+    ////////////////////////////////////////////////////////////////
+    ///////价值/////////////////////////////////////////////////////
+    rpc GetHyRm(GetHyRmReq) returns (GetHyRmResp){}
+    ////////////////////////////////////////////////////////////////
+}
+message GetHyRmReq {
+    int32 days = 1;// 几天
 }
 
+message GetHyRmResp {
+   repeated common.SimpSharInfo list = 1;// 列表
+}
 
 message DailyCheckInfo{
     string dayStr = 1;// 日期

@@ -16,3 +16,13 @@ message ResultResp {
 message Empty {
 	
 }
+
+
+message SimpSharInfo {
+	string code = 1;// 当前代码
+	string name = 2;// 当前名字
+    double price = 3;// 当前指数
+    double percent = 4;// 当前涨跌比例
+    string color = 5;// 颜色
+	string url = 6;// 地址
+}

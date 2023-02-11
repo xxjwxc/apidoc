@@ -62,6 +62,9 @@ type SharesClient interface {
 	GetUp(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDayResp, error)
 	// GetDailyCheck 每日复盘笔记
 	GetDailyCheck(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDailyCheckResp, error)
+	// //////////////////////////////////////////////////////////////
+	// /////价值/////////////////////////////////////////////////////
+	GetHyRm(ctx context.Context, in *GetHyRmReq, opts ...grpc.CallOption) (*GetHyRmResp, error)
 }
 
 type sharesClient struct {
@@ -327,6 +330,20 @@ func (c *sharesClient) GetDailyCheck(ctx context.Context, in *common.Empty, opts
 	return out, nil
 }
 
+func (c *sharesClient) GetHyRm(ctx context.Context, in *GetHyRmReq, opts ...grpc.CallOption) (*GetHyRmResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetHyRmResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetHyRm", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SharesServer is the server API for Shares service.
 type SharesServer interface {
 	// GetGroup 获取分组信息
@@ -363,6 +380,9 @@ type SharesServer interface {
 	GetUp(context.Context, *common.Empty) (*GetDayResp, error)
 	// GetDailyCheck 每日复盘笔记
 	GetDailyCheck(context.Context, *common.Empty) (*GetDailyCheckResp, error)
+	// //////////////////////////////////////////////////////////////
+	// /////价值/////////////////////////////////////////////////////
+	GetHyRm(context.Context, *GetHyRmReq) (*GetHyRmResp, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
@@ -419,6 +439,9 @@ func (*UnimplementedSharesServer) GetUp(context.Context, *common.Empty) (*GetDay
 }
 func (*UnimplementedSharesServer) GetDailyCheck(context.Context, *common.Empty) (*GetDailyCheckResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDailyCheck not implemented")
+}
+func (*UnimplementedSharesServer) GetHyRm(context.Context, *GetHyRmReq) (*GetHyRmResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetHyRm not implemented")
 }
 
 func RegisterSharesServer(s server.Server, srv SharesServer) {
@@ -731,6 +754,24 @@ func _Shares_GetDailyCheck_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_GetHyRm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHyRmReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetHyRm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetHyRm",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetHyRm(ctx, req.(*GetHyRmReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Shares_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.shares",
 	HandlerType: (*SharesServer)(nil),
@@ -802,6 +843,10 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDailyCheck",
 			Handler:    _Shares_GetDailyCheck_Handler,
+		},
+		{
+			MethodName: "GetHyRm",
+			Handler:    _Shares_GetHyRm_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

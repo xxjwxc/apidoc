@@ -24,7 +24,7 @@ service Weixin {
 	rpc UpsetUserInfo(UpsetUserInfoReq) returns (common.Empty) {}
 
 	// ReLogin 是否要重新登录
-	rpc ReLogin(common.Empty) returns (ReLoginResp){}
+	rpc ReLogin(GetUserInfoReq) returns (ReLoginResp){}
 	
 	// ReLogin 是否要重新登录
 	rpc GetJsSign(GetJsSignReq) returns (GetJsSignResp){}

@@ -1,6 +1,7 @@
 syntax = "proto3"; // 指定proto版本
 
 package shares;     // 指定包名
+import "common/common_public.proto";
 
 option go_package = "rpc/shares"; // 指定路径
 
@@ -12,11 +13,27 @@ service Analy {
     // GetAllSp 获取票的特色数据
     rpc GetAllSp(GetAllSpReq) returns (GetAllSpResp) {}
     rpc GetSampleWdj(GetSampleWdjReq) returns (GetSampleWdjResp) {}
+    rpc GetGjzb(common.Empty) returns (GjzbInfo) {}
+    
+}
+
+message GetGjzbResp{
+    repeated GjzbInfo list = 1;// 列表
+}
+
+message GjzbInfo {
+    double price = 1;// 当前指数
+    double percent = 2;// 当前涨跌比例
+    double changeNum = 3;// 当前涨跌数
+    string code = 4;// 当前代码
+    string name = 5;// 当前名字
+    string color = 6;// 颜色
 }
 
 message GetSampleWdjReq{
 
 }
+
 message GetSampleWdjResp{
     double baseHeat = 1;// 基础温度
     double dayHeat = 2;// 当日温度
