@@ -65,6 +65,10 @@ type SharesClient interface {
 	// //////////////////////////////////////////////////////////////
 	// /////价值/////////////////////////////////////////////////////
 	GetHyRm(ctx context.Context, in *GetHyRmReq, opts ...grpc.CallOption) (*GetHyRmResp, error)
+	GetMyTeam(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetMyTeamResp, error)
+	GetMyTeamDetail(ctx context.Context, in *GetMyTeamDetailReq, opts ...grpc.CallOption) (*GetMyTeamDetailResp, error)
+	GetHyMmadd(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*GetHyMmaddResp, error)
+	GetHyZyb(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*GetHyMmaddResp, error)
 }
 
 type sharesClient struct {
@@ -344,6 +348,62 @@ func (c *sharesClient) GetHyRm(ctx context.Context, in *GetHyRmReq, opts ...grpc
 	return out, nil
 }
 
+func (c *sharesClient) GetMyTeam(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetMyTeamResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetMyTeamResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetMyTeam", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sharesClient) GetMyTeamDetail(ctx context.Context, in *GetMyTeamDetailReq, opts ...grpc.CallOption) (*GetMyTeamDetailResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetMyTeamDetailResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetMyTeamDetail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sharesClient) GetHyMmadd(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*GetHyMmaddResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetHyMmaddResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetHyMmadd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sharesClient) GetHyZyb(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*GetHyMmaddResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetHyMmaddResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetHyZyb", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SharesServer is the server API for Shares service.
 type SharesServer interface {
 	// GetGroup 获取分组信息
@@ -383,6 +443,10 @@ type SharesServer interface {
 	// //////////////////////////////////////////////////////////////
 	// /////价值/////////////////////////////////////////////////////
 	GetHyRm(context.Context, *GetHyRmReq) (*GetHyRmResp, error)
+	GetMyTeam(context.Context, *common.Empty) (*GetMyTeamResp, error)
+	GetMyTeamDetail(context.Context, *GetMyTeamDetailReq) (*GetMyTeamDetailResp, error)
+	GetHyMmadd(context.Context, *GetHyMmaddReq) (*GetHyMmaddResp, error)
+	GetHyZyb(context.Context, *GetHyMmaddReq) (*GetHyMmaddResp, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
@@ -442,6 +506,18 @@ func (*UnimplementedSharesServer) GetDailyCheck(context.Context, *common.Empty) 
 }
 func (*UnimplementedSharesServer) GetHyRm(context.Context, *GetHyRmReq) (*GetHyRmResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHyRm not implemented")
+}
+func (*UnimplementedSharesServer) GetMyTeam(context.Context, *common.Empty) (*GetMyTeamResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMyTeam not implemented")
+}
+func (*UnimplementedSharesServer) GetMyTeamDetail(context.Context, *GetMyTeamDetailReq) (*GetMyTeamDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMyTeamDetail not implemented")
+}
+func (*UnimplementedSharesServer) GetHyMmadd(context.Context, *GetHyMmaddReq) (*GetHyMmaddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetHyMmadd not implemented")
+}
+func (*UnimplementedSharesServer) GetHyZyb(context.Context, *GetHyMmaddReq) (*GetHyMmaddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetHyZyb not implemented")
 }
 
 func RegisterSharesServer(s server.Server, srv SharesServer) {
@@ -772,6 +848,78 @@ func _Shares_GetHyRm_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_GetMyTeam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetMyTeam(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetMyTeam",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetMyTeam(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Shares_GetMyTeamDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMyTeamDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetMyTeamDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetMyTeamDetail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetMyTeamDetail(ctx, req.(*GetMyTeamDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Shares_GetHyMmadd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHyMmaddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetHyMmadd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetHyMmadd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetHyMmadd(ctx, req.(*GetHyMmaddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Shares_GetHyZyb_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHyMmaddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetHyZyb(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetHyZyb",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetHyZyb(ctx, req.(*GetHyMmaddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Shares_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.shares",
 	HandlerType: (*SharesServer)(nil),
@@ -847,6 +995,22 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetHyRm",
 			Handler:    _Shares_GetHyRm_Handler,
+		},
+		{
+			MethodName: "GetMyTeam",
+			Handler:    _Shares_GetMyTeam_Handler,
+		},
+		{
+			MethodName: "GetMyTeamDetail",
+			Handler:    _Shares_GetMyTeamDetail_Handler,
+		},
+		{
+			MethodName: "GetHyMmadd",
+			Handler:    _Shares_GetHyMmadd_Handler,
+		},
+		{
+			MethodName: "GetHyZyb",
+			Handler:    _Shares_GetHyZyb_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

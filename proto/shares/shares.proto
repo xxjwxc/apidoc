@@ -45,8 +45,37 @@ service shares {
     ////////////////////////////////////////////////////////////////
     ///////价值/////////////////////////////////////////////////////
     rpc GetHyRm(GetHyRmReq) returns (GetHyRmResp){}
+    rpc GetMyTeam(common.Empty) returns (GetMyTeamResp){}// 获取我的组织列表
+    rpc GetMyTeamDetail(GetMyTeamDetailReq) returns (GetMyTeamDetailResp){}// 获取我的组织详情
+    rpc GetHyMmadd(GetHyMmaddReq) returns (GetHyMmaddResp){}// 秘密加仓
+    rpc GetHyZyb(GetHyMmaddReq) returns (GetHyMmaddResp){}
+    
     ////////////////////////////////////////////////////////////////
 }
+
+message GetHyMmaddReq {
+    int32 tag = 1;// 类型 0:机构,1:北上,2:公募
+    int64 days = 2;// 拿几天
+}
+
+message GetHyMmaddResp {
+    string title = 1;// 标题
+    repeated SharesInfo list = 2;// 列表
+}
+
+message GetMyTeamDetailReq {
+    string name = 1;
+}
+
+message GetMyTeamDetailResp{
+    string name = 1;// 分组名
+    repeated SharesInfo list = 2;// 列表
+}
+
+message GetMyTeamResp{
+    repeated string list = 1;
+}
+
 message GetHyRmReq {
     int32 days = 1;// 几天
 }
@@ -74,16 +103,17 @@ message SharesInfo{
     string ext = 3;// 后缀
 	string name = 4;// 股票名字
     double price = 5;// 当前价格
-    double percent = 6;// 百分比
-    string color = 7;// 颜色
-    string img = 8;// 图片地址
-    string hy = 9;// 行业板块
-    string mainHy = 10;// 行业板块
-    string attach = 11;// 附加
-    string peg = 12;// peg信息
-    string url = 13;// 地址
-    string hyDj = 14;// 行业叠加
-    repeated string hyDjDoc = 15;// 行业叠加描述
+    string sPrice = 6;// 价格简写
+    double percent = 7;// 百分比
+    string color = 8;// 颜色
+    string img = 9;// 图片地址
+    string hy = 10;// 行业板块
+    string mainHy = 11;// 行业板块
+    string attach = 12;// 附加
+    string peg = 13;// peg信息
+    string url = 14;// 地址
+    string hyDj = 15;// 行业叠加
+    repeated string hyDjDoc = 16;// 行业叠加描述
 }
 
 // SharesInfoDetails 股票详细信息
