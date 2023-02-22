@@ -49,7 +49,6 @@ service shares {
     rpc GetMyTeamDetail(GetMyTeamDetailReq) returns (GetMyTeamDetailResp){}// 获取我的组织详情
     rpc GetHyMmadd(GetHyMmaddReq) returns (GetHyMmaddResp){}// 秘密加仓
     rpc GetHyZyb(GetHyMmaddReq) returns (GetHyMmaddResp){}
-    
     ////////////////////////////////////////////////////////////////
 }
 
@@ -60,7 +59,8 @@ message GetHyMmaddReq {
 
 message GetHyMmaddResp {
     string title = 1;// 标题
-    repeated SharesInfo list = 2;// 列表
+    string day0 = 2;// 日期
+    repeated SharesInfo list = 3;// 列表
 }
 
 message GetMyTeamDetailReq {
