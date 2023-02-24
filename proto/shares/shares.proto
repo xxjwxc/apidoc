@@ -104,16 +104,17 @@ message SharesInfo{
 	string name = 4;// 股票名字
     double price = 5;// 当前价格
     string sPrice = 6;// 价格简写
-    double percent = 7;// 百分比
-    string color = 8;// 颜色
-    string img = 9;// 图片地址
-    string hy = 10;// 行业板块
-    string mainHy = 11;// 行业板块
-    string attach = 12;// 附加
-    string peg = 13;// peg信息
-    string url = 14;// 地址
-    string hyDj = 15;// 行业叠加
-    repeated string hyDjDoc = 16;// 行业叠加描述
+    double jlr = 7;// 净流入
+    double percent = 8;// 百分比
+    string color = 9;// 颜色
+    string img = 10;// 图片地址
+    string hy = 11;// 行业板块
+    string mainHy = 12;// 行业板块
+    string attach = 13;// 附加
+    string peg = 14;// peg信息
+    string url = 15;// 地址
+    string hyDj = 16;// 行业叠加
+    repeated string hyDjDoc = 26;// 行业叠加描述
 }
 
 // SharesInfoDetails 股票详细信息
