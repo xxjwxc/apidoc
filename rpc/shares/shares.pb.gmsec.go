@@ -69,6 +69,7 @@ type SharesClient interface {
 	GetMyTeamDetail(ctx context.Context, in *GetMyTeamDetailReq, opts ...grpc.CallOption) (*GetMyTeamDetailResp, error)
 	GetHyMmadd(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*GetHyMmaddResp, error)
 	GetHyZyb(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*GetHyMmaddResp, error)
+	GetSharesKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetSharesKlineResp, error)
 }
 
 type sharesClient struct {
@@ -404,6 +405,20 @@ func (c *sharesClient) GetHyZyb(ctx context.Context, in *GetHyMmaddReq, opts ...
 	return out, nil
 }
 
+func (c *sharesClient) GetSharesKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetSharesKlineResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetSharesKlineResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetSharesKline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SharesServer is the server API for Shares service.
 type SharesServer interface {
 	// GetGroup 获取分组信息
@@ -447,6 +462,7 @@ type SharesServer interface {
 	GetMyTeamDetail(context.Context, *GetMyTeamDetailReq) (*GetMyTeamDetailResp, error)
 	GetHyMmadd(context.Context, *GetHyMmaddReq) (*GetHyMmaddResp, error)
 	GetHyZyb(context.Context, *GetHyMmaddReq) (*GetHyMmaddResp, error)
+	GetSharesKline(context.Context, *GetSharesKlineReq) (*GetSharesKlineResp, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
@@ -518,6 +534,9 @@ func (*UnimplementedSharesServer) GetHyMmadd(context.Context, *GetHyMmaddReq) (*
 }
 func (*UnimplementedSharesServer) GetHyZyb(context.Context, *GetHyMmaddReq) (*GetHyMmaddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHyZyb not implemented")
+}
+func (*UnimplementedSharesServer) GetSharesKline(context.Context, *GetSharesKlineReq) (*GetSharesKlineResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSharesKline not implemented")
 }
 
 func RegisterSharesServer(s server.Server, srv SharesServer) {
@@ -920,6 +939,24 @@ func _Shares_GetHyZyb_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_GetSharesKline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSharesKlineReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetSharesKline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetSharesKline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetSharesKline(ctx, req.(*GetSharesKlineReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Shares_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.shares",
 	HandlerType: (*SharesServer)(nil),
@@ -1011,6 +1048,10 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetHyZyb",
 			Handler:    _Shares_GetHyZyb_Handler,
+		},
+		{
+			MethodName: "GetSharesKline",
+			Handler:    _Shares_GetSharesKline_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

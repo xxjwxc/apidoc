@@ -49,7 +49,21 @@ service shares {
     rpc GetMyTeamDetail(GetMyTeamDetailReq) returns (GetMyTeamDetailResp){}// 获取我的组织详情
     rpc GetHyMmadd(GetHyMmaddReq) returns (GetHyMmaddResp){}// 秘密加仓
     rpc GetHyZyb(GetHyMmaddReq) returns (GetHyMmaddResp){}
+    rpc GetSharesKline(GetSharesKlineReq) returns (GetSharesKlineResp){} // 获取股票联动线数据
     ////////////////////////////////////////////////////////////////
+}
+
+message GetSharesKlineReq {
+    string code = 1;// 股票代码
+    int64 month = 2;// 拿几月
+}
+
+message GetSharesKlineResp {
+    repeated string xAxis = 1;// x轴数据
+    repeated double kLine = 2;// 数据
+    repeated double bxPercent = 3;// 北上占比
+    repeated double zlPercent = 4;// 股基占比
+    repeated double yhFocus = 5;// 用户情绪
 }
 
 message GetHyMmaddReq {
@@ -60,7 +74,8 @@ message GetHyMmaddReq {
 message GetHyMmaddResp {
     string title = 1;// 标题
     string day0 = 2;// 日期
-    repeated SharesInfo list = 3;// 列表
+    repeated string thList = 3;// 表名
+    repeated SharesInfo list = 4;// 列表
 }
 
 message GetMyTeamDetailReq {
