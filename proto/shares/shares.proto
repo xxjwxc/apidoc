@@ -59,11 +59,17 @@ message GetSharesKlineReq {
 }
 
 message GetSharesKlineResp {
-    repeated string xAxis = 1;// x轴数据
+    repeated string times = 1;// x轴数据
     repeated double kLine = 2;// 数据
     repeated double bxPercent = 3;// 北上占比
-    repeated double zlPercent = 4;// 股基占比
-    repeated double yhFocus = 5;// 用户情绪
+    repeated double bxjlr = 4;// 北向净流入
+    repeated double bxjlr5 = 5;// 北向净流入
+    repeated double zlPercent = 6;// 股基占比
+    repeated double yhFocus = 7;// 用户情绪
+    string colorr = 8;// 红的颜色
+    string colorg  = 9;// 绿的颜色
+    repeated double rzPercent = 10;// 融资占比
+    repeated double rzPrice = 11;// 融资净流入
 }
 
 message GetHyMmaddReq {
