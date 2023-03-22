@@ -50,6 +50,7 @@ service shares {
     rpc GetHyMmadd(GetHyMmaddReq) returns (GetHyMmaddResp){}// 秘密加仓
     rpc GetHyZyb(GetHyMmaddReq) returns (GetHyMmaddResp){}
     rpc GetSharesKline(GetSharesKlineReq) returns (GetSharesKlineResp){} // 获取股票联动线数据
+    rpc GetGzKline(GetSharesKlineReq) returns (GZPeResp){} // 获取股票联动线数据
     ////////////////////////////////////////////////////////////////
 }
 
@@ -70,6 +71,26 @@ message GetSharesKlineResp {
     string colorg  = 9;// 绿的颜色
     repeated double rzPercent = 10;// 融资占比
     repeated double rzPrice = 11;// 融资净流入
+
+}
+
+// 估值及pe
+message GZPeResp {
+    repeated string times = 1;// x轴数据
+    repeated double kLine = 2;// 数据
+    repeated double pe0 = 3;// pe1
+    repeated double pe1 = 4;// pe2
+    repeated double pe2 = 5;// pe3
+    repeated double pe3 = 6;// pe4
+    repeated double pe4 = 7;// pe5
+    double min = 8; 
+    double max = 9;
+    
+    double peMin = 10;
+    double peMax = 11;
+    repeated string names = 12;// 名字
+    int32 interval = 13;
+    int32 peInterval = 14;
 }
 
 message GetHyMmaddReq {
