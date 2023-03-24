@@ -71,7 +71,8 @@ message GetSharesKlineResp {
     string colorg  = 9;// 绿的颜色
     repeated double rzPercent = 10;// 融资占比
     repeated double rzPrice = 11;// 融资净流入
-
+    repeated double qx = 12;// 情绪
+    repeated double gzd = 13;// 用户关注度
 }
 
 // 估值及pe
