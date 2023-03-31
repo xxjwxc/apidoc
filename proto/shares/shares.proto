@@ -73,6 +73,9 @@ message GetSharesKlineResp {
     repeated double rzPrice = 11;// 融资净流入
     repeated double qx = 12;// 情绪
     repeated double gzd = 13;// 用户关注度
+    repeated double fyyx = 14;// 飞鹰优选
+    repeated double zljk = 15;// 主力真吸货(主力清洗之出货)
+    repeated double fx = 16;// 风险(>75 风险较大，<10 风险较小)
 }
 
 // 估值及pe
@@ -84,14 +87,7 @@ message GZPeResp {
     repeated double pe2 = 5;// pe3
     repeated double pe3 = 6;// pe4
     repeated double pe4 = 7;// pe5
-    double min = 8; 
-    double max = 9;
-    
-    double peMin = 10;
-    double peMax = 11;
     repeated string names = 12;// 名字
-    int32 interval = 13;
-    int32 peInterval = 14;
 }
 
 message GetHyMmaddReq {
@@ -174,7 +170,8 @@ message SharesInfoDetails{
     double turnover = 10;// 成交额（万）
     double turnoverRate = 11; // 换手率
     double pe = 12; // 市盈率
-    double pb = 13;// 市净率
+    double pettm = 13; // 市盈率
+    double pb = 14;// 市净率
     double total = 15;// 流通市值
     double cap = 16;// 总市值
     double zljlr = 17;// 主力资金净流入
