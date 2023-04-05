@@ -76,6 +76,8 @@ message GetSharesKlineResp {
     repeated double fyyx = 14;// 飞鹰优选
     repeated double zljk = 15;// 主力真吸货(主力清洗之出货)
     repeated double fx = 16;// 风险(>75 风险较大，<10 风险较小)
+    bool haveBx = 17;// 是否有北向
+    bool haveRz = 18;// 是否有融资
 }
 
 // 估值及pe
