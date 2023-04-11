@@ -71,6 +71,7 @@ type SharesClient interface {
 	GetHyZyb(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*GetHyMmaddResp, error)
 	GetSharesKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetSharesKlineResp, error)
 	GetGzKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GZPeResp, error)
+	GetHotHyCodeName(ctx context.Context, in *GetHotHyCodeNameReq, opts ...grpc.CallOption) (*GetHotHyCodeNameResp, error)
 }
 
 type sharesClient struct {
@@ -434,6 +435,20 @@ func (c *sharesClient) GetGzKline(ctx context.Context, in *GetSharesKlineReq, op
 	return out, nil
 }
 
+func (c *sharesClient) GetHotHyCodeName(ctx context.Context, in *GetHotHyCodeNameReq, opts ...grpc.CallOption) (*GetHotHyCodeNameResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetHotHyCodeNameResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetHotHyCodeName", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SharesServer is the server API for Shares service.
 type SharesServer interface {
 	// GetGroup 获取分组信息
@@ -479,6 +494,7 @@ type SharesServer interface {
 	GetHyZyb(context.Context, *GetHyMmaddReq) (*GetHyMmaddResp, error)
 	GetSharesKline(context.Context, *GetSharesKlineReq) (*GetSharesKlineResp, error)
 	GetGzKline(context.Context, *GetSharesKlineReq) (*GZPeResp, error)
+	GetHotHyCodeName(context.Context, *GetHotHyCodeNameReq) (*GetHotHyCodeNameResp, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
@@ -556,6 +572,9 @@ func (*UnimplementedSharesServer) GetSharesKline(context.Context, *GetSharesKlin
 }
 func (*UnimplementedSharesServer) GetGzKline(context.Context, *GetSharesKlineReq) (*GZPeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGzKline not implemented")
+}
+func (*UnimplementedSharesServer) GetHotHyCodeName(context.Context, *GetHotHyCodeNameReq) (*GetHotHyCodeNameResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetHotHyCodeName not implemented")
 }
 
 func RegisterSharesServer(s server.Server, srv SharesServer) {
@@ -994,6 +1013,24 @@ func _Shares_GetGzKline_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_GetHotHyCodeName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHotHyCodeNameReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetHotHyCodeName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetHotHyCodeName",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetHotHyCodeName(ctx, req.(*GetHotHyCodeNameReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Shares_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.shares",
 	HandlerType: (*SharesServer)(nil),
@@ -1093,6 +1130,10 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetGzKline",
 			Handler:    _Shares_GetGzKline_Handler,
+		},
+		{
+			MethodName: "GetHotHyCodeName",
+			Handler:    _Shares_GetHotHyCodeName_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

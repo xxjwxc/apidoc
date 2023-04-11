@@ -51,7 +51,20 @@ service shares {
     rpc GetHyZyb(GetHyMmaddReq) returns (GetHyMmaddResp){}
     rpc GetSharesKline(GetSharesKlineReq) returns (GetSharesKlineResp){} // 获取股票联动线数据
     rpc GetGzKline(GetSharesKlineReq) returns (GZPeResp){} // 获取股票联动线数据
+    rpc GetHotHyCodeName(GetHotHyCodeNameReq) returns (GetHotHyCodeNameResp){} // 获取热门行业
     ////////////////////////////////////////////////////////////////
+}
+message GetHotHyCodeNameReq {
+    repeated string names = 1;// 行业名字
+}
+
+message GetHotHyCodeNameResp{
+    repeated HyCodeInfo list = 1;// 行业名字
+}
+
+message HyCodeInfo {
+    string names = 1;// 行业名字
+    int32 num = 2;// 次数
 }
 
 message GetSharesKlineReq {
