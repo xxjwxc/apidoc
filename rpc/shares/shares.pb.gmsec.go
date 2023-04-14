@@ -71,7 +71,7 @@ type SharesClient interface {
 	GetHyZyb(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*GetHyMmaddResp, error)
 	GetSharesKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetSharesKlineResp, error)
 	GetGzKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GZPeResp, error)
-	GetHotHyCodeName(ctx context.Context, in *GetHotHyCodeNameReq, opts ...grpc.CallOption) (*GetHotHyCodeNameResp, error)
+	GetHotHyName(ctx context.Context, in *GetHotHyNameReq, opts ...grpc.CallOption) (*GetHotHyNameResp, error)
 }
 
 type sharesClient struct {
@@ -435,14 +435,14 @@ func (c *sharesClient) GetGzKline(ctx context.Context, in *GetSharesKlineReq, op
 	return out, nil
 }
 
-func (c *sharesClient) GetHotHyCodeName(ctx context.Context, in *GetHotHyCodeNameReq, opts ...grpc.CallOption) (*GetHotHyCodeNameResp, error) {
+func (c *sharesClient) GetHotHyName(ctx context.Context, in *GetHotHyNameReq, opts ...grpc.CallOption) (*GetHotHyNameResp, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
 		return nil, err
 	}
 	defer conn.Close()
-	out := new(GetHotHyCodeNameResp)
-	err = conn.Invoke(ctx, "/shares.shares/GetHotHyCodeName", in, out, opts...)
+	out := new(GetHotHyNameResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetHotHyName", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -494,7 +494,7 @@ type SharesServer interface {
 	GetHyZyb(context.Context, *GetHyMmaddReq) (*GetHyMmaddResp, error)
 	GetSharesKline(context.Context, *GetSharesKlineReq) (*GetSharesKlineResp, error)
 	GetGzKline(context.Context, *GetSharesKlineReq) (*GZPeResp, error)
-	GetHotHyCodeName(context.Context, *GetHotHyCodeNameReq) (*GetHotHyCodeNameResp, error)
+	GetHotHyName(context.Context, *GetHotHyNameReq) (*GetHotHyNameResp, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
@@ -573,8 +573,8 @@ func (*UnimplementedSharesServer) GetSharesKline(context.Context, *GetSharesKlin
 func (*UnimplementedSharesServer) GetGzKline(context.Context, *GetSharesKlineReq) (*GZPeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGzKline not implemented")
 }
-func (*UnimplementedSharesServer) GetHotHyCodeName(context.Context, *GetHotHyCodeNameReq) (*GetHotHyCodeNameResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetHotHyCodeName not implemented")
+func (*UnimplementedSharesServer) GetHotHyName(context.Context, *GetHotHyNameReq) (*GetHotHyNameResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetHotHyName not implemented")
 }
 
 func RegisterSharesServer(s server.Server, srv SharesServer) {
@@ -1013,20 +1013,20 @@ func _Shares_GetGzKline_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Shares_GetHotHyCodeName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetHotHyCodeNameReq)
+func _Shares_GetHotHyName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHotHyNameReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SharesServer).GetHotHyCodeName(ctx, in)
+		return srv.(SharesServer).GetHotHyName(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/shares.shares/GetHotHyCodeName",
+		FullMethod: "/shares.shares/GetHotHyName",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SharesServer).GetHotHyCodeName(ctx, req.(*GetHotHyCodeNameReq))
+		return srv.(SharesServer).GetHotHyName(ctx, req.(*GetHotHyNameReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1132,8 +1132,8 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Shares_GetGzKline_Handler,
 		},
 		{
-			MethodName: "GetHotHyCodeName",
-			Handler:    _Shares_GetHotHyCodeName_Handler,
+			MethodName: "GetHotHyName",
+			Handler:    _Shares_GetHotHyName_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
