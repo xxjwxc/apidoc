@@ -50,12 +50,33 @@ service shares {
     rpc GetHyMmadd(GetHyMmaddReq) returns (GetHyMmaddResp){}// 秘密加仓
     rpc GetHyZyb(GetHyMmaddReq) returns (GetHyMmaddResp){}
     rpc GetSharesKline(GetSharesKlineReq) returns (GetSharesKlineResp){} // 获取股票联动线数据
+    rpc GetFundKline(GetSharesKlineReq) returns (GetFundKlineResp){} // 获取基金线
     rpc GetGzKline(GetSharesKlineReq) returns (GZPeResp){} // 获取股票联动线数据
-    rpc GetHotHyName(GetHotHyNameReq) returns (GetHotHyNameResp){} // 获取热门行业
+    rpc GetHotHyName(GetHotHyNameReq) returns (GetHotHyNameResp){} // 获取热门行业  
     ////////////////////////////////////////////////////////////////
 }
+
+message GetFundKlineResp {
+    repeated string times = 1;// x轴数据
+    string colorr = 2;// 红的颜色
+    string colorg  = 3;// 绿的颜色
+    repeated double gjhj = 4; // 股基合计
+    repeated double gpx = 5; // 股票型
+    repeated double hhx = 6; // 混合型
+    repeated double zsx = 7; // 指数型
+    repeated double qdii = 8; // QDII
+    repeated double lof = 9; 
+    repeated double fof = 10;
+}
+
+message EchartsKeyLineInfo{
+    string name = 1;
+    repeated double data = 2;
+}
+
 message GetHotHyNameReq {
     repeated string names = 1;// 行业名字
+    int32 days =2;// 天数
 }
 
 message GetHotHyNameResp{

@@ -70,6 +70,7 @@ type SharesClient interface {
 	GetHyMmadd(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*GetHyMmaddResp, error)
 	GetHyZyb(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*GetHyMmaddResp, error)
 	GetSharesKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetSharesKlineResp, error)
+	GetFundKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetFundKlineResp, error)
 	GetGzKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GZPeResp, error)
 	GetHotHyName(ctx context.Context, in *GetHotHyNameReq, opts ...grpc.CallOption) (*GetHotHyNameResp, error)
 }
@@ -421,6 +422,20 @@ func (c *sharesClient) GetSharesKline(ctx context.Context, in *GetSharesKlineReq
 	return out, nil
 }
 
+func (c *sharesClient) GetFundKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetFundKlineResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetFundKlineResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetFundKline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *sharesClient) GetGzKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GZPeResp, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
@@ -493,6 +508,7 @@ type SharesServer interface {
 	GetHyMmadd(context.Context, *GetHyMmaddReq) (*GetHyMmaddResp, error)
 	GetHyZyb(context.Context, *GetHyMmaddReq) (*GetHyMmaddResp, error)
 	GetSharesKline(context.Context, *GetSharesKlineReq) (*GetSharesKlineResp, error)
+	GetFundKline(context.Context, *GetSharesKlineReq) (*GetFundKlineResp, error)
 	GetGzKline(context.Context, *GetSharesKlineReq) (*GZPeResp, error)
 	GetHotHyName(context.Context, *GetHotHyNameReq) (*GetHotHyNameResp, error)
 }
@@ -569,6 +585,9 @@ func (*UnimplementedSharesServer) GetHyZyb(context.Context, *GetHyMmaddReq) (*Ge
 }
 func (*UnimplementedSharesServer) GetSharesKline(context.Context, *GetSharesKlineReq) (*GetSharesKlineResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSharesKline not implemented")
+}
+func (*UnimplementedSharesServer) GetFundKline(context.Context, *GetSharesKlineReq) (*GetFundKlineResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFundKline not implemented")
 }
 func (*UnimplementedSharesServer) GetGzKline(context.Context, *GetSharesKlineReq) (*GZPeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGzKline not implemented")
@@ -995,6 +1014,24 @@ func _Shares_GetSharesKline_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_GetFundKline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSharesKlineReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetFundKline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetFundKline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetFundKline(ctx, req.(*GetSharesKlineReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Shares_GetGzKline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetSharesKlineReq)
 	if err := dec(in); err != nil {
@@ -1126,6 +1163,10 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSharesKline",
 			Handler:    _Shares_GetSharesKline_Handler,
+		},
+		{
+			MethodName: "GetFundKline",
+			Handler:    _Shares_GetFundKline_Handler,
 		},
 		{
 			MethodName: "GetGzKline",
