@@ -67,6 +67,8 @@ message GetFundKlineResp {
     repeated double qdii = 8; // QDII
     repeated double lof = 9; 
     repeated double fof = 10;
+    repeated string times1 = 11;// 盈利预测
+    repeated double ylyc = 12; // 盈利预测值
 }
 
 message EchartsKeyLineInfo{
