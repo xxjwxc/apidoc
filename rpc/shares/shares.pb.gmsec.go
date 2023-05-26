@@ -53,13 +53,13 @@ type SharesClient interface {
 	// AddGroup 添加一个组织
 	AddGroup(ctx context.Context, in *AddGroupReq, opts ...grpc.CallOption) (*common.Empty, error)
 	// GetDay 每日精选
-	GetDay(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDayResp, error)
+	GetDay(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error)
 	// GetVip vip内参
-	GetVip(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDayResp, error)
+	GetVip(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error)
 	// GetFl 放量(打版)
-	GetFl(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDayResp, error)
+	GetFl(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error)
 	// GetUp 趋势
-	GetUp(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDayResp, error)
+	GetUp(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error)
 	// GetDailyCheck 每日复盘笔记
 	GetDailyCheck(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDailyCheckResp, error)
 	// //////////////////////////////////////////////////////////////
@@ -71,8 +71,10 @@ type SharesClient interface {
 	GetHyZyb(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*GetHyMmaddResp, error)
 	GetSharesKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetSharesKlineResp, error)
 	GetFundKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetFundKlineResp, error)
+	GetJgKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetJgKlineResp, error)
 	GetGzKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GZPeResp, error)
 	GetHotHyName(ctx context.Context, in *GetHotHyNameReq, opts ...grpc.CallOption) (*GetHotHyNameResp, error)
+	GetYyq(ctx context.Context, in *GetYyqReq, opts ...grpc.CallOption) (*GetYyqResp, error)
 }
 
 type sharesClient struct {
@@ -268,7 +270,7 @@ func (c *sharesClient) AddGroup(ctx context.Context, in *AddGroupReq, opts ...gr
 	return out, nil
 }
 
-func (c *sharesClient) GetDay(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDayResp, error) {
+func (c *sharesClient) GetDay(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
 		return nil, err
@@ -282,7 +284,7 @@ func (c *sharesClient) GetDay(ctx context.Context, in *common.Empty, opts ...grp
 	return out, nil
 }
 
-func (c *sharesClient) GetVip(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDayResp, error) {
+func (c *sharesClient) GetVip(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
 		return nil, err
@@ -296,7 +298,7 @@ func (c *sharesClient) GetVip(ctx context.Context, in *common.Empty, opts ...grp
 	return out, nil
 }
 
-func (c *sharesClient) GetFl(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDayResp, error) {
+func (c *sharesClient) GetFl(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
 		return nil, err
@@ -310,7 +312,7 @@ func (c *sharesClient) GetFl(ctx context.Context, in *common.Empty, opts ...grpc
 	return out, nil
 }
 
-func (c *sharesClient) GetUp(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDayResp, error) {
+func (c *sharesClient) GetUp(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
 		return nil, err
@@ -436,6 +438,20 @@ func (c *sharesClient) GetFundKline(ctx context.Context, in *GetSharesKlineReq, 
 	return out, nil
 }
 
+func (c *sharesClient) GetJgKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetJgKlineResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetJgKlineResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetJgKline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *sharesClient) GetGzKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GZPeResp, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
@@ -458,6 +474,20 @@ func (c *sharesClient) GetHotHyName(ctx context.Context, in *GetHotHyNameReq, op
 	defer conn.Close()
 	out := new(GetHotHyNameResp)
 	err = conn.Invoke(ctx, "/shares.shares/GetHotHyName", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sharesClient) GetYyq(ctx context.Context, in *GetYyqReq, opts ...grpc.CallOption) (*GetYyqResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetYyqResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetYyq", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -491,13 +521,13 @@ type SharesServer interface {
 	// AddGroup 添加一个组织
 	AddGroup(context.Context, *AddGroupReq) (*common.Empty, error)
 	// GetDay 每日精选
-	GetDay(context.Context, *common.Empty) (*GetDayResp, error)
+	GetDay(context.Context, *CodeReq) (*GetDayResp, error)
 	// GetVip vip内参
-	GetVip(context.Context, *common.Empty) (*GetDayResp, error)
+	GetVip(context.Context, *CodeReq) (*GetDayResp, error)
 	// GetFl 放量(打版)
-	GetFl(context.Context, *common.Empty) (*GetDayResp, error)
+	GetFl(context.Context, *CodeReq) (*GetDayResp, error)
 	// GetUp 趋势
-	GetUp(context.Context, *common.Empty) (*GetDayResp, error)
+	GetUp(context.Context, *CodeReq) (*GetDayResp, error)
 	// GetDailyCheck 每日复盘笔记
 	GetDailyCheck(context.Context, *common.Empty) (*GetDailyCheckResp, error)
 	// //////////////////////////////////////////////////////////////
@@ -509,8 +539,10 @@ type SharesServer interface {
 	GetHyZyb(context.Context, *GetHyMmaddReq) (*GetHyMmaddResp, error)
 	GetSharesKline(context.Context, *GetSharesKlineReq) (*GetSharesKlineResp, error)
 	GetFundKline(context.Context, *GetSharesKlineReq) (*GetFundKlineResp, error)
+	GetJgKline(context.Context, *GetSharesKlineReq) (*GetJgKlineResp, error)
 	GetGzKline(context.Context, *GetSharesKlineReq) (*GZPeResp, error)
 	GetHotHyName(context.Context, *GetHotHyNameReq) (*GetHotHyNameResp, error)
+	GetYyq(context.Context, *GetYyqReq) (*GetYyqResp, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
@@ -553,16 +585,16 @@ func (*UnimplementedSharesServer) DeleteMyCode(context.Context, *DeleteMyCodeReq
 func (*UnimplementedSharesServer) AddGroup(context.Context, *AddGroupReq) (*common.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddGroup not implemented")
 }
-func (*UnimplementedSharesServer) GetDay(context.Context, *common.Empty) (*GetDayResp, error) {
+func (*UnimplementedSharesServer) GetDay(context.Context, *CodeReq) (*GetDayResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDay not implemented")
 }
-func (*UnimplementedSharesServer) GetVip(context.Context, *common.Empty) (*GetDayResp, error) {
+func (*UnimplementedSharesServer) GetVip(context.Context, *CodeReq) (*GetDayResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetVip not implemented")
 }
-func (*UnimplementedSharesServer) GetFl(context.Context, *common.Empty) (*GetDayResp, error) {
+func (*UnimplementedSharesServer) GetFl(context.Context, *CodeReq) (*GetDayResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFl not implemented")
 }
-func (*UnimplementedSharesServer) GetUp(context.Context, *common.Empty) (*GetDayResp, error) {
+func (*UnimplementedSharesServer) GetUp(context.Context, *CodeReq) (*GetDayResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUp not implemented")
 }
 func (*UnimplementedSharesServer) GetDailyCheck(context.Context, *common.Empty) (*GetDailyCheckResp, error) {
@@ -589,11 +621,17 @@ func (*UnimplementedSharesServer) GetSharesKline(context.Context, *GetSharesKlin
 func (*UnimplementedSharesServer) GetFundKline(context.Context, *GetSharesKlineReq) (*GetFundKlineResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFundKline not implemented")
 }
+func (*UnimplementedSharesServer) GetJgKline(context.Context, *GetSharesKlineReq) (*GetJgKlineResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetJgKline not implemented")
+}
 func (*UnimplementedSharesServer) GetGzKline(context.Context, *GetSharesKlineReq) (*GZPeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGzKline not implemented")
 }
 func (*UnimplementedSharesServer) GetHotHyName(context.Context, *GetHotHyNameReq) (*GetHotHyNameResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHotHyName not implemented")
+}
+func (*UnimplementedSharesServer) GetYyq(context.Context, *GetYyqReq) (*GetYyqResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetYyq not implemented")
 }
 
 func RegisterSharesServer(s server.Server, srv SharesServer) {
@@ -817,7 +855,7 @@ func _Shares_AddGroup_Handler(srv interface{}, ctx context.Context, dec func(int
 }
 
 func _Shares_GetDay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(common.Empty)
+	in := new(CodeReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -829,13 +867,13 @@ func _Shares_GetDay_Handler(srv interface{}, ctx context.Context, dec func(inter
 		FullMethod: "/shares.shares/GetDay",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SharesServer).GetDay(ctx, req.(*common.Empty))
+		return srv.(SharesServer).GetDay(ctx, req.(*CodeReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Shares_GetVip_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(common.Empty)
+	in := new(CodeReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -847,13 +885,13 @@ func _Shares_GetVip_Handler(srv interface{}, ctx context.Context, dec func(inter
 		FullMethod: "/shares.shares/GetVip",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SharesServer).GetVip(ctx, req.(*common.Empty))
+		return srv.(SharesServer).GetVip(ctx, req.(*CodeReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Shares_GetFl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(common.Empty)
+	in := new(CodeReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -865,13 +903,13 @@ func _Shares_GetFl_Handler(srv interface{}, ctx context.Context, dec func(interf
 		FullMethod: "/shares.shares/GetFl",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SharesServer).GetFl(ctx, req.(*common.Empty))
+		return srv.(SharesServer).GetFl(ctx, req.(*CodeReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Shares_GetUp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(common.Empty)
+	in := new(CodeReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -883,7 +921,7 @@ func _Shares_GetUp_Handler(srv interface{}, ctx context.Context, dec func(interf
 		FullMethod: "/shares.shares/GetUp",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SharesServer).GetUp(ctx, req.(*common.Empty))
+		return srv.(SharesServer).GetUp(ctx, req.(*CodeReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1032,6 +1070,24 @@ func _Shares_GetFundKline_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_GetJgKline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSharesKlineReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetJgKline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetJgKline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetJgKline(ctx, req.(*GetSharesKlineReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Shares_GetGzKline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetSharesKlineReq)
 	if err := dec(in); err != nil {
@@ -1064,6 +1120,24 @@ func _Shares_GetHotHyName_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SharesServer).GetHotHyName(ctx, req.(*GetHotHyNameReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Shares_GetYyq_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetYyqReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetYyq(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetYyq",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetYyq(ctx, req.(*GetYyqReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1169,12 +1243,20 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Shares_GetFundKline_Handler,
 		},
 		{
+			MethodName: "GetJgKline",
+			Handler:    _Shares_GetJgKline_Handler,
+		},
+		{
 			MethodName: "GetGzKline",
 			Handler:    _Shares_GetGzKline_Handler,
 		},
 		{
 			MethodName: "GetHotHyName",
 			Handler:    _Shares_GetHotHyName_Handler,
+		},
+		{
+			MethodName: "GetYyq",
+			Handler:    _Shares_GetYyq_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

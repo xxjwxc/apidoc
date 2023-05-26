@@ -33,13 +33,13 @@ service shares {
      // AddGroup 添加一个组织
 	 rpc AddGroup(AddGroupReq) returns (common.Empty){}
      // GetDay 每日精选
-	 rpc GetDay(common.Empty) returns (GetDayResp){}
+	 rpc GetDay(CodeReq) returns (GetDayResp){}
     // GetVip vip内参
-	 rpc GetVip(common.Empty) returns (GetDayResp){}
+	 rpc GetVip(CodeReq) returns (GetDayResp){}
     // GetFl 放量(打版)
-	rpc GetFl(common.Empty) returns (GetDayResp){}
+	rpc GetFl(CodeReq) returns (GetDayResp){}
     // GetUp 趋势
-	rpc GetUp(common.Empty) returns (GetDayResp){}
+	rpc GetUp(CodeReq) returns (GetDayResp){}
     // GetDailyCheck 每日复盘笔记
 	rpc GetDailyCheck(common.Empty) returns (GetDailyCheckResp){}
     ////////////////////////////////////////////////////////////////
@@ -51,9 +51,42 @@ service shares {
     rpc GetHyZyb(GetHyMmaddReq) returns (GetHyMmaddResp){}
     rpc GetSharesKline(GetSharesKlineReq) returns (GetSharesKlineResp){} // 获取股票联动线数据
     rpc GetFundKline(GetSharesKlineReq) returns (GetFundKlineResp){} // 获取基金线
+    rpc GetJgKline(GetSharesKlineReq) returns (GetJgKlineResp){} // 获取机构线
     rpc GetGzKline(GetSharesKlineReq) returns (GZPeResp){} // 获取股票联动线数据
     rpc GetHotHyName(GetHotHyNameReq) returns (GetHotHyNameResp){} // 获取热门行业  
+    rpc GetYyq(GetYyqReq) returns (GetYyqResp){} // 一眼清
     ////////////////////////////////////////////////////////////////
+}
+
+message KlineInfo {
+    repeated string times = 1;// x轴数据
+    repeated double data1 = 2;// 数据
+    repeated double data2 = 3;// 数据
+    repeated double data3 = 4;// 数据
+}
+
+message GetYyqReq {
+    int32 days =2;// 天数
+}
+
+message GetYyqResp {
+    string colorr = 1;// 红的颜色
+    string colorg  = 2;// 绿的颜色 
+    KlineInfo bx= 11;// 北向
+    KlineInfo rzrq= 12;// 融资融券
+    KlineInfo mlf= 13;// 逆回购
+    KlineInfo cpi= 14;
+    KlineInfo ppi= 15;
+    KlineInfo gdp= 16;
+    KlineInfo pmi= 17;
+    KlineInfo qyjqzs= 18;// 企业景气指数
+    KlineInfo gyzjz= 19;// 工业增加值
+    KlineInfo xfzxx= 20;// 消费者信心指数
+    KlineInfo m2= 21;
+    KlineInfo hgjck= 22;// 海关进出口
+  //  KlineInfo gpkhsj= 23;// 股票开户数据
+    KlineInfo fdi= 24;// 外商直接投资数据(FDI)
+    KlineInfo xzxd= 25;// 新增信贷数据
 }
 
 message GetFundKlineResp {
@@ -70,6 +103,21 @@ message GetFundKlineResp {
     repeated string times1 = 11;// 盈利预测
     repeated double ylyc = 12; // 盈利预测值
 }
+
+message GetJgKlineResp {
+    repeated string times = 1;// x轴数据
+    string colorr = 2;// 红的颜色
+    string colorg  = 3;// 绿的颜色
+    repeated double jghz = 4; // 机构汇总
+    repeated double jj = 5; // 基金
+    repeated double qfii = 6; // QFII
+    repeated double sb = 7; // 社保
+    repeated double bx = 8; // 保险
+    repeated double xt = 9; // 信托
+    repeated double qs = 10; // 券商
+    repeated double qt = 11;// 其他
+}
+
 
 message EchartsKeyLineInfo{
     string name = 1;
@@ -126,11 +174,13 @@ message GZPeResp {
     repeated double pe3 = 6;// pe4
     repeated double pe4 = 7;// pe5
     repeated string names = 12;// 名字
+    bool have = 13;
 }
 
 message GetHyMmaddReq {
     int32 tag = 1;// 类型 0:机构,1:北上,2:公募
     int64 days = 2;// 拿几天
+    string code = 3;// 行业名字
 }
 
 message GetHyMmaddResp {
@@ -187,10 +237,11 @@ message SharesInfo{
     string img = 10;// 图片地址
     string hy = 11;// 行业板块
     string mainHy = 12;// 行业板块
-    string attach = 13;// 附加
-    string peg = 14;// peg信息
-    string url = 15;// 地址
-    string hyDj = 16;// 行业叠加
+    string mainHyCode = 13;// 行业板块
+    string attach = 14;// 附加
+    string peg = 15;// peg信息
+    string url = 16;// 地址
+    string hyDj = 17;// 行业叠加
     repeated string hyDjDoc = 26;// 行业叠加描述
 }
 
@@ -358,6 +409,7 @@ message AddGroupReq{
 message CodeReq{
     string code = 1;// 股票代码
     string tp = 2;// 类型(k30,daily)
+    int64 days = 3;
 }
 
 message GetMyGroupResp{
@@ -398,4 +450,8 @@ message GetHyTimeResp{
     string title = 1;// 标题
     repeated string list =2;// 显示的名字
     repeated HyTimeData data = 3;
+}
+
+message GetTouTiaoResp{
+    repeated string list =1;// 显示的名字
 }
