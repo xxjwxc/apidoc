@@ -75,6 +75,9 @@ type SharesClient interface {
 	GetGzKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GZPeResp, error)
 	GetHotHyName(ctx context.Context, in *GetHotHyNameReq, opts ...grpc.CallOption) (*GetHotHyNameResp, error)
 	GetYyq(ctx context.Context, in *GetYyqReq, opts ...grpc.CallOption) (*GetYyqResp, error)
+	// //////////////////////////////////////////////////////////////
+	// ///////////////////////名人堂////////////////////////////
+	GetMrtList(ctx context.Context, in *GetMrtListReq, opts ...grpc.CallOption) (*GetMrtListResp, error)
 }
 
 type sharesClient struct {
@@ -494,6 +497,20 @@ func (c *sharesClient) GetYyq(ctx context.Context, in *GetYyqReq, opts ...grpc.C
 	return out, nil
 }
 
+func (c *sharesClient) GetMrtList(ctx context.Context, in *GetMrtListReq, opts ...grpc.CallOption) (*GetMrtListResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetMrtListResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetMrtList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SharesServer is the server API for Shares service.
 type SharesServer interface {
 	// GetGroup 获取分组信息
@@ -543,6 +560,9 @@ type SharesServer interface {
 	GetGzKline(context.Context, *GetSharesKlineReq) (*GZPeResp, error)
 	GetHotHyName(context.Context, *GetHotHyNameReq) (*GetHotHyNameResp, error)
 	GetYyq(context.Context, *GetYyqReq) (*GetYyqResp, error)
+	// //////////////////////////////////////////////////////////////
+	// ///////////////////////名人堂////////////////////////////
+	GetMrtList(context.Context, *GetMrtListReq) (*GetMrtListResp, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
@@ -632,6 +652,9 @@ func (*UnimplementedSharesServer) GetHotHyName(context.Context, *GetHotHyNameReq
 }
 func (*UnimplementedSharesServer) GetYyq(context.Context, *GetYyqReq) (*GetYyqResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetYyq not implemented")
+}
+func (*UnimplementedSharesServer) GetMrtList(context.Context, *GetMrtListReq) (*GetMrtListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMrtList not implemented")
 }
 
 func RegisterSharesServer(s server.Server, srv SharesServer) {
@@ -1142,6 +1165,24 @@ func _Shares_GetYyq_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_GetMrtList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMrtListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetMrtList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetMrtList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetMrtList(ctx, req.(*GetMrtListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Shares_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.shares",
 	HandlerType: (*SharesServer)(nil),
@@ -1257,6 +1298,10 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetYyq",
 			Handler:    _Shares_GetYyq_Handler,
+		},
+		{
+			MethodName: "GetMrtList",
+			Handler:    _Shares_GetMrtList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

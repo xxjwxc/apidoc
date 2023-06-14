@@ -102,8 +102,9 @@ message GetUserInfoResp{
 	string  group =9;// 用户所在分组列表    
 	bool    rg   = 10;// 是否涨绿跌红
 	bool 	only20 = 11;// 是否20日线
-	bool 	sendArtic = 14;// 是否发送每日复盘文章          
 	int32   capacity = 13;// 可用容量 
+	bool 	sendArtic = 14;// 是否发送每日复盘文章
+	bool 	only249 = 15;// 是否12/144/169日线
  }
  
  message UpsetUserInfoReq{

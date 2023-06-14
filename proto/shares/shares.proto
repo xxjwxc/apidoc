@@ -56,6 +56,31 @@ service shares {
     rpc GetHotHyName(GetHotHyNameReq) returns (GetHotHyNameResp){} // 获取热门行业  
     rpc GetYyq(GetYyqReq) returns (GetYyqResp){} // 一眼清
     ////////////////////////////////////////////////////////////////
+    /////////////////////////名人堂////////////////////////////
+    rpc GetMrtList(GetMrtListReq) returns (GetMrtListResp){} // 一眼清
+    ////////////////////////////////////////////////////////////////
+}
+
+message GetMrtListReq{
+    bool isMy = 1;// 是否只拉取我的
+}
+
+message GetMrtListResp{
+    repeated MrtInfo list = 1;// 列表
+}
+
+message MrtInfo {
+    string name   = 1;// 名人堂名字
+    repeated MrtDoc doc    =2;// 名人堂描述
+    repeated string openids = 3;// 名人堂所属openid
+    bool isMy = 4;// 名人堂是否是我的
+    bool haveMy = 5;// 名人堂是否有我
+}
+
+message MrtDoc {
+   string image =1;
+   string title = 2;
+   string type = 3;
 }
 
 message KlineInfo {
