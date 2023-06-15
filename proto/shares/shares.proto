@@ -58,7 +58,19 @@ service shares {
     ////////////////////////////////////////////////////////////////
     /////////////////////////名人堂////////////////////////////
     rpc GetMrtList(GetMrtListReq) returns (GetMrtListResp){} // 一眼清
+    rpc GetMrtCode(GetMrtCodeReq) returns (GetMrtCodeResp){} // 
     ////////////////////////////////////////////////////////////////
+}
+message GetMrtCodeReq{
+    string code = 1;
+    string mrt = 2;// id
+}
+
+message GetMrtCodeResp{
+    double cost = 1;// 成本价
+    double num = 2;// 持有数量
+    double price = 3;// 手上还有多少钱
+    string mrtName = 4;// 名人堂名字
 }
 
 message GetMrtListReq{
@@ -70,12 +82,22 @@ message GetMrtListResp{
 }
 
 message MrtInfo {
-    string name   = 1;// 名人堂名字
-    repeated MrtDoc doc    =2;// 名人堂描述
-    repeated string openids = 3;// 名人堂所属openid
-    bool isMy = 4;// 名人堂是否是我的
-    bool haveMy = 5;// 名人堂是否有我
+    string mrt = 1;// id
+    string name   = 2;// 名人堂名字
+    repeated MrtDoc doc    =3;// 名人堂描述
+    repeated string openids = 4;// 名人堂所属openid
+    bool isMy = 5;// 名人堂是否是我的
+    bool haveMy = 6;// 名人堂是否有我
 }
+
+// message GetMyMrtListReq {
+//     double cost = 1;// 成本价
+//     double sell = 2;// 卖出价
+//     double num = 3;// 买了多少
+//     double doc = 4;// 描述
+//     string code = 5;// 代码
+//     string name = 6;// 股票名字
+// }
 
 message MrtDoc {
    string image =1;
