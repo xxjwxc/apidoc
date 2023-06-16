@@ -57,10 +57,21 @@ service shares {
     rpc GetYyq(GetYyqReq) returns (GetYyqResp){} // 一眼清
     ////////////////////////////////////////////////////////////////
     /////////////////////////名人堂////////////////////////////
-    rpc GetMrtList(GetMrtListReq) returns (GetMrtListResp){} // 一眼清
+    rpc GetMrtList(GetMrtListReq) returns (GetMrtListResp){} //
     rpc GetMrtCode(GetMrtCodeReq) returns (GetMrtCodeResp){} // 
+    rpc UpsetMrtCode(UpsetMrtCodeReq) returns (common.Empty){} // 
     ////////////////////////////////////////////////////////////////
 }
+
+message UpsetMrtCodeReq{
+    string code = 1;// 代码
+    string mrt = 2;// mrt
+    int32 tag = 3;// 卖出/买入(-1/1)
+    double num = 4;// 操作数量
+    double price = 5;// 操作价格 
+    string doc = 6;// 描述
+}
+
 message GetMrtCodeReq{
     string code = 1;
     string mrt = 2;// id

@@ -79,6 +79,7 @@ type SharesClient interface {
 	// ///////////////////////名人堂////////////////////////////
 	GetMrtList(ctx context.Context, in *GetMrtListReq, opts ...grpc.CallOption) (*GetMrtListResp, error)
 	GetMrtCode(ctx context.Context, in *GetMrtCodeReq, opts ...grpc.CallOption) (*GetMrtCodeResp, error)
+	UpsetMrtCode(ctx context.Context, in *UpsetMrtCodeReq, opts ...grpc.CallOption) (*common.Empty, error)
 }
 
 type sharesClient struct {
@@ -526,6 +527,20 @@ func (c *sharesClient) GetMrtCode(ctx context.Context, in *GetMrtCodeReq, opts .
 	return out, nil
 }
 
+func (c *sharesClient) UpsetMrtCode(ctx context.Context, in *UpsetMrtCodeReq, opts ...grpc.CallOption) (*common.Empty, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(common.Empty)
+	err = conn.Invoke(ctx, "/shares.shares/UpsetMrtCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SharesServer is the server API for Shares service.
 type SharesServer interface {
 	// GetGroup 获取分组信息
@@ -579,6 +594,7 @@ type SharesServer interface {
 	// ///////////////////////名人堂////////////////////////////
 	GetMrtList(context.Context, *GetMrtListReq) (*GetMrtListResp, error)
 	GetMrtCode(context.Context, *GetMrtCodeReq) (*GetMrtCodeResp, error)
+	UpsetMrtCode(context.Context, *UpsetMrtCodeReq) (*common.Empty, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
@@ -674,6 +690,9 @@ func (*UnimplementedSharesServer) GetMrtList(context.Context, *GetMrtListReq) (*
 }
 func (*UnimplementedSharesServer) GetMrtCode(context.Context, *GetMrtCodeReq) (*GetMrtCodeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMrtCode not implemented")
+}
+func (*UnimplementedSharesServer) UpsetMrtCode(context.Context, *UpsetMrtCodeReq) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsetMrtCode not implemented")
 }
 
 func RegisterSharesServer(s server.Server, srv SharesServer) {
@@ -1220,6 +1239,24 @@ func _Shares_GetMrtCode_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_UpsetMrtCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpsetMrtCodeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).UpsetMrtCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/UpsetMrtCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).UpsetMrtCode(ctx, req.(*UpsetMrtCodeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Shares_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.shares",
 	HandlerType: (*SharesServer)(nil),
@@ -1343,6 +1380,10 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMrtCode",
 			Handler:    _Shares_GetMrtCode_Handler,
+		},
+		{
+			MethodName: "UpsetMrtCode",
+			Handler:    _Shares_UpsetMrtCode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
