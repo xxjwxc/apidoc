@@ -80,6 +80,10 @@ type SharesClient interface {
 	GetMrtList(ctx context.Context, in *GetMrtListReq, opts ...grpc.CallOption) (*GetMrtListResp, error)
 	GetMrtCode(ctx context.Context, in *GetMrtCodeReq, opts ...grpc.CallOption) (*GetMrtCodeResp, error)
 	UpsetMrtCode(ctx context.Context, in *UpsetMrtCodeReq, opts ...grpc.CallOption) (*common.Empty, error)
+	GetMrtDetail(ctx context.Context, in *GetMrtDetailReq, opts ...grpc.CallOption) (*GetMrtDetailResp, error)
+	// //////////////////////////////////////////////////////////////
+	// //////////////////////////中意榜////////////////////////////////
+	GetZybHyKline(ctx context.Context, in *GetZybHyKlineReq, opts ...grpc.CallOption) (*GetZybHyKlineResp, error)
 }
 
 type sharesClient struct {
@@ -541,6 +545,34 @@ func (c *sharesClient) UpsetMrtCode(ctx context.Context, in *UpsetMrtCodeReq, op
 	return out, nil
 }
 
+func (c *sharesClient) GetMrtDetail(ctx context.Context, in *GetMrtDetailReq, opts ...grpc.CallOption) (*GetMrtDetailResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetMrtDetailResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetMrtDetail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sharesClient) GetZybHyKline(ctx context.Context, in *GetZybHyKlineReq, opts ...grpc.CallOption) (*GetZybHyKlineResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetZybHyKlineResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetZybHyKline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SharesServer is the server API for Shares service.
 type SharesServer interface {
 	// GetGroup 获取分组信息
@@ -595,6 +627,10 @@ type SharesServer interface {
 	GetMrtList(context.Context, *GetMrtListReq) (*GetMrtListResp, error)
 	GetMrtCode(context.Context, *GetMrtCodeReq) (*GetMrtCodeResp, error)
 	UpsetMrtCode(context.Context, *UpsetMrtCodeReq) (*common.Empty, error)
+	GetMrtDetail(context.Context, *GetMrtDetailReq) (*GetMrtDetailResp, error)
+	// //////////////////////////////////////////////////////////////
+	// //////////////////////////中意榜////////////////////////////////
+	GetZybHyKline(context.Context, *GetZybHyKlineReq) (*GetZybHyKlineResp, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
@@ -693,6 +729,12 @@ func (*UnimplementedSharesServer) GetMrtCode(context.Context, *GetMrtCodeReq) (*
 }
 func (*UnimplementedSharesServer) UpsetMrtCode(context.Context, *UpsetMrtCodeReq) (*common.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpsetMrtCode not implemented")
+}
+func (*UnimplementedSharesServer) GetMrtDetail(context.Context, *GetMrtDetailReq) (*GetMrtDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMrtDetail not implemented")
+}
+func (*UnimplementedSharesServer) GetZybHyKline(context.Context, *GetZybHyKlineReq) (*GetZybHyKlineResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetZybHyKline not implemented")
 }
 
 func RegisterSharesServer(s server.Server, srv SharesServer) {
@@ -1257,6 +1299,42 @@ func _Shares_UpsetMrtCode_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_GetMrtDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMrtDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetMrtDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetMrtDetail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetMrtDetail(ctx, req.(*GetMrtDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Shares_GetZybHyKline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetZybHyKlineReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetZybHyKline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetZybHyKline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetZybHyKline(ctx, req.(*GetZybHyKlineReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Shares_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.shares",
 	HandlerType: (*SharesServer)(nil),
@@ -1384,6 +1462,14 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpsetMrtCode",
 			Handler:    _Shares_UpsetMrtCode_Handler,
+		},
+		{
+			MethodName: "GetMrtDetail",
+			Handler:    _Shares_GetMrtDetail_Handler,
+		},
+		{
+			MethodName: "GetZybHyKline",
+			Handler:    _Shares_GetZybHyKline_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

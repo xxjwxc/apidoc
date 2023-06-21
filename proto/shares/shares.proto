@@ -60,7 +60,66 @@ service shares {
     rpc GetMrtList(GetMrtListReq) returns (GetMrtListResp){} //
     rpc GetMrtCode(GetMrtCodeReq) returns (GetMrtCodeResp){} // 
     rpc UpsetMrtCode(UpsetMrtCodeReq) returns (common.Empty){} // 
+    rpc GetMrtDetail(GetMrtDetailReq) returns (GetMrtDetailResp){}
     ////////////////////////////////////////////////////////////////
+    ////////////////////////////中意榜////////////////////////////////
+    rpc GetZybHyKline(GetZybHyKlineReq) returns (GetZybHyKlineResp){}
+    ////////////////////////////////////////////////////////////////
+}
+message GetZybHyKlineReq {
+    int32 days =2;// 天数
+}
+
+message GetZybHyKlineResp{
+    repeated string times = 1;// x轴数据
+    repeated ZybHyDailyInfo list = 2;// 列表
+    repeated TagInfo tags = 3;// 标签
+}
+message TagInfo{
+    string name =1;// 标签名字
+    string color = 2;// 标签颜色
+    double percent = 3;// 涨跌幅
+    string url = 4;//地址
+    string doc = 5;
+}
+
+message ZybHyDailyInfo{
+    string name = 1;// 行业名字
+    string code = 2;// 行业代码
+    bool up = 3;
+    repeated double data = 4;// 数据
+    repeated double cjl = 5;// 数据
+}
+
+message GetMrtDetailReq{
+    string mrt = 1;// id
+}
+
+message GetMrtDetailResp{
+    MrtInfo info = 1;// mrt信息
+    repeated MrtLog docs = 2;// 操作列表
+    repeated MrtCode codes = 3;// 持有列表
+}
+message MrtCode {// 持有列表
+    string code = 1;// 股票代码
+    string name = 2;// 股票名字
+    double cost = 4;// 成本
+    double num = 5;// 操作数量
+    SharesInfo info = 6;
+}
+message MrtLog {
+    string mrt = 1;// id
+    string code = 2;// 股票代码
+    string name = 3;// 股票名字
+    string doc = 4;// 描述
+   
+    int32 flag = 5;// 标记
+    double price = 6;// 价格
+    double num = 7;// 操作数量
+    string tm = 8;// 操作时间
+    string sdoc = 9;// 简要描述
+    string tag = 10;// 标记
+    string color = 11;// 颜色
 }
 
 message UpsetMrtCodeReq{
@@ -99,6 +158,7 @@ message MrtInfo {
     repeated string openids = 4;// 名人堂所属openid
     bool isMy = 5;// 名人堂是否是我的
     bool haveMy = 6;// 名人堂是否有我
+    double price = 7;// 可用金额
 }
 
 // message GetMyMrtListReq {
@@ -293,7 +353,7 @@ message SharesInfo{
     double percent = 8;// 百分比
     string color = 9;// 颜色
     string img = 10;// 图片地址
-    string hy = 11;// 行业板块
+    repeated TagInfo  hy = 11;// 行业板块
     string mainHy = 12;// 行业板块
     string mainHyCode = 13;// 行业板块
     string attach = 14;// 附加
