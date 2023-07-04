@@ -60,8 +60,11 @@ type SharesClient interface {
 	GetFl(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error)
 	// GetUp 趋势
 	GetUp(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error)
+	// GetHejjw 获取华尔街见闻
+	GetHejjw(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetHejjwResp, error)
 	// GetDailyCheck 每日复盘笔记
 	GetDailyCheck(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDailyCheckResp, error)
+	GetClmx(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetClmxResp, error)
 	// //////////////////////////////////////////////////////////////
 	// /////价值/////////////////////////////////////////////////////
 	GetHyRm(ctx context.Context, in *GetHyRmReq, opts ...grpc.CallOption) (*GetHyRmResp, error)
@@ -335,6 +338,20 @@ func (c *sharesClient) GetUp(ctx context.Context, in *CodeReq, opts ...grpc.Call
 	return out, nil
 }
 
+func (c *sharesClient) GetHejjw(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetHejjwResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetHejjwResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetHejjw", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *sharesClient) GetDailyCheck(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDailyCheckResp, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
@@ -343,6 +360,20 @@ func (c *sharesClient) GetDailyCheck(ctx context.Context, in *common.Empty, opts
 	defer conn.Close()
 	out := new(GetDailyCheckResp)
 	err = conn.Invoke(ctx, "/shares.shares/GetDailyCheck", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sharesClient) GetClmx(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetClmxResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetClmxResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetClmx", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -607,8 +638,11 @@ type SharesServer interface {
 	GetFl(context.Context, *CodeReq) (*GetDayResp, error)
 	// GetUp 趋势
 	GetUp(context.Context, *CodeReq) (*GetDayResp, error)
+	// GetHejjw 获取华尔街见闻
+	GetHejjw(context.Context, *common.Empty) (*GetHejjwResp, error)
 	// GetDailyCheck 每日复盘笔记
 	GetDailyCheck(context.Context, *common.Empty) (*GetDailyCheckResp, error)
+	GetClmx(context.Context, *common.Empty) (*GetClmxResp, error)
 	// //////////////////////////////////////////////////////////////
 	// /////价值/////////////////////////////////////////////////////
 	GetHyRm(context.Context, *GetHyRmReq) (*GetHyRmResp, error)
@@ -685,8 +719,14 @@ func (*UnimplementedSharesServer) GetFl(context.Context, *CodeReq) (*GetDayResp,
 func (*UnimplementedSharesServer) GetUp(context.Context, *CodeReq) (*GetDayResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUp not implemented")
 }
+func (*UnimplementedSharesServer) GetHejjw(context.Context, *common.Empty) (*GetHejjwResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetHejjw not implemented")
+}
 func (*UnimplementedSharesServer) GetDailyCheck(context.Context, *common.Empty) (*GetDailyCheckResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDailyCheck not implemented")
+}
+func (*UnimplementedSharesServer) GetClmx(context.Context, *common.Empty) (*GetClmxResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetClmx not implemented")
 }
 func (*UnimplementedSharesServer) GetHyRm(context.Context, *GetHyRmReq) (*GetHyRmResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHyRm not implemented")
@@ -1029,6 +1069,24 @@ func _Shares_GetUp_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_GetHejjw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetHejjw(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetHejjw",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetHejjw(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Shares_GetDailyCheck_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(common.Empty)
 	if err := dec(in); err != nil {
@@ -1043,6 +1101,24 @@ func _Shares_GetDailyCheck_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SharesServer).GetDailyCheck(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Shares_GetClmx_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetClmx(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetClmx",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetClmx(ctx, req.(*common.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1404,8 +1480,16 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Shares_GetUp_Handler,
 		},
 		{
+			MethodName: "GetHejjw",
+			Handler:    _Shares_GetHejjw_Handler,
+		},
+		{
 			MethodName: "GetDailyCheck",
 			Handler:    _Shares_GetDailyCheck_Handler,
+		},
+		{
+			MethodName: "GetClmx",
+			Handler:    _Shares_GetClmx_Handler,
 		},
 		{
 			MethodName: "GetHyRm",

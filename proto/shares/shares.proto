@@ -40,8 +40,11 @@ service shares {
 	rpc GetFl(CodeReq) returns (GetDayResp){}
     // GetUp 趋势
 	rpc GetUp(CodeReq) returns (GetDayResp){}
+    // GetHejjw 获取华尔街见闻
+	rpc GetHejjw(common.Empty) returns (GetHejjwResp){}
     // GetDailyCheck 每日复盘笔记
 	rpc GetDailyCheck(common.Empty) returns (GetDailyCheckResp){}
+    rpc GetClmx(common.Empty)returns (GetClmxResp){}
     ////////////////////////////////////////////////////////////////
     ///////价值/////////////////////////////////////////////////////
     rpc GetHyRm(GetHyRmReq) returns (GetHyRmResp){}
@@ -66,6 +69,15 @@ service shares {
     rpc GetZybHyKline(GetZybHyKlineReq) returns (GetZybHyKlineResp){}
     ////////////////////////////////////////////////////////////////
 }
+message GetClmxResp{
+    repeated ClmxInfo list = 1;
+}
+message ClmxInfo{
+    string name = 1;// 
+    string doc = 2;//
+    string url = 3;//
+}
+
 message GetZybHyKlineReq {
     int32 days =2;// 天数
 }
@@ -74,6 +86,11 @@ message GetZybHyKlineResp{
     repeated string times = 1;// x轴数据
     repeated ZybHyDailyInfo list = 2;// 列表
     repeated TagInfo tags = 3;// 标签
+    repeated TagInfo tags1 = 4;// 标签
+    double cjlmin = 5;
+    double cjlmax = 6;
+    GetHyMmaddResp tsList1 = 7;
+    GetHyMmaddResp tsList2 = 8;
 }
 message TagInfo{
     string name =1;// 标签名字
@@ -81,14 +98,16 @@ message TagInfo{
     double percent = 3;// 涨跌幅
     string url = 4;//地址
     string doc = 5;
+    string code = 6;
 }
 
 message ZybHyDailyInfo{
     string name = 1;// 行业名字
     string code = 2;// 行业代码
     bool up = 3;
-    repeated double data = 4;// 数据
-    repeated double cjl = 5;// 数据
+
+    repeated double data = 6;// 数据
+    repeated double cjl = 7;// 数据集
 }
 
 message GetMrtDetailReq{
@@ -169,6 +188,15 @@ message MrtInfo {
 //     string code = 5;// 代码
 //     string name = 6;// 股票名字
 // }
+message GetHejjwResp {
+    repeated HejjwInfo list = 1;
+}
+
+message HejjwInfo{
+     string tmStr= 1;
+     string title= 2;
+     string content = 3;
+}
 
 message MrtDoc {
    string image =1;
@@ -304,8 +332,9 @@ message GetHyMmaddReq {
 message GetHyMmaddResp {
     string title = 1;// 标题
     string day0 = 2;// 日期
-    repeated string thList = 3;// 表名
-    repeated SharesInfo list = 4;// 列表
+    bool vaild = 3;// 是否隐藏
+    repeated string thList = 4;// 表名
+    repeated SharesInfo list = 5;// 列表
 }
 
 message GetMyTeamDetailReq {
