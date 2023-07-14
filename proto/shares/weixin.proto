@@ -118,4 +118,5 @@ message GetUserInfoResp{
 	 string openId = 3;// openid
 	 int64 overdueTime = 4;// 逾期时间点(时间戳)
 	 string msg = 5;// 消息
+	 int32 level= 6;// 等级
  }
