@@ -312,6 +312,12 @@ message GetSharesKlineResp {
     int32 level = 20;// 等级
     repeated double ddejlr = 21;// 散户数
     repeated double gds = 22;// 股东数
+    repeated GdsInfo gdsPl = 23;// 股东数(真实披露日)
+}
+
+message GdsInfo {
+    string day = 1;
+    double value = 2;
 }
 
 // 估值及pe
