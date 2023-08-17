@@ -45,6 +45,8 @@ service shares {
     // GetDailyCheck 每日复盘笔记
 	rpc GetDailyCheck(common.Empty) returns (GetDailyCheckResp){}
     rpc GetClmx(common.Empty)returns (GetClmxResp){}
+    rpc GetMyYd(GetMyYdReq)returns (GetMyYdResp){}
+    
     ////////////////////////////////////////////////////////////////
     ///////价值/////////////////////////////////////////////////////
     rpc GetHyRm(GetHyRmReq) returns (GetHyRmResp){}
@@ -295,7 +297,7 @@ message GetSharesKlineResp {
     repeated double bxPercent = 3;// 北上占比
     repeated double bxjlr = 4;// 北向净流入
     repeated double bxjlr5 = 5;// 北向净流入
-    repeated double zlPercent = 6;// 股基占比
+    // repeated double zlPercent = 6;// 股基占比
     repeated double yhFocus = 7;// 用户情绪
     string colorr = 8;// 红的颜色
     string colorg  = 9;// 绿的颜色
@@ -313,6 +315,10 @@ message GetSharesKlineResp {
     repeated double ddejlr = 21;// 散户数
     repeated double gds = 22;// 股东数
     repeated GdsInfo gdsPl = 23;// 股东数(真实披露日)
+    repeated double chip = 24;// 筹码集中度(90%)
+    repeated double zybl = 25;// 质押比例
+    repeated double zl = 26;// 主力净流入
+    repeated double jg = 27;// 机构动向
 }
 
 message GdsInfo {
@@ -611,4 +617,28 @@ message GetHyTimeResp{
 
 message GetTouTiaoResp{
     repeated string list =1;// 显示的名字
+}
+
+
+message MyYdInfo{
+    string code = 1;
+    string name = 2;
+    string key = 3;
+    string desc = 4;
+    string url = 5;
+    string color = 6;
+    string tm = 7;
+}
+
+message GetMyYdResp {
+    repeated MyYdInfo list = 1;
+}
+
+message GetMyYdReq {
+    string tag = 1;
+    string day = 2;
+}
+
+message GetYhxgReq {
+    string hexinv = 1;// 核心
 }

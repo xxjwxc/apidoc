@@ -65,6 +65,7 @@ type SharesClient interface {
 	// GetDailyCheck 每日复盘笔记
 	GetDailyCheck(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetDailyCheckResp, error)
 	GetClmx(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetClmxResp, error)
+	GetMyYd(ctx context.Context, in *GetMyYdReq, opts ...grpc.CallOption) (*GetMyYdResp, error)
 	// //////////////////////////////////////////////////////////////
 	// /////价值/////////////////////////////////////////////////////
 	GetHyRm(ctx context.Context, in *GetHyRmReq, opts ...grpc.CallOption) (*GetHyRmResp, error)
@@ -380,6 +381,20 @@ func (c *sharesClient) GetClmx(ctx context.Context, in *common.Empty, opts ...gr
 	return out, nil
 }
 
+func (c *sharesClient) GetMyYd(ctx context.Context, in *GetMyYdReq, opts ...grpc.CallOption) (*GetMyYdResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetMyYdResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetMyYd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *sharesClient) GetHyRm(ctx context.Context, in *GetHyRmReq, opts ...grpc.CallOption) (*GetHyRmResp, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
@@ -643,6 +658,7 @@ type SharesServer interface {
 	// GetDailyCheck 每日复盘笔记
 	GetDailyCheck(context.Context, *common.Empty) (*GetDailyCheckResp, error)
 	GetClmx(context.Context, *common.Empty) (*GetClmxResp, error)
+	GetMyYd(context.Context, *GetMyYdReq) (*GetMyYdResp, error)
 	// //////////////////////////////////////////////////////////////
 	// /////价值/////////////////////////////////////////////////////
 	GetHyRm(context.Context, *GetHyRmReq) (*GetHyRmResp, error)
@@ -727,6 +743,9 @@ func (*UnimplementedSharesServer) GetDailyCheck(context.Context, *common.Empty) 
 }
 func (*UnimplementedSharesServer) GetClmx(context.Context, *common.Empty) (*GetClmxResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetClmx not implemented")
+}
+func (*UnimplementedSharesServer) GetMyYd(context.Context, *GetMyYdReq) (*GetMyYdResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMyYd not implemented")
 }
 func (*UnimplementedSharesServer) GetHyRm(context.Context, *GetHyRmReq) (*GetHyRmResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHyRm not implemented")
@@ -1123,6 +1142,24 @@ func _Shares_GetClmx_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_GetMyYd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMyYdReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetMyYd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetMyYd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetMyYd(ctx, req.(*GetMyYdReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Shares_GetHyRm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetHyRmReq)
 	if err := dec(in); err != nil {
@@ -1490,6 +1527,10 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetClmx",
 			Handler:    _Shares_GetClmx_Handler,
+		},
+		{
+			MethodName: "GetMyYd",
+			Handler:    _Shares_GetMyYd_Handler,
 		},
 		{
 			MethodName: "GetHyRm",

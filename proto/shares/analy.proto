@@ -31,7 +31,7 @@ message GjzbInfo {
 }
 
 message GetSampleWdjReq{
-
+    string hexinv = 1;
 }
 
 message GetSampleWdjResp{

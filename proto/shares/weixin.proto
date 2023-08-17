@@ -87,6 +87,7 @@ message GetQrcodeResp{
 // GetUserInfoReq 用户信息
 message GetUserInfoReq{
 	bool isDebug = 1;// 是否调试模式
+	string hexinv = 2;// 核心
 }
 
 // GetUserInfoResp 用户信息
@@ -105,6 +106,9 @@ message GetUserInfoResp{
 	int32   capacity = 13;// 可用容量 
 	bool 	sendArtic = 14;// 是否发送每日复盘文章
 	bool 	only249 = 15;// 是否12/144/169日线
+	bool ylzc = 16;// 压力支撑
+	bool dkzx = 17; // 多空专线
+	bool ggfs = 18;// 个股分时
  }
  
  message UpsetUserInfoReq{
