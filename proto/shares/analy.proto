@@ -71,7 +71,9 @@ message AllSpInfo {
  repeated SpShowInfo list =7;// 列表
 }
 
+
 // GetAllSpResp 
 message GetAllSpResp {
     repeated AllSpInfo list =1;// 列表
+    string baseInfo = 2;// 基础数据
 }

@@ -319,6 +319,8 @@ message GetSharesKlineResp {
     repeated double zybl = 25;// 质押比例
     repeated double zl = 26;// 主力净流入
     repeated double jg = 27;// 机构动向
+    repeated double rqPrice = 28;// 融券净流入
+    bool haveRq = 29;// 是否有融券
 }
 
 message GdsInfo {
@@ -343,6 +345,7 @@ message GetHyMmaddReq {
     int32 tag = 1;// 类型 0:机构,1:北上,2:公募
     int64 days = 2;// 拿几天
     string code = 3;// 行业名字
+    repeated string hyCode = 4;// 行业名字
 }
 
 message GetHyMmaddResp {
