@@ -1,0 +1,92 @@
+syntax = "proto3"; // 指定proto版本
+
+package shares;     // 指定包名
+import "common/common_public.proto";
+
+option go_package = "rpc/shares"; // 指定路径
+
+
+// 分析服务器
+service Order {
+    // PlaceOrder 下单
+    rpc GetProduct(GetProductReq) returns (GetProductResp) {}
+    // PlaceOrder 下单
+    rpc PlaceOrder(PlaceOrderReq) returns (PayResp) {}
+
+    // ReckonFee 计算费用
+    rpc ReckonFee(ReckonFeeReq) returns (ReckonFeeResp) {}
+}
+
+// GetProductReq 通过类型获取商品列表
+message GetProductReq {
+	string typeId = 1;// 类型
+	int32 pageNumber = 2;// 当前页数
+}
+
+// GetProductResp 通过类型获取商品列表
+message GetProductResp {
+	string typeId = 1;// 类型
+	int32 pageNumber = 2;// 当前页数
+	repeated ProductInfo items = 3; // 当前列表
+}
+
+// ProductInfo 商品信息
+message ProductInfo{
+	string gpid = 1;// 商品gpid
+	string name = 2;// 商品名
+	int64 price = 3;// 商品价格
+	int64 originalPrice = 4;// 商品原始价格
+	int32 couponPct  = 5;// 折扣占比
+	int64 sales = 6;// 商品销量
+	int32 stock = 7;// 库存
+	string views = 8;// 浏览量
+	repeated string tagList = 9;// 标签列表
+    string vipDoc = 10;// vip描述
+    int64 expiresTimeMonth = 11;// 过期时间(月)
+	string icon = 12; // 商品图标
+	bool isFavorite = 13;// 是否收藏
+    bool sell = 14;// 是否精选(推荐)
+    string priceStr = 15;// 价格字符串
+    string originalPriceStr = 16;// 商品原始价格
+}
+
+// CartInfo 购买列表
+message CartInfo {
+    string gpid = 1;// 商品gpid
+    int64 number = 2;// 购买数量
+}
+
+// PlaceOrderReq 下单
+message PlaceOrderReq{
+	int32 buyType = 1;// 购买类型:1,来自直接购买，2:来自购物车
+	repeated CartInfo list = 2;// 购买列表
+}
+
+// PayResp 下单
+message PayResp{
+	bool status = 1;// 状态 1:成功，-1:失败
+	string billId =2;// 账单id
+	map<string, string> info = 3;// 支付相关信息
+}
+
+// 计算费用
+message ReckonFeeReq {
+	int32 buyType = 1;// 购买类型:1,来自直接购买，2:来自购物车
+	repeated CartInfo list = 2;// 购买列表
+}
+
+// 计算费用
+message ReckonFeeResp {
+	repeated OrderInfo orderInfo = 1;// 订单信息
+	int64 totalFee = 2;//总金额
+	int64 couponFee = 3;// 优惠金额
+}
+
+message OrderInfo{
+	string gpid = 1;// 商品gpid
+	string name = 2;// 商品名
+	int64 price = 3;// 商品价格
+	string icon = 5; // 商品图标
+	int64 number = 8;// 购买数量
+}
+
