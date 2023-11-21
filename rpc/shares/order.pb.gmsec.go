@@ -33,6 +33,8 @@ type OrderClient interface {
 	PlaceOrder(ctx context.Context, in *PlaceOrderReq, opts ...grpc.CallOption) (*PayResp, error)
 	// ReckonFee 计算费用
 	ReckonFee(ctx context.Context, in *ReckonFeeReq, opts ...grpc.CallOption) (*ReckonFeeResp, error)
+	// CheckPay 支付成功check一次
+	CheckPay(ctx context.Context, in *PayReq, opts ...grpc.CallOption) (*PayResp, error)
 }
 
 type orderClient struct {
@@ -102,6 +104,20 @@ func (c *orderClient) ReckonFee(ctx context.Context, in *ReckonFeeReq, opts ...g
 	return out, nil
 }
 
+func (c *orderClient) CheckPay(ctx context.Context, in *PayReq, opts ...grpc.CallOption) (*PayResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(PayResp)
+	err = conn.Invoke(ctx, "/shares.Order/CheckPay", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderServer is the server API for Order service.
 type OrderServer interface {
 	// PlaceOrder 下单
@@ -110,6 +126,8 @@ type OrderServer interface {
 	PlaceOrder(context.Context, *PlaceOrderReq) (*PayResp, error)
 	// ReckonFee 计算费用
 	ReckonFee(context.Context, *ReckonFeeReq) (*ReckonFeeResp, error)
+	// CheckPay 支付成功check一次
+	CheckPay(context.Context, *PayReq) (*PayResp, error)
 }
 
 // UnimplementedOrderServer can be embedded to have forward compatible implementations.
@@ -124,6 +142,9 @@ func (*UnimplementedOrderServer) PlaceOrder(context.Context, *PlaceOrderReq) (*P
 }
 func (*UnimplementedOrderServer) ReckonFee(context.Context, *ReckonFeeReq) (*ReckonFeeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReckonFee not implemented")
+}
+func (*UnimplementedOrderServer) CheckPay(context.Context, *PayReq) (*PayResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckPay not implemented")
 }
 
 func RegisterOrderServer(s server.Server, srv OrderServer) {
@@ -184,6 +205,24 @@ func _Order_ReckonFee_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Order_CheckPay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PayReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServer).CheckPay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.Order/CheckPay",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServer).CheckPay(ctx, req.(*PayReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Order_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.Order",
 	HandlerType: (*OrderServer)(nil),
@@ -199,6 +238,10 @@ var _Order_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReckonFee",
 			Handler:    _Order_ReckonFee_Handler,
+		},
+		{
+			MethodName: "CheckPay",
+			Handler:    _Order_CheckPay_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

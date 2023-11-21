@@ -15,7 +15,21 @@ service Order {
 
     // ReckonFee 计算费用
     rpc ReckonFee(ReckonFeeReq) returns (ReckonFeeResp) {}
+	// CheckPay 支付成功check一次
+	rpc CheckPay(PayReq) returns (PayResp) {}
 }
+
+enum BillStatus {
+	Default = 0; // 支付状态(-1:已退款,1:待支付,2:已支付,待发货,3:已取消,4:待收货,5:已完成，6:售后待评价)
+	Refunded = -1; // 已退款
+	Paying = 1;// 待支付
+	Paid = 2;// 已支付,待发货
+	Cancelled = 3;// 已取消
+	Received = 4;// 已发货，待收货
+	Completed = 5;// 已完成
+	AfterSale = 6;// 售后待评价
+}
+
 
 // GetProductReq 通过类型获取商品列表
 message GetProductReq {
@@ -41,13 +55,14 @@ message ProductInfo{
 	int32 stock = 7;// 库存
 	string views = 8;// 浏览量
 	repeated string tagList = 9;// 标签列表
-    string vipDoc = 10;// vip描述
+    string context = 10;// vip描述
     int64 expiresTimeMonth = 11;// 过期时间(月)
 	string icon = 12; // 商品图标
 	bool isFavorite = 13;// 是否收藏
     bool sell = 14;// 是否精选(推荐)
     string priceStr = 15;// 价格字符串
     string originalPriceStr = 16;// 商品原始价格
+	string tag = 17;// 标签
 }
 
 // CartInfo 购买列表
@@ -88,5 +103,10 @@ message OrderInfo{
 	int64 price = 3;// 商品价格
 	string icon = 5; // 商品图标
 	int64 number = 8;// 购买数量
+	int64  vipMonth = 9;// 服务期/月
 }
 
+
+message PayReq {
+	string billId =1;// 账单id
+}

@@ -78,10 +78,12 @@ message ClmxInfo{
     string name = 1;// 
     string doc = 2;//
     string url = 3;//
+    bool have = 4;// 是否有权限
 }
 
 message GetZybHyKlineReq {
-    int32 days =2;// 天数
+    int32 days =1;// 天数
+    bool showCd = 2;
 }
 
 message GetZybHyKlineResp{
@@ -93,6 +95,7 @@ message GetZybHyKlineResp{
     double cjlmax = 6;
     GetHyMmaddResp tsList1 = 7;
     GetHyMmaddResp tsList2 = 8;
+    string startTm = 9;// 开始时间
 }
 message TagInfo{
     string name =1;// 标签名字
@@ -235,6 +238,8 @@ message GetYyqResp {
   //  KlineInfo gpkhsj= 23;// 股票开户数据
     KlineInfo fdi= 24;// 外商直接投资数据(FDI)
     KlineInfo xzxd= 25;// 新增信贷数据
+    string left = 26;
+    string right = 27;
 }
 
 message GetFundKlineResp {
@@ -250,6 +255,9 @@ message GetFundKlineResp {
     repeated double fof = 10;
     repeated string times1 = 11;// 盈利预测
     repeated double ylyc = 12; // 盈利预测值
+    repeated string times2 = 13;// 股息分红
+    repeated double gxl = 14; // 盈利预测值
+    repeated double bvps = 15; // 每股净资产
 }
 
 message GetJgKlineResp {
@@ -576,6 +584,8 @@ message CodeReq{
     string code = 1;// 股票代码
     string tp = 2;// 类型(k30,daily)
     int64 days = 3;
+    bool flkx = 4;// 复利k线
+    bool fljx = 5;// 复利均线
 }
 
 message GetMyGroupResp{

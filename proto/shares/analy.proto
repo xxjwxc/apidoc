@@ -14,7 +14,18 @@ service Analy {
     rpc GetAllSp(GetAllSpReq) returns (GetAllSpResp) {}
     rpc GetSampleWdj(GetSampleWdjReq) returns (GetSampleWdjResp) {}
     rpc GetGjzb(common.Empty) returns (GjzbInfo) {}
-    
+    // GetBxNxKlineInfo 获取北向，南向当日净流入情况
+    rpc GetBxNxKlineInfo(common.Empty) returns (GetBxNxKlineInfoResp){}
+    rpc GetCjrl(GetCjrlReq) returns (GetCjrlResp){}
+}
+
+message GetCjrlReq {
+    string day = 1;
+}
+
+message GetCjrlResp{
+    repeated JjrbInfo jjsj = 1;// 经济数据
+    repeated JjrbInfo sj = 2;// 事件
 }
 
 message GetGjzbResp{
@@ -42,6 +53,7 @@ message GetSampleWdjResp{
 // AnalyCodeReq 请求
 message AnalyCodeReq{
 	string code = 1;// 股票代码
+    int32 len =2;
 }
 
 // AnalyCodeResp 返回
@@ -72,8 +84,60 @@ message AllSpInfo {
 }
 
 
+message BaseInfo {
+string name = 1;
+string value = 2;
+string color = 3;
+
+string name1 = 4;
+string value1 = 5;
+string color1 = 6;
+}
+
 // GetAllSpResp 
 message GetAllSpResp {
-    repeated AllSpInfo list =1;// 列表
-    string baseInfo = 2;// 基础数据
+    bool vip = 1;// 是否vip
+    int32 token = 2;// token 数
+    repeated AllSpInfo list =3;// 列表
+    repeated BaseInfo baseInfo  = 4;// 基础数据
+}
+
+message GetArticInfo{
+    string title = 1;
+    string tm = 2;
+}
+
+message GetArticResp{
+    repeated GetArticInfo list =1;// 显示的名字
+}
+
+
+message GetBxNxKlineInfoResp{
+    repeated string times1 = 10;// 北向
+    string dayStr1 = 11;// 当天时间
+    repeated double bs2 = 2;// 沪股通,净买入
+    repeated double bs3 = 3;// 深股通,净买入
+    repeated double bs4 = 4;// 北向资金,净买入
+    repeated double bs5 = 5;// 沪股通,净流入
+    repeated double bs6 = 6;// 深股通,净流入
+    repeated double bs7 = 7;// 北向资金,净流入
+
+    repeated string times2 = 20;// 南向
+    string dayStr2= 21;// 当天时间
+    repeated double nx2 = 22;// 港股通(沪),净流入
+    repeated double nx3 = 23;// 港股通(深),净流入
+    repeated double nx4 = 24;// 南向资金,净流入
+    repeated double nx5 = 25;// 港股通(沪),净流入
+    repeated double nx6 = 26;// 港股通(深),净流入
+    repeated double nx7 = 27;// 南向资金,净流入
+}
+
+message JjrbInfo {
+    string country = 1;       // 城市
+    string title = 2;
+    string previous = 3;// 前值
+    string consensus = 4;// 预期
+    string actual =5;// 实际值
+    string url = 6;
+    string tm = 7;
 }

@@ -103,12 +103,17 @@ message GetUserInfoResp{
 	string  group =9;// 用户所在分组列表    
 	bool    rg   = 10;// 是否涨绿跌红
 	bool 	only20 = 11;// 是否20日线
-	int32   capacity = 13;// 可用容量 
+	int32   token = 13;// 可用容量 
 	bool 	sendArtic = 14;// 是否发送每日复盘文章
 	bool 	only249 = 15;// 是否12/144/169日线
 	bool ylzc = 16;// 压力支撑
 	bool dkzx = 17; // 多空专线
 	bool ggfs = 18;// 个股分时
+	bool isVip = 19;// 是否是vip
+	string vipOutTime = 20;// 会员过期时间
+	int32 vipLevel = 21;// vip等级
+	bool k30 = 22;// 30分钟量能提醒
+	bool fljx = 23; // 复利均线
  }
  
  message UpsetUserInfoReq{

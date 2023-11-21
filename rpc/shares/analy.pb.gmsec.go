@@ -34,6 +34,9 @@ type AnalyClient interface {
 	GetAllSp(ctx context.Context, in *GetAllSpReq, opts ...grpc.CallOption) (*GetAllSpResp, error)
 	GetSampleWdj(ctx context.Context, in *GetSampleWdjReq, opts ...grpc.CallOption) (*GetSampleWdjResp, error)
 	GetGjzb(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GjzbInfo, error)
+	// GetBxNxKlineInfo 获取北向，南向当日净流入情况
+	GetBxNxKlineInfo(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetBxNxKlineInfoResp, error)
+	GetCjrl(ctx context.Context, in *GetCjrlReq, opts ...grpc.CallOption) (*GetCjrlResp, error)
 }
 
 type analyClient struct {
@@ -117,6 +120,34 @@ func (c *analyClient) GetGjzb(ctx context.Context, in *common.Empty, opts ...grp
 	return out, nil
 }
 
+func (c *analyClient) GetBxNxKlineInfo(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetBxNxKlineInfoResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetBxNxKlineInfoResp)
+	err = conn.Invoke(ctx, "/shares.Analy/GetBxNxKlineInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *analyClient) GetCjrl(ctx context.Context, in *GetCjrlReq, opts ...grpc.CallOption) (*GetCjrlResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetCjrlResp)
+	err = conn.Invoke(ctx, "/shares.Analy/GetCjrl", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AnalyServer is the server API for Analy service.
 type AnalyServer interface {
 	// AnalyCode 分析一直股票
@@ -125,6 +156,9 @@ type AnalyServer interface {
 	GetAllSp(context.Context, *GetAllSpReq) (*GetAllSpResp, error)
 	GetSampleWdj(context.Context, *GetSampleWdjReq) (*GetSampleWdjResp, error)
 	GetGjzb(context.Context, *common.Empty) (*GjzbInfo, error)
+	// GetBxNxKlineInfo 获取北向，南向当日净流入情况
+	GetBxNxKlineInfo(context.Context, *common.Empty) (*GetBxNxKlineInfoResp, error)
+	GetCjrl(context.Context, *GetCjrlReq) (*GetCjrlResp, error)
 }
 
 // UnimplementedAnalyServer can be embedded to have forward compatible implementations.
@@ -142,6 +176,12 @@ func (*UnimplementedAnalyServer) GetSampleWdj(context.Context, *GetSampleWdjReq)
 }
 func (*UnimplementedAnalyServer) GetGjzb(context.Context, *common.Empty) (*GjzbInfo, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGjzb not implemented")
+}
+func (*UnimplementedAnalyServer) GetBxNxKlineInfo(context.Context, *common.Empty) (*GetBxNxKlineInfoResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBxNxKlineInfo not implemented")
+}
+func (*UnimplementedAnalyServer) GetCjrl(context.Context, *GetCjrlReq) (*GetCjrlResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCjrl not implemented")
 }
 
 func RegisterAnalyServer(s server.Server, srv AnalyServer) {
@@ -220,6 +260,42 @@ func _Analy_GetGjzb_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Analy_GetBxNxKlineInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyServer).GetBxNxKlineInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.Analy/GetBxNxKlineInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyServer).GetBxNxKlineInfo(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Analy_GetCjrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCjrlReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyServer).GetCjrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.Analy/GetCjrl",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyServer).GetCjrl(ctx, req.(*GetCjrlReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Analy_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.Analy",
 	HandlerType: (*AnalyServer)(nil),
@@ -239,6 +315,14 @@ var _Analy_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetGjzb",
 			Handler:    _Analy_GetGjzb_Handler,
+		},
+		{
+			MethodName: "GetBxNxKlineInfo",
+			Handler:    _Analy_GetBxNxKlineInfo_Handler,
+		},
+		{
+			MethodName: "GetCjrl",
+			Handler:    _Analy_GetCjrl_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

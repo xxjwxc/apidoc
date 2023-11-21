@@ -96,11 +96,10 @@ message GetUserInfoResp{
 	bool    rg   = 10;// 是否涨绿跌红
 	bool 	only20 = 11;// 是否20日线
 	bool 	sendArtic = 12;// 是否发送每日复盘文章       
-	int32   capacity = 13;// 可用容量 
+	int32   token = 13;// 可用容量 
 	repeated userInfo userList = 14;// 用户列表
 	bool vip = 15;
 	bool ylzc = 16;// 压力支撑
-
  }
  
  message UpsetUserInfoReq{
