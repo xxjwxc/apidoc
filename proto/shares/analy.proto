@@ -26,6 +26,7 @@ message GetCjrlReq {
 message GetCjrlResp{
     repeated JjrbInfo jjsj = 1;// 经济数据
     repeated JjrbInfo sj = 2;// 事件
+    repeated JjrbInfo hy = 3;// 会议
 }
 
 message GetGjzbResp{
@@ -140,4 +141,11 @@ message JjrbInfo {
     string actual =5;// 实际值
     string url = 6;
     string tm = 7;
+}
+
+message MainShare{
+    string tm = 1;
+    repeated double price =2;
+    repeated double main = 3;// 当日主力情况
+    double mainDay = 4;
 }

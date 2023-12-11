@@ -75,7 +75,7 @@ type SharesClient interface {
 	GetHyZyb(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*GetHyMmaddResp, error)
 	GetSharesKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetSharesKlineResp, error)
 	GetFundKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetFundKlineResp, error)
-	GetJgKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetJgKlineResp, error)
+	// rpc GetJgKline(GetSharesKlineReq) returns (GetJgKlineResp){} // 获取机构线
 	GetGzKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GZPeResp, error)
 	GetHotHyName(ctx context.Context, in *GetHotHyNameReq, opts ...grpc.CallOption) (*GetHotHyNameResp, error)
 	GetYyq(ctx context.Context, in *GetYyqReq, opts ...grpc.CallOption) (*GetYyqResp, error)
@@ -493,20 +493,6 @@ func (c *sharesClient) GetFundKline(ctx context.Context, in *GetSharesKlineReq, 
 	return out, nil
 }
 
-func (c *sharesClient) GetJgKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetJgKlineResp, error) {
-	conn, err := c.cc.Next()
-	if err != nil {
-		return nil, err
-	}
-	defer conn.Close()
-	out := new(GetJgKlineResp)
-	err = conn.Invoke(ctx, "/shares.shares/GetJgKline", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *sharesClient) GetGzKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GZPeResp, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
@@ -668,7 +654,7 @@ type SharesServer interface {
 	GetHyZyb(context.Context, *GetHyMmaddReq) (*GetHyMmaddResp, error)
 	GetSharesKline(context.Context, *GetSharesKlineReq) (*GetSharesKlineResp, error)
 	GetFundKline(context.Context, *GetSharesKlineReq) (*GetFundKlineResp, error)
-	GetJgKline(context.Context, *GetSharesKlineReq) (*GetJgKlineResp, error)
+	// rpc GetJgKline(GetSharesKlineReq) returns (GetJgKlineResp){} // 获取机构线
 	GetGzKline(context.Context, *GetSharesKlineReq) (*GZPeResp, error)
 	GetHotHyName(context.Context, *GetHotHyNameReq) (*GetHotHyNameResp, error)
 	GetYyq(context.Context, *GetYyqReq) (*GetYyqResp, error)
@@ -767,9 +753,6 @@ func (*UnimplementedSharesServer) GetSharesKline(context.Context, *GetSharesKlin
 }
 func (*UnimplementedSharesServer) GetFundKline(context.Context, *GetSharesKlineReq) (*GetFundKlineResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFundKline not implemented")
-}
-func (*UnimplementedSharesServer) GetJgKline(context.Context, *GetSharesKlineReq) (*GetJgKlineResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetJgKline not implemented")
 }
 func (*UnimplementedSharesServer) GetGzKline(context.Context, *GetSharesKlineReq) (*GZPeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGzKline not implemented")
@@ -1286,24 +1269,6 @@ func _Shares_GetFundKline_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Shares_GetJgKline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSharesKlineReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SharesServer).GetJgKline(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/shares.shares/GetJgKline",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SharesServer).GetJgKline(ctx, req.(*GetSharesKlineReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Shares_GetGzKline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetSharesKlineReq)
 	if err := dec(in); err != nil {
@@ -1559,10 +1524,6 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetFundKline",
 			Handler:    _Shares_GetFundKline_Handler,
-		},
-		{
-			MethodName: "GetJgKline",
-			Handler:    _Shares_GetJgKline_Handler,
 		},
 		{
 			MethodName: "GetGzKline",
