@@ -255,12 +255,13 @@ message GetFundKlineResp {
     repeated double fof = 10;
     repeated string times1 = 11;// 盈利预测
     repeated double ylyc = 12; // 盈利预测值
-    repeated string times2 = 13;// 股息分红
-    repeated double gxl = 14; // 盈利预测值
-    repeated double bvps = 15; // 每股净资产
-    repeated double mzpg = 16;// 募资，增发
-    repeated double px = 17;// 派现
-    string mzpxbTitle = 18;// 募资派现比例
+    repeated double yl = 13; // 盈利
+    repeated string times2 = 14;// 股息分红
+    repeated double gxl = 15; // 盈利预测值
+    repeated double bvps = 16; // 每股净资产
+    repeated double mzpg = 17;// 募资，增发
+    repeated double px = 18;// 派现
+    string mzpxbTitle = 19;// 募资派现比例
 }
 
 message GetJgKlineResp {
@@ -333,6 +334,7 @@ message GetSharesKlineResp {
     repeated double rqPrice = 28;// 融券净流入
     bool haveRq = 29;// 是否有融券
     repeated double jjPercent = 30;// 公募基金占比
+    repeated double mbj = 31;// 目标价
 }
 
 message GdsInfo {
