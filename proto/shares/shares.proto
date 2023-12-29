@@ -73,6 +73,7 @@ service shares {
 }
 message GetClmxResp{
     repeated ClmxInfo list = 1;
+    bool clmx = 2;
 }
 message ClmxInfo{
     string name = 1;// 
@@ -97,6 +98,19 @@ message GetZybHyKlineResp{
     GetHyMmaddResp tsList2 = 8;
     string startTm = 9;// 开始时间
 }
+message GetZybYbResp{
+    repeated ZybHyYbInfo list = 1;// 列表
+    string startTm = 2;// 开始时间
+    double cjlmin = 3;
+    double cjlmax = 4;
+}
+
+message ZybHyYbInfo{
+    string name = 1;// 行业名字
+    string code = 2;// 行业代码
+    repeated double cjl = 3;// 数据集
+}
+
 message TagInfo{
     string name =1;// 标签名字
     string color = 2;// 标签颜色
@@ -514,7 +528,6 @@ message AddMyCodeReq{
     bool public = 8;// 是否推荐给组织
 	double up = 9;// 估价涨到
 	double down = 10;// 估价跌到
-
     bool vaild = 11;// 是否有效
     
     // 返回值用
@@ -527,6 +540,7 @@ message AddMyCodeReq{
     double upTo = 18;// 涨幅目标提醒
     double downPercent = 19; // 跌幅超
     double downTo = 20;// 涨幅目标提醒
+    double score = 21;// 得分
 }
 
 message AddMyCodeResp{
@@ -536,6 +550,7 @@ message AddMyCodeResp{
 
 message GetMyCodeReq{
     string code = 1;// 股票代码
+    bool yjzd = 2;// 一键诊断
 }
 
 message AddMyCodeInfo {
@@ -612,6 +627,8 @@ message UpsetGroupCodeReq{
 // GetDayResp 请求结构
 message GetDayResp{
     repeated Group list = 1;// 列表 
+    repeated TagInfo hyTags = 2;// 行业tags
+    repeated TagInfo tsTags = 3;// 淘神tags
 }
 
 // GetHyCodeResp 请求结构
