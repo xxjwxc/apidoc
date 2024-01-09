@@ -349,6 +349,7 @@ message GetSharesKlineResp {
     bool haveRq = 29;// 是否有融券
     repeated double jjPercent = 30;// 公募基金占比
     repeated double mbj = 31;// 目标价
+    repeated double gm = 32;// 公募
 }
 
 message GdsInfo {
