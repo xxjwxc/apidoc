@@ -52,8 +52,9 @@ type SharesClient interface {
 	DeleteMyCode(ctx context.Context, in *DeleteMyCodeReq, opts ...grpc.CallOption) (*common.Empty, error)
 	// AddGroup 添加一个组织
 	AddGroup(ctx context.Context, in *AddGroupReq, opts ...grpc.CallOption) (*common.Empty, error)
-	// GetDay 每日精选
-	GetDay(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error)
+	//	// GetDay 每日精选
+	//	rpc GetDay(CodeReq) returns (GetDayResp){}
+	//
 	// GetVip vip内参
 	GetVip(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error)
 	// GetFl 放量(打版)
@@ -277,20 +278,6 @@ func (c *sharesClient) AddGroup(ctx context.Context, in *AddGroupReq, opts ...gr
 	defer conn.Close()
 	out := new(common.Empty)
 	err = conn.Invoke(ctx, "/shares.shares/AddGroup", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sharesClient) GetDay(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error) {
-	conn, err := c.cc.Next()
-	if err != nil {
-		return nil, err
-	}
-	defer conn.Close()
-	out := new(GetDayResp)
-	err = conn.Invoke(ctx, "/shares.shares/GetDay", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -631,8 +618,9 @@ type SharesServer interface {
 	DeleteMyCode(context.Context, *DeleteMyCodeReq) (*common.Empty, error)
 	// AddGroup 添加一个组织
 	AddGroup(context.Context, *AddGroupReq) (*common.Empty, error)
-	// GetDay 每日精选
-	GetDay(context.Context, *CodeReq) (*GetDayResp, error)
+	//	// GetDay 每日精选
+	//	rpc GetDay(CodeReq) returns (GetDayResp){}
+	//
 	// GetVip vip内参
 	GetVip(context.Context, *CodeReq) (*GetDayResp, error)
 	// GetFl 放量(打版)
@@ -708,9 +696,6 @@ func (*UnimplementedSharesServer) DeleteMyCode(context.Context, *DeleteMyCodeReq
 }
 func (*UnimplementedSharesServer) AddGroup(context.Context, *AddGroupReq) (*common.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddGroup not implemented")
-}
-func (*UnimplementedSharesServer) GetDay(context.Context, *CodeReq) (*GetDayResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetDay not implemented")
 }
 func (*UnimplementedSharesServer) GetVip(context.Context, *CodeReq) (*GetDayResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetVip not implemented")
@@ -995,24 +980,6 @@ func _Shares_AddGroup_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SharesServer).AddGroup(ctx, req.(*AddGroupReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Shares_GetDay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CodeReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SharesServer).GetDay(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/shares.shares/GetDay",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SharesServer).GetDay(ctx, req.(*CodeReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1464,10 +1431,6 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddGroup",
 			Handler:    _Shares_AddGroup_Handler,
-		},
-		{
-			MethodName: "GetDay",
-			Handler:    _Shares_GetDay_Handler,
 		},
 		{
 			MethodName: "GetVip",

@@ -32,8 +32,8 @@ service shares {
      rpc DeleteMyCode(DeleteMyCodeReq) returns(common.Empty){}
      // AddGroup 添加一个组织
 	 rpc AddGroup(AddGroupReq) returns (common.Empty){}
-     // GetDay 每日精选
-	 rpc GetDay(CodeReq) returns (GetDayResp){}
+    //  // GetDay 每日精选
+	//  rpc GetDay(CodeReq) returns (GetDayResp){}
     // GetVip vip内参
 	 rpc GetVip(CodeReq) returns (GetDayResp){}
     // GetFl 放量(打版)
@@ -254,6 +254,7 @@ message GetYyqResp {
     KlineInfo xzxd= 25;// 新增信贷数据
     string left = 26;
     string right = 27;
+    KlineInfo zlps = 28;// 战略配售
 }
 
 message GetFundKlineResp {
@@ -350,6 +351,9 @@ message GetSharesKlineResp {
     repeated double jjPercent = 30;// 公募基金占比
     repeated double mbj = 31;// 目标价
     repeated double gm = 32;// 公募
+    repeated double zlpsKcjg = 33;// 战略配售可借出余量
+    repeated double zlpsYkcjg = 34;// 战略配售出借余量
+    repeated double zlpsCjPrice = 35;// 战略配售做空资金
 }
 
 message GdsInfo {
