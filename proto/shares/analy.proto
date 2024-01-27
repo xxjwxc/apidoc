@@ -17,6 +17,8 @@ service Analy {
     // GetBxNxKlineInfo 获取北向，南向当日净流入情况
     rpc GetBxNxKlineInfo(common.Empty) returns (GetBxNxKlineInfoResp){}
     rpc GetCjrl(GetCjrlReq) returns (GetCjrlResp){}
+    rpc GetGdData(GetGdDataReq) returns (GetGdDataResp){}
+    
 }
 
 message GetCjrlReq {
@@ -81,6 +83,7 @@ message AllSpInfo {
  string d2 = 3;// 发布日
  string d3 = 4;// 数量
  string d4 = 5;// 描述
+ bool isDot = 6;// 是否推荐
  repeated SpShowInfo list =7;// 列表
 }
 
@@ -148,4 +151,13 @@ message MainShare{
     repeated double price =2;
     repeated double main = 3;// 当日主力情况
     double mainDay = 4;
+}
+
+message GetGdDataReq{
+    string code = 1;
+    int32 tag = 2;// 0:机构，1：10大流通股东，2:10大股东
+}
+
+message GetGdDataResp{
+    repeated AllSpInfo list = 1;
 }

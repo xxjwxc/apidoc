@@ -37,6 +37,7 @@ type AnalyClient interface {
 	// GetBxNxKlineInfo 获取北向，南向当日净流入情况
 	GetBxNxKlineInfo(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetBxNxKlineInfoResp, error)
 	GetCjrl(ctx context.Context, in *GetCjrlReq, opts ...grpc.CallOption) (*GetCjrlResp, error)
+	GetGdData(ctx context.Context, in *GetGdDataReq, opts ...grpc.CallOption) (*GetGdDataResp, error)
 }
 
 type analyClient struct {
@@ -148,6 +149,20 @@ func (c *analyClient) GetCjrl(ctx context.Context, in *GetCjrlReq, opts ...grpc.
 	return out, nil
 }
 
+func (c *analyClient) GetGdData(ctx context.Context, in *GetGdDataReq, opts ...grpc.CallOption) (*GetGdDataResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetGdDataResp)
+	err = conn.Invoke(ctx, "/shares.Analy/GetGdData", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AnalyServer is the server API for Analy service.
 type AnalyServer interface {
 	// AnalyCode 分析一直股票
@@ -159,6 +174,7 @@ type AnalyServer interface {
 	// GetBxNxKlineInfo 获取北向，南向当日净流入情况
 	GetBxNxKlineInfo(context.Context, *common.Empty) (*GetBxNxKlineInfoResp, error)
 	GetCjrl(context.Context, *GetCjrlReq) (*GetCjrlResp, error)
+	GetGdData(context.Context, *GetGdDataReq) (*GetGdDataResp, error)
 }
 
 // UnimplementedAnalyServer can be embedded to have forward compatible implementations.
@@ -182,6 +198,9 @@ func (*UnimplementedAnalyServer) GetBxNxKlineInfo(context.Context, *common.Empty
 }
 func (*UnimplementedAnalyServer) GetCjrl(context.Context, *GetCjrlReq) (*GetCjrlResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCjrl not implemented")
+}
+func (*UnimplementedAnalyServer) GetGdData(context.Context, *GetGdDataReq) (*GetGdDataResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGdData not implemented")
 }
 
 func RegisterAnalyServer(s server.Server, srv AnalyServer) {
@@ -296,6 +315,24 @@ func _Analy_GetCjrl_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Analy_GetGdData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGdDataReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyServer).GetGdData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.Analy/GetGdData",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyServer).GetGdData(ctx, req.(*GetGdDataReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Analy_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.Analy",
 	HandlerType: (*AnalyServer)(nil),
@@ -323,6 +360,10 @@ var _Analy_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCjrl",
 			Handler:    _Analy_GetCjrl_Handler,
+		},
+		{
+			MethodName: "GetGdData",
+			Handler:    _Analy_GetGdData_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
