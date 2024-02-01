@@ -262,6 +262,7 @@ message GetYyqResp {
     string left = 26;
     string right = 27;
     KlineInfo zlps = 28;// 战略配售
+    KlineInfo bxjgzygj= 29;// 逆回购
 }
 
 message GetFundKlineResp {
@@ -338,6 +339,8 @@ message GetSharesKlineResp {
     repeated double fyyx = 14;// 飞鹰优选 - 
     repeated double zljk = 15;// 主力真吸货(主力清洗之出货) -
     repeated double fx = 16;// 风险(>75 风险较大，<10 风险较小) -
+    repeated double bxzygj1 = 17;// 中银国际(香港.国家队)累计流入
+    repeated double bxzygj2 = 18;// 中银国际(香港.国家队)当日净流入
     repeated double gds = 22;// 股东数 -
     repeated GdsInfo gdsPl = 23;// 股东数(真实披露日) -
     repeated double zybl = 25;// 质押比例 -
