@@ -11,8 +11,8 @@ service Weixin {
     // Oauth 微信授权获取登录信息
     rpc Oauth(OauthReq) returns (OauthResp) {}
 
-	// UpdateUserInfo 更新用户信息
-    rpc UpdateUserInfo(WxUserinfo) returns (common.Empty) {}
+	// // UpdateUserInfo 更新用户信息
+    // rpc UpdateUserInfo(WxUserinfo) returns (common.Empty) {}
 
 	// GetQrcode 获取微信二维码
 	rpc GetQrcode(GetQrcodeReq) returns (GetQrcodeResp){}
@@ -54,6 +54,7 @@ message OauthResp {
     string sessionId = 1;// 用户sessionid 用于当前交互使用
     string openId = 2;// openid
 	int64 overdueTime = 3;// 逾期时间点(时间戳)
+	int32 level= 4;// 等级
 }
 
 // WxUserinfo 用户信息

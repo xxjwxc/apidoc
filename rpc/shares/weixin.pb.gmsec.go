@@ -30,8 +30,6 @@ const _ = grpc.SupportPackageIsVersion6
 type WeixinClient interface {
 	// Oauth 微信授权获取登录信息
 	Oauth(ctx context.Context, in *OauthReq, opts ...grpc.CallOption) (*OauthResp, error)
-	// UpdateUserInfo 更新用户信息
-	UpdateUserInfo(ctx context.Context, in *WxUserinfo, opts ...grpc.CallOption) (*common.Empty, error)
 	// GetQrcode 获取微信二维码
 	GetQrcode(ctx context.Context, in *GetQrcodeReq, opts ...grpc.CallOption) (*GetQrcodeResp, error)
 	// GetUserInfo 获取用户信息
@@ -77,20 +75,6 @@ func (c *weixinClient) Oauth(ctx context.Context, in *OauthReq, opts ...grpc.Cal
 	defer conn.Close()
 	out := new(OauthResp)
 	err = conn.Invoke(ctx, "/shares.Weixin/Oauth", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *weixinClient) UpdateUserInfo(ctx context.Context, in *WxUserinfo, opts ...grpc.CallOption) (*common.Empty, error) {
-	conn, err := c.cc.Next()
-	if err != nil {
-		return nil, err
-	}
-	defer conn.Close()
-	out := new(common.Empty)
-	err = conn.Invoke(ctx, "/shares.Weixin/UpdateUserInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -171,8 +155,6 @@ func (c *weixinClient) GetJsSign(ctx context.Context, in *GetJsSignReq, opts ...
 type WeixinServer interface {
 	// Oauth 微信授权获取登录信息
 	Oauth(context.Context, *OauthReq) (*OauthResp, error)
-	// UpdateUserInfo 更新用户信息
-	UpdateUserInfo(context.Context, *WxUserinfo) (*common.Empty, error)
 	// GetQrcode 获取微信二维码
 	GetQrcode(context.Context, *GetQrcodeReq) (*GetQrcodeResp, error)
 	// GetUserInfo 获取用户信息
@@ -191,9 +173,6 @@ type UnimplementedWeixinServer struct {
 
 func (*UnimplementedWeixinServer) Oauth(context.Context, *OauthReq) (*OauthResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Oauth not implemented")
-}
-func (*UnimplementedWeixinServer) UpdateUserInfo(context.Context, *WxUserinfo) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserInfo not implemented")
 }
 func (*UnimplementedWeixinServer) GetQrcode(context.Context, *GetQrcodeReq) (*GetQrcodeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetQrcode not implemented")
@@ -229,24 +208,6 @@ func _Weixin_Oauth_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WeixinServer).Oauth(ctx, req.(*OauthReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Weixin_UpdateUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(WxUserinfo)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WeixinServer).UpdateUserInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/shares.Weixin/UpdateUserInfo",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WeixinServer).UpdateUserInfo(ctx, req.(*WxUserinfo))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -348,10 +309,6 @@ var _Weixin_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Oauth",
 			Handler:    _Weixin_Oauth_Handler,
-		},
-		{
-			MethodName: "UpdateUserInfo",
-			Handler:    _Weixin_UpdateUserInfo_Handler,
 		},
 		{
 			MethodName: "GetQrcode",
