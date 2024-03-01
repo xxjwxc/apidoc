@@ -484,12 +484,12 @@ message SharesInfoDetails{
     double pb = 14;// 市净率
     double total = 15;// 流通市值
     double cap = 16;// 总市值
-    double zljlr = 17;// 主力资金净流入
+   //  double zljlr = 17;// 主力资金净流入
     double openPrice = 18;// 开盘价
     double closePrice = 19;// 收盘价
-    double macd = 20;// macd
-    double dif = 21;// 快线
-    double dea = 22;// 慢线
+    // double macd = 20;// macd
+    // double dif = 21;// 快线
+    // double dea = 22;// 慢线
     double max = 23;// 当日最高点
     double min = 24;// 当日最低
     int64 day0 = 25;// 当日0点时间戳
