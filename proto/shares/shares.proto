@@ -261,7 +261,7 @@ message GetYyqResp {
     KlineInfo xzxd= 25;// 新增信贷数据
     string left = 26;
     string right = 27;
-    KlineInfo zlps = 28;// 战略配售
+   // KlineInfo zlps = 28;// 战略配售
     KlineInfo bxjgzygj= 29;// 逆回购
 }
 
@@ -373,9 +373,9 @@ message GetSharesKlineMoreResp {
     bool haveRq = 29;// 是否有融券
     repeated double mbj = 31;// 目标价
     repeated double gm = 32;// 公募
-    repeated double zlpsKcjg = 33;// 战略配售可借出余量
-    repeated double zlpsYkcjg = 34;// 战略配售出借余量
-    repeated double zlpsCjPrice = 35;// 战略配售做空资金
+    // repeated double zlpsKcjg = 33;// 战略配售可借出余量
+    // repeated double zlpsYkcjg = 34;// 战略配售出借余量
+    // repeated double zlpsCjPrice = 35;// 战略配售做空资金
 }
 
 message GdsInfo {
@@ -548,26 +548,26 @@ message AddMyCodeReq{
     string code = 1;// 股票代码
     double price = 2;// 当前价格
     bool kdj =3;// 日线金叉提醒
-    bool kdj20 = 4;// 20日线提醒
-	bool surge = 5;// 盘中急涨提醒
-	bool slump = 6;// 盘中急跌提醒
+    bool kdj11 = 4;// 11日线提醒
+	bool surge = 5;// 盘中急涨急跌提醒
 	bool ai = 7;// AI智能提醒
     bool public = 8;// 是否推荐给组织
 	double up = 9;// 估价涨到
 	double down = 10;// 估价跌到
     bool vaild = 11;// 是否有效
+    bool fljx = 12;// AI智能提醒
     
     // 返回值用
-    string simpleCode =12;// 股票代码简写
-    string ext = 13;// 后缀
-	string name = 14;// 股票名字
-    double percent = 15;// 百分比
-    string color = 16;// 颜色
-    double upPercent = 17;// 涨幅超
-    double upTo = 18;// 涨幅目标提醒
-    double downPercent = 19; // 跌幅超
-    double downTo = 20;// 涨幅目标提醒
-    double score = 21;// 得分
+    string simpleCode =13;// 股票代码简写
+    string ext = 14;// 后缀
+	string name = 15;// 股票名字
+    double percent = 16;// 百分比
+    string color = 17;// 颜色
+    double upPercent = 18;// 涨幅超
+    double upTo = 19;// 涨幅目标提醒
+    double downPercent = 20; // 跌幅超
+    double downTo = 21;// 涨幅目标提醒
+    double score = 22;// 得分
 }
 
 message AddMyCodeResp{
