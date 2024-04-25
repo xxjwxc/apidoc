@@ -90,6 +90,7 @@ type SharesClient interface {
 	// //////////////////////////////////////////////////////////////
 	// //////////////////////////中意榜////////////////////////////////
 	GetZybHyKline(ctx context.Context, in *GetZybHyKlineReq, opts ...grpc.CallOption) (*GetZybHyKlineResp, error)
+	GetLicence(ctx context.Context, in *GetLicenceReq, opts ...grpc.CallOption) (*GetLicenceResp, error)
 }
 
 type sharesClient struct {
@@ -607,6 +608,20 @@ func (c *sharesClient) GetZybHyKline(ctx context.Context, in *GetZybHyKlineReq, 
 	return out, nil
 }
 
+func (c *sharesClient) GetLicence(ctx context.Context, in *GetLicenceReq, opts ...grpc.CallOption) (*GetLicenceResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetLicenceResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetLicence", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SharesServer is the server API for Shares service.
 type SharesServer interface {
 	// GetGroup 获取分组信息
@@ -671,6 +686,7 @@ type SharesServer interface {
 	// //////////////////////////////////////////////////////////////
 	// //////////////////////////中意榜////////////////////////////////
 	GetZybHyKline(context.Context, *GetZybHyKlineReq) (*GetZybHyKlineResp, error)
+	GetLicence(context.Context, *GetLicenceReq) (*GetLicenceResp, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
@@ -781,6 +797,9 @@ func (*UnimplementedSharesServer) GetMrtDetail(context.Context, *GetMrtDetailReq
 }
 func (*UnimplementedSharesServer) GetZybHyKline(context.Context, *GetZybHyKlineReq) (*GetZybHyKlineResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetZybHyKline not implemented")
+}
+func (*UnimplementedSharesServer) GetLicence(context.Context, *GetLicenceReq) (*GetLicenceResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLicence not implemented")
 }
 
 func RegisterSharesServer(s server.Server, srv SharesServer) {
@@ -1417,6 +1436,24 @@ func _Shares_GetZybHyKline_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_GetLicence_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLicenceReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetLicence(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetLicence",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetLicence(ctx, req.(*GetLicenceReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Shares_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.shares",
 	HandlerType: (*SharesServer)(nil),
@@ -1560,6 +1597,10 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetZybHyKline",
 			Handler:    _Shares_GetZybHyKline_Handler,
+		},
+		{
+			MethodName: "GetLicence",
+			Handler:    _Shares_GetLicence_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

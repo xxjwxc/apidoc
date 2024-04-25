@@ -71,8 +71,17 @@ service shares {
     ////////////////////////////中意榜////////////////////////////////
     rpc GetZybHyKline(GetZybHyKlineReq) returns (GetZybHyKlineResp){}
     ////////////////////////////////////////////////////////////////
+
+    rpc GetLicence(GetLicenceReq) returns (GetLicenceResp){}
 }
 
+message GetLicenceReq{
+    string key = 1;
+}
+
+message GetLicenceResp{
+    string licence = 1;
+}
 
 message GetHejjwReq{
     string dayStr = 1;// 日期
