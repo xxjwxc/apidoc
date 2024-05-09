@@ -73,6 +73,22 @@ service shares {
     ////////////////////////////////////////////////////////////////
 
     rpc GetLicence(GetLicenceReq) returns (GetLicenceResp){}
+
+    ////////////////////////////////////////////////////////////////
+    ////////////////////////////北向机构榜////////////////////////////////
+    // rpc GetAllBsJgCodeName(common.Empty) returns (GetAllCodeNameResp){}
+    ////////////////////////////////////////////////////////////////
+}
+
+
+message CodeNamesInfo{
+    repeated string codes = 1;// 股票代码
+	string name = 2;// 股票名字
+}
+
+message GetAllBsJgCodeNameResp{
+    repeated CodeNameInfo list = 1;// 代码列表
+    repeated CodeNamesInfo jglist = 2;// 代码列表
 }
 
 message GetLicenceReq{
