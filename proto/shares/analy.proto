@@ -104,6 +104,7 @@ message GetAllSpResp {
     int32 token = 2;// token 数
     repeated AllSpInfo list =3;// 列表
     repeated BaseInfo baseInfo  = 4;// 基础数据
+    string wgjlUrl = 5;// 违规记录
 }
 
 message GetArticInfo{
