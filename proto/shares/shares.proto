@@ -247,6 +247,7 @@ message HejjwInfo{
      string tmStr= 1;
      string title= 2;
      string content = 3;
+     string url = 4;
 }
 
 message MrtDoc {
@@ -304,9 +305,9 @@ message GetFundKlineResp {
     repeated string times1 = 11;// 盈利预测
     repeated double ylyc = 12; // 盈利预测值
     repeated double yl = 13; // 盈利
-    repeated string times2 = 14;// 股息分红
-    repeated double gxl = 15; // 盈利预测值
-    repeated double bvps = 16; // 每股净资产
+    // repeated string times2 = 14;// 股息分红
+    // repeated double gxl = 15; // 盈利预测值
+    // repeated double bvps = 16; // 每股净资产
     repeated double mzpg = 17;// 募资，增发
     repeated double px = 18;// 派现
     string mzpxbTitle = 19;// 募资派现比例
@@ -399,6 +400,7 @@ message GetSharesKlineMoreResp {
     bool haveRq = 29;// 是否有融券
     repeated double mbj = 31;// 目标价
     repeated double gm = 32;// 公募
+    repeated double gxl = 33;// 股息率
     // repeated double zlpsKcjg = 33;// 战略配售可借出余量
     // repeated double zlpsYkcjg = 34;// 战略配售出借余量
     // repeated double zlpsCjPrice = 35;// 战略配售做空资金
@@ -518,7 +520,8 @@ message SharesInfoDetails{
     // double dea = 22;// 慢线
     double max = 23;// 当日最高点
     double min = 24;// 当日最低
-    int64 day0 = 25;// 当日0点时间戳
+    double gxl = 25;// 股息率
+    int64 day0 = 26;// 当日0点时间戳
 }
 
 
