@@ -29,6 +29,33 @@ service Weixin {
 	// ReLogin 是否要重新登录
 	rpc GetJsSign(GetJsSignReq) returns (GetJsSignResp){}
 
+	rpc H5Login(H5LoginReq) returns (H5LoginResp){}
+	rpc ClearLogin(H5LoginReq) returns (common.Empty){}// 清除登录信息
+	rpc GetMaga(GetMagaReq) returns (GetMagaResp){}// 清除登录信息
+}
+message GetMagaReq{
+	string code = 1;
+}
+message GetMagaResp{
+	repeated MagaInfo maga = 1;
+}
+
+message MagaInfo{
+	string name = 1;
+	string url = 2;
+}
+
+message H5LoginReq {
+	string code = 1;
+}
+
+message H5LoginResp {
+	string code  = 1;
+	string url = 2;
+	int32 status = 3;// 状态，0：正在登录中，1：登录成功，
+	string userId  = 4; // 用户id
+	string userName = 5;// 用户名
+	string avatarUrl = 6;// 头像地址
 }
 
 message GetJsSignReq{

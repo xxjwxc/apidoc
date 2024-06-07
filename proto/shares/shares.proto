@@ -389,6 +389,7 @@ message GetSharesKlineMoreResp {
     repeated double yhFocus = 8;// 用户情绪
     repeated double rzPercent = 9;// 融资占比
     repeated double rzPrice = 10;// 融资净流入
+    repeated double zrtNum = 11;// 转融通出借
     repeated double qx = 12;// 情绪
     repeated double gzd = 13;// 用户关注度
     repeated double dde = 17;// 散户数

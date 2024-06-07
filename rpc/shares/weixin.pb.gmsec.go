@@ -40,6 +40,9 @@ type WeixinClient interface {
 	ReLogin(ctx context.Context, in *GetUserInfoReq, opts ...grpc.CallOption) (*ReLoginResp, error)
 	// ReLogin 是否要重新登录
 	GetJsSign(ctx context.Context, in *GetJsSignReq, opts ...grpc.CallOption) (*GetJsSignResp, error)
+	H5Login(ctx context.Context, in *H5LoginReq, opts ...grpc.CallOption) (*H5LoginResp, error)
+	ClearLogin(ctx context.Context, in *H5LoginReq, opts ...grpc.CallOption) (*common.Empty, error)
+	GetMaga(ctx context.Context, in *GetMagaReq, opts ...grpc.CallOption) (*GetMagaResp, error)
 }
 
 type weixinClient struct {
@@ -151,6 +154,48 @@ func (c *weixinClient) GetJsSign(ctx context.Context, in *GetJsSignReq, opts ...
 	return out, nil
 }
 
+func (c *weixinClient) H5Login(ctx context.Context, in *H5LoginReq, opts ...grpc.CallOption) (*H5LoginResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(H5LoginResp)
+	err = conn.Invoke(ctx, "/shares.Weixin/H5Login", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *weixinClient) ClearLogin(ctx context.Context, in *H5LoginReq, opts ...grpc.CallOption) (*common.Empty, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(common.Empty)
+	err = conn.Invoke(ctx, "/shares.Weixin/ClearLogin", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *weixinClient) GetMaga(ctx context.Context, in *GetMagaReq, opts ...grpc.CallOption) (*GetMagaResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetMagaResp)
+	err = conn.Invoke(ctx, "/shares.Weixin/GetMaga", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WeixinServer is the server API for Weixin service.
 type WeixinServer interface {
 	// Oauth 微信授权获取登录信息
@@ -165,6 +210,9 @@ type WeixinServer interface {
 	ReLogin(context.Context, *GetUserInfoReq) (*ReLoginResp, error)
 	// ReLogin 是否要重新登录
 	GetJsSign(context.Context, *GetJsSignReq) (*GetJsSignResp, error)
+	H5Login(context.Context, *H5LoginReq) (*H5LoginResp, error)
+	ClearLogin(context.Context, *H5LoginReq) (*common.Empty, error)
+	GetMaga(context.Context, *GetMagaReq) (*GetMagaResp, error)
 }
 
 // UnimplementedWeixinServer can be embedded to have forward compatible implementations.
@@ -188,6 +236,15 @@ func (*UnimplementedWeixinServer) ReLogin(context.Context, *GetUserInfoReq) (*Re
 }
 func (*UnimplementedWeixinServer) GetJsSign(context.Context, *GetJsSignReq) (*GetJsSignResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetJsSign not implemented")
+}
+func (*UnimplementedWeixinServer) H5Login(context.Context, *H5LoginReq) (*H5LoginResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method H5Login not implemented")
+}
+func (*UnimplementedWeixinServer) ClearLogin(context.Context, *H5LoginReq) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ClearLogin not implemented")
+}
+func (*UnimplementedWeixinServer) GetMaga(context.Context, *GetMagaReq) (*GetMagaResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMaga not implemented")
 }
 
 func RegisterWeixinServer(s server.Server, srv WeixinServer) {
@@ -302,6 +359,60 @@ func _Weixin_GetJsSign_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Weixin_H5Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(H5LoginReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WeixinServer).H5Login(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.Weixin/H5Login",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WeixinServer).H5Login(ctx, req.(*H5LoginReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Weixin_ClearLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(H5LoginReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WeixinServer).ClearLogin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.Weixin/ClearLogin",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WeixinServer).ClearLogin(ctx, req.(*H5LoginReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Weixin_GetMaga_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMagaReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WeixinServer).GetMaga(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.Weixin/GetMaga",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WeixinServer).GetMaga(ctx, req.(*GetMagaReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Weixin_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.Weixin",
 	HandlerType: (*WeixinServer)(nil),
@@ -329,6 +440,18 @@ var _Weixin_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetJsSign",
 			Handler:    _Weixin_GetJsSign_Handler,
+		},
+		{
+			MethodName: "H5Login",
+			Handler:    _Weixin_H5Login_Handler,
+		},
+		{
+			MethodName: "ClearLogin",
+			Handler:    _Weixin_ClearLogin_Handler,
+		},
+		{
+			MethodName: "GetMaga",
+			Handler:    _Weixin_GetMaga_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
