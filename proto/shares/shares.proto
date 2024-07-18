@@ -626,6 +626,9 @@ message AddMyCodeInfo {
 
 message GetMyCodeResp{
     repeated AddMyCodeReq list = 1;
+    bool rg = 2;// 是否红涨绿跌
+    bool vip = 3;// 是否vip
+
 }
 
 message Msg{
@@ -665,6 +668,12 @@ message CodeReq{
     bool flkx = 4;// 复利k线
     bool fljx = 5;// 复利均线
 }
+
+message CodesReq{
+    repeated string codes = 1;// 股票代码
+    int64 days = 2;
+}
+
 
 message GetMyGroupResp{
     string code = 1;// 股票代码
