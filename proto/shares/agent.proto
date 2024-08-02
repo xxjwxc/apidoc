@@ -1,0 +1,67 @@
+syntax = "proto3"; // 指定proto版本
+
+package shares;     // 指定包名
+import "common/common_public.proto";
+
+option go_package = "rpc/shares"; // 指定路径
+
+// 定义shares服务
+service agent {
+    // SearchCodeInfo 获取股票详情
+    rpc SearchCodeInfo(SearchCodeInfoReq) returns (SearchCodeinfoResp) {}
+	// SearchHy 获取股票详情
+	rpc SearchHy(SearchHyReq) returns (SearchHyResp) {}
+	// SearchCode 通过类型搜索股票代码
+	rpc SearchCode(SearchCodeReq) returns (SearchCodeResp) {}
+	// Searchs 通过类型搜索股票代码
+	rpc Searchs(SearchsReq) returns (SearchCodeResp) {}
+}
+
+message SearchsReq {
+	string query = 1;// 搜索关键字
+}
+
+message SearchCodeReq{
+	int32 days = 1;// 搜索范围，单位为天，(近几天)
+	repeated string tags = 2;// 要搜索的类型标签，如：黄金上穿、北向、优选日、股息率、机会榜、复利k线
+	repeated string hys = 3;// 行业列表
+	int32 top = 4;// 返回前几个
+	// string day = 3;// 日期 yy
+}
+
+message SearchCodeResp {
+    repeated string docs = 1;// 详细数据
+}
+
+
+message SearchHyReq{
+	repeated string names = 2;// 行业名字
+}
+
+message SearchHyResp {
+    repeated string docs = 1;// 详细数据
+}
+
+message SearchCodeInfoReq{
+    repeated string codes = 1;// 股票代码
+    repeated string names = 2;// 股票名字
+    // string day = 3;// 日期 yy
+}
+
+message SearchCodeinfoResp {
+    repeated string docs = 1;// 详细数据
+}
+
+message ChatReq {
+	string msg = 1;// 搜索关键字
+}
+
+
+message ChatKv{
+	string key = 1;
+	string value = 2;
+}
+
+message ChatResp {
+	repeated ChatKv list = 1;// 详细数据
+}
