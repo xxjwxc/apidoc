@@ -29,6 +29,12 @@ message SearchCodeReq{
 	// string day = 3;// 日期 yy
 }
 
+message SearchMsgReq{
+	int32 days = 1;// 搜索范围，单位为天，(近几天)
+	repeated string names = 2;// 名字:可以是股票名字，行业板块名字，或者什么都不填(整体市场)
+	int32 top = 3;// 分析的总消息数
+}
+
 message SearchCodeResp {
     repeated string docs = 1;// 详细数据
 }
