@@ -102,6 +102,11 @@ message GetLicenceResp{
 message GetHejjwReq{
     string dayStr = 1;// 日期
 }
+message GetGlhTmReq{
+    string start = 1;
+    string end = 2;
+}
+
 message GetClmxResp{
     repeated ClmxInfo list = 1;
     bool clmx = 2;
@@ -249,6 +254,7 @@ message HejjwInfo{
      string content = 3;
      string url = 4;
      string color = 5;
+     string id = 6;
 }
 
 message MrtDoc {

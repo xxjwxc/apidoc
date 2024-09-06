@@ -162,3 +162,23 @@ message GetGdDataReq{
 message GetGdDataResp{
     repeated AllSpInfo list = 1;
 }
+
+message GetJdkpResp{
+    repeated double prices = 1;
+    repeated JdkpTagInfo tagList = 2;
+}
+
+message JdkpInfo{
+    string tm = 1;
+    double price = 2;
+    double percent = 3;
+}
+
+message JdkpTagInfo{
+    string tm = 1;
+    double start = 2;
+    double offset = 3;
+    string tag = 4;
+    string color = 5;
+    string align = 6;
+}
