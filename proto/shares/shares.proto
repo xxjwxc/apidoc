@@ -439,6 +439,13 @@ message GetHyMmaddReq {
     repeated string hyCode = 4;// 行业名字
 }
 
+message GetHyDjHjsc {
+    int64 days = 1;// 拿几天
+    double percent = 2;// 区间(起点都是0)
+    repeated string hyCode = 4;// 行业叠加
+}
+
+
 message GetHyMmaddResp {
     string title = 1;// 标题
     string day0 = 2;// 日期
@@ -615,6 +622,7 @@ message AddMyCodeResp{
 message GetMyCodeReq{
     string code = 1;// 股票代码
     bool yjzd = 2;// 一键诊断
+    repeated string codes = 3;// 股票代码
 }
 
 message AddMyCodeInfo {
