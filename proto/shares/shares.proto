@@ -452,6 +452,7 @@ message GetHyMmaddResp {
     bool vaild = 3;// 是否隐藏
     repeated string thList = 4;// 表名
     repeated SharesInfo list = 5;// 列表
+    repeated CodeNameInfo codeList = 6;// 代码列表
 }
 
 message GetMyTeamDetailReq {
