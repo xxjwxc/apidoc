@@ -507,6 +507,7 @@ message SharesInfo{
     string peg = 15;// peg信息
     string url = 16;// 地址
     string hyDj = 17;// 行业叠加
+    bool optional = 18;// 是否自选
     repeated string hyDjDoc = 26;// 行业叠加描述
 }
 
