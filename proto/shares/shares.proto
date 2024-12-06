@@ -770,3 +770,9 @@ message GetHotYzCodesResp{
     repeated TagInfo tags = 4;// 行业
     repeated TagInfo tags1 = 6;// 概念
 }
+
+message GetTopResp{
+    GetHyMmaddResp all = 1;// 列表 
+    GetHyMmaddResp dc = 2;// 列表
+    GetHyMmaddResp tx = 3;// 列表  
+}
