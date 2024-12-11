@@ -775,4 +775,5 @@ message GetTopResp{
     GetHyMmaddResp all = 1;// 列表 
     GetHyMmaddResp dc = 2;// 列表
     GetHyMmaddResp tx = 3;// 列表  
+    GetHyMmaddResp ths = 4;// 列表  
 }
