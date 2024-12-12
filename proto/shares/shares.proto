@@ -52,8 +52,8 @@ service shares {
     rpc GetHyRm(GetHyRmReq) returns (GetHyRmResp){}
     rpc GetMyTeam(common.Empty) returns (GetMyTeamResp){}// 获取我的组织列表
     rpc GetMyTeamDetail(GetMyTeamDetailReq) returns (GetMyTeamDetailResp){}// 获取我的组织详情
-    rpc GetHyMmadd(GetHyMmaddReq) returns (GetHyMmaddResp){}// 秘密加仓
-    rpc GetHyZyb(GetHyMmaddReq) returns (GetHyMmaddResp){}
+    rpc GetHyMmadd(GetHyMmaddReq) returns (TblResp){}// 秘密加仓
+    rpc GetAllZyb(GetHyMmaddReq) returns (TblResp){}
     rpc GetSharesKline(GetSharesKlineReq) returns (GetSharesKlineResp){} // 获取股票联动线数据
     rpc GetSharesKlineMore(GetSharesKlineReq) returns (GetSharesKlineMoreResp){} // 获取股票联动线数据
     rpc GetFundKline(GetSharesKlineReq) returns (GetFundKlineResp){} // 获取基金线
@@ -130,8 +130,8 @@ message GetZybHyKlineResp{
     repeated TagInfo tags1 = 4;// 标签
     double cjlmin = 5;
     double cjlmax = 6;
-    GetHyMmaddResp tsList1 = 7;
-    GetHyMmaddResp tsList2 = 8;
+    TblResp tsList1 = 7;
+    TblResp tsList2 = 8;
     string startTm = 9;// 开始时间
 }
 message GetZybYbResp{
@@ -443,16 +443,6 @@ message GetHyDjHjsc {
     int64 days = 1;// 拿几天
     double percent = 2;// 区间(起点都是0)
     repeated string hyCode = 4;// 行业叠加
-}
-
-
-message GetHyMmaddResp {
-    string title = 1;// 标题
-    string day0 = 2;// 日期
-    bool vaild = 3;// 是否隐藏
-    repeated string thList = 4;// 表名
-    repeated SharesInfo list = 5;// 列表
-    repeated CodeNameInfo codeList = 6;// 代码列表
 }
 
 message GetMyTeamDetailReq {
@@ -772,8 +762,40 @@ message GetHotYzCodesResp{
 }
 
 message GetTopResp{
-    GetHyMmaddResp all = 1;// 列表 
-    GetHyMmaddResp dc = 2;// 列表
-    GetHyMmaddResp tx = 3;// 列表  
-    GetHyMmaddResp ths = 4;// 列表  
+    TblResp all = 1;// 列表 
+    TblResp dc = 2;// 列表
+    TblResp tx = 3;// 列表  
+    TblResp ths = 4;// 列表  
+}
+
+message GetHyDjResp{
+    TblResp info = 1;
+    repeated CodeNameInfo codeList = 2;// 代码列表
+}
+
+message TblResp {
+    string title = 1;// 标题
+    string day0 = 2;// 日期
+    bool vaild = 3;// 是否隐藏
+    repeated string thList = 4;// 表名
+    repeated TrInfo list = 5;// 列表
+}
+
+// TrInfo 股票信息
+message TrInfo{
+    string code = 1;// 股票代码
+	string simpleCode =2;// 股票代码简写
+    string ext = 3;// 后缀
+	string name = 4;// 股票名字
+    double price = 5;// 当前价格
+    double percent = 6;// 百分比
+    bool optional = 7;// 是否自选
+    string td1 = 8;// 第一列(显示)
+    string td2 = 9;// 第二列(显示)
+    double data1 = 10;// 数据1
+    double data2 = 11;// 数据2
+    string color1 = 12;// 颜色1
+    string color2 = 13;// 颜色2
+    string url = 14;// 地址
+    double value1 = 20;// 临时数据
 }

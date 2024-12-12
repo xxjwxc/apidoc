@@ -72,8 +72,8 @@ type SharesClient interface {
 	GetHyRm(ctx context.Context, in *GetHyRmReq, opts ...grpc.CallOption) (*GetHyRmResp, error)
 	GetMyTeam(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetMyTeamResp, error)
 	GetMyTeamDetail(ctx context.Context, in *GetMyTeamDetailReq, opts ...grpc.CallOption) (*GetMyTeamDetailResp, error)
-	GetHyMmadd(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*GetHyMmaddResp, error)
-	GetHyZyb(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*GetHyMmaddResp, error)
+	GetHyMmadd(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*TblResp, error)
+	GetAllZyb(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*TblResp, error)
 	GetSharesKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetSharesKlineResp, error)
 	GetSharesKlineMore(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetSharesKlineMoreResp, error)
 	GetFundKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GetFundKlineResp, error)
@@ -426,13 +426,13 @@ func (c *sharesClient) GetMyTeamDetail(ctx context.Context, in *GetMyTeamDetailR
 	return out, nil
 }
 
-func (c *sharesClient) GetHyMmadd(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*GetHyMmaddResp, error) {
+func (c *sharesClient) GetHyMmadd(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*TblResp, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
 		return nil, err
 	}
 	defer conn.Close()
-	out := new(GetHyMmaddResp)
+	out := new(TblResp)
 	err = conn.Invoke(ctx, "/shares.shares/GetHyMmadd", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -440,14 +440,14 @@ func (c *sharesClient) GetHyMmadd(ctx context.Context, in *GetHyMmaddReq, opts .
 	return out, nil
 }
 
-func (c *sharesClient) GetHyZyb(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*GetHyMmaddResp, error) {
+func (c *sharesClient) GetAllZyb(ctx context.Context, in *GetHyMmaddReq, opts ...grpc.CallOption) (*TblResp, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
 		return nil, err
 	}
 	defer conn.Close()
-	out := new(GetHyMmaddResp)
-	err = conn.Invoke(ctx, "/shares.shares/GetHyZyb", in, out, opts...)
+	out := new(TblResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetAllZyb", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -668,8 +668,8 @@ type SharesServer interface {
 	GetHyRm(context.Context, *GetHyRmReq) (*GetHyRmResp, error)
 	GetMyTeam(context.Context, *common.Empty) (*GetMyTeamResp, error)
 	GetMyTeamDetail(context.Context, *GetMyTeamDetailReq) (*GetMyTeamDetailResp, error)
-	GetHyMmadd(context.Context, *GetHyMmaddReq) (*GetHyMmaddResp, error)
-	GetHyZyb(context.Context, *GetHyMmaddReq) (*GetHyMmaddResp, error)
+	GetHyMmadd(context.Context, *GetHyMmaddReq) (*TblResp, error)
+	GetAllZyb(context.Context, *GetHyMmaddReq) (*TblResp, error)
 	GetSharesKline(context.Context, *GetSharesKlineReq) (*GetSharesKlineResp, error)
 	GetSharesKlineMore(context.Context, *GetSharesKlineReq) (*GetSharesKlineMoreResp, error)
 	GetFundKline(context.Context, *GetSharesKlineReq) (*GetFundKlineResp, error)
@@ -759,11 +759,11 @@ func (*UnimplementedSharesServer) GetMyTeam(context.Context, *common.Empty) (*Ge
 func (*UnimplementedSharesServer) GetMyTeamDetail(context.Context, *GetMyTeamDetailReq) (*GetMyTeamDetailResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMyTeamDetail not implemented")
 }
-func (*UnimplementedSharesServer) GetHyMmadd(context.Context, *GetHyMmaddReq) (*GetHyMmaddResp, error) {
+func (*UnimplementedSharesServer) GetHyMmadd(context.Context, *GetHyMmaddReq) (*TblResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHyMmadd not implemented")
 }
-func (*UnimplementedSharesServer) GetHyZyb(context.Context, *GetHyMmaddReq) (*GetHyMmaddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetHyZyb not implemented")
+func (*UnimplementedSharesServer) GetAllZyb(context.Context, *GetHyMmaddReq) (*TblResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllZyb not implemented")
 }
 func (*UnimplementedSharesServer) GetSharesKline(context.Context, *GetSharesKlineReq) (*GetSharesKlineResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSharesKline not implemented")
@@ -1220,20 +1220,20 @@ func _Shares_GetHyMmadd_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Shares_GetHyZyb_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Shares_GetAllZyb_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetHyMmaddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SharesServer).GetHyZyb(ctx, in)
+		return srv.(SharesServer).GetAllZyb(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/shares.shares/GetHyZyb",
+		FullMethod: "/shares.shares/GetAllZyb",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SharesServer).GetHyZyb(ctx, req.(*GetHyMmaddReq))
+		return srv.(SharesServer).GetAllZyb(ctx, req.(*GetHyMmaddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1551,8 +1551,8 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Shares_GetHyMmadd_Handler,
 		},
 		{
-			MethodName: "GetHyZyb",
-			Handler:    _Shares_GetHyZyb_Handler,
+			MethodName: "GetAllZyb",
+			Handler:    _Shares_GetAllZyb_Handler,
 		},
 		{
 			MethodName: "GetSharesKline",
