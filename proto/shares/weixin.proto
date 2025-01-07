@@ -58,6 +58,7 @@ message H5LoginResp {
 	string avatarUrl = 6;// 头像地址
 	bool rg = 7;// 是否涨绿跌红
 	bool vip = 8;// 是否是vip
+	string sessionId = 9;// 用户sessionid 用于当前交互使用
 }
 
 message GetJsSignReq{
@@ -116,8 +117,7 @@ message GetQrcodeResp{
 
 // GetUserInfoReq 用户信息
 message GetUserInfoReq{
-	bool isDebug = 1;// 是否调试模式
-	string hexinv = 2;// 核心
+	string hexinv = 1;// 核心
 }
 
 // GetUserInfoResp 用户信息
