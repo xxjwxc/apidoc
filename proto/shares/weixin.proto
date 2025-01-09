@@ -158,4 +158,6 @@ message GetUserInfoResp{
 	 int64 overdueTime = 4;// 逾期时间点(时间戳)
 	 string msg = 5;// 消息
 	 int32 level= 6;// 等级
+	 string  nickName = 7;// 用户昵称 
+	 string  avatarURL = 8;// 用户头像地址
  }
