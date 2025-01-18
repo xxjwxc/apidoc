@@ -799,3 +799,15 @@ message TrInfo{
     string url = 14;// 地址
     double value1 = 20;// 临时数据
 }
+
+// GetCwsjResp 财务数据
+message GetCwsjResp {
+    repeated GdsInfo roe = 1;// 每股净资产收益率(%)
+   repeated GdsInfo zsr = 2; // 营业额
+   repeated GdsInfo jlr = 3; //  净利润 
+   repeated GdsInfo mll = 4; //  毛利率(%)
+   repeated GdsInfo jll = 5; // 净利率(%)
+   repeated GdsInfo xsfy = 6;// 销售费用
+   repeated GdsInfo yffy = 7;//研发费用
+
+}
