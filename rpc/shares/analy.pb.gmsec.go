@@ -31,7 +31,8 @@ type AnalyClient interface {
 	// AnalyCode 分析一直股票
 	AnalyCode(ctx context.Context, in *AnalyCodeReq, opts ...grpc.CallOption) (*AnalyCodeResp, error)
 	// GetAllSp 获取票的特色数据
-	GetAllSp(ctx context.Context, in *GetAllSpReq, opts ...grpc.CallOption) (*GetAllSpResp, error)
+	GetSp(ctx context.Context, in *GetAllSpReq, opts ...grpc.CallOption) (*GetAllSpResp, error)
+	GetBaseInfo(ctx context.Context, in *GetAllSpReq, opts ...grpc.CallOption) (*GetBaseInfoResp, error)
 	GetSampleWdj(ctx context.Context, in *GetSampleWdjReq, opts ...grpc.CallOption) (*GetSampleWdjResp, error)
 	GetGjzb(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GjzbInfo, error)
 	// GetBxNxKlineInfo 获取北向，南向当日净流入情况
@@ -79,14 +80,28 @@ func (c *analyClient) AnalyCode(ctx context.Context, in *AnalyCodeReq, opts ...g
 	return out, nil
 }
 
-func (c *analyClient) GetAllSp(ctx context.Context, in *GetAllSpReq, opts ...grpc.CallOption) (*GetAllSpResp, error) {
+func (c *analyClient) GetSp(ctx context.Context, in *GetAllSpReq, opts ...grpc.CallOption) (*GetAllSpResp, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
 		return nil, err
 	}
 	defer conn.Close()
 	out := new(GetAllSpResp)
-	err = conn.Invoke(ctx, "/shares.Analy/GetAllSp", in, out, opts...)
+	err = conn.Invoke(ctx, "/shares.Analy/GetSp", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *analyClient) GetBaseInfo(ctx context.Context, in *GetAllSpReq, opts ...grpc.CallOption) (*GetBaseInfoResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetBaseInfoResp)
+	err = conn.Invoke(ctx, "/shares.Analy/GetBaseInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -168,7 +183,8 @@ type AnalyServer interface {
 	// AnalyCode 分析一直股票
 	AnalyCode(context.Context, *AnalyCodeReq) (*AnalyCodeResp, error)
 	// GetAllSp 获取票的特色数据
-	GetAllSp(context.Context, *GetAllSpReq) (*GetAllSpResp, error)
+	GetSp(context.Context, *GetAllSpReq) (*GetAllSpResp, error)
+	GetBaseInfo(context.Context, *GetAllSpReq) (*GetBaseInfoResp, error)
 	GetSampleWdj(context.Context, *GetSampleWdjReq) (*GetSampleWdjResp, error)
 	GetGjzb(context.Context, *common.Empty) (*GjzbInfo, error)
 	// GetBxNxKlineInfo 获取北向，南向当日净流入情况
@@ -184,8 +200,11 @@ type UnimplementedAnalyServer struct {
 func (*UnimplementedAnalyServer) AnalyCode(context.Context, *AnalyCodeReq) (*AnalyCodeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AnalyCode not implemented")
 }
-func (*UnimplementedAnalyServer) GetAllSp(context.Context, *GetAllSpReq) (*GetAllSpResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAllSp not implemented")
+func (*UnimplementedAnalyServer) GetSp(context.Context, *GetAllSpReq) (*GetAllSpResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSp not implemented")
+}
+func (*UnimplementedAnalyServer) GetBaseInfo(context.Context, *GetAllSpReq) (*GetBaseInfoResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBaseInfo not implemented")
 }
 func (*UnimplementedAnalyServer) GetSampleWdj(context.Context, *GetSampleWdjReq) (*GetSampleWdjResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSampleWdj not implemented")
@@ -225,20 +244,38 @@ func _Analy_AnalyCode_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Analy_GetAllSp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Analy_GetSp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAllSpReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AnalyServer).GetAllSp(ctx, in)
+		return srv.(AnalyServer).GetSp(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/shares.Analy/GetAllSp",
+		FullMethod: "/shares.Analy/GetSp",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AnalyServer).GetAllSp(ctx, req.(*GetAllSpReq))
+		return srv.(AnalyServer).GetSp(ctx, req.(*GetAllSpReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Analy_GetBaseInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllSpReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyServer).GetBaseInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.Analy/GetBaseInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyServer).GetBaseInfo(ctx, req.(*GetAllSpReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -342,8 +379,12 @@ var _Analy_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Analy_AnalyCode_Handler,
 		},
 		{
-			MethodName: "GetAllSp",
-			Handler:    _Analy_GetAllSp_Handler,
+			MethodName: "GetSp",
+			Handler:    _Analy_GetSp_Handler,
+		},
+		{
+			MethodName: "GetBaseInfo",
+			Handler:    _Analy_GetBaseInfo_Handler,
 		},
 		{
 			MethodName: "GetSampleWdj",

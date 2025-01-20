@@ -11,7 +11,8 @@ service Analy {
     // AnalyCode 分析一直股票
     rpc AnalyCode(AnalyCodeReq) returns (AnalyCodeResp) {}
     // GetAllSp 获取票的特色数据
-    rpc GetAllSp(GetAllSpReq) returns (GetAllSpResp) {}
+    rpc GetSp(GetAllSpReq) returns (GetAllSpResp) {}
+    rpc GetBaseInfo(GetAllSpReq) returns (GetBaseInfoResp) {}
     rpc GetSampleWdj(GetSampleWdjReq) returns (GetSampleWdjResp) {}
     rpc GetGjzb(common.Empty) returns (GjzbInfo) {}
     // GetBxNxKlineInfo 获取北向，南向当日净流入情况
@@ -100,9 +101,12 @@ string color1 = 6;
 
 // GetAllSpResp 
 message GetAllSpResp {
+    repeated AllSpInfo list =3;// 列表
+}
+
+message GetBaseInfoResp {
     bool vip = 1;// 是否vip
     int32 token = 2;// token 数
-    repeated AllSpInfo list =3;// 列表
     repeated BaseInfo baseInfo  = 4;// 基础数据
     string wgjlUrl = 5;// 违规记录
 }
