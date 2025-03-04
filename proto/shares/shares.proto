@@ -246,6 +246,7 @@ message MrtInfo {
 message GetHejjwResp {
     repeated HejjwInfo list = 1;
     string dayStr = 2;
+    string next = 3;
 }
 
 message HejjwInfo{
@@ -255,6 +256,7 @@ message HejjwInfo{
      string url = 4;
      string color = 5;
      string id = 6;
+     string code = 7;
 }
 
 message MrtDoc {

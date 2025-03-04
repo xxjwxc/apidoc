@@ -1,0 +1,37 @@
+syntax = "proto3"; // 指定proto版本
+
+package shares;     // 指定包名
+import "common/common_public.proto";
+
+option go_package = "rpc/shares"; // 指定路径
+
+
+// 微信相关服务
+service Flow {
+    // CreatFlow 创建工作流
+    rpc CreatFlow(CreatFlowReq) returns (OauthResp) {}
+	// GetQrcode 获取微信二维码
+	rpc GetQrcode(GetQrcodeReq) returns (GetQrcodeResp){}
+
+	// GetUserInfo 获取用户信息
+	rpc GetUserInfo(GetUserInfoReq) returns (GetUserInfoResp){}
+
+	// UpsetUserInfo 更新用户信息
+	rpc UpsetUserInfo(UpsetUserInfoReq) returns (common.Empty) {}
+
+	// ReLogin 是否要重新登录
+	rpc ReLogin(GetUserInfoReq) returns (ReLoginResp){}
+	
+	// ReLogin 是否要重新登录
+	rpc GetJsSign(GetJsSignReq) returns (GetJsSignResp){}
+
+	rpc H5Login(H5LoginReq) returns (H5LoginResp){}
+	rpc ClearLogin(H5LoginReq) returns (common.Empty){}// 清除登录信息
+	rpc GetMaga(GetMagaReq) returns (GetMagaResp){}// 清除登录信息
+}
+
+message CreatFlowReq{
+	string code = 1;
+}
+
+
