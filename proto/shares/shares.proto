@@ -257,6 +257,7 @@ message HejjwInfo{
      string color = 5;
      string id = 6;
      string code = 7;
+     string name = 8;
 }
 
 message MrtDoc {
@@ -813,3 +814,4 @@ message GetCwsjResp {
    repeated GdsInfo yffy = 7;//研发费用
 
 }
+
