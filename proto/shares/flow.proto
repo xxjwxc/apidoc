@@ -8,30 +8,38 @@ option go_package = "rpc/shares"; // 指定路径
 
 // 微信相关服务
 service Flow {
-    // CreatFlow 创建工作流
-    rpc CreatFlow(CreatFlowReq) returns (OauthResp) {}
-	// GetQrcode 获取微信二维码
-	rpc GetQrcode(GetQrcodeReq) returns (GetQrcodeResp){}
-
-	// GetUserInfo 获取用户信息
-	rpc GetUserInfo(GetUserInfoReq) returns (GetUserInfoResp){}
-
-	// UpsetUserInfo 更新用户信息
-	rpc UpsetUserInfo(UpsetUserInfoReq) returns (common.Empty) {}
-
-	// ReLogin 是否要重新登录
-	rpc ReLogin(GetUserInfoReq) returns (ReLoginResp){}
-	
-	// ReLogin 是否要重新登录
-	rpc GetJsSign(GetJsSignReq) returns (GetJsSignResp){}
-
-	rpc H5Login(H5LoginReq) returns (H5LoginResp){}
-	rpc ClearLogin(H5LoginReq) returns (common.Empty){}// 清除登录信息
-	rpc GetMaga(GetMagaReq) returns (GetMagaResp){}// 清除登录信息
-}
-
-message CreatFlowReq{
-	string code = 1;
+	// UpdateFlow 创建/更新工作流
+	rpc UpsetFlow(UpdateFlowReq) returns (FlowInfo) {}
+	// GetFlow 获取工作流
+	rpc GetFlow(GetFlowReq) returns (GetFlowResp) {}
+	// DeleteFlow 删除工作流
+	rpc DeleteFlow(GetFlowReq) returns (common.Empty) {}
 }
 
 
+message FlowInfo{
+	string flowId = 1; // 为空创建
+	string title = 2;// 标题（不为空的时候修改）
+	string bgColor = 3;// 背景色
+	string doc	 = 4;// 描述（不为空的时候修改）
+	string logo = 5; // 图标（不为空的时候修改）
+	string data = 6;// 数据 （不为空的时候修改）
+}
+
+
+message UpdateFlowReq {
+	string flowId = 1; // 为空创建
+	string title = 2;// 标题（不为空的时候修改）
+	string doc	 = 3;// 描述（不为空的时候修改）
+	string logo = 4; // 图标（不为空的时候修改）
+	string bgColor = 5;// 背景色
+	string data = 6;// 数据 （不为空的时候修改）
+}
+
+message GetFlowReq {
+	string flowId = 1; // 为空获取所有
+}
+
+message GetFlowResp{
+	repeated FlowInfo list = 1;
+}
