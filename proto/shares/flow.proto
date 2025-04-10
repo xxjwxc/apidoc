@@ -43,3 +43,13 @@ message GetFlowReq {
 message GetFlowResp{
 	repeated FlowInfo list = 1;
 }
+
+message ChatFlowReq {
+	string flowId = 1;// 工作流id
+	string nodeId = 2;// 节点id(不为空视为测试目标节点)
+	// string data = 3;// 数据 （为空数据库找）
+}
+
+message GetTagsResp{
+	repeated string list = 1;// 提示列表
+}

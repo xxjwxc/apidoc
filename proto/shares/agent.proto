@@ -60,6 +60,7 @@ message SearchCodeinfoResp {
 
 message ChatReq {
 	string msg = 1;// 搜索关键字
+	string sessionId = 2;// 会话id
 }
 
 

@@ -144,6 +144,7 @@ message GetUserInfoResp{
 	bool k30 = 22;// 30分钟量能提醒
 	bool fljx = 23; // 复利均线
 	bool wgjl = 24;// 违规记录标记
+	bool fsyc = 25;// 分时预测
  }
  
  message UpsetUserInfoReq{

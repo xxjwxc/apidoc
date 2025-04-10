@@ -258,6 +258,7 @@ message HejjwInfo{
      string id = 6;
      string code = 7;
      string name = 8;
+     repeated string urls = 9;
 }
 
 message MrtDoc {
@@ -677,6 +678,7 @@ message CodeReq{
     int64 days = 3;
     bool flkx = 4;// 复利k线
     bool fljx = 5;// 复利均线
+    int32 num = 6;// 
 }
 
 message CodesReq{
