@@ -43,6 +43,7 @@ message GetMagaResp{
 message MagaInfo{
 	string name = 1;
 	string url = 2;
+	string icon = 3;
 }
 
 message H5LoginReq {
