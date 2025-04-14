@@ -40,9 +40,10 @@ type WeixinClient interface {
 	ReLogin(ctx context.Context, in *GetUserInfoReq, opts ...grpc.CallOption) (*ReLoginResp, error)
 	// ReLogin 是否要重新登录
 	GetJsSign(ctx context.Context, in *GetJsSignReq, opts ...grpc.CallOption) (*GetJsSignResp, error)
-	H5Login(ctx context.Context, in *H5LoginReq, opts ...grpc.CallOption) (*H5LoginResp, error)
+	// rpc H5Login(H5LoginReq) returns (H5LoginResp){}
 	ClearLogin(ctx context.Context, in *H5LoginReq, opts ...grpc.CallOption) (*common.Empty, error)
 	GetMaga(ctx context.Context, in *GetMagaReq, opts ...grpc.CallOption) (*GetMagaResp, error)
+	CheckVersion(ctx context.Context, in *CheckVersionReq, opts ...grpc.CallOption) (*CheckVersionResp, error)
 }
 
 type weixinClient struct {
@@ -154,20 +155,6 @@ func (c *weixinClient) GetJsSign(ctx context.Context, in *GetJsSignReq, opts ...
 	return out, nil
 }
 
-func (c *weixinClient) H5Login(ctx context.Context, in *H5LoginReq, opts ...grpc.CallOption) (*H5LoginResp, error) {
-	conn, err := c.cc.Next()
-	if err != nil {
-		return nil, err
-	}
-	defer conn.Close()
-	out := new(H5LoginResp)
-	err = conn.Invoke(ctx, "/shares.Weixin/H5Login", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *weixinClient) ClearLogin(ctx context.Context, in *H5LoginReq, opts ...grpc.CallOption) (*common.Empty, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
@@ -196,6 +183,20 @@ func (c *weixinClient) GetMaga(ctx context.Context, in *GetMagaReq, opts ...grpc
 	return out, nil
 }
 
+func (c *weixinClient) CheckVersion(ctx context.Context, in *CheckVersionReq, opts ...grpc.CallOption) (*CheckVersionResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(CheckVersionResp)
+	err = conn.Invoke(ctx, "/shares.Weixin/CheckVersion", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WeixinServer is the server API for Weixin service.
 type WeixinServer interface {
 	// Oauth 微信授权获取登录信息
@@ -210,9 +211,10 @@ type WeixinServer interface {
 	ReLogin(context.Context, *GetUserInfoReq) (*ReLoginResp, error)
 	// ReLogin 是否要重新登录
 	GetJsSign(context.Context, *GetJsSignReq) (*GetJsSignResp, error)
-	H5Login(context.Context, *H5LoginReq) (*H5LoginResp, error)
+	// rpc H5Login(H5LoginReq) returns (H5LoginResp){}
 	ClearLogin(context.Context, *H5LoginReq) (*common.Empty, error)
 	GetMaga(context.Context, *GetMagaReq) (*GetMagaResp, error)
+	CheckVersion(context.Context, *CheckVersionReq) (*CheckVersionResp, error)
 }
 
 // UnimplementedWeixinServer can be embedded to have forward compatible implementations.
@@ -237,14 +239,14 @@ func (*UnimplementedWeixinServer) ReLogin(context.Context, *GetUserInfoReq) (*Re
 func (*UnimplementedWeixinServer) GetJsSign(context.Context, *GetJsSignReq) (*GetJsSignResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetJsSign not implemented")
 }
-func (*UnimplementedWeixinServer) H5Login(context.Context, *H5LoginReq) (*H5LoginResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method H5Login not implemented")
-}
 func (*UnimplementedWeixinServer) ClearLogin(context.Context, *H5LoginReq) (*common.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ClearLogin not implemented")
 }
 func (*UnimplementedWeixinServer) GetMaga(context.Context, *GetMagaReq) (*GetMagaResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMaga not implemented")
+}
+func (*UnimplementedWeixinServer) CheckVersion(context.Context, *CheckVersionReq) (*CheckVersionResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckVersion not implemented")
 }
 
 func RegisterWeixinServer(s server.Server, srv WeixinServer) {
@@ -359,24 +361,6 @@ func _Weixin_GetJsSign_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Weixin_H5Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(H5LoginReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WeixinServer).H5Login(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/shares.Weixin/H5Login",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WeixinServer).H5Login(ctx, req.(*H5LoginReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Weixin_ClearLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(H5LoginReq)
 	if err := dec(in); err != nil {
@@ -413,6 +397,24 @@ func _Weixin_GetMaga_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Weixin_CheckVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckVersionReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WeixinServer).CheckVersion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.Weixin/CheckVersion",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WeixinServer).CheckVersion(ctx, req.(*CheckVersionReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Weixin_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.Weixin",
 	HandlerType: (*WeixinServer)(nil),
@@ -442,16 +444,16 @@ var _Weixin_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Weixin_GetJsSign_Handler,
 		},
 		{
-			MethodName: "H5Login",
-			Handler:    _Weixin_H5Login_Handler,
-		},
-		{
 			MethodName: "ClearLogin",
 			Handler:    _Weixin_ClearLogin_Handler,
 		},
 		{
 			MethodName: "GetMaga",
 			Handler:    _Weixin_GetMaga_Handler,
+		},
+		{
+			MethodName: "CheckVersion",
+			Handler:    _Weixin_CheckVersion_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

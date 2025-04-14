@@ -29,9 +29,11 @@ service Weixin {
 	// ReLogin 是否要重新登录
 	rpc GetJsSign(GetJsSignReq) returns (GetJsSignResp){}
 
-	rpc H5Login(H5LoginReq) returns (H5LoginResp){}
+	// rpc H5Login(H5LoginReq) returns (H5LoginResp){}
 	rpc ClearLogin(H5LoginReq) returns (common.Empty){}// 清除登录信息
 	rpc GetMaga(GetMagaReq) returns (GetMagaResp){}// 清除登录信息
+
+	rpc CheckVersion(CheckVersionReq)returns (CheckVersionResp){} // 检查版本更新
 }
 message GetMagaReq{
 	string code = 1;
@@ -162,4 +164,15 @@ message GetUserInfoResp{
 	 int32 level= 6;// 等级
 	 string  nickName = 7;// 用户昵称 
 	 string  avatarURL = 8;// 用户头像地址
+ }
+
+ message CheckVersionReq{
+	string version = 1;// 版本号
+	string platform = 2;// 平台
+ }
+
+ message CheckVersionResp{
+	string version = 1;// 版本号
+	string platform = 2;// 平台
+	string url = 3;// 地址
  }
