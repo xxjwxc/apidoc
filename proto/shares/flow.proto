@@ -47,6 +47,7 @@ message GetFlowResp{
 message ChatFlowReq {
 	string flowId = 1;// 工作流id
 	string nodeId = 2;// 节点id(不为空视为测试目标节点)
+	string isChange = 3;// 是否变更节点
 	// string data = 3;// 数据 （为空数据库找）
 }
 
