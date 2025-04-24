@@ -138,7 +138,7 @@ message GetUserInfoResp{
 	string vipOutTime = 11;// 会员过期时间
 	int32 vipLevel = 12;// vip等级
 	bool isVip = 13;// 是否是vip
-	// bool    rg   = 10;// 是否涨绿跌红
+	bool    rg   = 14;// 是否涨绿跌红
 	// bool 	only20 = 11;// 是否20日线
 	// bool 	zjjx = 15;// 最佳均线
 	// bool ylzc = 16;// 压力支撑
