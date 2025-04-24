@@ -100,6 +100,7 @@ message GetUserInfoResp{
 	repeated userInfo userList = 14;// 用户列表
 	bool vip = 15;
 	bool ylzc = 16;// 压力支撑
+	
  }
  
  message UpsetUserInfoReq{

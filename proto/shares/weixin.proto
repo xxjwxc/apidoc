@@ -134,21 +134,30 @@ message GetUserInfoResp{
 	string  country  =7; // 用户所在国家 
 	string  phone   = 8;// 用户手机号  
 	string  group =9;// 用户所在分组列表    
-	bool    rg   = 10;// 是否涨绿跌红
-	bool 	only20 = 11;// 是否20日线
-	int32   token = 13;// 可用容量 
-	bool 	zjjx = 15;// 最佳均线
-	bool ylzc = 16;// 压力支撑
-	bool dkzx = 17; // 多空专线
-	bool ggfs = 18;// 个股分时
-	bool isVip = 19;// 是否是vip
-	string vipOutTime = 20;// 会员过期时间
-	int32 vipLevel = 21;// vip等级
-	bool k30 = 22;// 30分钟量能提醒
-	bool fljx = 23; // 复利均线
-	bool wgjl = 24;// 违规记录标记
-	bool fsyc = 25;// 分时预测
+	int32   token = 10;// 可用容量 
+	string vipOutTime = 11;// 会员过期时间
+	int32 vipLevel = 12;// vip等级
+	bool isVip = 13;// 是否是vip
+	// bool    rg   = 10;// 是否涨绿跌红
+	// bool 	only20 = 11;// 是否20日线
+	// bool 	zjjx = 15;// 最佳均线
+	// bool ylzc = 16;// 压力支撑
+	// bool dkzx = 17; // 多空专线
+	// bool ggfs = 18;// 个股分时
+	// bool k30 = 22;// 30分钟量能提醒
+	// bool fljx = 23; // 复利均线
+	// bool wgjl = 24;// 违规记录标记
+	// bool fsyc = 25;// 分时预测
+	repeated UserKvInfo kvList = 26;// 用户自定义信息
  }
+
+ message UserKvInfo{
+	string key = 1;
+	string name = 2;
+	bool value = 3;
+	string activeColor = 4;// 激活颜色
+	string inactiveColor = 5; // 未激活颜色
+}
  
  message UpsetUserInfoReq{
 	 string key = 1;
