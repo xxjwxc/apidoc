@@ -173,6 +173,7 @@ message GetUserInfoResp{
 	 int32 level= 6;// 等级
 	 string  nickName = 7;// 用户昵称 
 	 string  avatarURL = 8;// 用户头像地址
+	 repeated UserKvInfo kvList = 9;// 用户自定义信息
  }
 
  message CheckVersionReq{
