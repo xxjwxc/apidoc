@@ -173,7 +173,10 @@ message GetUserInfoResp{
 	 int32 level= 6;// 等级
 	 string  nickName = 7;// 用户昵称 
 	 string  avatarURL = 8;// 用户头像地址
-	 repeated UserKvInfo kvList = 9;// 用户自定义信息
+	 bool rg = 9;// 是否涨绿跌红
+	 bool vip = 10;// 是否是vip
+	 string vipOutTime = 11;// 会员过期时间
+	 int32 vipLevel = 12;// vip等级
  }
 
  message CheckVersionReq{
