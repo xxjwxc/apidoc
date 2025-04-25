@@ -194,3 +194,9 @@ message GetUserInfoResp{
 	string code = 1;// 股票代码
 	repeated string kline = 2; // K线数据
  }
+
+ message GetVersionResp{
+	string mac = 1;// 版本号
+	string windows = 2;// 平台
+	string vscode = 3;// 地址
+ }
