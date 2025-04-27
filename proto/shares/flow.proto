@@ -51,6 +51,23 @@ message ChatFlowReq {
 	// string data = 3;// 数据 （为空数据库找）
 }
 
-message GetTagsResp{
-	repeated string list = 1;// 提示列表
+// message GetTagsResp{
+// 	repeated string list = 1;// 提示列表
+// }
+
+message GetPromptReq {
+	string tag = 1;// 标签(技能：skill，提示：tip)
+}
+
+message GetPromptResp {
+	repeated PromptInfo list = 1;// 提示列表
+	repeated string tips = 2;// 提示列表
+}
+
+message PromptInfo{
+	string key = 1;
+	string name = 2;
+	string value = 3;
+	string icon = 4;
+	string doc = 5;
 }
