@@ -52,6 +52,7 @@ message GetSampleWdjReq{
 message GetSampleWdjResp{
     double baseHeat = 1;// 基础温度
     double dayHeat = 2;// 当日温度
+    bool rg = 3;// 是否红涨绿跌
 }
 
 // AnalyCodeReq 请求
