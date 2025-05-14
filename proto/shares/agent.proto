@@ -36,7 +36,8 @@ message SearchMsgReq{
 }
 
 message SearchCodeResp {
-    repeated string docs = 1;// 详细数据
+	string msg = 1;// 提示信息
+    repeated string docs = 2;// 详细数据
 }
 
 
@@ -45,7 +46,8 @@ message SearchHyReq{
 }
 
 message SearchHyResp {
-    repeated string docs = 1;// 详细数据
+	string msg = 1;// 提示信息
+    repeated string docs = 2;// 详细数据
 }
 
 message SearchCodeInfoReq{
@@ -55,12 +57,16 @@ message SearchCodeInfoReq{
 }
 
 message SearchCodeinfoResp {
-    repeated string docs = 1;// 详细数据
+	string msg = 1;// 提示信息
+    repeated string docs = 2;// 详细数据
 }
 
 message ChatReq {
 	string msg = 1;// 搜索关键字
 	string sessionId = 2;// 会话id
+	string key = 3; // 技能id
+	bool think = 4;
+	repeated string attach = 5;// 附件
 }
 
 
