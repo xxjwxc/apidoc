@@ -808,12 +808,11 @@ message TrInfo{
 // GetCwsjResp 财务数据
 message GetCwsjResp {
     repeated GdsInfo roe = 1;// 每股净资产收益率(%)
-   repeated GdsInfo zsr = 2; // 营业额
+   repeated GdsInfo eps = 2; // 每股收益
    repeated GdsInfo jlr = 3; //  净利润 
-   repeated GdsInfo mll = 4; //  毛利率(%)
-   repeated GdsInfo jll = 5; // 净利率(%)
-   repeated GdsInfo xsfy = 6;// 销售费用
-   repeated GdsInfo yffy = 7;//研发费用
-
+   repeated GdsInfo xsjll = 4; //  销售净利润 
+   repeated GdsInfo jyxjl = 5; // 经营现金流
+   repeated GdsInfo zzc = 6;// 总资产
+   repeated GdsInfo zfz = 7;// 总负载
 }
 
