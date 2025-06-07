@@ -6785,7 +6785,7 @@ type GetCwsjResp struct {
 	Xsjll []*GdsInfo `protobuf:"bytes,4,rep,name=xsjll,proto3" json:"xsjll"` //  销售净利润
 	Jyxjl []*GdsInfo `protobuf:"bytes,5,rep,name=jyxjl,proto3" json:"jyxjl"` // 经营现金流
 	Zzc   []*GdsInfo `protobuf:"bytes,6,rep,name=zzc,proto3" json:"zzc"`     // 总资产
-	Zfz   []*GdsInfo `protobuf:"bytes,7,rep,name=zfz,proto3" json:"zfz"`     //总负载
+	Zfz   []*GdsInfo `protobuf:"bytes,7,rep,name=zfz,proto3" json:"zfz"`     // 总负载
 }
 
 func (x *GetCwsjResp) Reset() {
