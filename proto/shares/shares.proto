@@ -524,6 +524,7 @@ message SharesInfoDetails{
     double total = 15;// 流通市值
     double cap = 16;// 总市值
    //  double zljlr = 17;// 主力资金净流入
+    double lastPrice = 17;// 昨收价
     double openPrice = 18;// 开盘价
     double closePrice = 19;// 收盘价
     // double macd = 20;// macd
