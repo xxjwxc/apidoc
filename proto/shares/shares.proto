@@ -105,6 +105,7 @@ message GetHejjwReq{
 message GetGlhTmReq{
     string start = 1;
     string end = 2;
+    string tag = 3; // 默认小作文，1:投资日历
 }
 
 message GetClmxResp{
@@ -259,6 +260,7 @@ message HejjwInfo{
      string code = 7;
      string name = 8;
      repeated string urls = 9;
+     repeated TagInfo tags = 10;
 }
 
 message MrtDoc {
