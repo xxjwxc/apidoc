@@ -382,12 +382,14 @@ message GetSharesKlineResp {
     // repeated double bxzygj1 = 17;// 中银国际(香港.国家队)累计流入
     // repeated double bxzygj2 = 18;// 中银国际(香港.国家队)当日净流入
     repeated double gds = 13;// 股东数 
-    repeated GdsInfo gdsPl = 14;// 股东数(真实披露日) 
-    repeated double zybl = 15;// 质押比例 
-    repeated double zl = 16;// 主力净流入 
-    repeated double jg = 17;// 机构动向 
-    repeated double jjPercent = 18;// 公募基金占比 
-    repeated double qx = 19;// 情绪 
+    repeated double bs = 14;// 北向
+    repeated double gjd = 15;// 机构
+    repeated GdsInfo gdsPl = 16;// 股东数(真实披露日) 
+    repeated double zybl = 17;// 质押比例 
+    repeated double zl = 18;// 主力净流入 
+    repeated double jg = 19;// 机构动向 
+    repeated double jjPercent = 20;// 公募基金占比 
+    repeated double qx = 21;// 情绪 
 }
 
 message GetSharesKlineMoreResp {
