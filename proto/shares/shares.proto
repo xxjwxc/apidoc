@@ -538,6 +538,7 @@ message SharesInfoDetails{
     double min = 24;// 当日最低
     double gxl = 25;// 股息率
     int64 day0 = 26;// 当日0点时间戳
+    string addTime = 27;// 添加时间
 }
 
 
