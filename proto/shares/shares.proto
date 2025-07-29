@@ -259,8 +259,9 @@ message HejjwInfo{
      string id = 6;
      string code = 7;
      string name = 8;
-     repeated string urls = 9;
-     repeated TagInfo tags = 10;
+     int32 tp = 9; // 1: A股，2：港股
+     repeated string urls = 10;
+     repeated TagInfo tags = 11;
 }
 
 message MrtDoc {
