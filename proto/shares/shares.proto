@@ -234,7 +234,7 @@ message MrtInfo {
     bool isMy = 5;// 名人堂是否是我的
     bool haveMy = 6;// 名人堂是否有我
     double price = 7;// 可用金额
-}
+
 
 // message GetMyMrtListReq {
 //     double cost = 1;// 成本价
