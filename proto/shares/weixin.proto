@@ -139,15 +139,11 @@ message GetUserInfoResp{
 	int32 vipLevel = 12;// vip等级
 	bool isVip = 13;// 是否是vip
 	bool    rg   = 14;// 是否涨绿跌红
-	// bool 	only20 = 11;// 是否20日线
-	// bool 	zjjx = 15;// 最佳均线
-	// bool ylzc = 16;// 压力支撑
-	// bool dkzx = 17; // 多空专线
-	// bool ggfs = 18;// 个股分时
-	// bool k30 = 22;// 30分钟量能提醒
-	// bool fljx = 23; // 复利均线
-	// bool wgjl = 24;// 违规记录标记
-	// bool fsyc = 25;// 分时预测
+	bool  isCacheExpired = 15;// 缓存是否过期
+	string msg = 16; // 消息,每日签到等消息
+	string sessionId = 17; // 用户sessionid 用于当前交互使用 
+	int64 overdueTime = 18;// 逾期时间点(时间戳)
+	// bool relogin = 19;// 是否重新登录:true 重新登录
 	repeated UserKvInfo kvList = 26;// 用户自定义信息
  }
 

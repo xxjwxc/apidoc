@@ -33,7 +33,7 @@ type SharesClient interface {
 	// GetMyGroup 获取分组信息
 	GetMyGroup(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetMyGroupResp, error)
 	// UpsetGroupCode 更新分组信息
-	UpsetGroupCode(ctx context.Context, in *UpsetGroupCodeReq, opts ...grpc.CallOption) (*common.Empty, error)
+	UpsetGroupCode(ctx context.Context, in *UpsetGroupCodeReq, opts ...grpc.CallOption) (*UpsetGroupCodeResp, error)
 	// Search 搜索
 	Search(ctx context.Context, in *SearchReq, opts ...grpc.CallOption) (*SearchResp, error)
 	// Gets 精确查找代码
@@ -91,6 +91,10 @@ type SharesClient interface {
 	// //////////////////////////中意榜////////////////////////////////
 	GetZybHyKline(ctx context.Context, in *GetZybHyKlineReq, opts ...grpc.CallOption) (*GetZybHyKlineResp, error)
 	GetLicence(ctx context.Context, in *GetLicenceReq, opts ...grpc.CallOption) (*GetLicenceResp, error)
+	// //////////////////////////////////////////////////////////////////
+	// ///////////////////////////////V2/////////////////////////////////////
+	// GetTsc 获取搜索提示词
+	GetTsc(ctx context.Context, in *GetTscReq, opts ...grpc.CallOption) (*GetTscResp, error)
 }
 
 type sharesClient struct {
@@ -146,13 +150,13 @@ func (c *sharesClient) GetMyGroup(ctx context.Context, in *CodeReq, opts ...grpc
 	return out, nil
 }
 
-func (c *sharesClient) UpsetGroupCode(ctx context.Context, in *UpsetGroupCodeReq, opts ...grpc.CallOption) (*common.Empty, error) {
+func (c *sharesClient) UpsetGroupCode(ctx context.Context, in *UpsetGroupCodeReq, opts ...grpc.CallOption) (*UpsetGroupCodeResp, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
 		return nil, err
 	}
 	defer conn.Close()
-	out := new(common.Empty)
+	out := new(UpsetGroupCodeResp)
 	err = conn.Invoke(ctx, "/shares.shares/UpsetGroupCode", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -622,6 +626,20 @@ func (c *sharesClient) GetLicence(ctx context.Context, in *GetLicenceReq, opts .
 	return out, nil
 }
 
+func (c *sharesClient) GetTsc(ctx context.Context, in *GetTscReq, opts ...grpc.CallOption) (*GetTscResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetTscResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetTsc", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SharesServer is the server API for Shares service.
 type SharesServer interface {
 	// GetGroup 获取分组信息
@@ -629,7 +647,7 @@ type SharesServer interface {
 	// GetMyGroup 获取分组信息
 	GetMyGroup(context.Context, *CodeReq) (*GetMyGroupResp, error)
 	// UpsetGroupCode 更新分组信息
-	UpsetGroupCode(context.Context, *UpsetGroupCodeReq) (*common.Empty, error)
+	UpsetGroupCode(context.Context, *UpsetGroupCodeReq) (*UpsetGroupCodeResp, error)
 	// Search 搜索
 	Search(context.Context, *SearchReq) (*SearchResp, error)
 	// Gets 精确查找代码
@@ -687,6 +705,10 @@ type SharesServer interface {
 	// //////////////////////////中意榜////////////////////////////////
 	GetZybHyKline(context.Context, *GetZybHyKlineReq) (*GetZybHyKlineResp, error)
 	GetLicence(context.Context, *GetLicenceReq) (*GetLicenceResp, error)
+	// //////////////////////////////////////////////////////////////////
+	// ///////////////////////////////V2/////////////////////////////////////
+	// GetTsc 获取搜索提示词
+	GetTsc(context.Context, *GetTscReq) (*GetTscResp, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
@@ -699,7 +721,7 @@ func (*UnimplementedSharesServer) GetGroup(context.Context, *common.Empty) (*Get
 func (*UnimplementedSharesServer) GetMyGroup(context.Context, *CodeReq) (*GetMyGroupResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMyGroup not implemented")
 }
-func (*UnimplementedSharesServer) UpsetGroupCode(context.Context, *UpsetGroupCodeReq) (*common.Empty, error) {
+func (*UnimplementedSharesServer) UpsetGroupCode(context.Context, *UpsetGroupCodeReq) (*UpsetGroupCodeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpsetGroupCode not implemented")
 }
 func (*UnimplementedSharesServer) Search(context.Context, *SearchReq) (*SearchResp, error) {
@@ -800,6 +822,9 @@ func (*UnimplementedSharesServer) GetZybHyKline(context.Context, *GetZybHyKlineR
 }
 func (*UnimplementedSharesServer) GetLicence(context.Context, *GetLicenceReq) (*GetLicenceResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLicence not implemented")
+}
+func (*UnimplementedSharesServer) GetTsc(context.Context, *GetTscReq) (*GetTscResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTsc not implemented")
 }
 
 func RegisterSharesServer(s server.Server, srv SharesServer) {
@@ -1454,6 +1479,24 @@ func _Shares_GetLicence_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_GetTsc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTscReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetTsc(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetTsc",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetTsc(ctx, req.(*GetTscReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Shares_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.shares",
 	HandlerType: (*SharesServer)(nil),
@@ -1601,6 +1644,10 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetLicence",
 			Handler:    _Shares_GetLicence_Handler,
+		},
+		{
+			MethodName: "GetTsc",
+			Handler:    _Shares_GetTsc_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -13,7 +13,7 @@ service shares {
     // GetMyGroup 获取分组信息
     rpc GetMyGroup(CodeReq) returns (GetMyGroupResp) {}
     // UpsetGroupCode 更新分组信息
-    rpc UpsetGroupCode(UpsetGroupCodeReq) returns (common.Empty) {}
+    rpc UpsetGroupCode(UpsetGroupCodeReq) returns (UpsetGroupCodeResp) {}
      // Search 搜索
      rpc Search(SearchReq) returns (SearchResp) {}
      // Gets 精确查找代码
@@ -78,6 +78,12 @@ service shares {
     ////////////////////////////北向机构榜////////////////////////////////
     // rpc GetAllBsJgCodeName(common.Empty) returns (GetAllCodeNameResp){}
     ////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////
+    /////////////////////////////////V2/////////////////////////////////////
+    // GetTsc 获取搜索提示词
+    rpc GetTsc(GetTscReq) returns (GetTscResp){}
+    //////////////////////////////////////////////////////////////////
 }
 
 
@@ -234,6 +240,7 @@ message MrtInfo {
     bool isMy = 5;// 名人堂是否是我的
     bool haveMy = 6;// 名人堂是否有我
     double price = 7;// 可用金额
+}
 
 
 // message GetMyMrtListReq {
@@ -710,6 +717,10 @@ message UpsetGroupCodeReq{
     bool isAdd = 4;// 是否添加,false:删除
 }
 
+message UpsetGroupCodeResp{
+    string group = 1;// 组名，逗号隔开
+}
+
 // GetDayResp 请求结构
 message GetDayResp{
     repeated Group list = 1;// 列表 
@@ -815,7 +826,7 @@ message TrInfo{
 
 // GetCwsjResp 财务数据
 message GetCwsjResp {
-    repeated GdsInfo roe = 1;// 每股净资产收益率(%)
+   repeated GdsInfo roe = 1;// 每股净资产收益率(%)
    repeated GdsInfo eps = 2; // 每股收益
    repeated GdsInfo jlr = 3; //  净利润 
    repeated GdsInfo xsjll = 4; //  销售净利润 
@@ -824,3 +835,23 @@ message GetCwsjResp {
    repeated GdsInfo zfz = 7;// 总负载
 }
 
+
+message GetTscReq{
+    int32 tag = 1;// 标记: 0:全部,1:股票,2:行业,3:淘神
+}
+
+
+message TscInfo{
+    string code = 1;// 股票代码
+    string ext = 2;// 后缀
+    string simpleCode =3;// 股票代码简写(数字)
+	string name = 4;// 股票名字
+    string pingyin = 5; // 拼音
+   
+    bool optional = 6;// 是否自选
+
+}
+
+message GetTscResp{
+    map<string, string> obj = 2;  
+}
