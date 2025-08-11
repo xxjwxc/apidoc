@@ -55,6 +55,8 @@ type SharesClient interface {
 	//	// GetDay 每日精选
 	//	rpc GetDay(CodeReq) returns (GetDayResp){}
 	//
+	// 量价关系
+	GetLq(ctx context.Context, in *GetLqReq, opts ...grpc.CallOption) (*GetLqResp, error)
 	// GetVip vip内参
 	GetVip(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error)
 	// GetFl 放量(打版)
@@ -284,6 +286,20 @@ func (c *sharesClient) AddGroup(ctx context.Context, in *AddGroupReq, opts ...gr
 	defer conn.Close()
 	out := new(common.Empty)
 	err = conn.Invoke(ctx, "/shares.shares/AddGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sharesClient) GetLq(ctx context.Context, in *GetLqReq, opts ...grpc.CallOption) (*GetLqResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetLqResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetLq", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -669,6 +685,8 @@ type SharesServer interface {
 	//	// GetDay 每日精选
 	//	rpc GetDay(CodeReq) returns (GetDayResp){}
 	//
+	// 量价关系
+	GetLq(context.Context, *GetLqReq) (*GetLqResp, error)
 	// GetVip vip内参
 	GetVip(context.Context, *CodeReq) (*GetDayResp, error)
 	// GetFl 放量(打版)
@@ -750,6 +768,9 @@ func (*UnimplementedSharesServer) DeleteMyCode(context.Context, *DeleteMyCodeReq
 }
 func (*UnimplementedSharesServer) AddGroup(context.Context, *AddGroupReq) (*common.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddGroup not implemented")
+}
+func (*UnimplementedSharesServer) GetLq(context.Context, *GetLqReq) (*GetLqResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLq not implemented")
 }
 func (*UnimplementedSharesServer) GetVip(context.Context, *CodeReq) (*GetDayResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetVip not implemented")
@@ -1043,6 +1064,24 @@ func _Shares_AddGroup_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SharesServer).AddGroup(ctx, req.(*AddGroupReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Shares_GetLq_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLqReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetLq(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetLq",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetLq(ctx, req.(*GetLqReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1548,6 +1587,10 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddGroup",
 			Handler:    _Shares_AddGroup_Handler,
+		},
+		{
+			MethodName: "GetLq",
+			Handler:    _Shares_GetLq_Handler,
 		},
 		{
 			MethodName: "GetVip",

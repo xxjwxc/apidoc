@@ -34,6 +34,8 @@ service shares {
 	 rpc AddGroup(AddGroupReq) returns (common.Empty){}
     //  // GetDay 每日精选
 	//  rpc GetDay(CodeReq) returns (GetDayResp){}
+    // 量价关系
+    rpc GetLq(GetLqReq) returns (GetLqResp){}
     // GetVip vip内参
 	 rpc GetVip(CodeReq) returns (GetDayResp){}
     // GetFl 放量(打版)
@@ -502,18 +504,19 @@ message SharesInfo{
 	string name = 4;// 股票名字
     double price = 5;// 当前价格
     string sPrice = 6;// 价格简写
-    double jlr = 7;// 净流入
-    double percent = 8;// 百分比
-    string color = 9;// 颜色
-    string img = 10;// 图片地址
-    repeated TagInfo  hy = 11;// 行业板块
-    string mainHy = 12;// 行业板块
-    string mainHyCode = 13;// 行业板块
-    string attach = 14;// 附加
-    string peg = 15;// peg信息
-    string url = 16;// 地址
-    string hyDj = 17;// 行业叠加
-    bool optional = 18;// 是否自选
+    double change = 7;// 价格变化
+    double jlr = 8;// 净流入
+    double percent = 9;// 百分比
+    string color = 10;// 颜色
+    string img = 11;// 图片地址
+    repeated TagInfo  hy = 12;// 行业板块
+    string mainHy = 13;// 行业板块
+    string mainHyCode = 14;// 行业板块
+    string attach = 15;// 附加
+    string peg = 16;// peg信息
+    string url = 17;// 地址
+    string hyDj = 18;// 行业叠加
+    bool optional = 19;// 是否自选
     repeated string hyDjDoc = 26;// 行业叠加描述
 }
 
@@ -721,11 +724,25 @@ message UpsetGroupCodeResp{
     string group = 1;// 组名，逗号隔开
 }
 
+// GetLqReq 量价关系
+message GetLqReq{
+    string tag = 1;// 标记
+    int32 days = 2; // 天数
+}
+
+// GetLqResp 量价关系
+message GetLqResp{
+    string title = 1; // 标题
+    repeated Group list = 2;// 列表 
+}
+
+
 // GetDayResp 请求结构
 message GetDayResp{
-    repeated Group list = 1;// 列表 
-    repeated TagInfo hyTags = 2;// 行业tags
-    repeated TagInfo tsTags = 3;// 淘神tags
+    string title = 1; // 标题
+    repeated Group list = 2;// 列表 
+    repeated TagInfo hyTags = 3;// 行业tags
+    repeated TagInfo tsTags = 4;// 淘神tags
 }
 
 // GetHyCodeResp 请求结构
