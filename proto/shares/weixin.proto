@@ -139,7 +139,7 @@ message GetUserInfoResp{
 	int32 vipLevel = 12;// vip等级
 	bool isVip = 13;// 是否是vip
 	bool    rg   = 14;// 是否涨绿跌红
-	bool  isCacheExpired = 15;// 缓存是否过期
+	int64  cacheTime = 15;// 缓存时间
 	string msg = 16; // 消息,每日签到等消息
 	string sessionId = 17; // 用户sessionid 用于当前交互使用 
 	int64 overdueTime = 18;// 逾期时间点(时间戳)

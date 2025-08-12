@@ -36,12 +36,12 @@ service shares {
 	//  rpc GetDay(CodeReq) returns (GetDayResp){}
     // 量价关系
     rpc GetLq(GetLqReq) returns (GetLqResp){}
-    // GetVip vip内参
-	 rpc GetVip(CodeReq) returns (GetDayResp){}
-    // GetFl 放量(打版)
-	rpc GetFl(CodeReq) returns (GetDayResp){}
-    // GetUp 趋势
-	rpc GetUp(CodeReq) returns (GetDayResp){}
+    // // GetVip vip内参
+	//  rpc GetVip(CodeReq) returns (GetDayResp){}
+    // // GetFl 放量(打版)
+	// rpc GetFl(CodeReq) returns (GetDayResp){}
+    // // GetUp 趋势
+	// rpc GetUp(CodeReq) returns (GetDayResp){}
     // GetHejjw 获取华尔街见闻
 	rpc GetHejjw(GetHejjwReq) returns (GetHejjwResp){}
     // GetDailyCheck 每日复盘笔记
@@ -854,21 +854,41 @@ message GetCwsjResp {
 
 
 message GetTscReq{
-    int32 tag = 1;// 标记: 0:全部,1:股票,2:行业,3:淘神
+    int32 tag = 1;// 标记: 0:全部,1:个股,2:行业,3:淘神
 }
 
 
 message TscInfo{
-    string code = 1;// 股票代码
-    string ext = 2;// 后缀
-    string simpleCode =3;// 股票代码简写(数字)
-	string name = 4;// 股票名字
-    string pingyin = 5; // 拼音
-   
-    bool optional = 6;// 是否自选
-
+    string id = 1;// 股票代码
+    string type = 2;// 类型(板块，个股)
+    string ext = 3;// 后缀
+    // string sc =4;// 股票代码简写(数字)
+	string name = 5;// 股票名字
+    string py = 6; // 拼音
+    bool zx = 7;// 是否自选
 }
 
 message GetTscResp{
-    map<string, string> obj = 2;  
+    repeated TscInfo list = 1;  
+}
+
+
+message SearchTscReq{
+    string tag = 1;// 标记: 0:all,1:个股,2:行业,3:淘神
+    string query = 2; // 查询
+}
+
+message TscInfo1{
+    string id = 1;// 股票代码
+    string type = 2;// 类型(板块，个股)
+    string ext = 3;// 后缀
+    string doc = 4;
+	string name = 5;// 股票名字
+    // string py = 6; // 拼音
+    string sc = 6;
+    bool zx = 7;// 是否自选
+}
+
+message SearchTscResp{
+    repeated TscInfo1 list = 1;  
 }

@@ -57,12 +57,14 @@ type SharesClient interface {
 	//
 	// 量价关系
 	GetLq(ctx context.Context, in *GetLqReq, opts ...grpc.CallOption) (*GetLqResp, error)
-	// GetVip vip内参
-	GetVip(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error)
-	// GetFl 放量(打版)
-	GetFl(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error)
-	// GetUp 趋势
-	GetUp(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error)
+	// // GetVip vip内参
+	//
+	//	rpc GetVip(CodeReq) returns (GetDayResp){}
+	//
+	// // GetFl 放量(打版)
+	// rpc GetFl(CodeReq) returns (GetDayResp){}
+	// // GetUp 趋势
+	// rpc GetUp(CodeReq) returns (GetDayResp){}
 	// GetHejjw 获取华尔街见闻
 	GetHejjw(ctx context.Context, in *GetHejjwReq, opts ...grpc.CallOption) (*GetHejjwResp, error)
 	// GetDailyCheck 每日复盘笔记
@@ -300,48 +302,6 @@ func (c *sharesClient) GetLq(ctx context.Context, in *GetLqReq, opts ...grpc.Cal
 	defer conn.Close()
 	out := new(GetLqResp)
 	err = conn.Invoke(ctx, "/shares.shares/GetLq", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sharesClient) GetVip(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error) {
-	conn, err := c.cc.Next()
-	if err != nil {
-		return nil, err
-	}
-	defer conn.Close()
-	out := new(GetDayResp)
-	err = conn.Invoke(ctx, "/shares.shares/GetVip", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sharesClient) GetFl(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error) {
-	conn, err := c.cc.Next()
-	if err != nil {
-		return nil, err
-	}
-	defer conn.Close()
-	out := new(GetDayResp)
-	err = conn.Invoke(ctx, "/shares.shares/GetFl", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sharesClient) GetUp(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*GetDayResp, error) {
-	conn, err := c.cc.Next()
-	if err != nil {
-		return nil, err
-	}
-	defer conn.Close()
-	out := new(GetDayResp)
-	err = conn.Invoke(ctx, "/shares.shares/GetUp", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -687,12 +647,14 @@ type SharesServer interface {
 	//
 	// 量价关系
 	GetLq(context.Context, *GetLqReq) (*GetLqResp, error)
-	// GetVip vip内参
-	GetVip(context.Context, *CodeReq) (*GetDayResp, error)
-	// GetFl 放量(打版)
-	GetFl(context.Context, *CodeReq) (*GetDayResp, error)
-	// GetUp 趋势
-	GetUp(context.Context, *CodeReq) (*GetDayResp, error)
+	// // GetVip vip内参
+	//
+	//	rpc GetVip(CodeReq) returns (GetDayResp){}
+	//
+	// // GetFl 放量(打版)
+	// rpc GetFl(CodeReq) returns (GetDayResp){}
+	// // GetUp 趋势
+	// rpc GetUp(CodeReq) returns (GetDayResp){}
 	// GetHejjw 获取华尔街见闻
 	GetHejjw(context.Context, *GetHejjwReq) (*GetHejjwResp, error)
 	// GetDailyCheck 每日复盘笔记
@@ -771,15 +733,6 @@ func (*UnimplementedSharesServer) AddGroup(context.Context, *AddGroupReq) (*comm
 }
 func (*UnimplementedSharesServer) GetLq(context.Context, *GetLqReq) (*GetLqResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLq not implemented")
-}
-func (*UnimplementedSharesServer) GetVip(context.Context, *CodeReq) (*GetDayResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetVip not implemented")
-}
-func (*UnimplementedSharesServer) GetFl(context.Context, *CodeReq) (*GetDayResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetFl not implemented")
-}
-func (*UnimplementedSharesServer) GetUp(context.Context, *CodeReq) (*GetDayResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUp not implemented")
 }
 func (*UnimplementedSharesServer) GetHejjw(context.Context, *GetHejjwReq) (*GetHejjwResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHejjw not implemented")
@@ -1082,60 +1035,6 @@ func _Shares_GetLq_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SharesServer).GetLq(ctx, req.(*GetLqReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Shares_GetVip_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CodeReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SharesServer).GetVip(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/shares.shares/GetVip",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SharesServer).GetVip(ctx, req.(*CodeReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Shares_GetFl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CodeReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SharesServer).GetFl(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/shares.shares/GetFl",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SharesServer).GetFl(ctx, req.(*CodeReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Shares_GetUp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CodeReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SharesServer).GetUp(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/shares.shares/GetUp",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SharesServer).GetUp(ctx, req.(*CodeReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1591,18 +1490,6 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetLq",
 			Handler:    _Shares_GetLq_Handler,
-		},
-		{
-			MethodName: "GetVip",
-			Handler:    _Shares_GetVip_Handler,
-		},
-		{
-			MethodName: "GetFl",
-			Handler:    _Shares_GetFl_Handler,
-		},
-		{
-			MethodName: "GetUp",
-			Handler:    _Shares_GetUp_Handler,
 		},
 		{
 			MethodName: "GetHejjw",
