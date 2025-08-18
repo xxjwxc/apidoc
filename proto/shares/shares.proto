@@ -109,11 +109,14 @@ message GetLicenceResp{
 
 message GetHejjwReq{
     string dayStr = 1;// 日期
+    string tag = 2; // jrkx:今日快讯，rdkp:热点看盘
+    string tp = 3; // a:a股，h:港股
 }
 message GetGlhTmReq{
     string start = 1;
     string end = 2;
     string tag = 3; // 默认小作文，1:投资日历
+    string tp = 4; // a:a股，h:港股
 }
 
 message GetClmxResp{
@@ -268,7 +271,7 @@ message HejjwInfo{
      string id = 6;
      string code = 7;
      string name = 8;
-     int32 tp = 9; // 1: A股，2：港股
+     string tp = 9; // 1: A股，2：港股
      repeated string urls = 10;
      repeated TagInfo tags = 11;
 }
