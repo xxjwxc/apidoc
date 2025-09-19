@@ -111,7 +111,9 @@ message GetHejjwReq{
     string dayStr = 1;// 日期
     string tag = 2; // jrkx:今日快讯，rdkp:热点看盘
     string tp = 3; // a:a股，h:港股
+    string end = 4; // 下一页标记
 }
+
 message GetGlhTmReq{
     string start = 1;
     string end = 2;
@@ -184,7 +186,24 @@ message GetMrtDetailReq{
 message GetMrtDetailResp{
     MrtInfo info = 1;// mrt信息
     repeated MrtLog docs = 2;// 操作列表
-    repeated SharesInfo list = 3;// 持有列表
+    repeated MrtSharesInfo list = 3;// 持有列表
+}
+
+// MrtInfo 股票信息
+message MrtSharesInfo{
+    string code = 1;// 股票代码
+	string simpleCode =2;// 股票代码简写
+    string ext = 3;// 后缀
+	string name = 4;// 股票名字
+    double price = 5;// 当前价格
+    double change = 7;// 价格变化
+    double percent = 9;// 百分比
+    string color = 10;// 颜色
+    string url = 11;// 地址
+    double cost = 12; // 成本
+    double num = 13; // 持有数量
+    double profit = 14;// 当日收益
+    string attach = 15; // 附加信息
 }
 // message MrtCode {// 持有列表
 //     string code = 1;// 股票代码
@@ -245,6 +264,7 @@ message MrtInfo {
     bool isMy = 5;// 名人堂是否是我的
     bool haveMy = 6;// 名人堂是否有我
     double price = 7;// 可用金额
+    double total = 8; // 总金额
 }
 
 
