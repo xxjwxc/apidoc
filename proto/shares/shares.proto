@@ -501,6 +501,7 @@ message GetMyTeamResp{
 
 message GetHyRmReq {
     int32 days = 1;// 几天
+    int32 num = 2; // 显示多少条，默认8条
 }
 
 message GetHyRmResp {
