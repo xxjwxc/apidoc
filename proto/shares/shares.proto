@@ -620,6 +620,7 @@ message CodeNameInfo{
     string code = 1;// 股票代码
 	string name = 2;// 股票名字
     string sName = 3;// 股票简写
+    string ext = 4;// 后缀
 }
 
 message GetAllCodeNameResp{

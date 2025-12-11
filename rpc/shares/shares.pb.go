@@ -4615,6 +4615,7 @@ type CodeNameInfo struct {
 	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code"`   // 股票代码
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`   // 股票名字
 	SName         string                 `protobuf:"bytes,3,opt,name=sName,proto3" json:"sName"` // 股票简写
+	Ext           string                 `protobuf:"bytes,4,opt,name=ext,proto3" json:"ext"`     // 后缀
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4666,6 +4667,13 @@ func (x *CodeNameInfo) GetName() string {
 func (x *CodeNameInfo) GetSName() string {
 	if x != nil {
 		return x.SName
+	}
+	return ""
+}
+
+func (x *CodeNameInfo) GetExt() string {
+	if x != nil {
+		return x.Ext
 	}
 	return ""
 }
@@ -7768,11 +7776,12 @@ const file_shares_shares_proto_rawDesc = "" +
 	"\apercent\x18\x06 \x01(\x01R\apercent\x12\x14\n" +
 	"\x05color\x18\a \x01(\tR\x05color\"8\n" +
 	"\bGetsResp\x12,\n" +
-	"\x04list\x18\x02 \x03(\v2\x18.shares.SimpleSharesInfoR\x04list\"L\n" +
+	"\x04list\x18\x02 \x03(\v2\x18.shares.SimpleSharesInfoR\x04list\"^\n" +
 	"\fCodeNameInfo\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
-	"\x05sName\x18\x03 \x01(\tR\x05sName\">\n" +
+	"\x05sName\x18\x03 \x01(\tR\x05sName\x12\x10\n" +
+	"\x03ext\x18\x04 \x01(\tR\x03ext\">\n" +
 	"\x12GetAllCodeNameResp\x12(\n" +
 	"\x04list\x18\x01 \x03(\v2\x14.shares.CodeNameInfoR\x04list\"\xe4\x03\n" +
 	"\fAddMyCodeReq\x12\x12\n" +
