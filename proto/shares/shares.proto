@@ -90,13 +90,13 @@ service shares {
 
 
 message CodeNamesInfo{
-    repeated string codes = 1;// 股票代码
-	string name = 2;// 股票名字
+    repeated string codes = 1; // 股票代码
+	string name = 2; // 股票名字
 }
 
 message GetAllBsJgCodeNameResp{
-    repeated CodeNameInfo list = 1;// 代码列表
-    repeated CodeNamesInfo jglist = 2;// 代码列表
+    repeated CodeNameInfo list = 1; // 代码列表
+    repeated CodeNamesInfo jglist = 2; // 代码列表
 }
 
 message GetLicenceReq{
@@ -108,7 +108,7 @@ message GetLicenceResp{
 }
 
 message GetHejjwReq{
-    string dayStr = 1;// 日期
+    string dayStr = 1; // 日期
     string tag = 2; // jrkx:今日快讯，rdkp:热点看盘
     string tp = 3; // a:a股，h:港股
     string end = 4; // 下一页标记
@@ -126,83 +126,83 @@ message GetClmxResp{
     bool clmx = 2;
 }
 message ClmxInfo{
-    string name = 1;// 
-    string doc = 2;//
-    string url = 3;//
-    bool have = 4;// 是否有权限
+    string name = 1; //
+    string doc = 2; //
+    string url = 3; //
+    bool have = 4; // 是否有权限
 }
 
 message GetZybHyKlineReq {
-    int32 days =1;// 天数
+    int32 days =1; // 天数
     bool showCd = 2;
 }
 
 message GetZybHyKlineResp{
-    repeated string times = 1;// x轴数据
-    repeated ZybHyDailyInfo list = 2;// 列表
-    repeated TagInfo tags = 3;// 标签
-    repeated TagInfo tags1 = 4;// 标签
+    repeated string times = 1; // x轴数据
+    repeated ZybHyDailyInfo list = 2; // 列表
+    repeated TagInfo tags = 3; // 标签
+    repeated TagInfo tags1 = 4; // 标签
     double cjlmin = 5;
     double cjlmax = 6;
     TblResp tsList1 = 7;
     TblResp tsList2 = 8;
-    string startTm = 9;// 开始时间
+    string startTm = 9; // 开始时间
 }
 message GetZybYbResp{
-    repeated ZybHyYbInfo list = 1;// 列表
-    string startTm = 2;// 开始时间
+    repeated ZybHyYbInfo list = 1; // 列表
+    string startTm = 2; // 开始时间
     double cjlmin = 3;
     double cjlmax = 4;
 }
 
 message ZybHyYbInfo{
-    string name = 1;// 行业名字
-    string code = 2;// 行业代码
-    repeated double cjl = 3;// 数据集
+    string name = 1; // 行业名字
+    string code = 2; // 行业代码
+    repeated double cjl = 3; // 数据集
 }
 
 message TagInfo{
-    string name =1;// 标签名字
-    string color = 2;// 标签颜色
-    double percent = 3;// 涨跌幅
-    string url = 4;//地址
+    string name =1; // 标签名字
+    string color = 2; // 标签颜色
+    double percent = 3; // 涨跌幅
+    string url = 4; //地址
     string doc = 5;
     string code = 6;
 }
 
 message ZybHyDailyInfo{
-    string name = 1;// 行业名字
-    string code = 2;// 行业代码
+    string name = 1; // 行业名字
+    string code = 2; // 行业代码
     bool up = 3;
 
-    repeated double data = 6;// 数据
-    repeated double cjl = 7;// 数据集
+    repeated double data = 6; // 数据
+    repeated double cjl = 7; // 数据集
 }
 
 message GetMrtDetailReq{
-    string mrt = 1;// id
+    string mrt = 1; // id
 }
 
 message GetMrtDetailResp{
-    MrtInfo info = 1;// mrt信息
-    repeated MrtLog docs = 2;// 操作列表
-    repeated MrtSharesInfo list = 3;// 持有列表
+    MrtInfo info = 1; // mrt信息
+    repeated MrtLog docs = 2; // 操作列表
+    repeated MrtSharesInfo list = 3; // 持有列表
 }
 
 // MrtInfo 股票信息
 message MrtSharesInfo{
-    string code = 1;// 股票代码
-	string simpleCode =2;// 股票代码简写
-    string ext = 3;// 后缀
-	string name = 4;// 股票名字
-    double price = 5;// 当前价格
-    double change = 7;// 价格变化
-    double percent = 9;// 百分比
-    string color = 10;// 颜色
-    string url = 11;// 地址
+    string code = 1; // 股票代码
+	string simpleCode =2; // 股票代码简写
+    string ext = 3; // 后缀
+	string name = 4; // 股票名字
+    double price = 5; // 当前价格
+    double change = 7; // 价格变化
+    double percent = 9; // 百分比
+    string color = 10; // 颜色
+    string url = 11; // 地址
     double cost = 12; // 成本
     double num = 13; // 持有数量
-    double profit = 14;// 当日收益
+    double profit = 14; // 当日收益
     string attach = 15; // 附加信息
 }
 // message MrtCode {// 持有列表
@@ -213,57 +213,57 @@ message MrtSharesInfo{
 //     SharesInfo info = 6;
 // }
 message MrtLog {
-    string mrt = 1;// id
-    string code = 2;// 股票代码
-    string name = 3;// 股票名字
-    string doc = 4;// 描述
+    string mrt = 1; // id
+    string code = 2; // 股票代码
+    string name = 3; // 股票名字
+    string doc = 4; // 描述
    
-    int32 flag = 5;// 标记
-    double price = 6;// 价格
-    double num = 7;// 操作数量
-    string tm = 8;// 操作时间
-    string sdoc = 9;// 简要描述
-    string tag = 10;// 标记
-    string color = 11;// 颜色
+    int32 flag = 5; // 标记
+    double price = 6; // 价格
+    double num = 7; // 操作数量
+    string tm = 8; // 操作时间
+    string sdoc = 9; // 简要描述
+    string tag = 10; // 标记
+    string color = 11; // 颜色
 }
 
 message UpsetMrtCodeReq{
-    string code = 1;// 代码
-    string mrt = 2;// mrt
-    int32 tag = 3;// 卖出/买入(-1/1)
-    double num = 4;// 操作数量
-    double price = 5;// 操作价格 
-    string doc = 6;// 描述
+    string code = 1; // 代码
+    string mrt = 2; // mrt
+    int32 tag = 3; // 卖出/买入(-1/1)
+    double num = 4; // 操作数量
+    double price = 5; // 操作价格
+    string doc = 6; // 描述
 }
 
 message GetMrtCodeReq{
     string code = 1;
-    string mrt = 2;// id
+    string mrt = 2; // id
 }
 
 message GetMrtCodeResp{
-    double cost = 1;// 成本价
-    double num = 2;// 持有数量
-    double price = 3;// 手上还有多少钱
-    string mrtName = 4;// 名人堂名字
+    double cost = 1; // 成本价
+    double num = 2; // 持有数量
+    double price = 3; // 手上还有多少钱
+    string mrtName = 4; // 名人堂名字
 }
 
 message GetMrtListReq{
-    bool isMy = 1;// 是否只拉取我的
+    bool isMy = 1; // 是否只拉取我的
 }
 
 message GetMrtListResp{
-    repeated MrtInfo list = 1;// 列表
+    repeated MrtInfo list = 1; // 列表
 }
 
 message MrtInfo {
-    string mrt = 1;// id
-    string name   = 2;// 名人堂名字
-    repeated MrtDoc doc    =3;// 名人堂描述
-    repeated string openids = 4;// 名人堂所属openid
-    bool isMy = 5;// 名人堂是否是我的
-    bool haveMy = 6;// 名人堂是否有我
-    double price = 7;// 可用金额
+    string mrt = 1; // id
+    string name   = 2; // 名人堂名字
+    repeated MrtDoc doc    =3; // 名人堂描述
+    repeated string openids = 4; // 名人堂所属openid
+    bool isMy = 5; // 名人堂是否是我的
+    bool haveMy = 6; // 名人堂是否有我
+    double price = 7; // 可用金额
     double total = 8; // 总金额
 }
 
@@ -303,34 +303,34 @@ message MrtDoc {
 }
 
 message KlineInfo {
-    repeated string times = 1;// x轴数据
-    repeated double data1 = 2;// 数据
-    repeated double data2 = 3;// 数据
-    repeated double data3 = 4;// 数据
+    repeated string times = 1; // x轴数据
+    repeated double data1 = 2; // 数据
+    repeated double data2 = 3; // 数据
+    repeated double data3 = 4; // 数据
 }
 
 message GetYyqReq {
-    int32 days =2;// 天数
+    int32 days =2; // 天数
 }
 
 message GetYyqResp {
-    string colorr = 1;// 红的颜色
-    string colorg  = 2;// 绿的颜色 
-    KlineInfo bx= 11;// 北向
-    KlineInfo rzrq= 12;// 融资融券
-    KlineInfo mlf= 13;// 逆回购
+    string colorr = 1; // 红的颜色
+    string colorg  = 2; // 绿的颜色
+    KlineInfo bx= 11; // 北向
+    KlineInfo rzrq= 12; // 融资融券
+    KlineInfo mlf= 13; // 逆回购
     KlineInfo cpi= 14;
     KlineInfo ppi= 15;
     KlineInfo gdp= 16;
     KlineInfo pmi= 17;
-    KlineInfo qyjqzs= 18;// 企业景气指数
-    KlineInfo gyzjz= 19;// 工业增加值
-    KlineInfo xfzxx= 20;// 消费者信心指数
+    KlineInfo qyjqzs= 18; // 企业景气指数
+    KlineInfo gyzjz= 19; // 工业增加值
+    KlineInfo xfzxx= 20; // 消费者信心指数
     KlineInfo m2= 21;
-    KlineInfo hgjck= 22;// 海关进出口
+    KlineInfo hgjck= 22; // 海关进出口
   //  KlineInfo gpkhsj= 23;// 股票开户数据
-    KlineInfo fdi= 24;// 外商直接投资数据(FDI)
-    KlineInfo xzxd= 25;// 新增信贷数据
+    KlineInfo fdi= 24; // 外商直接投资数据(FDI)
+    KlineInfo xzxd= 25; // 新增信贷数据
     string left = 26;
     string right = 27;
    // KlineInfo zlps = 28;// 战略配售
@@ -338,9 +338,9 @@ message GetYyqResp {
 }
 
 message GetFundKlineResp {
-    repeated string times = 1;// x轴数据
-    string colorr = 2;// 红的颜色
-    string colorg  = 3;// 绿的颜色
+    repeated string times = 1; // x轴数据
+    string colorr = 2; // 红的颜色
+    string colorg  = 3; // 绿的颜色
     repeated double gjhj = 4; // 股基合计
     repeated double gpx = 5; // 股票型
     repeated double hhx = 6; // 混合型
@@ -348,21 +348,21 @@ message GetFundKlineResp {
     repeated double qdii = 8; // QDII
     repeated double lof = 9; 
     repeated double fof = 10;
-    repeated string times1 = 11;// 盈利预测
+    repeated string times1 = 11; // 盈利预测
     repeated double ylyc = 12; // 盈利预测值
     repeated double yl = 13; // 盈利
     // repeated string times2 = 14;// 股息分红
     // repeated double gxl = 15; // 盈利预测值
     // repeated double bvps = 16; // 每股净资产
-    repeated double mzpg = 17;// 募资，增发
-    repeated double px = 18;// 派现
-    string mzpxbTitle = 19;// 募资派现比例
+    repeated double mzpg = 17; // 募资，增发
+    repeated double px = 18; // 派现
+    string mzpxbTitle = 19; // 募资派现比例
 }
 
 message GetJgKlineResp {
-    repeated string times = 1;// x轴数据
-    string colorr = 2;// 红的颜色
-    string colorg  = 3;// 绿的颜色
+    repeated string times = 1; // x轴数据
+    string colorr = 2; // 红的颜色
+    string colorg  = 3; // 绿的颜色
     repeated double jghz = 4; // 机构汇总
     repeated double jj = 5; // 基金
     repeated double qfii = 6; // QFII
@@ -370,7 +370,7 @@ message GetJgKlineResp {
     repeated double bx = 8; // 保险
     repeated double xt = 9; // 信托
     repeated double qs = 10; // 券商
-    repeated double qt = 11;// 其他
+    repeated double qt = 11; // 其他
 }
 
 
@@ -380,76 +380,76 @@ message EchartsKeyLineInfo{
 }
 
 message GetHotHyNameReq {
-    repeated string names = 1;// 行业名字
-    int32 days =2;// 天数
+    repeated string names = 1; // 行业名字
+    int32 days =2; // 天数
 }
 
 message GetHotHyNameResp{
-    repeated HyCodeInfo list = 1;// 行业名字
+    repeated HyCodeInfo list = 1; // 行业名字
 }
 
 message HyCodeInfo {
-    string name = 1;// 行业名字
-    int32 num = 2;// 次数
+    string name = 1; // 行业名字
+    int32 num = 2; // 次数
 }
 
 message GetSharesKlineReq {
-    string code = 1;// 股票代码
-    int64 month = 2;// 拿几月
+    string code = 1; // 股票代码
+    int64 month = 2; // 拿几月
 }
 
 message GetSharesKlineResp {
-    string colorr = 1;// 红的颜色 
-    string colorg  = 2;// 绿的颜色 
-    int32 level = 3;// 等级
-    repeated string times = 4;// x轴数据 
-    repeated double kLine = 5;// 数据 
-    repeated GdsInfo bxPercent = 6;// 北上占比  
+    string colorr = 1; // 红的颜色
+    string colorg  = 2; // 绿的颜色
+    int32 level = 3; // 等级
+    repeated string times = 4; // x轴数据
+    repeated double kLine = 5; // 数据
+    repeated GdsInfo bxPercent = 6; // 北上占比
 
-    repeated double rzPercent = 7;// 融资占比
-    repeated double rzPrice = 8;// 融资净流入
-    repeated double gm = 9;// 公募
-    repeated GdsInfo fyyx = 10;// 飞鹰优选  
-    repeated double zljk = 11;// 主力真吸货(主力清洗之出货) 
-    repeated double fx = 12;// 风险(>75 风险较大，<10 风险较小) 
+    repeated double rzPercent = 7; // 融资占比
+    repeated double rzPrice = 8; // 融资净流入
+    repeated double gm = 9; // 公募
+    repeated GdsInfo fyyx = 10; // 飞鹰优选
+    repeated double zljk = 11; // 主力真吸货(主力清洗之出货)
+    repeated double fx = 12; // 风险(>75 风险较大，<10 风险较小)
     // repeated double bxzygj1 = 17;// 中银国际(香港.国家队)累计流入
     // repeated double bxzygj2 = 18;// 中银国际(香港.国家队)当日净流入
-    repeated double gds = 13;// 股东数 
-    repeated double bs = 14;// 北向
-    repeated double gjd = 15;// 机构
-    repeated GdsInfo gdsPl = 16;// 股东数(真实披露日) 
-    repeated double zybl = 17;// 质押比例 
-    repeated double zl = 18;// 主力净流入 
-    repeated double jg = 19;// 机构动向 
-    repeated double jjPercent = 20;// 公募基金占比 
-    repeated double qx = 21;// 情绪 
+    repeated double gds = 13; // 股东数
+    repeated double bs = 14; // 北向
+    repeated double gjd = 15; // 机构
+    repeated GdsInfo gdsPl = 16; // 股东数(真实披露日)
+    repeated double zybl = 17; // 质押比例
+    repeated double zl = 18; // 主力净流入
+    repeated double jg = 19; // 机构动向
+    repeated double jjPercent = 20; // 公募基金占比
+    repeated double qx = 21; // 情绪
 }
 
 message GetSharesKlineMoreResp {
-    repeated string times = 1;// x轴数据 -
-    repeated double kLine = 2;// 数据 - 
-    string colorr = 3;// 红的颜色 -
-    string colorg  = 4;// 绿的颜色 -
-    int32 level = 5;// 等级
+    repeated string times = 1; // x轴数据 -
+    repeated double kLine = 2; // 数据 -
+    string colorr = 3; // 红的颜色 -
+    string colorg  = 4; // 绿的颜色 -
+    int32 level = 5; // 等级
     // repeated double bxjlr = 6;// 北向净流入
     // repeated double bxjlr5 = 7;// 北向净流入
     // repeated double zlPercent = 6;// 股基占比
-    repeated double yhFocus = 8;// 用户情绪
-    repeated double rzPercent = 9;// 融资占比
-    repeated double rzPrice = 10;// 融资净流入
-    repeated double zrtNum = 11;// 转融通出借
-    repeated double qx = 12;// 情绪
-    repeated double gzd = 13;// 用户关注度
-    repeated double dde = 17;// 散户数
+    repeated double yhFocus = 8; // 用户情绪
+    repeated double rzPercent = 9; // 融资占比
+    repeated double rzPrice = 10; // 融资净流入
+    repeated double zrtNum = 11; // 转融通出借
+    repeated double qx = 12; // 情绪
+    repeated double gzd = 13; // 用户关注度
+    repeated double dde = 17; // 散户数
     // bool haveBx = 18;// 是否有北向
-    bool haveRz = 19;// 是否有融资
-    repeated double ddejlr = 21;// 散户数
+    bool haveRz = 19; // 是否有融资
+    repeated double ddejlr = 21; // 散户数
     // repeated double chip = 24;// 筹码集中度(90%)
-    repeated double rqPrice = 28;// 融券净流入
-    bool haveRq = 29;// 是否有融券
-    repeated double mbj = 31;// 目标价
-    repeated double gm = 32;// 公募
-    repeated double gxl = 33;// 股息率
+    repeated double rqPrice = 28; // 融券净流入
+    bool haveRq = 29; // 是否有融券
+    repeated double mbj = 31; // 目标价
+    repeated double gm = 32; // 公募
+    repeated double gxl = 33; // 股息率
     // repeated double zlpsKcjg = 33;// 战略配售可借出余量
     // repeated double zlpsYkcjg = 34;// 战略配售出借余量
     // repeated double zlpsCjPrice = 35;// 战略配售做空资金
@@ -462,28 +462,28 @@ message GdsInfo {
 
 // 估值及pe
 message GZPeResp {
-    repeated string times = 1;// x轴数据
-    repeated double kLine = 2;// 数据
-    repeated double pe0 = 3;// pe1
-    repeated double pe1 = 4;// pe2
-    repeated double pe2 = 5;// pe3
-    repeated double pe3 = 6;// pe4
-    repeated double pe4 = 7;// pe5
-    repeated string names = 12;// 名字
+    repeated string times = 1; // x轴数据
+    repeated double kLine = 2; // 数据
+    repeated double pe0 = 3; // pe1
+    repeated double pe1 = 4; // pe2
+    repeated double pe2 = 5; // pe3
+    repeated double pe3 = 6; // pe4
+    repeated double pe4 = 7; // pe5
+    repeated string names = 12; // 名字
     bool have = 13;
 }
 
 message GetHyMmaddReq {
-    int32 tag = 1;// 类型 0:机构,1:北上,2:公募
-    int64 days = 2;// 拿几天
-    string code = 3;// 行业名字
-    repeated string hyCode = 4;// 行业名字
+    int32 tag = 1; // 类型 0:机构,1:北上,2:公募
+    int64 days = 2; // 拿几天
+    string code = 3; // 行业名字
+    repeated string hyCode = 4; // 行业名字
 }
 
 message GetHyDjHjsc {
-    int64 days = 1;// 拿几天
-    double percent = 2;// 区间(起点都是0)
-    repeated string hyCode = 4;// 行业叠加
+    int64 days = 1; // 拿几天
+    double percent = 2; // 区间(起点都是0)
+    repeated string hyCode = 4; // 行业叠加
 }
 
 message GetMyTeamDetailReq {
@@ -491,8 +491,8 @@ message GetMyTeamDetailReq {
 }
 
 message GetMyTeamDetailResp{
-    string name = 1;// 分组名
-    repeated SharesInfo list = 2;// 列表
+    string name = 1; // 分组名
+    repeated SharesInfo list = 2; // 列表
 }
 
 message GetMyTeamResp{
@@ -500,280 +500,282 @@ message GetMyTeamResp{
 }
 
 message GetHyRmReq {
-    int32 days = 1;// 几天
+    int32 days = 1; // 几天
     int32 num = 2; // 显示多少条，默认8条
 }
 
 message GetHyRmResp {
-   repeated common.SimpSharInfo list = 1;// 列表
+   repeated common.SimpSharInfo list = 1; // 列表
 }
 
 message DailyCheckInfo{
-    string dayStr = 1;// 日期
-    string title = 2;// 标题
-    string digest = 3;// 简要描述
-    string img = 4;// 图片地址
-    string url = 5;// 连接地址
+    string dayStr = 1; // 日期
+    string title = 2; // 标题
+    string digest = 3; // 简要描述
+    string img = 4; // 图片地址
+    string url = 5; // 连接地址
 }
 
 message GetDailyCheckResp{
-    repeated DailyCheckInfo list = 1;// 每日复盘笔记
+    repeated DailyCheckInfo list = 1; // 每日复盘笔记
 }
 
 // SharesInfo 股票信息
 message SharesInfo{
-    string code = 1;// 股票代码
-	string simpleCode =2;// 股票代码简写
-    string ext = 3;// 后缀
-	string name = 4;// 股票名字
-    double price = 5;// 当前价格
-    string sPrice = 6;// 价格简写
-    double change = 7;// 价格变化
-    double jlr = 8;// 净流入
-    double percent = 9;// 百分比
-    string color = 10;// 颜色
-    string img = 11;// 图片地址
-    repeated TagInfo  hy = 12;// 行业板块
-    string mainHy = 13;// 行业板块
-    string mainHyCode = 14;// 行业板块
-    string attach = 15;// 附加
-    string peg = 16;// peg信息
-    string url = 17;// 地址
-    string hyDj = 18;// 行业叠加
-    bool optional = 19;// 是否自选
-    repeated string hyDjDoc = 26;// 行业叠加描述
+    string code = 1; // 股票代码
+	string simpleCode =2; // 股票代码简写
+    string ext = 3; // 后缀
+	string name = 4; // 股票名字
+    double price = 5; // 当前价格
+    string sPrice = 6; // 价格简写
+    double change = 7; // 价格变化
+    double jlr = 8; // 净流入
+    double percent = 9; // 百分比
+    string color = 10; // 颜色
+    string img = 11; // 图片地址
+    repeated TagInfo  hy = 12; // 行业板块
+    string mainHy = 13; // 行业板块
+    string mainHyCode = 14; // 行业板块
+    string attach = 15; // 附加
+    // string peg = 16; // peg信息
+    string url = 17; // 地址
+    string hyDj = 18; // 行业叠加
+    bool optional = 19; // 是否自选
+    repeated string hyDjDoc = 26; // 行业叠加描述
+    int32 token = 20; // token 数
+    bool isVip = 21; // 是否vip
 }
 
 // SharesInfoDetails 股票详细信息
 message SharesInfoDetails{
-    string code = 1;// 股票代码
-	string simpleCode =2;// 股票代码简写
-    string ext = 3;// 后缀
-    string extName = 4;// 股票代码简写
-	string name = 5;// 股票名字
-    double price = 6;// 当前价格
-    double percent =7;// 百分比
-    string color = 8;// 颜色
-    string img = 9;// 图片地址
-    double volume = 10;// 成交量（手）
-    double turnover = 11;// 成交额（万）
+    string code = 1; // 股票代码
+	string simpleCode =2; // 股票代码简写
+    string ext = 3; // 后缀
+    string extName = 4; // 股票代码简写
+	string name = 5; // 股票名字
+    double price = 6; // 当前价格
+    double percent =7; // 百分比
+    string color = 8; // 颜色
+    string img = 9; // 图片地址
+    double volume = 10; // 成交量（手）
+    double turnover = 11; // 成交额（万）
     double turnoverRate = 12; // 换手率
     double pe = 13; // 市盈率
     double pettm = 14; // 市盈率
-    double pb = 15;// 市净率
-    double total = 16;// 流通市值
-    double cap = 17;// 总市值
+    double pb = 15; // 市净率
+    double total = 16; // 流通市值
+    double cap = 17; // 总市值
    //  double zljlr = 17;// 主力资金净流入
-    double lastPrice = 18;// 昨收价
-    double openPrice = 19;// 开盘价
-    double closePrice = 20;// 收盘价
+    double lastPrice = 18; // 昨收价
+    double openPrice = 19; // 开盘价
+    double closePrice = 20; // 收盘价
     // double macd = 20;// macd
     // double dif = 21;// 快线
     // double dea = 22;// 慢线
-    double max = 23;// 当日最高点
-    double min = 24;// 当日最低
-    double gxl = 25;// 股息率
-    int64 day0 = 26;// 当日0点时间戳
-    string addTime = 27;// 添加时间
+    double max = 23; // 当日最高点
+    double min = 24; // 当日最低
+    double gxl = 25; // 股息率
+    int64 day0 = 26; // 当日0点时间戳
+    string addTime = 27; // 添加时间
 }
 
 
 message Group {
-    string name = 1;// 分组名
-    repeated SharesInfo list = 2;// 列表
+    string name = 1; // 分组名
+    repeated SharesInfo list = 2; // 列表
 }
 
 // GetGroupResp 请求结构
 message GetGroupResp {
-    repeated Group list = 1;// 列表 
+    repeated Group list = 1; // 列表
 }
 
 // SearchReq 搜索请求
 message SearchReq{
-    string code = 1;// 股票代码
-    string tag = 2;// 标记(min,daily)
+    string code = 1; // 股票代码
+    string tag = 2; // 标记(min,daily)
 }
 
 // SearchReq 搜索请求
 message SearchResp{
-    SharesInfo info = 1;// 返回信息
+    SharesInfo info = 1; // 返回信息
 }
 
 message GetsReq {
-    repeated string codes = 1;// 股票代码
+    repeated string codes = 1; // 股票代码
 }
 
 // SimpleSharesInfo 股票信息
 message SimpleSharesInfo{
-    string code = 1;// 股票代码
-    double price = 5;// 当前价格
-    double percent = 6;// 百分比
-    string color = 7;// 颜色
+    string code = 1; // 股票代码
+    double price = 5; // 当前价格
+    double percent = 6; // 百分比
+    string color = 7; // 颜色
 }
 
 
 message GetsResp {
-    repeated SimpleSharesInfo list = 2;// 列表(只返回价格相关的信息(code,price,percent,color))
+    repeated SimpleSharesInfo list = 2; // 列表(只返回价格相关的信息(code,price,percent,color))
 }
 
 message CodeNameInfo{
-    string code = 1;// 股票代码
-	string name = 2;// 股票名字
-    string sName = 3;// 股票简写
-    string ext = 4;// 后缀
+    string code = 1; // 股票代码
+	string name = 2; // 股票名字
+    string sName = 3; // 股票简写
+    string ext = 4; // 后缀
 }
 
 message GetAllCodeNameResp{
-    repeated CodeNameInfo list = 1;// 代码列表
+    repeated CodeNameInfo list = 1; // 代码列表
 }
 
 message AddMyCodeReq{
-    string code = 1;// 股票代码
-    double price = 2;// 当前价格
-    bool kdj =3;// 日线金叉提醒
-    bool kdj11 = 4;// 11日线提醒
-	bool surge = 5;// 盘中急涨急跌提醒
-	bool ai = 7;// AI智能提醒
-    bool public = 8;// 是否推荐给组织
-	double up = 9;// 估价涨到
-	double down = 10;// 估价跌到
-    bool vaild = 11;// 是否有效
-    bool fljx = 12;// AI智能提醒
+    string code = 1; // 股票代码
+    double price = 2; // 当前价格
+    bool kdj =3; // 日线金叉提醒
+    bool kdj11 = 4; // 11日线提醒
+	bool surge = 5; // 盘中急涨急跌提醒
+	bool ai = 7; // AI智能提醒
+    bool public = 8; // 是否推荐给组织
+	double up = 9; // 估价涨到
+	double down = 10; // 估价跌到
+    bool vaild = 11; // 是否有效
+    bool fljx = 12; // AI智能提醒
     
     // 返回值用
-    string simpleCode =13;// 股票代码简写
-    string ext = 14;// 后缀
-	string name = 15;// 股票名字
-    double percent = 16;// 百分比
-    string color = 17;// 颜色
-    double upPercent = 18;// 涨幅超
-    double upTo = 19;// 涨幅目标提醒
+    string simpleCode =13; // 股票代码简写
+    string ext = 14; // 后缀
+	string name = 15; // 股票名字
+    double percent = 16; // 百分比
+    string color = 17; // 颜色
+    double upPercent = 18; // 涨幅超
+    double upTo = 19; // 涨幅目标提醒
     double downPercent = 20; // 跌幅超
-    double downTo = 21;// 涨幅目标提醒
-    double score = 22;// 得分
+    double downTo = 21; // 涨幅目标提醒
+    double score = 22; // 得分
 }
 
 message AddMyCodeResp{
-    bool status = 1;// 状态是否成功
-    string msg = 2;// 消息
+    bool status = 1; // 状态是否成功
+    string msg = 2; // 消息
 }
 
 message GetMyCodeReq{
-    string code = 1;// 股票代码
-    bool yjzd = 2;// 一键诊断
-    repeated string codes = 3;// 股票代码
+    string code = 1; // 股票代码
+    bool yjzd = 2; // 一键诊断
+    repeated string codes = 3; // 股票代码
 }
 
 message AddMyCodeInfo {
-    string code = 1;// 股票代码
-    double price = 2;// 当前价格
-    bool kdj =3;// 日线金叉提醒
-	bool surge = 4;// 盘中急涨提醒
-	bool slump = 5;// 盘中急跌提醒
-	bool ai = 6;// AI智能提醒
-    bool public = 7;// 是否推荐给组织
-	double up = 8;// 估价涨到
-	double down = 9;// 估价跌到
-	double upPercent = 10;// 涨幅超
+    string code = 1; // 股票代码
+    double price = 2; // 当前价格
+    bool kdj =3; // 日线金叉提醒
+	bool surge = 4; // 盘中急涨提醒
+	bool slump = 5; // 盘中急跌提醒
+	bool ai = 6; // AI智能提醒
+    bool public = 7; // 是否推荐给组织
+	double up = 8; // 估价涨到
+	double down = 9; // 估价跌到
+	double upPercent = 10; // 涨幅超
 	double downPercent = 11; // 跌幅超
 }
 
 message GetMyCodeResp{
     repeated AddMyCodeReq list = 1;
-    bool rg = 2;// 是否红涨绿跌
-    bool vip = 3;// 是否vip
+    bool rg = 2; // 是否红涨绿跌
+    bool vip = 3; // 是否vip
 
 }
 
 message Msg{
-    string code = 1;// 股票代码
-    string simpleCode =2;// 股票代码简写
-    string ext = 3;// 后缀
-	string name = 4;// 股票名字    
-    double price = 5;// 当前价格     
-    string key =6;// 标签        
-    string desc = 7;// 描述   
-    double percent = 8;// 百分比
-    string color = 9;// 颜色
-    string now = 10;// 当前时间
-    string tag = 11;// 标记(min,daily)
+    string code = 1; // 股票代码
+    string simpleCode =2; // 股票代码简写
+    string ext = 3; // 后缀
+	string name = 4; // 股票名字
+    double price = 5; // 当前价格
+    string  key =6; // 标签
+    string desc = 7; // 描述
+    double percent = 8; // 百分比
+    string color = 9; // 颜色
+    string now = 10; // 当前时间
+    string tag = 11; // 标记(min,daily)
 }
 
 message GetMsgResp {
-    repeated Msg list = 1;// 消息列表
+    repeated Msg list = 1; // 消息列表
 }
 
 message HaveNewMsgResp{
-    bool badge = 1;// 是否有新消息
+    bool badge = 1; // 是否有新消息
 }
 
 message DeleteMyCodeReq{
-    string code = 1;// 股票代码
+    string code = 1; // 股票代码
 }
 
 message AddGroupReq{
-    string key = 1;// 分组key
+    string key = 1; // 分组key
 }
 
 message CodeReq{
-    string code = 1;// 股票代码
-    string tp = 2;// 类型(k30,daily)
+    string code = 1; // 股票代码
+    string tp = 2; // 类型(k30,daily)
     int64 days = 3;
-    bool flkx = 4;// 复利k线
-    bool fljx = 5;// 复利均线
-    int32 num = 6;// 
+    bool flkx = 4; // 复利k线
+    bool fljx = 5; // 复利均线
+    int32 num = 6; //
 }
 
 message CodesReq{
-    repeated string codes = 1;// 股票代码
+    repeated string codes = 1; // 股票代码
     int64 days = 2;
 }
 
 
 message GetMyGroupResp{
-    string code = 1;// 股票代码
-    string groupName = 2;// 分组名
-    string userName = 3;// 推荐人
-    int32 wi = 4;// 权重
-    repeated string group = 5;// 我的股票列表
+    string code = 1; // 股票代码
+    string groupName = 2; // 分组名
+    string userName = 3; // 推荐人
+    int32 wi = 4; // 权重
+    repeated string group = 5; // 我的股票列表
 }
 
 message UpsetGroupCodeReq{
-    string code = 1;// 股票代码
-    string groupName = 2;// 分组名 
-    string userName = 3;// 推荐人
-    bool isAdd = 4;// 是否添加,false:删除
+    string code = 1; // 股票代码
+    string groupName = 2; // 分组名
+    string userName = 3; // 推荐人
+    bool isAdd = 4; // 是否添加,false:删除
 }
 
 message UpsetGroupCodeResp{
-    string group = 1;// 组名，逗号隔开
+    string group = 1; // 组名，逗号隔开
 }
 
 // GetLqReq 量价关系
 message GetLqReq{
-    string tag = 1;// 标记
+    string tag = 1; // 标记
     int32 days = 2; // 天数
 }
 
 // GetLqResp 量价关系
 message GetLqResp{
     string title = 1; // 标题
-    repeated Group list = 2;// 列表 
+    repeated Group list = 2; // 列表
 }
 
 
 // GetDayResp 请求结构
 message GetDayResp{
     string title = 1; // 标题
-    repeated Group list = 2;// 列表 
-    repeated TagInfo hyTags = 3;// 行业tags
-    repeated TagInfo tsTags = 4;// 淘神tags
+    repeated Group list = 2; // 列表
+    repeated TagInfo hyTags = 3; // 行业tags
+    repeated TagInfo tsTags = 4; // 淘神tags
 }
 
 // GetHyCodeResp 请求结构
 message GetHyCodeResp{
-    repeated string doc = 1;// 当日净流入
-    repeated Group list = 2;// 列表 
+    repeated string doc = 1; // 当日净流入
+    repeated Group list = 2; // 列表
 }
 
 message HyTimeData {
@@ -781,17 +783,17 @@ message HyTimeData {
 }
 
 message GetHyTimeReq{
-    int32 num=1;// 时间
+    int32 num=1; // 时间
 }
 
 message GetHyTimeResp{
-    string title = 1;// 标题
-    repeated string list =2;// 显示的名字
+    string title = 1; // 标题
+    repeated string list =2; // 显示的名字
     repeated HyTimeData data = 3;
 }
 
 message GetTouTiaoResp{
-    repeated string list =1;// 显示的名字
+    repeated string list =1; // 显示的名字
 }
 
 
@@ -815,82 +817,82 @@ message GetMyYdReq {
 }
 
 message GetYhxgReq {
-    string hexinv = 1;// 核心
+    string hexinv = 1; // 核心
 }
 
 // GetHotYzCodesResp 请求结构
 message GetHotYzCodesResp{
-    repeated Group list = 1;// 列表 
-    repeated common.SimpSharInfo hyListUp= 2;// 行业信息
-    repeated common.SimpSharInfo hyListDown= 3;// 行业信息
-    repeated TagInfo tags = 4;// 行业
-    repeated TagInfo tags1 = 6;// 概念
+    repeated Group list = 1; // 列表
+    repeated common.SimpSharInfo hyListUp= 2; // 行业信息
+    repeated common.SimpSharInfo hyListDown= 3; // 行业信息
+    repeated TagInfo tags = 4; // 行业
+    repeated TagInfo tags1 = 6; // 概念
 }
 
 message GetTopResp{
-    TblResp all = 1;// 列表 
-    TblResp dc = 2;// 列表
-    TblResp tx = 3;// 列表  
-    TblResp ths = 4;// 列表  
+    TblResp all = 1; // 列表
+    TblResp dc = 2; // 列表
+    TblResp tx = 3; // 列表
+    TblResp ths = 4; // 列表
 }
 
 message GetHyDjResp{
     TblResp info = 1;
-    repeated CodeNameInfo codeList = 2;// 代码列表
+    repeated CodeNameInfo codeList = 2; // 代码列表
 }
 
 message TblResp {
-    string title = 1;// 标题
-    string day0 = 2;// 日期
-    bool vaild = 3;// 是否隐藏
-    repeated string thList = 4;// 表名
-    repeated TrInfo list = 5;// 列表
+    string title = 1; // 标题
+    string day0 = 2; // 日期
+    bool vaild = 3; // 是否隐藏
+    repeated string thList = 4; // 表名
+    repeated TrInfo list = 5; // 列表
 }
 
 // TrInfo 股票信息
 message TrInfo{
-    string code = 1;// 股票代码
-	string simpleCode =2;// 股票代码简写
-    string ext = 3;// 后缀
-	string name = 4;// 股票名字
-    double price = 5;// 当前价格
-    double percent = 6;// 百分比
-    bool optional = 7;// 是否自选
-    string td1 = 8;// 第一列(显示)
-    string td2 = 9;// 第二列(显示)
-    double data1 = 10;// 数据1
-    double data2 = 11;// 数据2
-    string color1 = 12;// 颜色1
-    string color2 = 13;// 颜色2
-    string url = 14;// 地址
-    double value1 = 20;// 临时数据
+    string code = 1; // 股票代码
+	string simpleCode =2; // 股票代码简写
+    string ext = 3; // 后缀
+	string name = 4; // 股票名字
+    double price = 5; // 当前价格
+    double percent = 6; // 百分比
+    bool optional = 7; // 是否自选
+    string td1 = 8; // 第一列(显示)
+    string td2 = 9; // 第二列(显示)
+    double data1 = 10; // 数据1
+    double data2 = 11; // 数据2
+    string color1 = 12; // 颜色1
+    string color2 = 13; // 颜色2
+    string url = 14; // 地址
+    double value1 = 20; // 临时数据
 }
 
 // GetCwsjResp 财务数据
 message GetCwsjResp {
-   repeated GdsInfo roe = 1;// 每股净资产收益率(%)
+   repeated GdsInfo roe = 1; // 每股净资产收益率(%)
    repeated GdsInfo eps = 2; // 每股收益
-   repeated GdsInfo jlr = 3; //  净利润 
-   repeated GdsInfo xsjll = 4; //  销售净利润 
+   repeated GdsInfo jlr = 3; //  净利润
+   repeated GdsInfo xsjll = 4; //  销售净利润
    repeated GdsInfo jyxjl = 5; // 经营现金流
-   repeated GdsInfo zzc = 6;// 总资产
-   repeated GdsInfo zfz = 7;// 总负载
+   repeated GdsInfo zzc = 6; // 总资产
+   repeated GdsInfo zfz = 7; // 总负载
 }
 
 
 message GetTscReq{
-    int32 tag = 1;// 标记: 0:全部,1:个股,2:行业,3:淘神
+    int32 tag = 1; // 标记: 0:全部,1:个股,2:行业,3:淘神
 }
 
 
 message TscInfo{
-    string id = 1;// 股票代码
-    string type = 2;// 类型(板块，个股)
-    string ext = 3;// 后缀
+    string id = 1; // 股票代码
+    string type = 2; // 类型(板块，个股)
+    string ext = 3; // 后缀
     // string sc =4;// 股票代码简写(数字)
-	string name = 5;// 股票名字
+	string name = 5; // 股票名字
     string py = 6; // 拼音
-    bool zx = 7;// 是否自选
+    bool zx = 7; // 是否自选
 }
 
 message GetTscResp{
@@ -899,19 +901,19 @@ message GetTscResp{
 
 
 message SearchTscReq{
-    string tag = 1;// 标记: 0:all,1:个股,2:行业,3:淘神
+    string tag = 1; // 标记: 0:all,1:个股,2:行业,3:淘神
     string query = 2; // 查询
 }
 
 message TscInfo1{
-    string id = 1;// 股票代码
-    string type = 2;// 类型(板块，个股)
-    string ext = 3;// 后缀
+    string id = 1; // 股票代码
+    string type = 2; // 类型(板块，个股)
+    string ext = 3; // 后缀
     string doc = 4;
-	string name = 5;// 股票名字
+	string name = 5; // 股票名字
     // string py = 6; // 拼音
     string sc = 6;
-    bool zx = 7;// 是否自选
+    bool zx = 7; // 是否自选
 }
 
 message SearchTscResp{

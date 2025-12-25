@@ -63,7 +63,12 @@ message AnalyCodeReq{
 
 // AnalyCodeResp 返回
 message AnalyCodeResp{
-	repeated string msgs = 1;// 内容
+	repeated AnalyCodeInfo list = 1;// 内容
+}
+
+message AnalyCodeInfo{
+    string name = 1;// 名字
+    repeated string msgs = 2;// 内容
 }
 
 // GetAllSpReq 请求

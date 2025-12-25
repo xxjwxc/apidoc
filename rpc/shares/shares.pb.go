@@ -3822,27 +3822,29 @@ func (x *GetDailyCheckResp) GetList() []*DailyCheckInfo {
 
 // SharesInfo 股票信息
 type SharesInfo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code" jsonschema_description:"股票代码"`               // 股票代码
-	SimpleCode    string                 `protobuf:"bytes,2,opt,name=simpleCode,proto3" json:"simpleCode" jsonschema_description:"股票代码简写"` // 股票代码简写
-	Ext           string                 `protobuf:"bytes,3,opt,name=ext,proto3" json:"ext" jsonschema_description:"后缀"`                   // 后缀
-	Name          string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name" jsonschema_description:"股票名字"`               // 股票名字
-	Price         float64                `protobuf:"fixed64,5,opt,name=price,proto3" json:"price" jsonschema_description:"当前价格"`           // 当前价格
-	SPrice        string                 `protobuf:"bytes,6,opt,name=sPrice,proto3" json:"sPrice" jsonschema_description:"价格简写"`           // 价格简写
-	Change        float64                `protobuf:"fixed64,7,opt,name=change,proto3" json:"change" jsonschema_description:"价格变化"`         // 价格变化
-	Jlr           float64                `protobuf:"fixed64,8,opt,name=jlr,proto3" json:"jlr" jsonschema_description:"净流入"`                // 净流入
-	Percent       float64                `protobuf:"fixed64,9,opt,name=percent,proto3" json:"percent" jsonschema_description:"百分比"`        // 百分比
-	Color         string                 `protobuf:"bytes,10,opt,name=color,proto3" json:"color" jsonschema_description:"颜色"`              // 颜色
-	Img           string                 `protobuf:"bytes,11,opt,name=img,proto3" json:"img" jsonschema_description:"图片地址"`                // 图片地址
-	Hy            []*TagInfo             `protobuf:"bytes,12,rep,name=hy,proto3" json:"hy" jsonschema_description:"行业板块"`                  // 行业板块
-	MainHy        string                 `protobuf:"bytes,13,opt,name=mainHy,proto3" json:"mainHy" jsonschema_description:"行业板块"`          // 行业板块
-	MainHyCode    string                 `protobuf:"bytes,14,opt,name=mainHyCode,proto3" json:"mainHyCode" jsonschema_description:"行业板块"`  // 行业板块
-	Attach        string                 `protobuf:"bytes,15,opt,name=attach,proto3" json:"attach" jsonschema_description:"附加"`            // 附加
-	Peg           string                 `protobuf:"bytes,16,opt,name=peg,proto3" json:"peg" jsonschema_description:"peg信息"`               // peg信息
-	Url           string                 `protobuf:"bytes,17,opt,name=url,proto3" json:"url" jsonschema_description:"地址"`                  // 地址
-	HyDj          string                 `protobuf:"bytes,18,opt,name=hyDj,proto3" json:"hyDj" jsonschema_description:"行业叠加"`              // 行业叠加
-	Optional      bool                   `protobuf:"varint,19,opt,name=optional,proto3" json:"optional" jsonschema_description:"是否自选"`     // 是否自选
-	HyDjDoc       []string               `protobuf:"bytes,26,rep,name=hyDjDoc,proto3" json:"hyDjDoc" jsonschema_description:"行业叠加描述"`      // 行业叠加描述
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	Code       string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code" jsonschema_description:"股票代码"`               // 股票代码
+	SimpleCode string                 `protobuf:"bytes,2,opt,name=simpleCode,proto3" json:"simpleCode" jsonschema_description:"股票代码简写"` // 股票代码简写
+	Ext        string                 `protobuf:"bytes,3,opt,name=ext,proto3" json:"ext" jsonschema_description:"后缀"`                   // 后缀
+	Name       string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name" jsonschema_description:"股票名字"`               // 股票名字
+	Price      float64                `protobuf:"fixed64,5,opt,name=price,proto3" json:"price" jsonschema_description:"当前价格"`           // 当前价格
+	SPrice     string                 `protobuf:"bytes,6,opt,name=sPrice,proto3" json:"sPrice" jsonschema_description:"价格简写"`           // 价格简写
+	Change     float64                `protobuf:"fixed64,7,opt,name=change,proto3" json:"change" jsonschema_description:"价格变化"`         // 价格变化
+	Jlr        float64                `protobuf:"fixed64,8,opt,name=jlr,proto3" json:"jlr" jsonschema_description:"净流入"`                // 净流入
+	Percent    float64                `protobuf:"fixed64,9,opt,name=percent,proto3" json:"percent" jsonschema_description:"百分比"`        // 百分比
+	Color      string                 `protobuf:"bytes,10,opt,name=color,proto3" json:"color" jsonschema_description:"颜色"`              // 颜色
+	Img        string                 `protobuf:"bytes,11,opt,name=img,proto3" json:"img" jsonschema_description:"图片地址"`                // 图片地址
+	Hy         []*TagInfo             `protobuf:"bytes,12,rep,name=hy,proto3" json:"hy" jsonschema_description:"行业板块"`                  // 行业板块
+	MainHy     string                 `protobuf:"bytes,13,opt,name=mainHy,proto3" json:"mainHy" jsonschema_description:"行业板块"`          // 行业板块
+	MainHyCode string                 `protobuf:"bytes,14,opt,name=mainHyCode,proto3" json:"mainHyCode" jsonschema_description:"行业板块"`  // 行业板块
+	Attach     string                 `protobuf:"bytes,15,opt,name=attach,proto3" json:"attach" jsonschema_description:"附加"`            // 附加
+	// string peg = 16; // peg信息
+	Url           string   `protobuf:"bytes,17,opt,name=url,proto3" json:"url" jsonschema_description:"string peg = 16; // peg信息"` // 地址
+	HyDj          string   `protobuf:"bytes,18,opt,name=hyDj,proto3" json:"hyDj" jsonschema_description:"行业叠加"`                    // 行业叠加
+	Optional      bool     `protobuf:"varint,19,opt,name=optional,proto3" json:"optional" jsonschema_description:"是否自选"`           // 是否自选
+	HyDjDoc       []string `protobuf:"bytes,26,rep,name=hyDjDoc,proto3" json:"hyDjDoc" jsonschema_description:"行业叠加描述"`            // 行业叠加描述
+	Token         int32    `protobuf:"varint,20,opt,name=token,proto3" json:"token" jsonschema_description:"token 数"`              // token 数
+	IsVip         bool     `protobuf:"varint,21,opt,name=isVip,proto3" json:"isVip" jsonschema_description:"是否vip"`                // 是否vip
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3982,13 +3984,6 @@ func (x *SharesInfo) GetAttach() string {
 	return ""
 }
 
-func (x *SharesInfo) GetPeg() string {
-	if x != nil {
-		return x.Peg
-	}
-	return ""
-}
-
 func (x *SharesInfo) GetUrl() string {
 	if x != nil {
 		return x.Url
@@ -4015,6 +4010,20 @@ func (x *SharesInfo) GetHyDjDoc() []string {
 		return x.HyDjDoc
 	}
 	return nil
+}
+
+func (x *SharesInfo) GetToken() int32 {
+	if x != nil {
+		return x.Token
+	}
+	return 0
+}
+
+func (x *SharesInfo) GetIsVip() bool {
+	if x != nil {
+		return x.IsVip
+	}
+	return false
 }
 
 // SharesInfoDetails 股票详细信息
@@ -7698,7 +7707,7 @@ const file_shares_shares_proto_rawDesc = "" +
 	"\x03img\x18\x04 \x01(\tR\x03img\x12\x10\n" +
 	"\x03url\x18\x05 \x01(\tR\x03url\"?\n" +
 	"\x11GetDailyCheckResp\x12*\n" +
-	"\x04list\x18\x01 \x03(\v2\x16.shares.DailyCheckInfoR\x04list\"\xdf\x03\n" +
+	"\x04list\x18\x01 \x03(\v2\x16.shares.DailyCheckInfoR\x04list\"\xf9\x03\n" +
 	"\n" +
 	"SharesInfo\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x1e\n" +
@@ -7721,11 +7730,12 @@ const file_shares_shares_proto_rawDesc = "" +
 	"mainHyCode\x18\x0e \x01(\tR\n" +
 	"mainHyCode\x12\x16\n" +
 	"\x06attach\x18\x0f \x01(\tR\x06attach\x12\x10\n" +
-	"\x03peg\x18\x10 \x01(\tR\x03peg\x12\x10\n" +
 	"\x03url\x18\x11 \x01(\tR\x03url\x12\x12\n" +
 	"\x04hyDj\x18\x12 \x01(\tR\x04hyDj\x12\x1a\n" +
 	"\boptional\x18\x13 \x01(\bR\boptional\x12\x18\n" +
-	"\ahyDjDoc\x18\x1a \x03(\tR\ahyDjDoc\"\xd5\x04\n" +
+	"\ahyDjDoc\x18\x1a \x03(\tR\ahyDjDoc\x12\x14\n" +
+	"\x05token\x18\x14 \x01(\x05R\x05token\x12\x14\n" +
+	"\x05isVip\x18\x15 \x01(\bR\x05isVip\"\xd5\x04\n" +
 	"\x11SharesInfoDetails\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x1e\n" +
 	"\n" +
