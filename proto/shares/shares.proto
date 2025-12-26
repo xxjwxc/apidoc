@@ -845,8 +845,13 @@ message TblResp {
     string title = 1; // 标题
     string day0 = 2; // 日期
     bool vaild = 3; // 是否隐藏
-    repeated string thList = 4; // 表名
+    repeated ThInfo thList = 4; // 表名
     repeated TrInfo list = 5; // 列表
+}
+
+message ThInfo {
+    string name = 1; // 名字
+    int32 width = 2; // 宽度
 }
 
 // TrInfo 股票信息
@@ -877,6 +882,7 @@ message GetCwsjResp {
    repeated GdsInfo jyxjl = 5; // 经营现金流
    repeated GdsInfo zzc = 6; // 总资产
    repeated GdsInfo zfz = 7; // 总负载
+   bool show = 8; // 是否显示
 }
 
 
