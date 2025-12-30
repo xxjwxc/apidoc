@@ -2235,7 +2235,7 @@ func (x *GetYyqResp) GetRight() string {
 
 type GetFundKlineResp struct {
 	state  protoimpl.MessageState `protogen:"open.v1"`
-	Times  []string               `protobuf:"bytes,1,rep,name=times,proto3" json:"times" jsonschema_description:"x轴数据"`        // x轴数据
+	Times  []string               `protobuf:"bytes,1,rep,name=times,proto3" json:"times" jsonschema_description:"x轴数据 ---"`    // x轴数据 ---
 	Colorr string                 `protobuf:"bytes,2,opt,name=colorr,proto3" json:"colorr" jsonschema_description:"红的颜色"`      // 红的颜色
 	Colorg string                 `protobuf:"bytes,3,opt,name=colorg,proto3" json:"colorg" jsonschema_description:"绿的颜色"`      // 绿的颜色
 	Gjhj   []float64              `protobuf:"fixed64,4,rep,packed,name=gjhj,proto3" json:"gjhj" jsonschema_description:"股基合计"` // 股基合计
@@ -2245,14 +2245,14 @@ type GetFundKlineResp struct {
 	Qdii   []float64              `protobuf:"fixed64,8,rep,packed,name=qdii,proto3" json:"qdii" jsonschema_description:"QDII"` // QDII
 	Lof    []float64              `protobuf:"fixed64,9,rep,packed,name=lof,proto3" json:"lof"`
 	Fof    []float64              `protobuf:"fixed64,10,rep,packed,name=fof,proto3" json:"fof"`
-	Times1 []string               `protobuf:"bytes,11,rep,name=times1,proto3" json:"times1" jsonschema_description:"盈利预测"`       // 盈利预测
-	Ylyc   []float64              `protobuf:"fixed64,12,rep,packed,name=ylyc,proto3" json:"ylyc" jsonschema_description:"盈利预测值"` // 盈利预测值
-	Yl     []float64              `protobuf:"fixed64,13,rep,packed,name=yl,proto3" json:"yl" jsonschema_description:"盈利"`        // 盈利
+	Times1 []string               `protobuf:"bytes,11,rep,name=times1,proto3" json:"times1" jsonschema_description:"盈利预测"`           // 盈利预测
+	Ylyc   []float64              `protobuf:"fixed64,12,rep,packed,name=ylyc,proto3" json:"ylyc" jsonschema_description:"盈利预测值 ---"` // 盈利预测值 ---
+	Yl     []float64              `protobuf:"fixed64,13,rep,packed,name=yl,proto3" json:"yl" jsonschema_description:"盈利 ---"`        // 盈利 ---
 	// repeated string times2 = 14;// 股息分红
 	// repeated double gxl = 15; // 盈利预测值
 	// repeated double bvps = 16; // 每股净资产
-	Mzpg          []float64 `protobuf:"fixed64,17,rep,packed,name=mzpg,proto3" json:"mzpg" jsonschema_description:"repeated string times2 = 14;// 股息分红\n repeated double gxl = 15; // 盈利预测值\n repeated double bvps = 16; // 每股净资产"` // 募资，增发
-	Px            []float64 `protobuf:"fixed64,18,rep,packed,name=px,proto3" json:"px" jsonschema_description:"派现"`                                                                                                                 // 派现
+	Mzpg          []float64 `protobuf:"fixed64,17,rep,packed,name=mzpg,proto3" json:"mzpg" jsonschema_description:"repeated string times2 = 14;// 股息分红\n repeated double gxl = 15; // 盈利预测值\n repeated double bvps = 16; // 每股净资产"` // 募资，增发 ---
+	Px            []float64 `protobuf:"fixed64,18,rep,packed,name=px,proto3" json:"px" jsonschema_description:"派现 ---"`                                                                                                             // 派现 ---
 	MzpxbTitle    string    `protobuf:"bytes,19,opt,name=mzpxbTitle,proto3" json:"mzpxbTitle" jsonschema_description:"募资派现比例"`                                                                                                      // 募资派现比例
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2992,22 +2992,23 @@ type GetSharesKlineMoreResp struct {
 	// repeated double bxjlr = 6;// 北向净流入
 	// repeated double bxjlr5 = 7;// 北向净流入
 	// repeated double zlPercent = 6;// 股基占比
-	YhFocus   []float64 `protobuf:"fixed64,8,rep,packed,name=yhFocus,proto3" json:"yhFocus" jsonschema_description:"repeated double bxjlr = 6;// 北向净流入\n repeated double bxjlr5 = 7;// 北向净流入\n repeated double zlPercent = 6;// 股基占比"` // 用户情绪
-	RzPercent []float64 `protobuf:"fixed64,9,rep,packed,name=rzPercent,proto3" json:"rzPercent" jsonschema_description:"融资占比"`                                                                                                         // 融资占比
-	RzPrice   []float64 `protobuf:"fixed64,10,rep,packed,name=rzPrice,proto3" json:"rzPrice" jsonschema_description:"融资净流入"`                                                                                                           // 融资净流入
-	ZrtNum    []float64 `protobuf:"fixed64,11,rep,packed,name=zrtNum,proto3" json:"zrtNum" jsonschema_description:"转融通出借"`                                                                                                             // 转融通出借
-	Qx        []float64 `protobuf:"fixed64,12,rep,packed,name=qx,proto3" json:"qx" jsonschema_description:"情绪"`                                                                                                                        // 情绪
-	Gzd       []float64 `protobuf:"fixed64,13,rep,packed,name=gzd,proto3" json:"gzd" jsonschema_description:"用户关注度"`                                                                                                                   // 用户关注度
-	Dde       []float64 `protobuf:"fixed64,17,rep,packed,name=dde,proto3" json:"dde" jsonschema_description:"散户数"`                                                                                                                     // 散户数
+	YhFocus   []float64 `protobuf:"fixed64,6,rep,packed,name=yhFocus,proto3" json:"yhFocus" jsonschema_description:"repeated double bxjlr = 6;// 北向净流入\n repeated double bxjlr5 = 7;// 北向净流入\n repeated double zlPercent = 6;// 股基占比"` // 用户情绪
+	RzPercent []float64 `protobuf:"fixed64,7,rep,packed,name=rzPercent,proto3" json:"rzPercent" jsonschema_description:"融资占比"`                                                                                                         // 融资占比
+	RzPrice   []float64 `protobuf:"fixed64,8,rep,packed,name=rzPrice,proto3" json:"rzPrice" jsonschema_description:"融资净流入"`                                                                                                            // 融资净流入
+	ZrtNum    []float64 `protobuf:"fixed64,9,rep,packed,name=zrtNum,proto3" json:"zrtNum" jsonschema_description:"转融通出借"`                                                                                                              // 转融通出借
+	Qx        []float64 `protobuf:"fixed64,10,rep,packed,name=qx,proto3" json:"qx" jsonschema_description:"情绪"`                                                                                                                        // 情绪
+	Gzd       []float64 `protobuf:"fixed64,11,rep,packed,name=gzd,proto3" json:"gzd" jsonschema_description:"用户关注度"`                                                                                                                   // 用户关注度
+	Dde       []float64 `protobuf:"fixed64,12,rep,packed,name=dde,proto3" json:"dde" jsonschema_description:"散户数"`                                                                                                                     // 散户数
 	// bool haveBx = 18;// 是否有北向
-	HaveRz bool      `protobuf:"varint,19,opt,name=haveRz,proto3" json:"haveRz" jsonschema_description:"bool haveBx = 18;// 是否有北向"` // 是否有融资
-	Ddejlr []float64 `protobuf:"fixed64,21,rep,packed,name=ddejlr,proto3" json:"ddejlr" jsonschema_description:"散户数"`               // 散户数
+	HaveRz bool      `protobuf:"varint,13,opt,name=haveRz,proto3" json:"haveRz" jsonschema_description:"bool haveBx = 18;// 是否有北向"` // 是否有融资
+	Ddejlr []float64 `protobuf:"fixed64,14,rep,packed,name=ddejlr,proto3" json:"ddejlr" jsonschema_description:"散户数"`               // 散户数
 	// repeated double chip = 24;// 筹码集中度(90%)
-	RqPrice       []float64 `protobuf:"fixed64,28,rep,packed,name=rqPrice,proto3" json:"rqPrice" jsonschema_description:"repeated double chip = 24;// 筹码集中度(90%)"` // 融券净流入
-	HaveRq        bool      `protobuf:"varint,29,opt,name=haveRq,proto3" json:"haveRq" jsonschema_description:"是否有融券"`                                             // 是否有融券
-	Mbj           []float64 `protobuf:"fixed64,31,rep,packed,name=mbj,proto3" json:"mbj" jsonschema_description:"目标价"`                                             // 目标价
-	Gm            []float64 `protobuf:"fixed64,32,rep,packed,name=gm,proto3" json:"gm" jsonschema_description:"公募"`                                                // 公募
-	Gxl           []float64 `protobuf:"fixed64,33,rep,packed,name=gxl,proto3" json:"gxl" jsonschema_description:"股息率"`                                             // 股息率
+	RqPrice       []float64 `protobuf:"fixed64,15,rep,packed,name=rqPrice,proto3" json:"rqPrice" jsonschema_description:"repeated double chip = 24;// 筹码集中度(90%)"` // 融券净流入
+	HaveRq        bool      `protobuf:"varint,16,opt,name=haveRq,proto3" json:"haveRq" jsonschema_description:"是否有融券"`                                             // 是否有融券
+	Mbj           []float64 `protobuf:"fixed64,17,rep,packed,name=mbj,proto3" json:"mbj" jsonschema_description:"目标价"`                                             // 目标价
+	Gm            []float64 `protobuf:"fixed64,18,rep,packed,name=gm,proto3" json:"gm" jsonschema_description:"公募"`                                                // 公募
+	Gxl           []float64 `protobuf:"fixed64,19,rep,packed,name=gxl,proto3" json:"gxl" jsonschema_description:"股息率"`                                             // 股息率
+	Zcyl          string    `protobuf:"bytes,20,opt,name=zcyl,proto3" json:"zcyl" jsonschema_description:"支撑压力位"`                                                  // 支撑压力位
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3173,6 +3174,13 @@ func (x *GetSharesKlineMoreResp) GetGxl() []float64 {
 		return x.Gxl
 	}
 	return nil
+}
+
+func (x *GetSharesKlineMoreResp) GetZcyl() string {
+	if x != nil {
+		return x.Zcyl
+	}
+	return ""
 }
 
 type GdsInfo struct {
@@ -6710,7 +6718,7 @@ type TblResp struct {
 	Title         string                 `protobuf:"bytes,1,opt,name=title,proto3" json:"title" jsonschema_description:"标题"`    // 标题
 	Day0          string                 `protobuf:"bytes,2,opt,name=day0,proto3" json:"day0" jsonschema_description:"日期"`      // 日期
 	Vaild         bool                   `protobuf:"varint,3,opt,name=vaild,proto3" json:"vaild" jsonschema_description:"是否隐藏"` // 是否隐藏
-	ThList        []*ThInfo              `protobuf:"bytes,4,rep,name=thList,proto3" json:"thList" jsonschema_description:"表名"`  // 表名
+	ThList        []string               `protobuf:"bytes,4,rep,name=thList,proto3" json:"thList" jsonschema_description:"表名"`  // 表名
 	List          []*TrInfo              `protobuf:"bytes,5,rep,name=list,proto3" json:"list" jsonschema_description:"列表"`      // 列表
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -6767,7 +6775,7 @@ func (x *TblResp) GetVaild() bool {
 	return false
 }
 
-func (x *TblResp) GetThList() []*ThInfo {
+func (x *TblResp) GetThList() []string {
 	if x != nil {
 		return x.ThList
 	}
@@ -7703,28 +7711,29 @@ const file_shares_shares_proto_rawDesc = "" +
 	"\x02zl\x18\x12 \x03(\x01R\x02zl\x12\x0e\n" +
 	"\x02jg\x18\x13 \x03(\x01R\x02jg\x12\x1c\n" +
 	"\tjjPercent\x18\x14 \x03(\x01R\tjjPercent\x12\x0e\n" +
-	"\x02qx\x18\x15 \x03(\x01R\x02qx\"\xbe\x03\n" +
+	"\x02qx\x18\x15 \x03(\x01R\x02qx\"\xd2\x03\n" +
 	"\x16GetSharesKlineMoreResp\x12\x14\n" +
 	"\x05times\x18\x01 \x03(\tR\x05times\x12\x14\n" +
 	"\x05kLine\x18\x02 \x03(\x01R\x05kLine\x12\x16\n" +
 	"\x06colorr\x18\x03 \x01(\tR\x06colorr\x12\x16\n" +
 	"\x06colorg\x18\x04 \x01(\tR\x06colorg\x12\x14\n" +
 	"\x05level\x18\x05 \x01(\x05R\x05level\x12\x18\n" +
-	"\ayhFocus\x18\b \x03(\x01R\ayhFocus\x12\x1c\n" +
-	"\trzPercent\x18\t \x03(\x01R\trzPercent\x12\x18\n" +
-	"\arzPrice\x18\n" +
-	" \x03(\x01R\arzPrice\x12\x16\n" +
-	"\x06zrtNum\x18\v \x03(\x01R\x06zrtNum\x12\x0e\n" +
-	"\x02qx\x18\f \x03(\x01R\x02qx\x12\x10\n" +
-	"\x03gzd\x18\r \x03(\x01R\x03gzd\x12\x10\n" +
-	"\x03dde\x18\x11 \x03(\x01R\x03dde\x12\x16\n" +
-	"\x06haveRz\x18\x13 \x01(\bR\x06haveRz\x12\x16\n" +
-	"\x06ddejlr\x18\x15 \x03(\x01R\x06ddejlr\x12\x18\n" +
-	"\arqPrice\x18\x1c \x03(\x01R\arqPrice\x12\x16\n" +
-	"\x06haveRq\x18\x1d \x01(\bR\x06haveRq\x12\x10\n" +
-	"\x03mbj\x18\x1f \x03(\x01R\x03mbj\x12\x0e\n" +
-	"\x02gm\x18  \x03(\x01R\x02gm\x12\x10\n" +
-	"\x03gxl\x18! \x03(\x01R\x03gxl\"1\n" +
+	"\ayhFocus\x18\x06 \x03(\x01R\ayhFocus\x12\x1c\n" +
+	"\trzPercent\x18\a \x03(\x01R\trzPercent\x12\x18\n" +
+	"\arzPrice\x18\b \x03(\x01R\arzPrice\x12\x16\n" +
+	"\x06zrtNum\x18\t \x03(\x01R\x06zrtNum\x12\x0e\n" +
+	"\x02qx\x18\n" +
+	" \x03(\x01R\x02qx\x12\x10\n" +
+	"\x03gzd\x18\v \x03(\x01R\x03gzd\x12\x10\n" +
+	"\x03dde\x18\f \x03(\x01R\x03dde\x12\x16\n" +
+	"\x06haveRz\x18\r \x01(\bR\x06haveRz\x12\x16\n" +
+	"\x06ddejlr\x18\x0e \x03(\x01R\x06ddejlr\x12\x18\n" +
+	"\arqPrice\x18\x0f \x03(\x01R\arqPrice\x12\x16\n" +
+	"\x06haveRq\x18\x10 \x01(\bR\x06haveRq\x12\x10\n" +
+	"\x03mbj\x18\x11 \x03(\x01R\x03mbj\x12\x0e\n" +
+	"\x02gm\x18\x12 \x03(\x01R\x02gm\x12\x10\n" +
+	"\x03gxl\x18\x13 \x03(\x01R\x03gxl\x12\x12\n" +
+	"\x04zcyl\x18\x14 \x01(\tR\x04zcyl\"1\n" +
 	"\aGdsInfo\x12\x10\n" +
 	"\x03day\x18\x01 \x01(\tR\x03day\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x01R\x05value\"\xba\x01\n" +
@@ -8009,12 +8018,12 @@ const file_shares_shares_proto_rawDesc = "" +
 	"\x03ths\x18\x04 \x01(\v2\x0f.shares.TblRespR\x03ths\"d\n" +
 	"\vGetHyDjResp\x12#\n" +
 	"\x04info\x18\x01 \x01(\v2\x0f.shares.TblRespR\x04info\x120\n" +
-	"\bcodeList\x18\x02 \x03(\v2\x14.shares.CodeNameInfoR\bcodeList\"\x95\x01\n" +
+	"\bcodeList\x18\x02 \x03(\v2\x14.shares.CodeNameInfoR\bcodeList\"\x85\x01\n" +
 	"\aTblResp\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12\x12\n" +
 	"\x04day0\x18\x02 \x01(\tR\x04day0\x12\x14\n" +
-	"\x05vaild\x18\x03 \x01(\bR\x05vaild\x12&\n" +
-	"\x06thList\x18\x04 \x03(\v2\x0e.shares.ThInfoR\x06thList\x12\"\n" +
+	"\x05vaild\x18\x03 \x01(\bR\x05vaild\x12\x16\n" +
+	"\x06thList\x18\x04 \x03(\tR\x06thList\x12\"\n" +
 	"\x04list\x18\x05 \x03(\v2\x0e.shares.TrInfoR\x04list\"2\n" +
 	"\x06ThInfo\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
@@ -8301,92 +8310,91 @@ var file_shares_shares_proto_depIdxs = []int32{
 	91,  // 61: shares.GetTopResp.ths:type_name -> shares.TblResp
 	91,  // 62: shares.GetHyDjResp.info:type_name -> shares.TblResp
 	59,  // 63: shares.GetHyDjResp.codeList:type_name -> shares.CodeNameInfo
-	92,  // 64: shares.TblResp.thList:type_name -> shares.ThInfo
-	93,  // 65: shares.TblResp.list:type_name -> shares.TrInfo
-	39,  // 66: shares.GetCwsjResp.roe:type_name -> shares.GdsInfo
-	39,  // 67: shares.GetCwsjResp.eps:type_name -> shares.GdsInfo
-	39,  // 68: shares.GetCwsjResp.jlr:type_name -> shares.GdsInfo
-	39,  // 69: shares.GetCwsjResp.xsjll:type_name -> shares.GdsInfo
-	39,  // 70: shares.GetCwsjResp.jyxjl:type_name -> shares.GdsInfo
-	39,  // 71: shares.GetCwsjResp.zzc:type_name -> shares.GdsInfo
-	39,  // 72: shares.GetCwsjResp.zfz:type_name -> shares.GdsInfo
-	96,  // 73: shares.GetTscResp.list:type_name -> shares.TscInfo
-	99,  // 74: shares.SearchTscResp.list:type_name -> shares.TscInfo1
-	103, // 75: shares.shares.GetGroup:input_type -> common.Empty
-	71,  // 76: shares.shares.GetMyGroup:input_type -> shares.CodeReq
-	74,  // 77: shares.shares.UpsetGroupCode:input_type -> shares.UpsetGroupCodeReq
-	54,  // 78: shares.shares.Search:input_type -> shares.SearchReq
-	56,  // 79: shares.shares.Gets:input_type -> shares.GetsReq
-	103, // 80: shares.shares.GetAllCodeName:input_type -> common.Empty
-	61,  // 81: shares.shares.AddMyCode:input_type -> shares.AddMyCodeReq
-	63,  // 82: shares.shares.GetMyCode:input_type -> shares.GetMyCodeReq
-	103, // 83: shares.shares.GetMsg:input_type -> common.Empty
-	103, // 84: shares.shares.HaveNewMsg:input_type -> common.Empty
-	69,  // 85: shares.shares.DeleteMyCode:input_type -> shares.DeleteMyCodeReq
-	70,  // 86: shares.shares.AddGroup:input_type -> shares.AddGroupReq
-	76,  // 87: shares.shares.GetLq:input_type -> shares.GetLqReq
-	4,   // 88: shares.shares.GetHejjw:input_type -> shares.GetHejjwReq
-	103, // 89: shares.shares.GetDailyCheck:input_type -> common.Empty
-	103, // 90: shares.shares.GetClmx:input_type -> common.Empty
-	86,  // 91: shares.shares.GetMyYd:input_type -> shares.GetMyYdReq
-	46,  // 92: shares.shares.GetHyRm:input_type -> shares.GetHyRmReq
-	103, // 93: shares.shares.GetMyTeam:input_type -> common.Empty
-	43,  // 94: shares.shares.GetMyTeamDetail:input_type -> shares.GetMyTeamDetailReq
-	41,  // 95: shares.shares.GetHyMmadd:input_type -> shares.GetHyMmaddReq
-	41,  // 96: shares.shares.GetAllZyb:input_type -> shares.GetHyMmaddReq
-	36,  // 97: shares.shares.GetSharesKline:input_type -> shares.GetSharesKlineReq
-	36,  // 98: shares.shares.GetSharesKlineMore:input_type -> shares.GetSharesKlineReq
-	36,  // 99: shares.shares.GetFundKline:input_type -> shares.GetSharesKlineReq
-	36,  // 100: shares.shares.GetGzKline:input_type -> shares.GetSharesKlineReq
-	33,  // 101: shares.shares.GetHotHyName:input_type -> shares.GetHotHyNameReq
-	28,  // 102: shares.shares.GetYyq:input_type -> shares.GetYyqReq
-	21,  // 103: shares.shares.GetMrtList:input_type -> shares.GetMrtListReq
-	19,  // 104: shares.shares.GetMrtCode:input_type -> shares.GetMrtCodeReq
-	18,  // 105: shares.shares.UpsetMrtCode:input_type -> shares.UpsetMrtCodeReq
-	14,  // 106: shares.shares.GetMrtDetail:input_type -> shares.GetMrtDetailReq
-	8,   // 107: shares.shares.GetZybHyKline:input_type -> shares.GetZybHyKlineReq
-	2,   // 108: shares.shares.GetLicence:input_type -> shares.GetLicenceReq
-	95,  // 109: shares.shares.GetTsc:input_type -> shares.GetTscReq
-	53,  // 110: shares.shares.GetGroup:output_type -> shares.GetGroupResp
-	73,  // 111: shares.shares.GetMyGroup:output_type -> shares.GetMyGroupResp
-	75,  // 112: shares.shares.UpsetGroupCode:output_type -> shares.UpsetGroupCodeResp
-	55,  // 113: shares.shares.Search:output_type -> shares.SearchResp
-	58,  // 114: shares.shares.Gets:output_type -> shares.GetsResp
-	60,  // 115: shares.shares.GetAllCodeName:output_type -> shares.GetAllCodeNameResp
-	62,  // 116: shares.shares.AddMyCode:output_type -> shares.AddMyCodeResp
-	65,  // 117: shares.shares.GetMyCode:output_type -> shares.GetMyCodeResp
-	67,  // 118: shares.shares.GetMsg:output_type -> shares.GetMsgResp
-	68,  // 119: shares.shares.HaveNewMsg:output_type -> shares.HaveNewMsgResp
-	103, // 120: shares.shares.DeleteMyCode:output_type -> common.Empty
-	103, // 121: shares.shares.AddGroup:output_type -> common.Empty
-	77,  // 122: shares.shares.GetLq:output_type -> shares.GetLqResp
-	24,  // 123: shares.shares.GetHejjw:output_type -> shares.GetHejjwResp
-	49,  // 124: shares.shares.GetDailyCheck:output_type -> shares.GetDailyCheckResp
-	6,   // 125: shares.shares.GetClmx:output_type -> shares.GetClmxResp
-	85,  // 126: shares.shares.GetMyYd:output_type -> shares.GetMyYdResp
-	47,  // 127: shares.shares.GetHyRm:output_type -> shares.GetHyRmResp
-	45,  // 128: shares.shares.GetMyTeam:output_type -> shares.GetMyTeamResp
-	44,  // 129: shares.shares.GetMyTeamDetail:output_type -> shares.GetMyTeamDetailResp
-	91,  // 130: shares.shares.GetHyMmadd:output_type -> shares.TblResp
-	91,  // 131: shares.shares.GetAllZyb:output_type -> shares.TblResp
-	37,  // 132: shares.shares.GetSharesKline:output_type -> shares.GetSharesKlineResp
-	38,  // 133: shares.shares.GetSharesKlineMore:output_type -> shares.GetSharesKlineMoreResp
-	30,  // 134: shares.shares.GetFundKline:output_type -> shares.GetFundKlineResp
-	40,  // 135: shares.shares.GetGzKline:output_type -> shares.GZPeResp
-	34,  // 136: shares.shares.GetHotHyName:output_type -> shares.GetHotHyNameResp
-	29,  // 137: shares.shares.GetYyq:output_type -> shares.GetYyqResp
-	22,  // 138: shares.shares.GetMrtList:output_type -> shares.GetMrtListResp
-	20,  // 139: shares.shares.GetMrtCode:output_type -> shares.GetMrtCodeResp
-	103, // 140: shares.shares.UpsetMrtCode:output_type -> common.Empty
-	15,  // 141: shares.shares.GetMrtDetail:output_type -> shares.GetMrtDetailResp
-	9,   // 142: shares.shares.GetZybHyKline:output_type -> shares.GetZybHyKlineResp
-	3,   // 143: shares.shares.GetLicence:output_type -> shares.GetLicenceResp
-	97,  // 144: shares.shares.GetTsc:output_type -> shares.GetTscResp
-	110, // [110:145] is the sub-list for method output_type
-	75,  // [75:110] is the sub-list for method input_type
-	75,  // [75:75] is the sub-list for extension type_name
-	75,  // [75:75] is the sub-list for extension extendee
-	0,   // [0:75] is the sub-list for field type_name
+	93,  // 64: shares.TblResp.list:type_name -> shares.TrInfo
+	39,  // 65: shares.GetCwsjResp.roe:type_name -> shares.GdsInfo
+	39,  // 66: shares.GetCwsjResp.eps:type_name -> shares.GdsInfo
+	39,  // 67: shares.GetCwsjResp.jlr:type_name -> shares.GdsInfo
+	39,  // 68: shares.GetCwsjResp.xsjll:type_name -> shares.GdsInfo
+	39,  // 69: shares.GetCwsjResp.jyxjl:type_name -> shares.GdsInfo
+	39,  // 70: shares.GetCwsjResp.zzc:type_name -> shares.GdsInfo
+	39,  // 71: shares.GetCwsjResp.zfz:type_name -> shares.GdsInfo
+	96,  // 72: shares.GetTscResp.list:type_name -> shares.TscInfo
+	99,  // 73: shares.SearchTscResp.list:type_name -> shares.TscInfo1
+	103, // 74: shares.shares.GetGroup:input_type -> common.Empty
+	71,  // 75: shares.shares.GetMyGroup:input_type -> shares.CodeReq
+	74,  // 76: shares.shares.UpsetGroupCode:input_type -> shares.UpsetGroupCodeReq
+	54,  // 77: shares.shares.Search:input_type -> shares.SearchReq
+	56,  // 78: shares.shares.Gets:input_type -> shares.GetsReq
+	103, // 79: shares.shares.GetAllCodeName:input_type -> common.Empty
+	61,  // 80: shares.shares.AddMyCode:input_type -> shares.AddMyCodeReq
+	63,  // 81: shares.shares.GetMyCode:input_type -> shares.GetMyCodeReq
+	103, // 82: shares.shares.GetMsg:input_type -> common.Empty
+	103, // 83: shares.shares.HaveNewMsg:input_type -> common.Empty
+	69,  // 84: shares.shares.DeleteMyCode:input_type -> shares.DeleteMyCodeReq
+	70,  // 85: shares.shares.AddGroup:input_type -> shares.AddGroupReq
+	76,  // 86: shares.shares.GetLq:input_type -> shares.GetLqReq
+	4,   // 87: shares.shares.GetHejjw:input_type -> shares.GetHejjwReq
+	103, // 88: shares.shares.GetDailyCheck:input_type -> common.Empty
+	103, // 89: shares.shares.GetClmx:input_type -> common.Empty
+	86,  // 90: shares.shares.GetMyYd:input_type -> shares.GetMyYdReq
+	46,  // 91: shares.shares.GetHyRm:input_type -> shares.GetHyRmReq
+	103, // 92: shares.shares.GetMyTeam:input_type -> common.Empty
+	43,  // 93: shares.shares.GetMyTeamDetail:input_type -> shares.GetMyTeamDetailReq
+	41,  // 94: shares.shares.GetHyMmadd:input_type -> shares.GetHyMmaddReq
+	41,  // 95: shares.shares.GetAllZyb:input_type -> shares.GetHyMmaddReq
+	36,  // 96: shares.shares.GetSharesKline:input_type -> shares.GetSharesKlineReq
+	36,  // 97: shares.shares.GetSharesKlineMore:input_type -> shares.GetSharesKlineReq
+	36,  // 98: shares.shares.GetFundKline:input_type -> shares.GetSharesKlineReq
+	36,  // 99: shares.shares.GetGzKline:input_type -> shares.GetSharesKlineReq
+	33,  // 100: shares.shares.GetHotHyName:input_type -> shares.GetHotHyNameReq
+	28,  // 101: shares.shares.GetYyq:input_type -> shares.GetYyqReq
+	21,  // 102: shares.shares.GetMrtList:input_type -> shares.GetMrtListReq
+	19,  // 103: shares.shares.GetMrtCode:input_type -> shares.GetMrtCodeReq
+	18,  // 104: shares.shares.UpsetMrtCode:input_type -> shares.UpsetMrtCodeReq
+	14,  // 105: shares.shares.GetMrtDetail:input_type -> shares.GetMrtDetailReq
+	8,   // 106: shares.shares.GetZybHyKline:input_type -> shares.GetZybHyKlineReq
+	2,   // 107: shares.shares.GetLicence:input_type -> shares.GetLicenceReq
+	95,  // 108: shares.shares.GetTsc:input_type -> shares.GetTscReq
+	53,  // 109: shares.shares.GetGroup:output_type -> shares.GetGroupResp
+	73,  // 110: shares.shares.GetMyGroup:output_type -> shares.GetMyGroupResp
+	75,  // 111: shares.shares.UpsetGroupCode:output_type -> shares.UpsetGroupCodeResp
+	55,  // 112: shares.shares.Search:output_type -> shares.SearchResp
+	58,  // 113: shares.shares.Gets:output_type -> shares.GetsResp
+	60,  // 114: shares.shares.GetAllCodeName:output_type -> shares.GetAllCodeNameResp
+	62,  // 115: shares.shares.AddMyCode:output_type -> shares.AddMyCodeResp
+	65,  // 116: shares.shares.GetMyCode:output_type -> shares.GetMyCodeResp
+	67,  // 117: shares.shares.GetMsg:output_type -> shares.GetMsgResp
+	68,  // 118: shares.shares.HaveNewMsg:output_type -> shares.HaveNewMsgResp
+	103, // 119: shares.shares.DeleteMyCode:output_type -> common.Empty
+	103, // 120: shares.shares.AddGroup:output_type -> common.Empty
+	77,  // 121: shares.shares.GetLq:output_type -> shares.GetLqResp
+	24,  // 122: shares.shares.GetHejjw:output_type -> shares.GetHejjwResp
+	49,  // 123: shares.shares.GetDailyCheck:output_type -> shares.GetDailyCheckResp
+	6,   // 124: shares.shares.GetClmx:output_type -> shares.GetClmxResp
+	85,  // 125: shares.shares.GetMyYd:output_type -> shares.GetMyYdResp
+	47,  // 126: shares.shares.GetHyRm:output_type -> shares.GetHyRmResp
+	45,  // 127: shares.shares.GetMyTeam:output_type -> shares.GetMyTeamResp
+	44,  // 128: shares.shares.GetMyTeamDetail:output_type -> shares.GetMyTeamDetailResp
+	91,  // 129: shares.shares.GetHyMmadd:output_type -> shares.TblResp
+	91,  // 130: shares.shares.GetAllZyb:output_type -> shares.TblResp
+	37,  // 131: shares.shares.GetSharesKline:output_type -> shares.GetSharesKlineResp
+	38,  // 132: shares.shares.GetSharesKlineMore:output_type -> shares.GetSharesKlineMoreResp
+	30,  // 133: shares.shares.GetFundKline:output_type -> shares.GetFundKlineResp
+	40,  // 134: shares.shares.GetGzKline:output_type -> shares.GZPeResp
+	34,  // 135: shares.shares.GetHotHyName:output_type -> shares.GetHotHyNameResp
+	29,  // 136: shares.shares.GetYyq:output_type -> shares.GetYyqResp
+	22,  // 137: shares.shares.GetMrtList:output_type -> shares.GetMrtListResp
+	20,  // 138: shares.shares.GetMrtCode:output_type -> shares.GetMrtCodeResp
+	103, // 139: shares.shares.UpsetMrtCode:output_type -> common.Empty
+	15,  // 140: shares.shares.GetMrtDetail:output_type -> shares.GetMrtDetailResp
+	9,   // 141: shares.shares.GetZybHyKline:output_type -> shares.GetZybHyKlineResp
+	3,   // 142: shares.shares.GetLicence:output_type -> shares.GetLicenceResp
+	97,  // 143: shares.shares.GetTsc:output_type -> shares.GetTscResp
+	109, // [109:144] is the sub-list for method output_type
+	74,  // [74:109] is the sub-list for method input_type
+	74,  // [74:74] is the sub-list for extension type_name
+	74,  // [74:74] is the sub-list for extension extendee
+	0,   // [0:74] is the sub-list for field type_name
 }
 
 func init() { file_shares_shares_proto_init() }
