@@ -63,6 +63,8 @@ message ProductInfo{
     string priceStr = 15;// 价格字符串
     string originalPriceStr = 16;// 商品原始价格
 	string tag = 17;// 标签
+	string  title = 18; 	// 标题
+	string period = 19;	// 期限
 }
 
 // CartInfo 购买列表

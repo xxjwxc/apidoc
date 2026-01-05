@@ -220,6 +220,8 @@ type ProductInfo struct {
 	PriceStr         string                 `protobuf:"bytes,15,opt,name=priceStr,proto3" json:"priceStr" jsonschema_description:"价格字符串"`                    // 价格字符串
 	OriginalPriceStr string                 `protobuf:"bytes,16,opt,name=originalPriceStr,proto3" json:"originalPriceStr" jsonschema_description:"商品原始价格"`   // 商品原始价格
 	Tag              string                 `protobuf:"bytes,17,opt,name=tag,proto3" json:"tag" jsonschema_description:"标签"`                                 // 标签
+	Title            string                 `protobuf:"bytes,18,opt,name=title,proto3" json:"title" jsonschema_description:"标题"`                             // 标题
+	Period           string                 `protobuf:"bytes,19,opt,name=period,proto3" json:"period" jsonschema_description:"期限"`                           // 期限
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -369,6 +371,20 @@ func (x *ProductInfo) GetOriginalPriceStr() string {
 func (x *ProductInfo) GetTag() string {
 	if x != nil {
 		return x.Tag
+	}
+	return ""
+}
+
+func (x *ProductInfo) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *ProductInfo) GetPeriod() string {
+	if x != nil {
+		return x.Period
 	}
 	return ""
 }
@@ -797,7 +813,7 @@ const file_shares_order_proto_rawDesc = "" +
 	"\n" +
 	"pageNumber\x18\x02 \x01(\x05R\n" +
 	"pageNumber\x12)\n" +
-	"\x05items\x18\x03 \x03(\v2\x13.shares.ProductInfoR\x05items\"\xd3\x03\n" +
+	"\x05items\x18\x03 \x03(\v2\x13.shares.ProductInfoR\x05items\"\x81\x04\n" +
 	"\vProductInfo\x12\x12\n" +
 	"\x04gpid\x18\x01 \x01(\tR\x04gpid\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
@@ -818,7 +834,9 @@ const file_shares_order_proto_rawDesc = "" +
 	"\x04sell\x18\x0e \x01(\bR\x04sell\x12\x1a\n" +
 	"\bpriceStr\x18\x0f \x01(\tR\bpriceStr\x12*\n" +
 	"\x10originalPriceStr\x18\x10 \x01(\tR\x10originalPriceStr\x12\x10\n" +
-	"\x03tag\x18\x11 \x01(\tR\x03tag\"6\n" +
+	"\x03tag\x18\x11 \x01(\tR\x03tag\x12\x14\n" +
+	"\x05title\x18\x12 \x01(\tR\x05title\x12\x16\n" +
+	"\x06period\x18\x13 \x01(\tR\x06period\"6\n" +
 	"\bCartInfo\x12\x12\n" +
 	"\x04gpid\x18\x01 \x01(\tR\x04gpid\x12\x16\n" +
 	"\x06number\x18\x02 \x01(\x03R\x06number\"O\n" +
