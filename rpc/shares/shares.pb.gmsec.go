@@ -39,7 +39,9 @@ type SharesClient interface {
 	// Gets 精确查找代码
 	Gets(ctx context.Context, in *GetsReq, opts ...grpc.CallOption) (*GetsResp, error)
 	// GetAllCodeName 获取所有中文
-	GetAllCodeName(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetAllCodeNameResp, error)
+	//
+	//	rpc GetAllCodeName(common.Empty) returns (GetAllCodeNameResp){}
+	//
 	// AddMyCode 给自己添加一个监听
 	AddMyCode(ctx context.Context, in *AddMyCodeReq, opts ...grpc.CallOption) (*AddMyCodeResp, error)
 	// GetMyCode 获取我的监听,code不为空获取全部
@@ -190,20 +192,6 @@ func (c *sharesClient) Gets(ctx context.Context, in *GetsReq, opts ...grpc.CallO
 	defer conn.Close()
 	out := new(GetsResp)
 	err = conn.Invoke(ctx, "/shares.shares/Gets", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sharesClient) GetAllCodeName(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*GetAllCodeNameResp, error) {
-	conn, err := c.cc.Next()
-	if err != nil {
-		return nil, err
-	}
-	defer conn.Close()
-	out := new(GetAllCodeNameResp)
-	err = conn.Invoke(ctx, "/shares.shares/GetAllCodeName", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -629,7 +617,9 @@ type SharesServer interface {
 	// Gets 精确查找代码
 	Gets(context.Context, *GetsReq) (*GetsResp, error)
 	// GetAllCodeName 获取所有中文
-	GetAllCodeName(context.Context, *common.Empty) (*GetAllCodeNameResp, error)
+	//
+	//	rpc GetAllCodeName(common.Empty) returns (GetAllCodeNameResp){}
+	//
 	// AddMyCode 给自己添加一个监听
 	AddMyCode(context.Context, *AddMyCodeReq) (*AddMyCodeResp, error)
 	// GetMyCode 获取我的监听,code不为空获取全部
@@ -709,9 +699,6 @@ func (*UnimplementedSharesServer) Search(context.Context, *SearchReq) (*SearchRe
 }
 func (*UnimplementedSharesServer) Gets(context.Context, *GetsReq) (*GetsResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Gets not implemented")
-}
-func (*UnimplementedSharesServer) GetAllCodeName(context.Context, *common.Empty) (*GetAllCodeNameResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAllCodeName not implemented")
 }
 func (*UnimplementedSharesServer) AddMyCode(context.Context, *AddMyCodeReq) (*AddMyCodeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddMyCode not implemented")
@@ -891,24 +878,6 @@ func _Shares_Gets_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SharesServer).Gets(ctx, req.(*GetsReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Shares_GetAllCodeName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(common.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SharesServer).GetAllCodeName(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/shares.shares/GetAllCodeName",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SharesServer).GetAllCodeName(ctx, req.(*common.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1458,10 +1427,6 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Gets",
 			Handler:    _Shares_Gets_Handler,
-		},
-		{
-			MethodName: "GetAllCodeName",
-			Handler:    _Shares_GetAllCodeName_Handler,
 		},
 		{
 			MethodName: "AddMyCode",

@@ -19,7 +19,7 @@ service shares {
      // Gets 精确查找代码
      rpc Gets(GetsReq) returns (GetsResp){}
      // GetAllCodeName 获取所有中文
-     rpc GetAllCodeName(common.Empty) returns (GetAllCodeNameResp){}
+    //  rpc GetAllCodeName(common.Empty) returns (GetAllCodeNameResp){}
      // AddMyCode 给自己添加一个监听
      rpc AddMyCode(AddMyCodeReq) returns(AddMyCodeResp){}
      // GetMyCode 获取我的监听,code不为空获取全部
@@ -630,6 +630,12 @@ message GetAllCodeNameResp{
     repeated CodeNameInfo list = 1; // 代码列表
 }
 
+message AddMyCodeToGroupReq{
+    string code = 1; // 股票代码
+    string groupName = 2; // 分组名
+   repeated string codes = 3; // 批量添加的股票代码
+}
+
 message AddMyCodeReq{
     string code = 1; // 股票代码
     double price = 2; // 当前价格
@@ -664,7 +670,8 @@ message AddMyCodeResp{
 message GetMyCodeReq{
     string code = 1; // 股票代码
     bool yjzd = 2; // 一键诊断
-    repeated string codes = 3; // 股票代码
+    string groupName = 3; // 分组名
+    repeated string codes = 4; // 股票代码
 }
 
 message AddMyCodeInfo {
@@ -712,6 +719,7 @@ message HaveNewMsgResp{
 
 message DeleteMyCodeReq{
     string code = 1; // 股票代码
+    string groupName = 2; // 分组名
 }
 
 message AddGroupReq{
@@ -894,12 +902,15 @@ message GetTscReq{
 
 message TscInfo{
     string id = 1; // 股票代码
-    string type = 2; // 类型(板块，个股)
-    string ext = 3; // 后缀
+    string code = 2; // 文档
+    string type = 3; // 类型(板块，个股)
+    string ext = 4; // 后缀
     // string sc =4;// 股票代码简写(数字)
 	string name = 5; // 股票名字
     string py = 6; // 拼音
     bool zx = 7; // 是否自选
+    string url = 8; // 跳转地址
+    string doc = 9; // 描述
 }
 
 message GetTscResp{
@@ -912,17 +923,17 @@ message SearchTscReq{
     string query = 2; // 查询
 }
 
-message TscInfo1{
-    string id = 1; // 股票代码
-    string type = 2; // 类型(板块，个股)
-    string ext = 3; // 后缀
-    string doc = 4;
-	string name = 5; // 股票名字
-    // string py = 6; // 拼音
-    string sc = 6;
-    bool zx = 7; // 是否自选
-}
+// message TscInfo1{
+//     string id = 1; // 股票代码
+//     string type = 2; // 类型(板块，个股)
+//     string ext = 3; // 后缀
+//     string doc = 4;
+// 	string name = 5; // 股票名字
+//     // string py = 6; // 拼音
+//     string sc = 6;
+//     bool zx = 7; // 是否自选
+// }
 
 message SearchTscResp{
-    repeated TscInfo1 list = 1;  
+    repeated TscInfo list = 1;  
 }

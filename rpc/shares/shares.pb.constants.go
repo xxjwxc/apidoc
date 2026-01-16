@@ -14,10 +14,6 @@ const (
 	Shares_Search_ToolDesc = "搜索"
 	// 精确查找代码
 	Shares_Gets_ToolDesc = "精确查找代码"
-	// 获取所有中文
-	Shares_GetAllCodeName_ToolDesc = "获取所有中文"
-	// 给自己添加一个监听
-	Shares_AddMyCode_ToolDesc = "给自己添加一个监听"
 	// 获取我的监听,code不为空获取全部
 	Shares_GetMyCode_ToolDesc = "获取我的监听,code不为空获取全部"
 	// 获取消息

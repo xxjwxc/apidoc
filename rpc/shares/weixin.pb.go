@@ -864,7 +864,7 @@ type GetUserInfoResp struct {
 	Province    string                 `protobuf:"bytes,6,opt,name=province,proto3" json:"province" jsonschema_description:"用户所在省份"`                  // 用户所在省份
 	Country     string                 `protobuf:"bytes,7,opt,name=country,proto3" json:"country" jsonschema_description:"用户所在国家"`                    // 用户所在国家
 	Phone       string                 `protobuf:"bytes,8,opt,name=phone,proto3" json:"phone" jsonschema_description:"用户手机号"`                         // 用户手机号
-	Group       string                 `protobuf:"bytes,9,opt,name=group,proto3" json:"group" jsonschema_description:"用户所在分组列表"`                      // 用户所在分组列表
+	Org         string                 `protobuf:"bytes,9,opt,name=org,proto3" json:"org" jsonschema_description:"用户所在分组列表"`                          // 用户所在分组列表
 	Token       int32                  `protobuf:"varint,10,opt,name=token,proto3" json:"token" jsonschema_description:"可用容量"`                        // 可用容量
 	VipOutTime  string                 `protobuf:"bytes,11,opt,name=vipOutTime,proto3" json:"vipOutTime" jsonschema_description:"会员过期时间"`             // 会员过期时间
 	VipLevel    int32                  `protobuf:"varint,12,opt,name=vipLevel,proto3" json:"vipLevel" jsonschema_description:"vip等级"`                 // vip等级
@@ -874,6 +874,7 @@ type GetUserInfoResp struct {
 	Msg         string                 `protobuf:"bytes,16,opt,name=msg,proto3" json:"msg" jsonschema_description:"消息,每日签到等消息"`                       // 消息,每日签到等消息
 	SessionId   string                 `protobuf:"bytes,17,opt,name=sessionId,proto3" json:"sessionId" jsonschema_description:"用户sessionid 用于当前交互使用"` // 用户sessionid 用于当前交互使用
 	OverdueTime int64                  `protobuf:"varint,18,opt,name=overdueTime,proto3" json:"overdueTime" jsonschema_description:"逾期时间点(时间戳)"`      // 逾期时间点(时间戳)
+	Group       string                 `protobuf:"bytes,19,opt,name=group,proto3" json:"group" jsonschema_description:"我的分组"`                         // 我的分组
 	// bool relogin = 19;// 是否重新登录:true 重新登录
 	KvList        []*UserKvInfo `protobuf:"bytes,26,rep,name=kvList,proto3" json:"kvList" jsonschema_description:"bool relogin = 19;// 是否重新登录:true 重新登录"` // 用户自定义信息
 	unknownFields protoimpl.UnknownFields
@@ -966,9 +967,9 @@ func (x *GetUserInfoResp) GetPhone() string {
 	return ""
 }
 
-func (x *GetUserInfoResp) GetGroup() string {
+func (x *GetUserInfoResp) GetOrg() string {
 	if x != nil {
-		return x.Group
+		return x.Org
 	}
 	return ""
 }
@@ -1034,6 +1035,13 @@ func (x *GetUserInfoResp) GetOverdueTime() int64 {
 		return x.OverdueTime
 	}
 	return 0
+}
+
+func (x *GetUserInfoResp) GetGroup() string {
+	if x != nil {
+		return x.Group
+	}
+	return ""
 }
 
 func (x *GetUserInfoResp) GetKvList() []*UserKvInfo {
@@ -1588,7 +1596,7 @@ const file_shares_weixin_proto_rawDesc = "" +
 	"\rGetQrcodeResp\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\"(\n" +
 	"\x0eGetUserInfoReq\x12\x16\n" +
-	"\x06hexinv\x18\x01 \x01(\tR\x06hexinv\"\x85\x04\n" +
+	"\x06hexinv\x18\x01 \x01(\tR\x06hexinv\"\x97\x04\n" +
 	"\x0fGetUserInfoResp\x12\x16\n" +
 	"\x06openid\x18\x01 \x01(\tR\x06openid\x12\x1a\n" +
 	"\bnickName\x18\x02 \x01(\tR\bnickName\x12\x1c\n" +
@@ -1597,8 +1605,8 @@ const file_shares_weixin_proto_rawDesc = "" +
 	"\x04city\x18\x05 \x01(\tR\x04city\x12\x1a\n" +
 	"\bprovince\x18\x06 \x01(\tR\bprovince\x12\x18\n" +
 	"\acountry\x18\a \x01(\tR\acountry\x12\x14\n" +
-	"\x05phone\x18\b \x01(\tR\x05phone\x12\x14\n" +
-	"\x05group\x18\t \x01(\tR\x05group\x12\x14\n" +
+	"\x05phone\x18\b \x01(\tR\x05phone\x12\x10\n" +
+	"\x03org\x18\t \x01(\tR\x03org\x12\x14\n" +
 	"\x05token\x18\n" +
 	" \x01(\x05R\x05token\x12\x1e\n" +
 	"\n" +
@@ -1610,7 +1618,8 @@ const file_shares_weixin_proto_rawDesc = "" +
 	"\tcacheTime\x18\x0f \x01(\x03R\tcacheTime\x12\x10\n" +
 	"\x03msg\x18\x10 \x01(\tR\x03msg\x12\x1c\n" +
 	"\tsessionId\x18\x11 \x01(\tR\tsessionId\x12 \n" +
-	"\voverdueTime\x18\x12 \x01(\x03R\voverdueTime\x12*\n" +
+	"\voverdueTime\x18\x12 \x01(\x03R\voverdueTime\x12\x14\n" +
+	"\x05group\x18\x13 \x01(\tR\x05group\x12*\n" +
 	"\x06kvList\x18\x1a \x03(\v2\x12.shares.UserKvInfoR\x06kvList\"\x90\x01\n" +
 	"\n" +
 	"UserKvInfo\x12\x10\n" +

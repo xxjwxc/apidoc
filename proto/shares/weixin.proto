@@ -133,7 +133,7 @@ message GetUserInfoResp{
 	string  province  = 6;// 用户所在省份
 	string  country  =7; // 用户所在国家 
 	string  phone   = 8;// 用户手机号  
-	string  group =9;// 用户所在分组列表    
+	string  org =9;// 用户所在分组列表    
 	int32   token = 10;// 可用容量 
 	string vipOutTime = 11;// 会员过期时间
 	int32 vipLevel = 12;// vip等级
@@ -143,6 +143,7 @@ message GetUserInfoResp{
 	string msg = 16; // 消息,每日签到等消息
 	string sessionId = 17; // 用户sessionid 用于当前交互使用 
 	int64 overdueTime = 18;// 逾期时间点(时间戳)
+	string  group =19;// 我的分组  
 	// bool relogin = 19;// 是否重新登录:true 重新登录
 	repeated UserKvInfo kvList = 26;// 用户自定义信息
  }
