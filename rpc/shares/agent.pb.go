@@ -522,6 +522,58 @@ func (x *ChatReq) GetAttach() []string {
 	return nil
 }
 
+type WorkFlowReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Tag           int32                  `protobuf:"varint,1,opt,name=tag,proto3" json:"tag" jsonschema_description:"搜索关键字"` // 搜索关键字
+	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code" jsonschema_description:"代码"`   // 代码
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WorkFlowReq) Reset() {
+	*x = WorkFlowReq{}
+	mi := &file_shares_agent_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WorkFlowReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WorkFlowReq) ProtoMessage() {}
+
+func (x *WorkFlowReq) ProtoReflect() protoreflect.Message {
+	mi := &file_shares_agent_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WorkFlowReq.ProtoReflect.Descriptor instead.
+func (*WorkFlowReq) Descriptor() ([]byte, []int) {
+	return file_shares_agent_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *WorkFlowReq) GetTag() int32 {
+	if x != nil {
+		return x.Tag
+	}
+	return 0
+}
+
+func (x *WorkFlowReq) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
 type ChatKv struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key"`
@@ -532,7 +584,7 @@ type ChatKv struct {
 
 func (x *ChatKv) Reset() {
 	*x = ChatKv{}
-	mi := &file_shares_agent_proto_msgTypes[9]
+	mi := &file_shares_agent_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -544,7 +596,7 @@ func (x *ChatKv) String() string {
 func (*ChatKv) ProtoMessage() {}
 
 func (x *ChatKv) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_agent_proto_msgTypes[9]
+	mi := &file_shares_agent_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -557,7 +609,7 @@ func (x *ChatKv) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChatKv.ProtoReflect.Descriptor instead.
 func (*ChatKv) Descriptor() ([]byte, []int) {
-	return file_shares_agent_proto_rawDescGZIP(), []int{9}
+	return file_shares_agent_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ChatKv) GetKey() string {
@@ -583,7 +635,7 @@ type ChatResp struct {
 
 func (x *ChatResp) Reset() {
 	*x = ChatResp{}
-	mi := &file_shares_agent_proto_msgTypes[10]
+	mi := &file_shares_agent_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -595,7 +647,7 @@ func (x *ChatResp) String() string {
 func (*ChatResp) ProtoMessage() {}
 
 func (x *ChatResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_agent_proto_msgTypes[10]
+	mi := &file_shares_agent_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -608,7 +660,7 @@ func (x *ChatResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChatResp.ProtoReflect.Descriptor instead.
 func (*ChatResp) Descriptor() ([]byte, []int) {
-	return file_shares_agent_proto_rawDescGZIP(), []int{10}
+	return file_shares_agent_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ChatResp) GetList() []*ChatKv {
@@ -654,7 +706,10 @@ const file_shares_agent_proto_rawDesc = "" +
 	"\tsessionId\x18\x02 \x01(\tR\tsessionId\x12\x10\n" +
 	"\x03key\x18\x03 \x01(\tR\x03key\x12\x14\n" +
 	"\x05think\x18\x04 \x01(\bR\x05think\x12\x16\n" +
-	"\x06attach\x18\x05 \x03(\tR\x06attach\"0\n" +
+	"\x06attach\x18\x05 \x03(\tR\x06attach\"3\n" +
+	"\vWorkFlowReq\x12\x10\n" +
+	"\x03tag\x18\x01 \x01(\x05R\x03tag\x12\x12\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\"0\n" +
 	"\x06ChatKv\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value\".\n" +
@@ -680,7 +735,7 @@ func file_shares_agent_proto_rawDescGZIP() []byte {
 	return file_shares_agent_proto_rawDescData
 }
 
-var file_shares_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_shares_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_shares_agent_proto_goTypes = []any{
 	(*SearchsReq)(nil),         // 0: shares.SearchsReq
 	(*SearchCodeReq)(nil),      // 1: shares.SearchCodeReq
@@ -691,24 +746,25 @@ var file_shares_agent_proto_goTypes = []any{
 	(*SearchCodeInfoReq)(nil),  // 6: shares.SearchCodeInfoReq
 	(*SearchCodeinfoResp)(nil), // 7: shares.SearchCodeinfoResp
 	(*ChatReq)(nil),            // 8: shares.ChatReq
-	(*ChatKv)(nil),             // 9: shares.ChatKv
-	(*ChatResp)(nil),           // 10: shares.ChatResp
+	(*WorkFlowReq)(nil),        // 9: shares.WorkFlowReq
+	(*ChatKv)(nil),             // 10: shares.ChatKv
+	(*ChatResp)(nil),           // 11: shares.ChatResp
 }
 var file_shares_agent_proto_depIdxs = []int32{
-	9, // 0: shares.ChatResp.list:type_name -> shares.ChatKv
-	6, // 1: shares.agent.SearchCodeInfo:input_type -> shares.SearchCodeInfoReq
-	4, // 2: shares.agent.SearchHy:input_type -> shares.SearchHyReq
-	1, // 3: shares.agent.SearchCode:input_type -> shares.SearchCodeReq
-	0, // 4: shares.agent.Searchs:input_type -> shares.SearchsReq
-	7, // 5: shares.agent.SearchCodeInfo:output_type -> shares.SearchCodeinfoResp
-	5, // 6: shares.agent.SearchHy:output_type -> shares.SearchHyResp
-	3, // 7: shares.agent.SearchCode:output_type -> shares.SearchCodeResp
-	3, // 8: shares.agent.Searchs:output_type -> shares.SearchCodeResp
-	5, // [5:9] is the sub-list for method output_type
-	1, // [1:5] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	10, // 0: shares.ChatResp.list:type_name -> shares.ChatKv
+	6,  // 1: shares.agent.SearchCodeInfo:input_type -> shares.SearchCodeInfoReq
+	4,  // 2: shares.agent.SearchHy:input_type -> shares.SearchHyReq
+	1,  // 3: shares.agent.SearchCode:input_type -> shares.SearchCodeReq
+	0,  // 4: shares.agent.Searchs:input_type -> shares.SearchsReq
+	7,  // 5: shares.agent.SearchCodeInfo:output_type -> shares.SearchCodeinfoResp
+	5,  // 6: shares.agent.SearchHy:output_type -> shares.SearchHyResp
+	3,  // 7: shares.agent.SearchCode:output_type -> shares.SearchCodeResp
+	3,  // 8: shares.agent.Searchs:output_type -> shares.SearchCodeResp
+	5,  // [5:9] is the sub-list for method output_type
+	1,  // [1:5] is the sub-list for method input_type
+	1,  // [1:1] is the sub-list for extension type_name
+	1,  // [1:1] is the sub-list for extension extendee
+	0,  // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_shares_agent_proto_init() }
@@ -722,7 +778,7 @@ func file_shares_agent_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_shares_agent_proto_rawDesc), len(file_shares_agent_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
