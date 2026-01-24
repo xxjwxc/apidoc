@@ -384,6 +384,21 @@ message GetHotHyNameReq {
     int32 days =2; // 天数
 }
 
+
+message JointSearchInfo{
+    string name = 1;
+    string code = 2;
+}
+
+message JointSearchReq {
+    repeated JointSearchInfo list = 1; // 行业名字
+    int32 days =2; // 天数
+}
+
+message JointSearchResp {
+   repeated Group list = 1; // 列表
+}
+
 message GetHotHyNameResp{
     repeated HyCodeInfo list = 1; // 行业名字
 }
