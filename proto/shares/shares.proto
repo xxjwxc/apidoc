@@ -396,7 +396,7 @@ message JointSearchReq {
 }
 
 message JointSearchResp {
-   repeated Group list = 1; // 列表
+   repeated SharesInfo list = 1; // 列表
 }
 
 message GetHotHyNameResp{
@@ -496,11 +496,11 @@ message GetHyMmaddReq {
     repeated string hyCode = 4; // 行业名字
 }
 
-message GetHyDjHjsc {
-    int64 days = 1; // 拿几天
-    double percent = 2; // 区间(起点都是0)
-    repeated string hyCode = 4; // 行业叠加
-}
+// message GetHyDjHjsc {
+//     int64 days = 1; // 拿几天
+//     double percent = 2; // 区间(起点都是0)
+//     repeated string hyCode = 4; // 行业叠加
+// }
 
 message GetMyTeamDetailReq {
     string name = 1;
@@ -951,4 +951,10 @@ message SearchTscReq{
 
 message SearchTscResp{
     repeated TscInfo list = 1;  
+}
+
+// SharesAttachInfo 股票信息
+message SharesAttachInfo{
+    string code = 1; // 股票代码
+    string attach = 15; // 附加信息
 }
