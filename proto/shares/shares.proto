@@ -958,3 +958,12 @@ message SharesAttachInfo{
     string code = 1; // 股票代码
     string attach = 15; // 附加信息
 }
+
+message TaoshengInfo{
+    string code = 1; // 股票代码
+    string doc = 2; // 概念描述
+}
+
+message GetTaoshengResp {
+        repeated TaoshengInfo list = 1; 
+}
