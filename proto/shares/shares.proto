@@ -359,6 +359,16 @@ message GetFundKlineResp {
     string mzpxbTitle = 19; // 募资派现比例
 }
 
+message GetHKMarketKlineResp {
+    repeated string times = 1; // x轴数据 -
+    repeated double kLine = 2; // 数据 -
+    repeated double ggt = 3; // 港股通持股占比
+    repeated double gk = 4; // 沽空
+    repeated double hgNum = 5; // 当日回购数量
+    repeated double hgPrice = 6; // 当日回购价格
+     repeated double hgTotalPrice = 7; // 当前总的回购成本价值
+}
+
 message GetJgKlineResp {
     repeated string times = 1; // x轴数据
     string colorr = 2; // 红的颜色

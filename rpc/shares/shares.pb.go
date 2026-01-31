@@ -2400,6 +2400,98 @@ func (x *GetFundKlineResp) GetMzpxbTitle() string {
 	return ""
 }
 
+type GetHKMarketKlineResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Times         []string               `protobuf:"bytes,1,rep,name=times,proto3" json:"times" jsonschema_description:"x轴数据 -"`                            // x轴数据 -
+	KLine         []float64              `protobuf:"fixed64,2,rep,packed,name=kLine,proto3" json:"kLine" jsonschema_description:"数据 -"`                     // 数据 -
+	Ggt           []float64              `protobuf:"fixed64,3,rep,packed,name=ggt,proto3" json:"ggt" jsonschema_description:"港股通持股占比"`                      // 港股通持股占比
+	Gk            []float64              `protobuf:"fixed64,4,rep,packed,name=gk,proto3" json:"gk" jsonschema_description:"沽空"`                             // 沽空
+	HgNum         []float64              `protobuf:"fixed64,5,rep,packed,name=hgNum,proto3" json:"hgNum" jsonschema_description:"当日回购数量"`                   // 当日回购数量
+	HgPrice       []float64              `protobuf:"fixed64,6,rep,packed,name=hgPrice,proto3" json:"hgPrice" jsonschema_description:"当日回购价格"`               // 当日回购价格
+	HgTotalPrice  []float64              `protobuf:"fixed64,7,rep,packed,name=hgTotalPrice,proto3" json:"hgTotalPrice" jsonschema_description:"当前总的回购成本价值"` // 当前总的回购成本价值
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetHKMarketKlineResp) Reset() {
+	*x = GetHKMarketKlineResp{}
+	mi := &file_shares_shares_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetHKMarketKlineResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetHKMarketKlineResp) ProtoMessage() {}
+
+func (x *GetHKMarketKlineResp) ProtoReflect() protoreflect.Message {
+	mi := &file_shares_shares_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetHKMarketKlineResp.ProtoReflect.Descriptor instead.
+func (*GetHKMarketKlineResp) Descriptor() ([]byte, []int) {
+	return file_shares_shares_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *GetHKMarketKlineResp) GetTimes() []string {
+	if x != nil {
+		return x.Times
+	}
+	return nil
+}
+
+func (x *GetHKMarketKlineResp) GetKLine() []float64 {
+	if x != nil {
+		return x.KLine
+	}
+	return nil
+}
+
+func (x *GetHKMarketKlineResp) GetGgt() []float64 {
+	if x != nil {
+		return x.Ggt
+	}
+	return nil
+}
+
+func (x *GetHKMarketKlineResp) GetGk() []float64 {
+	if x != nil {
+		return x.Gk
+	}
+	return nil
+}
+
+func (x *GetHKMarketKlineResp) GetHgNum() []float64 {
+	if x != nil {
+		return x.HgNum
+	}
+	return nil
+}
+
+func (x *GetHKMarketKlineResp) GetHgPrice() []float64 {
+	if x != nil {
+		return x.HgPrice
+	}
+	return nil
+}
+
+func (x *GetHKMarketKlineResp) GetHgTotalPrice() []float64 {
+	if x != nil {
+		return x.HgTotalPrice
+	}
+	return nil
+}
+
 type GetJgKlineResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Times         []string               `protobuf:"bytes,1,rep,name=times,proto3" json:"times" jsonschema_description:"x轴数据"`        // x轴数据
@@ -2419,7 +2511,7 @@ type GetJgKlineResp struct {
 
 func (x *GetJgKlineResp) Reset() {
 	*x = GetJgKlineResp{}
-	mi := &file_shares_shares_proto_msgTypes[31]
+	mi := &file_shares_shares_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2431,7 +2523,7 @@ func (x *GetJgKlineResp) String() string {
 func (*GetJgKlineResp) ProtoMessage() {}
 
 func (x *GetJgKlineResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[31]
+	mi := &file_shares_shares_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2444,7 +2536,7 @@ func (x *GetJgKlineResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetJgKlineResp.ProtoReflect.Descriptor instead.
 func (*GetJgKlineResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{31}
+	return file_shares_shares_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *GetJgKlineResp) GetTimes() []string {
@@ -2534,7 +2626,7 @@ type EchartsKeyLineInfo struct {
 
 func (x *EchartsKeyLineInfo) Reset() {
 	*x = EchartsKeyLineInfo{}
-	mi := &file_shares_shares_proto_msgTypes[32]
+	mi := &file_shares_shares_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2546,7 +2638,7 @@ func (x *EchartsKeyLineInfo) String() string {
 func (*EchartsKeyLineInfo) ProtoMessage() {}
 
 func (x *EchartsKeyLineInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[32]
+	mi := &file_shares_shares_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2559,7 +2651,7 @@ func (x *EchartsKeyLineInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EchartsKeyLineInfo.ProtoReflect.Descriptor instead.
 func (*EchartsKeyLineInfo) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{32}
+	return file_shares_shares_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *EchartsKeyLineInfo) GetName() string {
@@ -2586,7 +2678,7 @@ type GetHotHyNameReq struct {
 
 func (x *GetHotHyNameReq) Reset() {
 	*x = GetHotHyNameReq{}
-	mi := &file_shares_shares_proto_msgTypes[33]
+	mi := &file_shares_shares_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2598,7 +2690,7 @@ func (x *GetHotHyNameReq) String() string {
 func (*GetHotHyNameReq) ProtoMessage() {}
 
 func (x *GetHotHyNameReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[33]
+	mi := &file_shares_shares_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2611,7 +2703,7 @@ func (x *GetHotHyNameReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHotHyNameReq.ProtoReflect.Descriptor instead.
 func (*GetHotHyNameReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{33}
+	return file_shares_shares_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *GetHotHyNameReq) GetNames() []string {
@@ -2638,7 +2730,7 @@ type JointSearchInfo struct {
 
 func (x *JointSearchInfo) Reset() {
 	*x = JointSearchInfo{}
-	mi := &file_shares_shares_proto_msgTypes[34]
+	mi := &file_shares_shares_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2650,7 +2742,7 @@ func (x *JointSearchInfo) String() string {
 func (*JointSearchInfo) ProtoMessage() {}
 
 func (x *JointSearchInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[34]
+	mi := &file_shares_shares_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2663,7 +2755,7 @@ func (x *JointSearchInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JointSearchInfo.ProtoReflect.Descriptor instead.
 func (*JointSearchInfo) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{34}
+	return file_shares_shares_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *JointSearchInfo) GetName() string {
@@ -2690,7 +2782,7 @@ type JointSearchReq struct {
 
 func (x *JointSearchReq) Reset() {
 	*x = JointSearchReq{}
-	mi := &file_shares_shares_proto_msgTypes[35]
+	mi := &file_shares_shares_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2702,7 +2794,7 @@ func (x *JointSearchReq) String() string {
 func (*JointSearchReq) ProtoMessage() {}
 
 func (x *JointSearchReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[35]
+	mi := &file_shares_shares_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2715,7 +2807,7 @@ func (x *JointSearchReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JointSearchReq.ProtoReflect.Descriptor instead.
 func (*JointSearchReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{35}
+	return file_shares_shares_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *JointSearchReq) GetList() []*JointSearchInfo {
@@ -2741,7 +2833,7 @@ type JointSearchResp struct {
 
 func (x *JointSearchResp) Reset() {
 	*x = JointSearchResp{}
-	mi := &file_shares_shares_proto_msgTypes[36]
+	mi := &file_shares_shares_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2753,7 +2845,7 @@ func (x *JointSearchResp) String() string {
 func (*JointSearchResp) ProtoMessage() {}
 
 func (x *JointSearchResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[36]
+	mi := &file_shares_shares_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2766,7 +2858,7 @@ func (x *JointSearchResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JointSearchResp.ProtoReflect.Descriptor instead.
 func (*JointSearchResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{36}
+	return file_shares_shares_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *JointSearchResp) GetList() []*SharesInfo {
@@ -2785,7 +2877,7 @@ type GetHotHyNameResp struct {
 
 func (x *GetHotHyNameResp) Reset() {
 	*x = GetHotHyNameResp{}
-	mi := &file_shares_shares_proto_msgTypes[37]
+	mi := &file_shares_shares_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2797,7 +2889,7 @@ func (x *GetHotHyNameResp) String() string {
 func (*GetHotHyNameResp) ProtoMessage() {}
 
 func (x *GetHotHyNameResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[37]
+	mi := &file_shares_shares_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2810,7 +2902,7 @@ func (x *GetHotHyNameResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHotHyNameResp.ProtoReflect.Descriptor instead.
 func (*GetHotHyNameResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{37}
+	return file_shares_shares_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *GetHotHyNameResp) GetList() []*HyCodeInfo {
@@ -2830,7 +2922,7 @@ type HyCodeInfo struct {
 
 func (x *HyCodeInfo) Reset() {
 	*x = HyCodeInfo{}
-	mi := &file_shares_shares_proto_msgTypes[38]
+	mi := &file_shares_shares_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2842,7 +2934,7 @@ func (x *HyCodeInfo) String() string {
 func (*HyCodeInfo) ProtoMessage() {}
 
 func (x *HyCodeInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[38]
+	mi := &file_shares_shares_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2855,7 +2947,7 @@ func (x *HyCodeInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HyCodeInfo.ProtoReflect.Descriptor instead.
 func (*HyCodeInfo) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{38}
+	return file_shares_shares_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *HyCodeInfo) GetName() string {
@@ -2882,7 +2974,7 @@ type GetSharesKlineReq struct {
 
 func (x *GetSharesKlineReq) Reset() {
 	*x = GetSharesKlineReq{}
-	mi := &file_shares_shares_proto_msgTypes[39]
+	mi := &file_shares_shares_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2894,7 +2986,7 @@ func (x *GetSharesKlineReq) String() string {
 func (*GetSharesKlineReq) ProtoMessage() {}
 
 func (x *GetSharesKlineReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[39]
+	mi := &file_shares_shares_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2907,7 +2999,7 @@ func (x *GetSharesKlineReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSharesKlineReq.ProtoReflect.Descriptor instead.
 func (*GetSharesKlineReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{39}
+	return file_shares_shares_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *GetSharesKlineReq) GetCode() string {
@@ -2955,7 +3047,7 @@ type GetSharesKlineResp struct {
 
 func (x *GetSharesKlineResp) Reset() {
 	*x = GetSharesKlineResp{}
-	mi := &file_shares_shares_proto_msgTypes[40]
+	mi := &file_shares_shares_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2967,7 +3059,7 @@ func (x *GetSharesKlineResp) String() string {
 func (*GetSharesKlineResp) ProtoMessage() {}
 
 func (x *GetSharesKlineResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[40]
+	mi := &file_shares_shares_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2980,7 +3072,7 @@ func (x *GetSharesKlineResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSharesKlineResp.ProtoReflect.Descriptor instead.
 func (*GetSharesKlineResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{40}
+	return file_shares_shares_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *GetSharesKlineResp) GetColorr() string {
@@ -3163,7 +3255,7 @@ type GetSharesKlineMoreResp struct {
 
 func (x *GetSharesKlineMoreResp) Reset() {
 	*x = GetSharesKlineMoreResp{}
-	mi := &file_shares_shares_proto_msgTypes[41]
+	mi := &file_shares_shares_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3175,7 +3267,7 @@ func (x *GetSharesKlineMoreResp) String() string {
 func (*GetSharesKlineMoreResp) ProtoMessage() {}
 
 func (x *GetSharesKlineMoreResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[41]
+	mi := &file_shares_shares_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3188,7 +3280,7 @@ func (x *GetSharesKlineMoreResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSharesKlineMoreResp.ProtoReflect.Descriptor instead.
 func (*GetSharesKlineMoreResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{41}
+	return file_shares_shares_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *GetSharesKlineMoreResp) GetTimes() []string {
@@ -3341,7 +3433,7 @@ type GdsInfo struct {
 
 func (x *GdsInfo) Reset() {
 	*x = GdsInfo{}
-	mi := &file_shares_shares_proto_msgTypes[42]
+	mi := &file_shares_shares_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3353,7 +3445,7 @@ func (x *GdsInfo) String() string {
 func (*GdsInfo) ProtoMessage() {}
 
 func (x *GdsInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[42]
+	mi := &file_shares_shares_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3366,7 +3458,7 @@ func (x *GdsInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GdsInfo.ProtoReflect.Descriptor instead.
 func (*GdsInfo) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{42}
+	return file_shares_shares_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *GdsInfo) GetDay() string {
@@ -3401,7 +3493,7 @@ type GZPeResp struct {
 
 func (x *GZPeResp) Reset() {
 	*x = GZPeResp{}
-	mi := &file_shares_shares_proto_msgTypes[43]
+	mi := &file_shares_shares_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3413,7 +3505,7 @@ func (x *GZPeResp) String() string {
 func (*GZPeResp) ProtoMessage() {}
 
 func (x *GZPeResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[43]
+	mi := &file_shares_shares_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3426,7 +3518,7 @@ func (x *GZPeResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GZPeResp.ProtoReflect.Descriptor instead.
 func (*GZPeResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{43}
+	return file_shares_shares_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *GZPeResp) GetTimes() []string {
@@ -3504,7 +3596,7 @@ type GetHyMmaddReq struct {
 
 func (x *GetHyMmaddReq) Reset() {
 	*x = GetHyMmaddReq{}
-	mi := &file_shares_shares_proto_msgTypes[44]
+	mi := &file_shares_shares_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3516,7 +3608,7 @@ func (x *GetHyMmaddReq) String() string {
 func (*GetHyMmaddReq) ProtoMessage() {}
 
 func (x *GetHyMmaddReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[44]
+	mi := &file_shares_shares_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3529,7 +3621,7 @@ func (x *GetHyMmaddReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHyMmaddReq.ProtoReflect.Descriptor instead.
 func (*GetHyMmaddReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{44}
+	return file_shares_shares_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *GetHyMmaddReq) GetTag() int32 {
@@ -3569,7 +3661,7 @@ type GetMyTeamDetailReq struct {
 
 func (x *GetMyTeamDetailReq) Reset() {
 	*x = GetMyTeamDetailReq{}
-	mi := &file_shares_shares_proto_msgTypes[45]
+	mi := &file_shares_shares_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3581,7 +3673,7 @@ func (x *GetMyTeamDetailReq) String() string {
 func (*GetMyTeamDetailReq) ProtoMessage() {}
 
 func (x *GetMyTeamDetailReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[45]
+	mi := &file_shares_shares_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3594,7 +3686,7 @@ func (x *GetMyTeamDetailReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMyTeamDetailReq.ProtoReflect.Descriptor instead.
 func (*GetMyTeamDetailReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{45}
+	return file_shares_shares_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *GetMyTeamDetailReq) GetName() string {
@@ -3614,7 +3706,7 @@ type GetMyTeamDetailResp struct {
 
 func (x *GetMyTeamDetailResp) Reset() {
 	*x = GetMyTeamDetailResp{}
-	mi := &file_shares_shares_proto_msgTypes[46]
+	mi := &file_shares_shares_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3626,7 +3718,7 @@ func (x *GetMyTeamDetailResp) String() string {
 func (*GetMyTeamDetailResp) ProtoMessage() {}
 
 func (x *GetMyTeamDetailResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[46]
+	mi := &file_shares_shares_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3639,7 +3731,7 @@ func (x *GetMyTeamDetailResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMyTeamDetailResp.ProtoReflect.Descriptor instead.
 func (*GetMyTeamDetailResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{46}
+	return file_shares_shares_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *GetMyTeamDetailResp) GetName() string {
@@ -3665,7 +3757,7 @@ type GetMyTeamResp struct {
 
 func (x *GetMyTeamResp) Reset() {
 	*x = GetMyTeamResp{}
-	mi := &file_shares_shares_proto_msgTypes[47]
+	mi := &file_shares_shares_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3677,7 +3769,7 @@ func (x *GetMyTeamResp) String() string {
 func (*GetMyTeamResp) ProtoMessage() {}
 
 func (x *GetMyTeamResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[47]
+	mi := &file_shares_shares_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3690,7 +3782,7 @@ func (x *GetMyTeamResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMyTeamResp.ProtoReflect.Descriptor instead.
 func (*GetMyTeamResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{47}
+	return file_shares_shares_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *GetMyTeamResp) GetList() []string {
@@ -3710,7 +3802,7 @@ type GetHyRmReq struct {
 
 func (x *GetHyRmReq) Reset() {
 	*x = GetHyRmReq{}
-	mi := &file_shares_shares_proto_msgTypes[48]
+	mi := &file_shares_shares_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3722,7 +3814,7 @@ func (x *GetHyRmReq) String() string {
 func (*GetHyRmReq) ProtoMessage() {}
 
 func (x *GetHyRmReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[48]
+	mi := &file_shares_shares_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3735,7 +3827,7 @@ func (x *GetHyRmReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHyRmReq.ProtoReflect.Descriptor instead.
 func (*GetHyRmReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{48}
+	return file_shares_shares_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *GetHyRmReq) GetDays() int32 {
@@ -3761,7 +3853,7 @@ type GetHyRmResp struct {
 
 func (x *GetHyRmResp) Reset() {
 	*x = GetHyRmResp{}
-	mi := &file_shares_shares_proto_msgTypes[49]
+	mi := &file_shares_shares_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3773,7 +3865,7 @@ func (x *GetHyRmResp) String() string {
 func (*GetHyRmResp) ProtoMessage() {}
 
 func (x *GetHyRmResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[49]
+	mi := &file_shares_shares_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3786,7 +3878,7 @@ func (x *GetHyRmResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHyRmResp.ProtoReflect.Descriptor instead.
 func (*GetHyRmResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{49}
+	return file_shares_shares_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *GetHyRmResp) GetList() []*common.SimpSharInfo {
@@ -3809,7 +3901,7 @@ type DailyCheckInfo struct {
 
 func (x *DailyCheckInfo) Reset() {
 	*x = DailyCheckInfo{}
-	mi := &file_shares_shares_proto_msgTypes[50]
+	mi := &file_shares_shares_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3821,7 +3913,7 @@ func (x *DailyCheckInfo) String() string {
 func (*DailyCheckInfo) ProtoMessage() {}
 
 func (x *DailyCheckInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[50]
+	mi := &file_shares_shares_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3834,7 +3926,7 @@ func (x *DailyCheckInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DailyCheckInfo.ProtoReflect.Descriptor instead.
 func (*DailyCheckInfo) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{50}
+	return file_shares_shares_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *DailyCheckInfo) GetDayStr() string {
@@ -3881,7 +3973,7 @@ type GetDailyCheckResp struct {
 
 func (x *GetDailyCheckResp) Reset() {
 	*x = GetDailyCheckResp{}
-	mi := &file_shares_shares_proto_msgTypes[51]
+	mi := &file_shares_shares_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3893,7 +3985,7 @@ func (x *GetDailyCheckResp) String() string {
 func (*GetDailyCheckResp) ProtoMessage() {}
 
 func (x *GetDailyCheckResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[51]
+	mi := &file_shares_shares_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3906,7 +3998,7 @@ func (x *GetDailyCheckResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDailyCheckResp.ProtoReflect.Descriptor instead.
 func (*GetDailyCheckResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{51}
+	return file_shares_shares_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *GetDailyCheckResp) GetList() []*DailyCheckInfo {
@@ -3947,7 +4039,7 @@ type SharesInfo struct {
 
 func (x *SharesInfo) Reset() {
 	*x = SharesInfo{}
-	mi := &file_shares_shares_proto_msgTypes[52]
+	mi := &file_shares_shares_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3959,7 +4051,7 @@ func (x *SharesInfo) String() string {
 func (*SharesInfo) ProtoMessage() {}
 
 func (x *SharesInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[52]
+	mi := &file_shares_shares_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3972,7 +4064,7 @@ func (x *SharesInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SharesInfo.ProtoReflect.Descriptor instead.
 func (*SharesInfo) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{52}
+	return file_shares_shares_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *SharesInfo) GetCode() string {
@@ -4160,7 +4252,7 @@ type SharesInfoDetails struct {
 
 func (x *SharesInfoDetails) Reset() {
 	*x = SharesInfoDetails{}
-	mi := &file_shares_shares_proto_msgTypes[53]
+	mi := &file_shares_shares_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4172,7 +4264,7 @@ func (x *SharesInfoDetails) String() string {
 func (*SharesInfoDetails) ProtoMessage() {}
 
 func (x *SharesInfoDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[53]
+	mi := &file_shares_shares_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4185,7 +4277,7 @@ func (x *SharesInfoDetails) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SharesInfoDetails.ProtoReflect.Descriptor instead.
 func (*SharesInfoDetails) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{53}
+	return file_shares_shares_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *SharesInfoDetails) GetCode() string {
@@ -4373,7 +4465,7 @@ type Group struct {
 
 func (x *Group) Reset() {
 	*x = Group{}
-	mi := &file_shares_shares_proto_msgTypes[54]
+	mi := &file_shares_shares_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4385,7 +4477,7 @@ func (x *Group) String() string {
 func (*Group) ProtoMessage() {}
 
 func (x *Group) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[54]
+	mi := &file_shares_shares_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4398,7 +4490,7 @@ func (x *Group) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Group.ProtoReflect.Descriptor instead.
 func (*Group) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{54}
+	return file_shares_shares_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *Group) GetName() string {
@@ -4425,7 +4517,7 @@ type GetGroupResp struct {
 
 func (x *GetGroupResp) Reset() {
 	*x = GetGroupResp{}
-	mi := &file_shares_shares_proto_msgTypes[55]
+	mi := &file_shares_shares_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4437,7 +4529,7 @@ func (x *GetGroupResp) String() string {
 func (*GetGroupResp) ProtoMessage() {}
 
 func (x *GetGroupResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[55]
+	mi := &file_shares_shares_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4450,7 +4542,7 @@ func (x *GetGroupResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGroupResp.ProtoReflect.Descriptor instead.
 func (*GetGroupResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{55}
+	return file_shares_shares_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *GetGroupResp) GetList() []*Group {
@@ -4471,7 +4563,7 @@ type SearchReq struct {
 
 func (x *SearchReq) Reset() {
 	*x = SearchReq{}
-	mi := &file_shares_shares_proto_msgTypes[56]
+	mi := &file_shares_shares_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4483,7 +4575,7 @@ func (x *SearchReq) String() string {
 func (*SearchReq) ProtoMessage() {}
 
 func (x *SearchReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[56]
+	mi := &file_shares_shares_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4496,7 +4588,7 @@ func (x *SearchReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchReq.ProtoReflect.Descriptor instead.
 func (*SearchReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{56}
+	return file_shares_shares_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *SearchReq) GetCode() string {
@@ -4523,7 +4615,7 @@ type SearchResp struct {
 
 func (x *SearchResp) Reset() {
 	*x = SearchResp{}
-	mi := &file_shares_shares_proto_msgTypes[57]
+	mi := &file_shares_shares_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4535,7 +4627,7 @@ func (x *SearchResp) String() string {
 func (*SearchResp) ProtoMessage() {}
 
 func (x *SearchResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[57]
+	mi := &file_shares_shares_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4548,7 +4640,7 @@ func (x *SearchResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchResp.ProtoReflect.Descriptor instead.
 func (*SearchResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{57}
+	return file_shares_shares_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *SearchResp) GetInfo() *SharesInfo {
@@ -4567,7 +4659,7 @@ type GetsReq struct {
 
 func (x *GetsReq) Reset() {
 	*x = GetsReq{}
-	mi := &file_shares_shares_proto_msgTypes[58]
+	mi := &file_shares_shares_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4579,7 +4671,7 @@ func (x *GetsReq) String() string {
 func (*GetsReq) ProtoMessage() {}
 
 func (x *GetsReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[58]
+	mi := &file_shares_shares_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4592,7 +4684,7 @@ func (x *GetsReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetsReq.ProtoReflect.Descriptor instead.
 func (*GetsReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{58}
+	return file_shares_shares_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *GetsReq) GetCodes() []string {
@@ -4615,7 +4707,7 @@ type SimpleSharesInfo struct {
 
 func (x *SimpleSharesInfo) Reset() {
 	*x = SimpleSharesInfo{}
-	mi := &file_shares_shares_proto_msgTypes[59]
+	mi := &file_shares_shares_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4627,7 +4719,7 @@ func (x *SimpleSharesInfo) String() string {
 func (*SimpleSharesInfo) ProtoMessage() {}
 
 func (x *SimpleSharesInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[59]
+	mi := &file_shares_shares_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4640,7 +4732,7 @@ func (x *SimpleSharesInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SimpleSharesInfo.ProtoReflect.Descriptor instead.
 func (*SimpleSharesInfo) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{59}
+	return file_shares_shares_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *SimpleSharesInfo) GetCode() string {
@@ -4680,7 +4772,7 @@ type GetsResp struct {
 
 func (x *GetsResp) Reset() {
 	*x = GetsResp{}
-	mi := &file_shares_shares_proto_msgTypes[60]
+	mi := &file_shares_shares_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4692,7 +4784,7 @@ func (x *GetsResp) String() string {
 func (*GetsResp) ProtoMessage() {}
 
 func (x *GetsResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[60]
+	mi := &file_shares_shares_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4705,7 +4797,7 @@ func (x *GetsResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetsResp.ProtoReflect.Descriptor instead.
 func (*GetsResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{60}
+	return file_shares_shares_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *GetsResp) GetList() []*SimpleSharesInfo {
@@ -4727,7 +4819,7 @@ type CodeNameInfo struct {
 
 func (x *CodeNameInfo) Reset() {
 	*x = CodeNameInfo{}
-	mi := &file_shares_shares_proto_msgTypes[61]
+	mi := &file_shares_shares_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4739,7 +4831,7 @@ func (x *CodeNameInfo) String() string {
 func (*CodeNameInfo) ProtoMessage() {}
 
 func (x *CodeNameInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[61]
+	mi := &file_shares_shares_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4752,7 +4844,7 @@ func (x *CodeNameInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CodeNameInfo.ProtoReflect.Descriptor instead.
 func (*CodeNameInfo) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{61}
+	return file_shares_shares_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *CodeNameInfo) GetCode() string {
@@ -4792,7 +4884,7 @@ type GetAllCodeNameResp struct {
 
 func (x *GetAllCodeNameResp) Reset() {
 	*x = GetAllCodeNameResp{}
-	mi := &file_shares_shares_proto_msgTypes[62]
+	mi := &file_shares_shares_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4804,7 +4896,7 @@ func (x *GetAllCodeNameResp) String() string {
 func (*GetAllCodeNameResp) ProtoMessage() {}
 
 func (x *GetAllCodeNameResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[62]
+	mi := &file_shares_shares_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4817,7 +4909,7 @@ func (x *GetAllCodeNameResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllCodeNameResp.ProtoReflect.Descriptor instead.
 func (*GetAllCodeNameResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{62}
+	return file_shares_shares_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *GetAllCodeNameResp) GetList() []*CodeNameInfo {
@@ -4838,7 +4930,7 @@ type AddMyCodeToGroupReq struct {
 
 func (x *AddMyCodeToGroupReq) Reset() {
 	*x = AddMyCodeToGroupReq{}
-	mi := &file_shares_shares_proto_msgTypes[63]
+	mi := &file_shares_shares_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4850,7 +4942,7 @@ func (x *AddMyCodeToGroupReq) String() string {
 func (*AddMyCodeToGroupReq) ProtoMessage() {}
 
 func (x *AddMyCodeToGroupReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[63]
+	mi := &file_shares_shares_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4863,7 +4955,7 @@ func (x *AddMyCodeToGroupReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddMyCodeToGroupReq.ProtoReflect.Descriptor instead.
 func (*AddMyCodeToGroupReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{63}
+	return file_shares_shares_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *AddMyCodeToGroupReq) GetCode() string {
@@ -4917,7 +5009,7 @@ type AddMyCodeReq struct {
 
 func (x *AddMyCodeReq) Reset() {
 	*x = AddMyCodeReq{}
-	mi := &file_shares_shares_proto_msgTypes[64]
+	mi := &file_shares_shares_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4929,7 +5021,7 @@ func (x *AddMyCodeReq) String() string {
 func (*AddMyCodeReq) ProtoMessage() {}
 
 func (x *AddMyCodeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[64]
+	mi := &file_shares_shares_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4942,7 +5034,7 @@ func (x *AddMyCodeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddMyCodeReq.ProtoReflect.Descriptor instead.
 func (*AddMyCodeReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{64}
+	return file_shares_shares_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *AddMyCodeReq) GetCode() string {
@@ -5102,7 +5194,7 @@ type AddMyCodeResp struct {
 
 func (x *AddMyCodeResp) Reset() {
 	*x = AddMyCodeResp{}
-	mi := &file_shares_shares_proto_msgTypes[65]
+	mi := &file_shares_shares_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5114,7 +5206,7 @@ func (x *AddMyCodeResp) String() string {
 func (*AddMyCodeResp) ProtoMessage() {}
 
 func (x *AddMyCodeResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[65]
+	mi := &file_shares_shares_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5127,7 +5219,7 @@ func (x *AddMyCodeResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddMyCodeResp.ProtoReflect.Descriptor instead.
 func (*AddMyCodeResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{65}
+	return file_shares_shares_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *AddMyCodeResp) GetStatus() bool {
@@ -5156,7 +5248,7 @@ type GetMyCodeReq struct {
 
 func (x *GetMyCodeReq) Reset() {
 	*x = GetMyCodeReq{}
-	mi := &file_shares_shares_proto_msgTypes[66]
+	mi := &file_shares_shares_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5168,7 +5260,7 @@ func (x *GetMyCodeReq) String() string {
 func (*GetMyCodeReq) ProtoMessage() {}
 
 func (x *GetMyCodeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[66]
+	mi := &file_shares_shares_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5181,7 +5273,7 @@ func (x *GetMyCodeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMyCodeReq.ProtoReflect.Descriptor instead.
 func (*GetMyCodeReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{66}
+	return file_shares_shares_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *GetMyCodeReq) GetCode() string {
@@ -5231,7 +5323,7 @@ type AddMyCodeInfo struct {
 
 func (x *AddMyCodeInfo) Reset() {
 	*x = AddMyCodeInfo{}
-	mi := &file_shares_shares_proto_msgTypes[67]
+	mi := &file_shares_shares_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5243,7 +5335,7 @@ func (x *AddMyCodeInfo) String() string {
 func (*AddMyCodeInfo) ProtoMessage() {}
 
 func (x *AddMyCodeInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[67]
+	mi := &file_shares_shares_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5256,7 +5348,7 @@ func (x *AddMyCodeInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddMyCodeInfo.ProtoReflect.Descriptor instead.
 func (*AddMyCodeInfo) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{67}
+	return file_shares_shares_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *AddMyCodeInfo) GetCode() string {
@@ -5347,7 +5439,7 @@ type GetMyCodeResp struct {
 
 func (x *GetMyCodeResp) Reset() {
 	*x = GetMyCodeResp{}
-	mi := &file_shares_shares_proto_msgTypes[68]
+	mi := &file_shares_shares_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5359,7 +5451,7 @@ func (x *GetMyCodeResp) String() string {
 func (*GetMyCodeResp) ProtoMessage() {}
 
 func (x *GetMyCodeResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[68]
+	mi := &file_shares_shares_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5372,7 +5464,7 @@ func (x *GetMyCodeResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMyCodeResp.ProtoReflect.Descriptor instead.
 func (*GetMyCodeResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{68}
+	return file_shares_shares_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *GetMyCodeResp) GetList() []*AddMyCodeReq {
@@ -5415,7 +5507,7 @@ type Msg struct {
 
 func (x *Msg) Reset() {
 	*x = Msg{}
-	mi := &file_shares_shares_proto_msgTypes[69]
+	mi := &file_shares_shares_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5427,7 +5519,7 @@ func (x *Msg) String() string {
 func (*Msg) ProtoMessage() {}
 
 func (x *Msg) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[69]
+	mi := &file_shares_shares_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5440,7 +5532,7 @@ func (x *Msg) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Msg.ProtoReflect.Descriptor instead.
 func (*Msg) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{69}
+	return file_shares_shares_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *Msg) GetCode() string {
@@ -5529,7 +5621,7 @@ type GetMsgResp struct {
 
 func (x *GetMsgResp) Reset() {
 	*x = GetMsgResp{}
-	mi := &file_shares_shares_proto_msgTypes[70]
+	mi := &file_shares_shares_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5541,7 +5633,7 @@ func (x *GetMsgResp) String() string {
 func (*GetMsgResp) ProtoMessage() {}
 
 func (x *GetMsgResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[70]
+	mi := &file_shares_shares_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5554,7 +5646,7 @@ func (x *GetMsgResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMsgResp.ProtoReflect.Descriptor instead.
 func (*GetMsgResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{70}
+	return file_shares_shares_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *GetMsgResp) GetList() []*Msg {
@@ -5573,7 +5665,7 @@ type HaveNewMsgResp struct {
 
 func (x *HaveNewMsgResp) Reset() {
 	*x = HaveNewMsgResp{}
-	mi := &file_shares_shares_proto_msgTypes[71]
+	mi := &file_shares_shares_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5585,7 +5677,7 @@ func (x *HaveNewMsgResp) String() string {
 func (*HaveNewMsgResp) ProtoMessage() {}
 
 func (x *HaveNewMsgResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[71]
+	mi := &file_shares_shares_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5598,7 +5690,7 @@ func (x *HaveNewMsgResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HaveNewMsgResp.ProtoReflect.Descriptor instead.
 func (*HaveNewMsgResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{71}
+	return file_shares_shares_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *HaveNewMsgResp) GetBadge() bool {
@@ -5618,7 +5710,7 @@ type DeleteMyCodeReq struct {
 
 func (x *DeleteMyCodeReq) Reset() {
 	*x = DeleteMyCodeReq{}
-	mi := &file_shares_shares_proto_msgTypes[72]
+	mi := &file_shares_shares_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5630,7 +5722,7 @@ func (x *DeleteMyCodeReq) String() string {
 func (*DeleteMyCodeReq) ProtoMessage() {}
 
 func (x *DeleteMyCodeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[72]
+	mi := &file_shares_shares_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5643,7 +5735,7 @@ func (x *DeleteMyCodeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteMyCodeReq.ProtoReflect.Descriptor instead.
 func (*DeleteMyCodeReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{72}
+	return file_shares_shares_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *DeleteMyCodeReq) GetCode() string {
@@ -5669,7 +5761,7 @@ type AddGroupReq struct {
 
 func (x *AddGroupReq) Reset() {
 	*x = AddGroupReq{}
-	mi := &file_shares_shares_proto_msgTypes[73]
+	mi := &file_shares_shares_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5681,7 +5773,7 @@ func (x *AddGroupReq) String() string {
 func (*AddGroupReq) ProtoMessage() {}
 
 func (x *AddGroupReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[73]
+	mi := &file_shares_shares_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5694,7 +5786,7 @@ func (x *AddGroupReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddGroupReq.ProtoReflect.Descriptor instead.
 func (*AddGroupReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{73}
+	return file_shares_shares_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *AddGroupReq) GetKey() string {
@@ -5718,7 +5810,7 @@ type CodeReq struct {
 
 func (x *CodeReq) Reset() {
 	*x = CodeReq{}
-	mi := &file_shares_shares_proto_msgTypes[74]
+	mi := &file_shares_shares_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5730,7 +5822,7 @@ func (x *CodeReq) String() string {
 func (*CodeReq) ProtoMessage() {}
 
 func (x *CodeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[74]
+	mi := &file_shares_shares_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5743,7 +5835,7 @@ func (x *CodeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CodeReq.ProtoReflect.Descriptor instead.
 func (*CodeReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{74}
+	return file_shares_shares_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *CodeReq) GetCode() string {
@@ -5798,7 +5890,7 @@ type CodesReq struct {
 
 func (x *CodesReq) Reset() {
 	*x = CodesReq{}
-	mi := &file_shares_shares_proto_msgTypes[75]
+	mi := &file_shares_shares_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5810,7 +5902,7 @@ func (x *CodesReq) String() string {
 func (*CodesReq) ProtoMessage() {}
 
 func (x *CodesReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[75]
+	mi := &file_shares_shares_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5823,7 +5915,7 @@ func (x *CodesReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CodesReq.ProtoReflect.Descriptor instead.
 func (*CodesReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{75}
+	return file_shares_shares_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *CodesReq) GetCodes() []string {
@@ -5853,7 +5945,7 @@ type GetMyGroupResp struct {
 
 func (x *GetMyGroupResp) Reset() {
 	*x = GetMyGroupResp{}
-	mi := &file_shares_shares_proto_msgTypes[76]
+	mi := &file_shares_shares_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5865,7 +5957,7 @@ func (x *GetMyGroupResp) String() string {
 func (*GetMyGroupResp) ProtoMessage() {}
 
 func (x *GetMyGroupResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[76]
+	mi := &file_shares_shares_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5878,7 +5970,7 @@ func (x *GetMyGroupResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMyGroupResp.ProtoReflect.Descriptor instead.
 func (*GetMyGroupResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{76}
+	return file_shares_shares_proto_rawDescGZIP(), []int{77}
 }
 
 func (x *GetMyGroupResp) GetCode() string {
@@ -5928,7 +6020,7 @@ type UpsetGroupCodeReq struct {
 
 func (x *UpsetGroupCodeReq) Reset() {
 	*x = UpsetGroupCodeReq{}
-	mi := &file_shares_shares_proto_msgTypes[77]
+	mi := &file_shares_shares_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5940,7 +6032,7 @@ func (x *UpsetGroupCodeReq) String() string {
 func (*UpsetGroupCodeReq) ProtoMessage() {}
 
 func (x *UpsetGroupCodeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[77]
+	mi := &file_shares_shares_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5953,7 +6045,7 @@ func (x *UpsetGroupCodeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpsetGroupCodeReq.ProtoReflect.Descriptor instead.
 func (*UpsetGroupCodeReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{77}
+	return file_shares_shares_proto_rawDescGZIP(), []int{78}
 }
 
 func (x *UpsetGroupCodeReq) GetCode() string {
@@ -5993,7 +6085,7 @@ type UpsetGroupCodeResp struct {
 
 func (x *UpsetGroupCodeResp) Reset() {
 	*x = UpsetGroupCodeResp{}
-	mi := &file_shares_shares_proto_msgTypes[78]
+	mi := &file_shares_shares_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6005,7 +6097,7 @@ func (x *UpsetGroupCodeResp) String() string {
 func (*UpsetGroupCodeResp) ProtoMessage() {}
 
 func (x *UpsetGroupCodeResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[78]
+	mi := &file_shares_shares_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6018,7 +6110,7 @@ func (x *UpsetGroupCodeResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpsetGroupCodeResp.ProtoReflect.Descriptor instead.
 func (*UpsetGroupCodeResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{78}
+	return file_shares_shares_proto_rawDescGZIP(), []int{79}
 }
 
 func (x *UpsetGroupCodeResp) GetGroup() string {
@@ -6039,7 +6131,7 @@ type GetLqReq struct {
 
 func (x *GetLqReq) Reset() {
 	*x = GetLqReq{}
-	mi := &file_shares_shares_proto_msgTypes[79]
+	mi := &file_shares_shares_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6051,7 +6143,7 @@ func (x *GetLqReq) String() string {
 func (*GetLqReq) ProtoMessage() {}
 
 func (x *GetLqReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[79]
+	mi := &file_shares_shares_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6064,7 +6156,7 @@ func (x *GetLqReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLqReq.ProtoReflect.Descriptor instead.
 func (*GetLqReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{79}
+	return file_shares_shares_proto_rawDescGZIP(), []int{80}
 }
 
 func (x *GetLqReq) GetTag() string {
@@ -6092,7 +6184,7 @@ type GetLqResp struct {
 
 func (x *GetLqResp) Reset() {
 	*x = GetLqResp{}
-	mi := &file_shares_shares_proto_msgTypes[80]
+	mi := &file_shares_shares_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6104,7 +6196,7 @@ func (x *GetLqResp) String() string {
 func (*GetLqResp) ProtoMessage() {}
 
 func (x *GetLqResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[80]
+	mi := &file_shares_shares_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6117,7 +6209,7 @@ func (x *GetLqResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLqResp.ProtoReflect.Descriptor instead.
 func (*GetLqResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{80}
+	return file_shares_shares_proto_rawDescGZIP(), []int{81}
 }
 
 func (x *GetLqResp) GetTitle() string {
@@ -6147,7 +6239,7 @@ type GetDayResp struct {
 
 func (x *GetDayResp) Reset() {
 	*x = GetDayResp{}
-	mi := &file_shares_shares_proto_msgTypes[81]
+	mi := &file_shares_shares_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6159,7 +6251,7 @@ func (x *GetDayResp) String() string {
 func (*GetDayResp) ProtoMessage() {}
 
 func (x *GetDayResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[81]
+	mi := &file_shares_shares_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6172,7 +6264,7 @@ func (x *GetDayResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDayResp.ProtoReflect.Descriptor instead.
 func (*GetDayResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{81}
+	return file_shares_shares_proto_rawDescGZIP(), []int{82}
 }
 
 func (x *GetDayResp) GetTitle() string {
@@ -6214,7 +6306,7 @@ type GetHyCodeResp struct {
 
 func (x *GetHyCodeResp) Reset() {
 	*x = GetHyCodeResp{}
-	mi := &file_shares_shares_proto_msgTypes[82]
+	mi := &file_shares_shares_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6226,7 +6318,7 @@ func (x *GetHyCodeResp) String() string {
 func (*GetHyCodeResp) ProtoMessage() {}
 
 func (x *GetHyCodeResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[82]
+	mi := &file_shares_shares_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6239,7 +6331,7 @@ func (x *GetHyCodeResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHyCodeResp.ProtoReflect.Descriptor instead.
 func (*GetHyCodeResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{82}
+	return file_shares_shares_proto_rawDescGZIP(), []int{83}
 }
 
 func (x *GetHyCodeResp) GetDoc() []string {
@@ -6265,7 +6357,7 @@ type HyTimeData struct {
 
 func (x *HyTimeData) Reset() {
 	*x = HyTimeData{}
-	mi := &file_shares_shares_proto_msgTypes[83]
+	mi := &file_shares_shares_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6277,7 +6369,7 @@ func (x *HyTimeData) String() string {
 func (*HyTimeData) ProtoMessage() {}
 
 func (x *HyTimeData) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[83]
+	mi := &file_shares_shares_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6290,7 +6382,7 @@ func (x *HyTimeData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HyTimeData.ProtoReflect.Descriptor instead.
 func (*HyTimeData) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{83}
+	return file_shares_shares_proto_rawDescGZIP(), []int{84}
 }
 
 func (x *HyTimeData) GetData() []*anypb.Any {
@@ -6309,7 +6401,7 @@ type GetHyTimeReq struct {
 
 func (x *GetHyTimeReq) Reset() {
 	*x = GetHyTimeReq{}
-	mi := &file_shares_shares_proto_msgTypes[84]
+	mi := &file_shares_shares_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6321,7 +6413,7 @@ func (x *GetHyTimeReq) String() string {
 func (*GetHyTimeReq) ProtoMessage() {}
 
 func (x *GetHyTimeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[84]
+	mi := &file_shares_shares_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6334,7 +6426,7 @@ func (x *GetHyTimeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHyTimeReq.ProtoReflect.Descriptor instead.
 func (*GetHyTimeReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{84}
+	return file_shares_shares_proto_rawDescGZIP(), []int{85}
 }
 
 func (x *GetHyTimeReq) GetNum() int32 {
@@ -6355,7 +6447,7 @@ type GetHyTimeResp struct {
 
 func (x *GetHyTimeResp) Reset() {
 	*x = GetHyTimeResp{}
-	mi := &file_shares_shares_proto_msgTypes[85]
+	mi := &file_shares_shares_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6367,7 +6459,7 @@ func (x *GetHyTimeResp) String() string {
 func (*GetHyTimeResp) ProtoMessage() {}
 
 func (x *GetHyTimeResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[85]
+	mi := &file_shares_shares_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6380,7 +6472,7 @@ func (x *GetHyTimeResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHyTimeResp.ProtoReflect.Descriptor instead.
 func (*GetHyTimeResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{85}
+	return file_shares_shares_proto_rawDescGZIP(), []int{86}
 }
 
 func (x *GetHyTimeResp) GetTitle() string {
@@ -6413,7 +6505,7 @@ type GetTouTiaoResp struct {
 
 func (x *GetTouTiaoResp) Reset() {
 	*x = GetTouTiaoResp{}
-	mi := &file_shares_shares_proto_msgTypes[86]
+	mi := &file_shares_shares_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6425,7 +6517,7 @@ func (x *GetTouTiaoResp) String() string {
 func (*GetTouTiaoResp) ProtoMessage() {}
 
 func (x *GetTouTiaoResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[86]
+	mi := &file_shares_shares_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6438,7 +6530,7 @@ func (x *GetTouTiaoResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTouTiaoResp.ProtoReflect.Descriptor instead.
 func (*GetTouTiaoResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{86}
+	return file_shares_shares_proto_rawDescGZIP(), []int{87}
 }
 
 func (x *GetTouTiaoResp) GetList() []string {
@@ -6463,7 +6555,7 @@ type MyYdInfo struct {
 
 func (x *MyYdInfo) Reset() {
 	*x = MyYdInfo{}
-	mi := &file_shares_shares_proto_msgTypes[87]
+	mi := &file_shares_shares_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6475,7 +6567,7 @@ func (x *MyYdInfo) String() string {
 func (*MyYdInfo) ProtoMessage() {}
 
 func (x *MyYdInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[87]
+	mi := &file_shares_shares_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6488,7 +6580,7 @@ func (x *MyYdInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MyYdInfo.ProtoReflect.Descriptor instead.
 func (*MyYdInfo) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{87}
+	return file_shares_shares_proto_rawDescGZIP(), []int{88}
 }
 
 func (x *MyYdInfo) GetCode() string {
@@ -6549,7 +6641,7 @@ type GetMyYdResp struct {
 
 func (x *GetMyYdResp) Reset() {
 	*x = GetMyYdResp{}
-	mi := &file_shares_shares_proto_msgTypes[88]
+	mi := &file_shares_shares_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6561,7 +6653,7 @@ func (x *GetMyYdResp) String() string {
 func (*GetMyYdResp) ProtoMessage() {}
 
 func (x *GetMyYdResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[88]
+	mi := &file_shares_shares_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6574,7 +6666,7 @@ func (x *GetMyYdResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMyYdResp.ProtoReflect.Descriptor instead.
 func (*GetMyYdResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{88}
+	return file_shares_shares_proto_rawDescGZIP(), []int{89}
 }
 
 func (x *GetMyYdResp) GetList() []*MyYdInfo {
@@ -6594,7 +6686,7 @@ type GetMyYdReq struct {
 
 func (x *GetMyYdReq) Reset() {
 	*x = GetMyYdReq{}
-	mi := &file_shares_shares_proto_msgTypes[89]
+	mi := &file_shares_shares_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6606,7 +6698,7 @@ func (x *GetMyYdReq) String() string {
 func (*GetMyYdReq) ProtoMessage() {}
 
 func (x *GetMyYdReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[89]
+	mi := &file_shares_shares_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6619,7 +6711,7 @@ func (x *GetMyYdReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMyYdReq.ProtoReflect.Descriptor instead.
 func (*GetMyYdReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{89}
+	return file_shares_shares_proto_rawDescGZIP(), []int{90}
 }
 
 func (x *GetMyYdReq) GetTag() string {
@@ -6645,7 +6737,7 @@ type GetYhxgReq struct {
 
 func (x *GetYhxgReq) Reset() {
 	*x = GetYhxgReq{}
-	mi := &file_shares_shares_proto_msgTypes[90]
+	mi := &file_shares_shares_proto_msgTypes[91]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6657,7 +6749,7 @@ func (x *GetYhxgReq) String() string {
 func (*GetYhxgReq) ProtoMessage() {}
 
 func (x *GetYhxgReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[90]
+	mi := &file_shares_shares_proto_msgTypes[91]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6670,7 +6762,7 @@ func (x *GetYhxgReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetYhxgReq.ProtoReflect.Descriptor instead.
 func (*GetYhxgReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{90}
+	return file_shares_shares_proto_rawDescGZIP(), []int{91}
 }
 
 func (x *GetYhxgReq) GetHexinv() string {
@@ -6694,7 +6786,7 @@ type GetHotYzCodesResp struct {
 
 func (x *GetHotYzCodesResp) Reset() {
 	*x = GetHotYzCodesResp{}
-	mi := &file_shares_shares_proto_msgTypes[91]
+	mi := &file_shares_shares_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6706,7 +6798,7 @@ func (x *GetHotYzCodesResp) String() string {
 func (*GetHotYzCodesResp) ProtoMessage() {}
 
 func (x *GetHotYzCodesResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[91]
+	mi := &file_shares_shares_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6719,7 +6811,7 @@ func (x *GetHotYzCodesResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHotYzCodesResp.ProtoReflect.Descriptor instead.
 func (*GetHotYzCodesResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{91}
+	return file_shares_shares_proto_rawDescGZIP(), []int{92}
 }
 
 func (x *GetHotYzCodesResp) GetList() []*Group {
@@ -6769,7 +6861,7 @@ type GetTopResp struct {
 
 func (x *GetTopResp) Reset() {
 	*x = GetTopResp{}
-	mi := &file_shares_shares_proto_msgTypes[92]
+	mi := &file_shares_shares_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6781,7 +6873,7 @@ func (x *GetTopResp) String() string {
 func (*GetTopResp) ProtoMessage() {}
 
 func (x *GetTopResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[92]
+	mi := &file_shares_shares_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6794,7 +6886,7 @@ func (x *GetTopResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTopResp.ProtoReflect.Descriptor instead.
 func (*GetTopResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{92}
+	return file_shares_shares_proto_rawDescGZIP(), []int{93}
 }
 
 func (x *GetTopResp) GetAll() *TblResp {
@@ -6835,7 +6927,7 @@ type GetHyDjResp struct {
 
 func (x *GetHyDjResp) Reset() {
 	*x = GetHyDjResp{}
-	mi := &file_shares_shares_proto_msgTypes[93]
+	mi := &file_shares_shares_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6847,7 +6939,7 @@ func (x *GetHyDjResp) String() string {
 func (*GetHyDjResp) ProtoMessage() {}
 
 func (x *GetHyDjResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[93]
+	mi := &file_shares_shares_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6860,7 +6952,7 @@ func (x *GetHyDjResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHyDjResp.ProtoReflect.Descriptor instead.
 func (*GetHyDjResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{93}
+	return file_shares_shares_proto_rawDescGZIP(), []int{94}
 }
 
 func (x *GetHyDjResp) GetInfo() *TblResp {
@@ -6890,7 +6982,7 @@ type TblResp struct {
 
 func (x *TblResp) Reset() {
 	*x = TblResp{}
-	mi := &file_shares_shares_proto_msgTypes[94]
+	mi := &file_shares_shares_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6902,7 +6994,7 @@ func (x *TblResp) String() string {
 func (*TblResp) ProtoMessage() {}
 
 func (x *TblResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[94]
+	mi := &file_shares_shares_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6915,7 +7007,7 @@ func (x *TblResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TblResp.ProtoReflect.Descriptor instead.
 func (*TblResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{94}
+	return file_shares_shares_proto_rawDescGZIP(), []int{95}
 }
 
 func (x *TblResp) GetTitle() string {
@@ -6963,7 +7055,7 @@ type ThInfo struct {
 
 func (x *ThInfo) Reset() {
 	*x = ThInfo{}
-	mi := &file_shares_shares_proto_msgTypes[95]
+	mi := &file_shares_shares_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6975,7 +7067,7 @@ func (x *ThInfo) String() string {
 func (*ThInfo) ProtoMessage() {}
 
 func (x *ThInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[95]
+	mi := &file_shares_shares_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6988,7 +7080,7 @@ func (x *ThInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ThInfo.ProtoReflect.Descriptor instead.
 func (*ThInfo) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{95}
+	return file_shares_shares_proto_rawDescGZIP(), []int{96}
 }
 
 func (x *ThInfo) GetName() string {
@@ -7029,7 +7121,7 @@ type TrInfo struct {
 
 func (x *TrInfo) Reset() {
 	*x = TrInfo{}
-	mi := &file_shares_shares_proto_msgTypes[96]
+	mi := &file_shares_shares_proto_msgTypes[97]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7041,7 +7133,7 @@ func (x *TrInfo) String() string {
 func (*TrInfo) ProtoMessage() {}
 
 func (x *TrInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[96]
+	mi := &file_shares_shares_proto_msgTypes[97]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7054,7 +7146,7 @@ func (x *TrInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TrInfo.ProtoReflect.Descriptor instead.
 func (*TrInfo) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{96}
+	return file_shares_shares_proto_rawDescGZIP(), []int{97}
 }
 
 func (x *TrInfo) GetCode() string {
@@ -7179,7 +7271,7 @@ type GetCwsjResp struct {
 
 func (x *GetCwsjResp) Reset() {
 	*x = GetCwsjResp{}
-	mi := &file_shares_shares_proto_msgTypes[97]
+	mi := &file_shares_shares_proto_msgTypes[98]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7191,7 +7283,7 @@ func (x *GetCwsjResp) String() string {
 func (*GetCwsjResp) ProtoMessage() {}
 
 func (x *GetCwsjResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[97]
+	mi := &file_shares_shares_proto_msgTypes[98]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7204,7 +7296,7 @@ func (x *GetCwsjResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCwsjResp.ProtoReflect.Descriptor instead.
 func (*GetCwsjResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{97}
+	return file_shares_shares_proto_rawDescGZIP(), []int{98}
 }
 
 func (x *GetCwsjResp) GetRoe() []*GdsInfo {
@@ -7272,7 +7364,7 @@ type GetTscReq struct {
 
 func (x *GetTscReq) Reset() {
 	*x = GetTscReq{}
-	mi := &file_shares_shares_proto_msgTypes[98]
+	mi := &file_shares_shares_proto_msgTypes[99]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7284,7 +7376,7 @@ func (x *GetTscReq) String() string {
 func (*GetTscReq) ProtoMessage() {}
 
 func (x *GetTscReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[98]
+	mi := &file_shares_shares_proto_msgTypes[99]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7297,7 +7389,7 @@ func (x *GetTscReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTscReq.ProtoReflect.Descriptor instead.
 func (*GetTscReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{98}
+	return file_shares_shares_proto_rawDescGZIP(), []int{99}
 }
 
 func (x *GetTscReq) GetTag() int32 {
@@ -7325,7 +7417,7 @@ type TscInfo struct {
 
 func (x *TscInfo) Reset() {
 	*x = TscInfo{}
-	mi := &file_shares_shares_proto_msgTypes[99]
+	mi := &file_shares_shares_proto_msgTypes[100]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7337,7 +7429,7 @@ func (x *TscInfo) String() string {
 func (*TscInfo) ProtoMessage() {}
 
 func (x *TscInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[99]
+	mi := &file_shares_shares_proto_msgTypes[100]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7350,7 +7442,7 @@ func (x *TscInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TscInfo.ProtoReflect.Descriptor instead.
 func (*TscInfo) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{99}
+	return file_shares_shares_proto_rawDescGZIP(), []int{100}
 }
 
 func (x *TscInfo) GetId() string {
@@ -7425,7 +7517,7 @@ type GetTscResp struct {
 
 func (x *GetTscResp) Reset() {
 	*x = GetTscResp{}
-	mi := &file_shares_shares_proto_msgTypes[100]
+	mi := &file_shares_shares_proto_msgTypes[101]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7437,7 +7529,7 @@ func (x *GetTscResp) String() string {
 func (*GetTscResp) ProtoMessage() {}
 
 func (x *GetTscResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[100]
+	mi := &file_shares_shares_proto_msgTypes[101]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7450,7 +7542,7 @@ func (x *GetTscResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTscResp.ProtoReflect.Descriptor instead.
 func (*GetTscResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{100}
+	return file_shares_shares_proto_rawDescGZIP(), []int{101}
 }
 
 func (x *GetTscResp) GetList() []*TscInfo {
@@ -7470,7 +7562,7 @@ type SearchTscReq struct {
 
 func (x *SearchTscReq) Reset() {
 	*x = SearchTscReq{}
-	mi := &file_shares_shares_proto_msgTypes[101]
+	mi := &file_shares_shares_proto_msgTypes[102]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7482,7 +7574,7 @@ func (x *SearchTscReq) String() string {
 func (*SearchTscReq) ProtoMessage() {}
 
 func (x *SearchTscReq) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[101]
+	mi := &file_shares_shares_proto_msgTypes[102]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7495,7 +7587,7 @@ func (x *SearchTscReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchTscReq.ProtoReflect.Descriptor instead.
 func (*SearchTscReq) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{101}
+	return file_shares_shares_proto_rawDescGZIP(), []int{102}
 }
 
 func (x *SearchTscReq) GetTag() string {
@@ -7521,7 +7613,7 @@ type SearchTscResp struct {
 
 func (x *SearchTscResp) Reset() {
 	*x = SearchTscResp{}
-	mi := &file_shares_shares_proto_msgTypes[102]
+	mi := &file_shares_shares_proto_msgTypes[103]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7533,7 +7625,7 @@ func (x *SearchTscResp) String() string {
 func (*SearchTscResp) ProtoMessage() {}
 
 func (x *SearchTscResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[102]
+	mi := &file_shares_shares_proto_msgTypes[103]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7546,7 +7638,7 @@ func (x *SearchTscResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchTscResp.ProtoReflect.Descriptor instead.
 func (*SearchTscResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{102}
+	return file_shares_shares_proto_rawDescGZIP(), []int{103}
 }
 
 func (x *SearchTscResp) GetList() []*TscInfo {
@@ -7567,7 +7659,7 @@ type SharesAttachInfo struct {
 
 func (x *SharesAttachInfo) Reset() {
 	*x = SharesAttachInfo{}
-	mi := &file_shares_shares_proto_msgTypes[103]
+	mi := &file_shares_shares_proto_msgTypes[104]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7579,7 +7671,7 @@ func (x *SharesAttachInfo) String() string {
 func (*SharesAttachInfo) ProtoMessage() {}
 
 func (x *SharesAttachInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[103]
+	mi := &file_shares_shares_proto_msgTypes[104]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7592,7 +7684,7 @@ func (x *SharesAttachInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SharesAttachInfo.ProtoReflect.Descriptor instead.
 func (*SharesAttachInfo) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{103}
+	return file_shares_shares_proto_rawDescGZIP(), []int{104}
 }
 
 func (x *SharesAttachInfo) GetCode() string {
@@ -7619,7 +7711,7 @@ type TaoshengInfo struct {
 
 func (x *TaoshengInfo) Reset() {
 	*x = TaoshengInfo{}
-	mi := &file_shares_shares_proto_msgTypes[104]
+	mi := &file_shares_shares_proto_msgTypes[105]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7631,7 +7723,7 @@ func (x *TaoshengInfo) String() string {
 func (*TaoshengInfo) ProtoMessage() {}
 
 func (x *TaoshengInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[104]
+	mi := &file_shares_shares_proto_msgTypes[105]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7644,7 +7736,7 @@ func (x *TaoshengInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TaoshengInfo.ProtoReflect.Descriptor instead.
 func (*TaoshengInfo) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{104}
+	return file_shares_shares_proto_rawDescGZIP(), []int{105}
 }
 
 func (x *TaoshengInfo) GetCode() string {
@@ -7670,7 +7762,7 @@ type GetTaoshengResp struct {
 
 func (x *GetTaoshengResp) Reset() {
 	*x = GetTaoshengResp{}
-	mi := &file_shares_shares_proto_msgTypes[105]
+	mi := &file_shares_shares_proto_msgTypes[106]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7682,7 +7774,7 @@ func (x *GetTaoshengResp) String() string {
 func (*GetTaoshengResp) ProtoMessage() {}
 
 func (x *GetTaoshengResp) ProtoReflect() protoreflect.Message {
-	mi := &file_shares_shares_proto_msgTypes[105]
+	mi := &file_shares_shares_proto_msgTypes[106]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7695,7 +7787,7 @@ func (x *GetTaoshengResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTaoshengResp.ProtoReflect.Descriptor instead.
 func (*GetTaoshengResp) Descriptor() ([]byte, []int) {
-	return file_shares_shares_proto_rawDescGZIP(), []int{105}
+	return file_shares_shares_proto_rawDescGZIP(), []int{106}
 }
 
 func (x *GetTaoshengResp) GetList() []*TaoshengInfo {
@@ -7904,7 +7996,15 @@ const file_shares_shares_proto_rawDesc = "" +
 	"\x02px\x18\x12 \x03(\x01R\x02px\x12\x1e\n" +
 	"\n" +
 	"mzpxbTitle\x18\x13 \x01(\tR\n" +
-	"mzpxbTitle\"\xde\x01\n" +
+	"mzpxbTitle\"\xb8\x01\n" +
+	"\x14GetHKMarketKlineResp\x12\x14\n" +
+	"\x05times\x18\x01 \x03(\tR\x05times\x12\x14\n" +
+	"\x05kLine\x18\x02 \x03(\x01R\x05kLine\x12\x10\n" +
+	"\x03ggt\x18\x03 \x03(\x01R\x03ggt\x12\x0e\n" +
+	"\x02gk\x18\x04 \x03(\x01R\x02gk\x12\x14\n" +
+	"\x05hgNum\x18\x05 \x03(\x01R\x05hgNum\x12\x18\n" +
+	"\ahgPrice\x18\x06 \x03(\x01R\ahgPrice\x12\"\n" +
+	"\fhgTotalPrice\x18\a \x03(\x01R\fhgTotalPrice\"\xde\x01\n" +
 	"\x0eGetJgKlineResp\x12\x14\n" +
 	"\x05times\x18\x01 \x03(\tR\x05times\x12\x16\n" +
 	"\x06colorr\x18\x02 \x01(\tR\x06colorr\x12\x16\n" +
@@ -8394,7 +8494,7 @@ func file_shares_shares_proto_rawDescGZIP() []byte {
 	return file_shares_shares_proto_rawDescData
 }
 
-var file_shares_shares_proto_msgTypes = make([]protoimpl.MessageInfo, 106)
+var file_shares_shares_proto_msgTypes = make([]protoimpl.MessageInfo, 107)
 var file_shares_shares_proto_goTypes = []any{
 	(*CodeNamesInfo)(nil),          // 0: shares.CodeNamesInfo
 	(*GetAllBsJgCodeNameResp)(nil), // 1: shares.GetAllBsJgCodeNameResp
@@ -8427,94 +8527,95 @@ var file_shares_shares_proto_goTypes = []any{
 	(*GetYyqReq)(nil),              // 28: shares.GetYyqReq
 	(*GetYyqResp)(nil),             // 29: shares.GetYyqResp
 	(*GetFundKlineResp)(nil),       // 30: shares.GetFundKlineResp
-	(*GetJgKlineResp)(nil),         // 31: shares.GetJgKlineResp
-	(*EchartsKeyLineInfo)(nil),     // 32: shares.EchartsKeyLineInfo
-	(*GetHotHyNameReq)(nil),        // 33: shares.GetHotHyNameReq
-	(*JointSearchInfo)(nil),        // 34: shares.JointSearchInfo
-	(*JointSearchReq)(nil),         // 35: shares.JointSearchReq
-	(*JointSearchResp)(nil),        // 36: shares.JointSearchResp
-	(*GetHotHyNameResp)(nil),       // 37: shares.GetHotHyNameResp
-	(*HyCodeInfo)(nil),             // 38: shares.HyCodeInfo
-	(*GetSharesKlineReq)(nil),      // 39: shares.GetSharesKlineReq
-	(*GetSharesKlineResp)(nil),     // 40: shares.GetSharesKlineResp
-	(*GetSharesKlineMoreResp)(nil), // 41: shares.GetSharesKlineMoreResp
-	(*GdsInfo)(nil),                // 42: shares.GdsInfo
-	(*GZPeResp)(nil),               // 43: shares.GZPeResp
-	(*GetHyMmaddReq)(nil),          // 44: shares.GetHyMmaddReq
-	(*GetMyTeamDetailReq)(nil),     // 45: shares.GetMyTeamDetailReq
-	(*GetMyTeamDetailResp)(nil),    // 46: shares.GetMyTeamDetailResp
-	(*GetMyTeamResp)(nil),          // 47: shares.GetMyTeamResp
-	(*GetHyRmReq)(nil),             // 48: shares.GetHyRmReq
-	(*GetHyRmResp)(nil),            // 49: shares.GetHyRmResp
-	(*DailyCheckInfo)(nil),         // 50: shares.DailyCheckInfo
-	(*GetDailyCheckResp)(nil),      // 51: shares.GetDailyCheckResp
-	(*SharesInfo)(nil),             // 52: shares.SharesInfo
-	(*SharesInfoDetails)(nil),      // 53: shares.SharesInfoDetails
-	(*Group)(nil),                  // 54: shares.Group
-	(*GetGroupResp)(nil),           // 55: shares.GetGroupResp
-	(*SearchReq)(nil),              // 56: shares.SearchReq
-	(*SearchResp)(nil),             // 57: shares.SearchResp
-	(*GetsReq)(nil),                // 58: shares.GetsReq
-	(*SimpleSharesInfo)(nil),       // 59: shares.SimpleSharesInfo
-	(*GetsResp)(nil),               // 60: shares.GetsResp
-	(*CodeNameInfo)(nil),           // 61: shares.CodeNameInfo
-	(*GetAllCodeNameResp)(nil),     // 62: shares.GetAllCodeNameResp
-	(*AddMyCodeToGroupReq)(nil),    // 63: shares.AddMyCodeToGroupReq
-	(*AddMyCodeReq)(nil),           // 64: shares.AddMyCodeReq
-	(*AddMyCodeResp)(nil),          // 65: shares.AddMyCodeResp
-	(*GetMyCodeReq)(nil),           // 66: shares.GetMyCodeReq
-	(*AddMyCodeInfo)(nil),          // 67: shares.AddMyCodeInfo
-	(*GetMyCodeResp)(nil),          // 68: shares.GetMyCodeResp
-	(*Msg)(nil),                    // 69: shares.Msg
-	(*GetMsgResp)(nil),             // 70: shares.GetMsgResp
-	(*HaveNewMsgResp)(nil),         // 71: shares.HaveNewMsgResp
-	(*DeleteMyCodeReq)(nil),        // 72: shares.DeleteMyCodeReq
-	(*AddGroupReq)(nil),            // 73: shares.AddGroupReq
-	(*CodeReq)(nil),                // 74: shares.CodeReq
-	(*CodesReq)(nil),               // 75: shares.CodesReq
-	(*GetMyGroupResp)(nil),         // 76: shares.GetMyGroupResp
-	(*UpsetGroupCodeReq)(nil),      // 77: shares.UpsetGroupCodeReq
-	(*UpsetGroupCodeResp)(nil),     // 78: shares.UpsetGroupCodeResp
-	(*GetLqReq)(nil),               // 79: shares.GetLqReq
-	(*GetLqResp)(nil),              // 80: shares.GetLqResp
-	(*GetDayResp)(nil),             // 81: shares.GetDayResp
-	(*GetHyCodeResp)(nil),          // 82: shares.GetHyCodeResp
-	(*HyTimeData)(nil),             // 83: shares.HyTimeData
-	(*GetHyTimeReq)(nil),           // 84: shares.GetHyTimeReq
-	(*GetHyTimeResp)(nil),          // 85: shares.GetHyTimeResp
-	(*GetTouTiaoResp)(nil),         // 86: shares.GetTouTiaoResp
-	(*MyYdInfo)(nil),               // 87: shares.MyYdInfo
-	(*GetMyYdResp)(nil),            // 88: shares.GetMyYdResp
-	(*GetMyYdReq)(nil),             // 89: shares.GetMyYdReq
-	(*GetYhxgReq)(nil),             // 90: shares.GetYhxgReq
-	(*GetHotYzCodesResp)(nil),      // 91: shares.GetHotYzCodesResp
-	(*GetTopResp)(nil),             // 92: shares.GetTopResp
-	(*GetHyDjResp)(nil),            // 93: shares.GetHyDjResp
-	(*TblResp)(nil),                // 94: shares.TblResp
-	(*ThInfo)(nil),                 // 95: shares.ThInfo
-	(*TrInfo)(nil),                 // 96: shares.TrInfo
-	(*GetCwsjResp)(nil),            // 97: shares.GetCwsjResp
-	(*GetTscReq)(nil),              // 98: shares.GetTscReq
-	(*TscInfo)(nil),                // 99: shares.TscInfo
-	(*GetTscResp)(nil),             // 100: shares.GetTscResp
-	(*SearchTscReq)(nil),           // 101: shares.SearchTscReq
-	(*SearchTscResp)(nil),          // 102: shares.SearchTscResp
-	(*SharesAttachInfo)(nil),       // 103: shares.SharesAttachInfo
-	(*TaoshengInfo)(nil),           // 104: shares.TaoshengInfo
-	(*GetTaoshengResp)(nil),        // 105: shares.GetTaoshengResp
-	(*common.SimpSharInfo)(nil),    // 106: common.SimpSharInfo
-	(*anypb.Any)(nil),              // 107: google.protobuf.Any
-	(*common.Empty)(nil),           // 108: common.Empty
+	(*GetHKMarketKlineResp)(nil),   // 31: shares.GetHKMarketKlineResp
+	(*GetJgKlineResp)(nil),         // 32: shares.GetJgKlineResp
+	(*EchartsKeyLineInfo)(nil),     // 33: shares.EchartsKeyLineInfo
+	(*GetHotHyNameReq)(nil),        // 34: shares.GetHotHyNameReq
+	(*JointSearchInfo)(nil),        // 35: shares.JointSearchInfo
+	(*JointSearchReq)(nil),         // 36: shares.JointSearchReq
+	(*JointSearchResp)(nil),        // 37: shares.JointSearchResp
+	(*GetHotHyNameResp)(nil),       // 38: shares.GetHotHyNameResp
+	(*HyCodeInfo)(nil),             // 39: shares.HyCodeInfo
+	(*GetSharesKlineReq)(nil),      // 40: shares.GetSharesKlineReq
+	(*GetSharesKlineResp)(nil),     // 41: shares.GetSharesKlineResp
+	(*GetSharesKlineMoreResp)(nil), // 42: shares.GetSharesKlineMoreResp
+	(*GdsInfo)(nil),                // 43: shares.GdsInfo
+	(*GZPeResp)(nil),               // 44: shares.GZPeResp
+	(*GetHyMmaddReq)(nil),          // 45: shares.GetHyMmaddReq
+	(*GetMyTeamDetailReq)(nil),     // 46: shares.GetMyTeamDetailReq
+	(*GetMyTeamDetailResp)(nil),    // 47: shares.GetMyTeamDetailResp
+	(*GetMyTeamResp)(nil),          // 48: shares.GetMyTeamResp
+	(*GetHyRmReq)(nil),             // 49: shares.GetHyRmReq
+	(*GetHyRmResp)(nil),            // 50: shares.GetHyRmResp
+	(*DailyCheckInfo)(nil),         // 51: shares.DailyCheckInfo
+	(*GetDailyCheckResp)(nil),      // 52: shares.GetDailyCheckResp
+	(*SharesInfo)(nil),             // 53: shares.SharesInfo
+	(*SharesInfoDetails)(nil),      // 54: shares.SharesInfoDetails
+	(*Group)(nil),                  // 55: shares.Group
+	(*GetGroupResp)(nil),           // 56: shares.GetGroupResp
+	(*SearchReq)(nil),              // 57: shares.SearchReq
+	(*SearchResp)(nil),             // 58: shares.SearchResp
+	(*GetsReq)(nil),                // 59: shares.GetsReq
+	(*SimpleSharesInfo)(nil),       // 60: shares.SimpleSharesInfo
+	(*GetsResp)(nil),               // 61: shares.GetsResp
+	(*CodeNameInfo)(nil),           // 62: shares.CodeNameInfo
+	(*GetAllCodeNameResp)(nil),     // 63: shares.GetAllCodeNameResp
+	(*AddMyCodeToGroupReq)(nil),    // 64: shares.AddMyCodeToGroupReq
+	(*AddMyCodeReq)(nil),           // 65: shares.AddMyCodeReq
+	(*AddMyCodeResp)(nil),          // 66: shares.AddMyCodeResp
+	(*GetMyCodeReq)(nil),           // 67: shares.GetMyCodeReq
+	(*AddMyCodeInfo)(nil),          // 68: shares.AddMyCodeInfo
+	(*GetMyCodeResp)(nil),          // 69: shares.GetMyCodeResp
+	(*Msg)(nil),                    // 70: shares.Msg
+	(*GetMsgResp)(nil),             // 71: shares.GetMsgResp
+	(*HaveNewMsgResp)(nil),         // 72: shares.HaveNewMsgResp
+	(*DeleteMyCodeReq)(nil),        // 73: shares.DeleteMyCodeReq
+	(*AddGroupReq)(nil),            // 74: shares.AddGroupReq
+	(*CodeReq)(nil),                // 75: shares.CodeReq
+	(*CodesReq)(nil),               // 76: shares.CodesReq
+	(*GetMyGroupResp)(nil),         // 77: shares.GetMyGroupResp
+	(*UpsetGroupCodeReq)(nil),      // 78: shares.UpsetGroupCodeReq
+	(*UpsetGroupCodeResp)(nil),     // 79: shares.UpsetGroupCodeResp
+	(*GetLqReq)(nil),               // 80: shares.GetLqReq
+	(*GetLqResp)(nil),              // 81: shares.GetLqResp
+	(*GetDayResp)(nil),             // 82: shares.GetDayResp
+	(*GetHyCodeResp)(nil),          // 83: shares.GetHyCodeResp
+	(*HyTimeData)(nil),             // 84: shares.HyTimeData
+	(*GetHyTimeReq)(nil),           // 85: shares.GetHyTimeReq
+	(*GetHyTimeResp)(nil),          // 86: shares.GetHyTimeResp
+	(*GetTouTiaoResp)(nil),         // 87: shares.GetTouTiaoResp
+	(*MyYdInfo)(nil),               // 88: shares.MyYdInfo
+	(*GetMyYdResp)(nil),            // 89: shares.GetMyYdResp
+	(*GetMyYdReq)(nil),             // 90: shares.GetMyYdReq
+	(*GetYhxgReq)(nil),             // 91: shares.GetYhxgReq
+	(*GetHotYzCodesResp)(nil),      // 92: shares.GetHotYzCodesResp
+	(*GetTopResp)(nil),             // 93: shares.GetTopResp
+	(*GetHyDjResp)(nil),            // 94: shares.GetHyDjResp
+	(*TblResp)(nil),                // 95: shares.TblResp
+	(*ThInfo)(nil),                 // 96: shares.ThInfo
+	(*TrInfo)(nil),                 // 97: shares.TrInfo
+	(*GetCwsjResp)(nil),            // 98: shares.GetCwsjResp
+	(*GetTscReq)(nil),              // 99: shares.GetTscReq
+	(*TscInfo)(nil),                // 100: shares.TscInfo
+	(*GetTscResp)(nil),             // 101: shares.GetTscResp
+	(*SearchTscReq)(nil),           // 102: shares.SearchTscReq
+	(*SearchTscResp)(nil),          // 103: shares.SearchTscResp
+	(*SharesAttachInfo)(nil),       // 104: shares.SharesAttachInfo
+	(*TaoshengInfo)(nil),           // 105: shares.TaoshengInfo
+	(*GetTaoshengResp)(nil),        // 106: shares.GetTaoshengResp
+	(*common.SimpSharInfo)(nil),    // 107: common.SimpSharInfo
+	(*anypb.Any)(nil),              // 108: google.protobuf.Any
+	(*common.Empty)(nil),           // 109: common.Empty
 }
 var file_shares_shares_proto_depIdxs = []int32{
-	61,  // 0: shares.GetAllBsJgCodeNameResp.list:type_name -> shares.CodeNameInfo
+	62,  // 0: shares.GetAllBsJgCodeNameResp.list:type_name -> shares.CodeNameInfo
 	0,   // 1: shares.GetAllBsJgCodeNameResp.jglist:type_name -> shares.CodeNamesInfo
 	7,   // 2: shares.GetClmxResp.list:type_name -> shares.ClmxInfo
 	13,  // 3: shares.GetZybHyKlineResp.list:type_name -> shares.ZybHyDailyInfo
 	12,  // 4: shares.GetZybHyKlineResp.tags:type_name -> shares.TagInfo
 	12,  // 5: shares.GetZybHyKlineResp.tags1:type_name -> shares.TagInfo
-	94,  // 6: shares.GetZybHyKlineResp.tsList1:type_name -> shares.TblResp
-	94,  // 7: shares.GetZybHyKlineResp.tsList2:type_name -> shares.TblResp
+	95,  // 6: shares.GetZybHyKlineResp.tsList1:type_name -> shares.TblResp
+	95,  // 7: shares.GetZybHyKlineResp.tsList2:type_name -> shares.TblResp
 	11,  // 8: shares.GetZybYbResp.list:type_name -> shares.ZybHyYbInfo
 	23,  // 9: shares.GetMrtDetailResp.info:type_name -> shares.MrtInfo
 	17,  // 10: shares.GetMrtDetailResp.docs:type_name -> shares.MrtLog
@@ -8537,79 +8638,79 @@ var file_shares_shares_proto_depIdxs = []int32{
 	27,  // 27: shares.GetYyqResp.hgjck:type_name -> shares.KlineInfo
 	27,  // 28: shares.GetYyqResp.fdi:type_name -> shares.KlineInfo
 	27,  // 29: shares.GetYyqResp.xzxd:type_name -> shares.KlineInfo
-	34,  // 30: shares.JointSearchReq.list:type_name -> shares.JointSearchInfo
-	52,  // 31: shares.JointSearchResp.list:type_name -> shares.SharesInfo
-	38,  // 32: shares.GetHotHyNameResp.list:type_name -> shares.HyCodeInfo
-	42,  // 33: shares.GetSharesKlineResp.bxPercent:type_name -> shares.GdsInfo
-	42,  // 34: shares.GetSharesKlineResp.fyyx:type_name -> shares.GdsInfo
-	42,  // 35: shares.GetSharesKlineResp.gdsPl:type_name -> shares.GdsInfo
-	52,  // 36: shares.GetMyTeamDetailResp.list:type_name -> shares.SharesInfo
-	106, // 37: shares.GetHyRmResp.list:type_name -> common.SimpSharInfo
-	50,  // 38: shares.GetDailyCheckResp.list:type_name -> shares.DailyCheckInfo
+	35,  // 30: shares.JointSearchReq.list:type_name -> shares.JointSearchInfo
+	53,  // 31: shares.JointSearchResp.list:type_name -> shares.SharesInfo
+	39,  // 32: shares.GetHotHyNameResp.list:type_name -> shares.HyCodeInfo
+	43,  // 33: shares.GetSharesKlineResp.bxPercent:type_name -> shares.GdsInfo
+	43,  // 34: shares.GetSharesKlineResp.fyyx:type_name -> shares.GdsInfo
+	43,  // 35: shares.GetSharesKlineResp.gdsPl:type_name -> shares.GdsInfo
+	53,  // 36: shares.GetMyTeamDetailResp.list:type_name -> shares.SharesInfo
+	107, // 37: shares.GetHyRmResp.list:type_name -> common.SimpSharInfo
+	51,  // 38: shares.GetDailyCheckResp.list:type_name -> shares.DailyCheckInfo
 	12,  // 39: shares.SharesInfo.hy:type_name -> shares.TagInfo
-	52,  // 40: shares.Group.list:type_name -> shares.SharesInfo
-	54,  // 41: shares.GetGroupResp.list:type_name -> shares.Group
-	52,  // 42: shares.SearchResp.info:type_name -> shares.SharesInfo
-	59,  // 43: shares.GetsResp.list:type_name -> shares.SimpleSharesInfo
-	61,  // 44: shares.GetAllCodeNameResp.list:type_name -> shares.CodeNameInfo
-	64,  // 45: shares.GetMyCodeResp.list:type_name -> shares.AddMyCodeReq
-	69,  // 46: shares.GetMsgResp.list:type_name -> shares.Msg
-	54,  // 47: shares.GetLqResp.list:type_name -> shares.Group
-	54,  // 48: shares.GetDayResp.list:type_name -> shares.Group
+	53,  // 40: shares.Group.list:type_name -> shares.SharesInfo
+	55,  // 41: shares.GetGroupResp.list:type_name -> shares.Group
+	53,  // 42: shares.SearchResp.info:type_name -> shares.SharesInfo
+	60,  // 43: shares.GetsResp.list:type_name -> shares.SimpleSharesInfo
+	62,  // 44: shares.GetAllCodeNameResp.list:type_name -> shares.CodeNameInfo
+	65,  // 45: shares.GetMyCodeResp.list:type_name -> shares.AddMyCodeReq
+	70,  // 46: shares.GetMsgResp.list:type_name -> shares.Msg
+	55,  // 47: shares.GetLqResp.list:type_name -> shares.Group
+	55,  // 48: shares.GetDayResp.list:type_name -> shares.Group
 	12,  // 49: shares.GetDayResp.hyTags:type_name -> shares.TagInfo
 	12,  // 50: shares.GetDayResp.tsTags:type_name -> shares.TagInfo
-	54,  // 51: shares.GetHyCodeResp.list:type_name -> shares.Group
-	107, // 52: shares.HyTimeData.data:type_name -> google.protobuf.Any
-	83,  // 53: shares.GetHyTimeResp.data:type_name -> shares.HyTimeData
-	87,  // 54: shares.GetMyYdResp.list:type_name -> shares.MyYdInfo
-	54,  // 55: shares.GetHotYzCodesResp.list:type_name -> shares.Group
-	106, // 56: shares.GetHotYzCodesResp.hyListUp:type_name -> common.SimpSharInfo
-	106, // 57: shares.GetHotYzCodesResp.hyListDown:type_name -> common.SimpSharInfo
+	55,  // 51: shares.GetHyCodeResp.list:type_name -> shares.Group
+	108, // 52: shares.HyTimeData.data:type_name -> google.protobuf.Any
+	84,  // 53: shares.GetHyTimeResp.data:type_name -> shares.HyTimeData
+	88,  // 54: shares.GetMyYdResp.list:type_name -> shares.MyYdInfo
+	55,  // 55: shares.GetHotYzCodesResp.list:type_name -> shares.Group
+	107, // 56: shares.GetHotYzCodesResp.hyListUp:type_name -> common.SimpSharInfo
+	107, // 57: shares.GetHotYzCodesResp.hyListDown:type_name -> common.SimpSharInfo
 	12,  // 58: shares.GetHotYzCodesResp.tags:type_name -> shares.TagInfo
 	12,  // 59: shares.GetHotYzCodesResp.tags1:type_name -> shares.TagInfo
-	94,  // 60: shares.GetTopResp.all:type_name -> shares.TblResp
-	94,  // 61: shares.GetTopResp.dc:type_name -> shares.TblResp
-	94,  // 62: shares.GetTopResp.tx:type_name -> shares.TblResp
-	94,  // 63: shares.GetTopResp.ths:type_name -> shares.TblResp
-	94,  // 64: shares.GetHyDjResp.info:type_name -> shares.TblResp
-	61,  // 65: shares.GetHyDjResp.codeList:type_name -> shares.CodeNameInfo
-	96,  // 66: shares.TblResp.list:type_name -> shares.TrInfo
-	42,  // 67: shares.GetCwsjResp.roe:type_name -> shares.GdsInfo
-	42,  // 68: shares.GetCwsjResp.eps:type_name -> shares.GdsInfo
-	42,  // 69: shares.GetCwsjResp.jlr:type_name -> shares.GdsInfo
-	42,  // 70: shares.GetCwsjResp.xsjll:type_name -> shares.GdsInfo
-	42,  // 71: shares.GetCwsjResp.jyxjl:type_name -> shares.GdsInfo
-	42,  // 72: shares.GetCwsjResp.zzc:type_name -> shares.GdsInfo
-	42,  // 73: shares.GetCwsjResp.zfz:type_name -> shares.GdsInfo
-	99,  // 74: shares.GetTscResp.list:type_name -> shares.TscInfo
-	99,  // 75: shares.SearchTscResp.list:type_name -> shares.TscInfo
-	104, // 76: shares.GetTaoshengResp.list:type_name -> shares.TaoshengInfo
-	108, // 77: shares.shares.GetGroup:input_type -> common.Empty
-	74,  // 78: shares.shares.GetMyGroup:input_type -> shares.CodeReq
-	77,  // 79: shares.shares.UpsetGroupCode:input_type -> shares.UpsetGroupCodeReq
-	56,  // 80: shares.shares.Search:input_type -> shares.SearchReq
-	58,  // 81: shares.shares.Gets:input_type -> shares.GetsReq
-	64,  // 82: shares.shares.AddMyCode:input_type -> shares.AddMyCodeReq
-	66,  // 83: shares.shares.GetMyCode:input_type -> shares.GetMyCodeReq
-	108, // 84: shares.shares.GetMsg:input_type -> common.Empty
-	108, // 85: shares.shares.HaveNewMsg:input_type -> common.Empty
-	72,  // 86: shares.shares.DeleteMyCode:input_type -> shares.DeleteMyCodeReq
-	73,  // 87: shares.shares.AddGroup:input_type -> shares.AddGroupReq
-	79,  // 88: shares.shares.GetLq:input_type -> shares.GetLqReq
+	95,  // 60: shares.GetTopResp.all:type_name -> shares.TblResp
+	95,  // 61: shares.GetTopResp.dc:type_name -> shares.TblResp
+	95,  // 62: shares.GetTopResp.tx:type_name -> shares.TblResp
+	95,  // 63: shares.GetTopResp.ths:type_name -> shares.TblResp
+	95,  // 64: shares.GetHyDjResp.info:type_name -> shares.TblResp
+	62,  // 65: shares.GetHyDjResp.codeList:type_name -> shares.CodeNameInfo
+	97,  // 66: shares.TblResp.list:type_name -> shares.TrInfo
+	43,  // 67: shares.GetCwsjResp.roe:type_name -> shares.GdsInfo
+	43,  // 68: shares.GetCwsjResp.eps:type_name -> shares.GdsInfo
+	43,  // 69: shares.GetCwsjResp.jlr:type_name -> shares.GdsInfo
+	43,  // 70: shares.GetCwsjResp.xsjll:type_name -> shares.GdsInfo
+	43,  // 71: shares.GetCwsjResp.jyxjl:type_name -> shares.GdsInfo
+	43,  // 72: shares.GetCwsjResp.zzc:type_name -> shares.GdsInfo
+	43,  // 73: shares.GetCwsjResp.zfz:type_name -> shares.GdsInfo
+	100, // 74: shares.GetTscResp.list:type_name -> shares.TscInfo
+	100, // 75: shares.SearchTscResp.list:type_name -> shares.TscInfo
+	105, // 76: shares.GetTaoshengResp.list:type_name -> shares.TaoshengInfo
+	109, // 77: shares.shares.GetGroup:input_type -> common.Empty
+	75,  // 78: shares.shares.GetMyGroup:input_type -> shares.CodeReq
+	78,  // 79: shares.shares.UpsetGroupCode:input_type -> shares.UpsetGroupCodeReq
+	57,  // 80: shares.shares.Search:input_type -> shares.SearchReq
+	59,  // 81: shares.shares.Gets:input_type -> shares.GetsReq
+	65,  // 82: shares.shares.AddMyCode:input_type -> shares.AddMyCodeReq
+	67,  // 83: shares.shares.GetMyCode:input_type -> shares.GetMyCodeReq
+	109, // 84: shares.shares.GetMsg:input_type -> common.Empty
+	109, // 85: shares.shares.HaveNewMsg:input_type -> common.Empty
+	73,  // 86: shares.shares.DeleteMyCode:input_type -> shares.DeleteMyCodeReq
+	74,  // 87: shares.shares.AddGroup:input_type -> shares.AddGroupReq
+	80,  // 88: shares.shares.GetLq:input_type -> shares.GetLqReq
 	4,   // 89: shares.shares.GetHejjw:input_type -> shares.GetHejjwReq
-	108, // 90: shares.shares.GetDailyCheck:input_type -> common.Empty
-	108, // 91: shares.shares.GetClmx:input_type -> common.Empty
-	89,  // 92: shares.shares.GetMyYd:input_type -> shares.GetMyYdReq
-	48,  // 93: shares.shares.GetHyRm:input_type -> shares.GetHyRmReq
-	108, // 94: shares.shares.GetMyTeam:input_type -> common.Empty
-	45,  // 95: shares.shares.GetMyTeamDetail:input_type -> shares.GetMyTeamDetailReq
-	44,  // 96: shares.shares.GetHyMmadd:input_type -> shares.GetHyMmaddReq
-	44,  // 97: shares.shares.GetAllZyb:input_type -> shares.GetHyMmaddReq
-	39,  // 98: shares.shares.GetSharesKline:input_type -> shares.GetSharesKlineReq
-	39,  // 99: shares.shares.GetSharesKlineMore:input_type -> shares.GetSharesKlineReq
-	39,  // 100: shares.shares.GetFundKline:input_type -> shares.GetSharesKlineReq
-	39,  // 101: shares.shares.GetGzKline:input_type -> shares.GetSharesKlineReq
-	33,  // 102: shares.shares.GetHotHyName:input_type -> shares.GetHotHyNameReq
+	109, // 90: shares.shares.GetDailyCheck:input_type -> common.Empty
+	109, // 91: shares.shares.GetClmx:input_type -> common.Empty
+	90,  // 92: shares.shares.GetMyYd:input_type -> shares.GetMyYdReq
+	49,  // 93: shares.shares.GetHyRm:input_type -> shares.GetHyRmReq
+	109, // 94: shares.shares.GetMyTeam:input_type -> common.Empty
+	46,  // 95: shares.shares.GetMyTeamDetail:input_type -> shares.GetMyTeamDetailReq
+	45,  // 96: shares.shares.GetHyMmadd:input_type -> shares.GetHyMmaddReq
+	45,  // 97: shares.shares.GetAllZyb:input_type -> shares.GetHyMmaddReq
+	40,  // 98: shares.shares.GetSharesKline:input_type -> shares.GetSharesKlineReq
+	40,  // 99: shares.shares.GetSharesKlineMore:input_type -> shares.GetSharesKlineReq
+	40,  // 100: shares.shares.GetFundKline:input_type -> shares.GetSharesKlineReq
+	40,  // 101: shares.shares.GetGzKline:input_type -> shares.GetSharesKlineReq
+	34,  // 102: shares.shares.GetHotHyName:input_type -> shares.GetHotHyNameReq
 	28,  // 103: shares.shares.GetYyq:input_type -> shares.GetYyqReq
 	21,  // 104: shares.shares.GetMrtList:input_type -> shares.GetMrtListReq
 	19,  // 105: shares.shares.GetMrtCode:input_type -> shares.GetMrtCodeReq
@@ -8617,41 +8718,41 @@ var file_shares_shares_proto_depIdxs = []int32{
 	14,  // 107: shares.shares.GetMrtDetail:input_type -> shares.GetMrtDetailReq
 	8,   // 108: shares.shares.GetZybHyKline:input_type -> shares.GetZybHyKlineReq
 	2,   // 109: shares.shares.GetLicence:input_type -> shares.GetLicenceReq
-	98,  // 110: shares.shares.GetTsc:input_type -> shares.GetTscReq
-	55,  // 111: shares.shares.GetGroup:output_type -> shares.GetGroupResp
-	76,  // 112: shares.shares.GetMyGroup:output_type -> shares.GetMyGroupResp
-	78,  // 113: shares.shares.UpsetGroupCode:output_type -> shares.UpsetGroupCodeResp
-	57,  // 114: shares.shares.Search:output_type -> shares.SearchResp
-	60,  // 115: shares.shares.Gets:output_type -> shares.GetsResp
-	65,  // 116: shares.shares.AddMyCode:output_type -> shares.AddMyCodeResp
-	68,  // 117: shares.shares.GetMyCode:output_type -> shares.GetMyCodeResp
-	70,  // 118: shares.shares.GetMsg:output_type -> shares.GetMsgResp
-	71,  // 119: shares.shares.HaveNewMsg:output_type -> shares.HaveNewMsgResp
-	108, // 120: shares.shares.DeleteMyCode:output_type -> common.Empty
-	108, // 121: shares.shares.AddGroup:output_type -> common.Empty
-	80,  // 122: shares.shares.GetLq:output_type -> shares.GetLqResp
+	99,  // 110: shares.shares.GetTsc:input_type -> shares.GetTscReq
+	56,  // 111: shares.shares.GetGroup:output_type -> shares.GetGroupResp
+	77,  // 112: shares.shares.GetMyGroup:output_type -> shares.GetMyGroupResp
+	79,  // 113: shares.shares.UpsetGroupCode:output_type -> shares.UpsetGroupCodeResp
+	58,  // 114: shares.shares.Search:output_type -> shares.SearchResp
+	61,  // 115: shares.shares.Gets:output_type -> shares.GetsResp
+	66,  // 116: shares.shares.AddMyCode:output_type -> shares.AddMyCodeResp
+	69,  // 117: shares.shares.GetMyCode:output_type -> shares.GetMyCodeResp
+	71,  // 118: shares.shares.GetMsg:output_type -> shares.GetMsgResp
+	72,  // 119: shares.shares.HaveNewMsg:output_type -> shares.HaveNewMsgResp
+	109, // 120: shares.shares.DeleteMyCode:output_type -> common.Empty
+	109, // 121: shares.shares.AddGroup:output_type -> common.Empty
+	81,  // 122: shares.shares.GetLq:output_type -> shares.GetLqResp
 	24,  // 123: shares.shares.GetHejjw:output_type -> shares.GetHejjwResp
-	51,  // 124: shares.shares.GetDailyCheck:output_type -> shares.GetDailyCheckResp
+	52,  // 124: shares.shares.GetDailyCheck:output_type -> shares.GetDailyCheckResp
 	6,   // 125: shares.shares.GetClmx:output_type -> shares.GetClmxResp
-	88,  // 126: shares.shares.GetMyYd:output_type -> shares.GetMyYdResp
-	49,  // 127: shares.shares.GetHyRm:output_type -> shares.GetHyRmResp
-	47,  // 128: shares.shares.GetMyTeam:output_type -> shares.GetMyTeamResp
-	46,  // 129: shares.shares.GetMyTeamDetail:output_type -> shares.GetMyTeamDetailResp
-	94,  // 130: shares.shares.GetHyMmadd:output_type -> shares.TblResp
-	94,  // 131: shares.shares.GetAllZyb:output_type -> shares.TblResp
-	40,  // 132: shares.shares.GetSharesKline:output_type -> shares.GetSharesKlineResp
-	41,  // 133: shares.shares.GetSharesKlineMore:output_type -> shares.GetSharesKlineMoreResp
+	89,  // 126: shares.shares.GetMyYd:output_type -> shares.GetMyYdResp
+	50,  // 127: shares.shares.GetHyRm:output_type -> shares.GetHyRmResp
+	48,  // 128: shares.shares.GetMyTeam:output_type -> shares.GetMyTeamResp
+	47,  // 129: shares.shares.GetMyTeamDetail:output_type -> shares.GetMyTeamDetailResp
+	95,  // 130: shares.shares.GetHyMmadd:output_type -> shares.TblResp
+	95,  // 131: shares.shares.GetAllZyb:output_type -> shares.TblResp
+	41,  // 132: shares.shares.GetSharesKline:output_type -> shares.GetSharesKlineResp
+	42,  // 133: shares.shares.GetSharesKlineMore:output_type -> shares.GetSharesKlineMoreResp
 	30,  // 134: shares.shares.GetFundKline:output_type -> shares.GetFundKlineResp
-	43,  // 135: shares.shares.GetGzKline:output_type -> shares.GZPeResp
-	37,  // 136: shares.shares.GetHotHyName:output_type -> shares.GetHotHyNameResp
+	44,  // 135: shares.shares.GetGzKline:output_type -> shares.GZPeResp
+	38,  // 136: shares.shares.GetHotHyName:output_type -> shares.GetHotHyNameResp
 	29,  // 137: shares.shares.GetYyq:output_type -> shares.GetYyqResp
 	22,  // 138: shares.shares.GetMrtList:output_type -> shares.GetMrtListResp
 	20,  // 139: shares.shares.GetMrtCode:output_type -> shares.GetMrtCodeResp
-	108, // 140: shares.shares.UpsetMrtCode:output_type -> common.Empty
+	109, // 140: shares.shares.UpsetMrtCode:output_type -> common.Empty
 	15,  // 141: shares.shares.GetMrtDetail:output_type -> shares.GetMrtDetailResp
 	9,   // 142: shares.shares.GetZybHyKline:output_type -> shares.GetZybHyKlineResp
 	3,   // 143: shares.shares.GetLicence:output_type -> shares.GetLicenceResp
-	100, // 144: shares.shares.GetTsc:output_type -> shares.GetTscResp
+	101, // 144: shares.shares.GetTsc:output_type -> shares.GetTscResp
 	111, // [111:145] is the sub-list for method output_type
 	77,  // [77:111] is the sub-list for method input_type
 	77,  // [77:77] is the sub-list for extension type_name
@@ -8670,7 +8771,7 @@ func file_shares_shares_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_shares_shares_proto_rawDesc), len(file_shares_shares_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   106,
+			NumMessages:   107,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
