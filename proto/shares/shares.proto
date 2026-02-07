@@ -570,6 +570,7 @@ message SharesInfo{
     repeated string hyDjDoc = 26; // 行业叠加描述
     int32 token = 20; // token 数
     bool isVip = 21; // 是否vip
+    string py = 22; // 拼音
 }
 
 // SharesInfoDetails 股票详细信息
@@ -976,4 +977,10 @@ message TaoshengInfo{
 
 message GetTaoshengResp {
         repeated TaoshengInfo list = 1; 
+}
+
+message ChangeCodeReq{
+    string code = 1; // 股票代码
+    string key = 2; // 键
+    string value = 3; // 值
 }

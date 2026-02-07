@@ -4033,6 +4033,7 @@ type SharesInfo struct {
 	HyDjDoc       []string `protobuf:"bytes,26,rep,name=hyDjDoc,proto3" json:"hyDjDoc" jsonschema_description:"行业叠加描述"`            // 行业叠加描述
 	Token         int32    `protobuf:"varint,20,opt,name=token,proto3" json:"token" jsonschema_description:"token 数"`              // token 数
 	IsVip         bool     `protobuf:"varint,21,opt,name=isVip,proto3" json:"isVip" jsonschema_description:"是否vip"`                // 是否vip
+	Py            string   `protobuf:"bytes,22,opt,name=py,proto3" json:"py" jsonschema_description:"拼音"`                          // 拼音
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4212,6 +4213,13 @@ func (x *SharesInfo) GetIsVip() bool {
 		return x.IsVip
 	}
 	return false
+}
+
+func (x *SharesInfo) GetPy() string {
+	if x != nil {
+		return x.Py
+	}
+	return ""
 }
 
 // SharesInfoDetails 股票详细信息
@@ -7797,6 +7805,66 @@ func (x *GetTaoshengResp) GetList() []*TaoshengInfo {
 	return nil
 }
 
+type ChangeCodeReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code" jsonschema_description:"股票代码"` // 股票代码
+	Key           string                 `protobuf:"bytes,2,opt,name=key,proto3" json:"key" jsonschema_description:"键"`      // 键
+	Value         string                 `protobuf:"bytes,3,opt,name=value,proto3" json:"value" jsonschema_description:"值"`  // 值
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChangeCodeReq) Reset() {
+	*x = ChangeCodeReq{}
+	mi := &file_shares_shares_proto_msgTypes[107]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChangeCodeReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChangeCodeReq) ProtoMessage() {}
+
+func (x *ChangeCodeReq) ProtoReflect() protoreflect.Message {
+	mi := &file_shares_shares_proto_msgTypes[107]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChangeCodeReq.ProtoReflect.Descriptor instead.
+func (*ChangeCodeReq) Descriptor() ([]byte, []int) {
+	return file_shares_shares_proto_rawDescGZIP(), []int{107}
+}
+
+func (x *ChangeCodeReq) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *ChangeCodeReq) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *ChangeCodeReq) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
 var File_shares_shares_proto protoreflect.FileDescriptor
 
 const file_shares_shares_proto_rawDesc = "" +
@@ -8124,7 +8192,7 @@ const file_shares_shares_proto_rawDesc = "" +
 	"\x03img\x18\x04 \x01(\tR\x03img\x12\x10\n" +
 	"\x03url\x18\x05 \x01(\tR\x03url\"?\n" +
 	"\x11GetDailyCheckResp\x12*\n" +
-	"\x04list\x18\x01 \x03(\v2\x16.shares.DailyCheckInfoR\x04list\"\xf9\x03\n" +
+	"\x04list\x18\x01 \x03(\v2\x16.shares.DailyCheckInfoR\x04list\"\x89\x04\n" +
 	"\n" +
 	"SharesInfo\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x1e\n" +
@@ -8152,7 +8220,8 @@ const file_shares_shares_proto_rawDesc = "" +
 	"\boptional\x18\x13 \x01(\bR\boptional\x12\x18\n" +
 	"\ahyDjDoc\x18\x1a \x03(\tR\ahyDjDoc\x12\x14\n" +
 	"\x05token\x18\x14 \x01(\x05R\x05token\x12\x14\n" +
-	"\x05isVip\x18\x15 \x01(\bR\x05isVip\"\xd5\x04\n" +
+	"\x05isVip\x18\x15 \x01(\bR\x05isVip\x12\x0e\n" +
+	"\x02py\x18\x16 \x01(\tR\x02py\"\xd5\x04\n" +
 	"\x11SharesInfoDetails\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x1e\n" +
 	"\n" +
@@ -8437,7 +8506,11 @@ const file_shares_shares_proto_rawDesc = "" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x10\n" +
 	"\x03doc\x18\x02 \x01(\tR\x03doc\";\n" +
 	"\x0fGetTaoshengResp\x12(\n" +
-	"\x04list\x18\x01 \x03(\v2\x14.shares.TaoshengInfoR\x04list2\xef\x0f\n" +
+	"\x04list\x18\x01 \x03(\v2\x14.shares.TaoshengInfoR\x04list\"K\n" +
+	"\rChangeCodeReq\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\x12\x10\n" +
+	"\x03key\x18\x02 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x03 \x01(\tR\x05value2\xef\x0f\n" +
 	"\x06shares\x121\n" +
 	"\bGetGroup\x12\r.common.Empty\x1a\x14.shares.GetGroupResp\"\x00\x127\n" +
 	"\n" +
@@ -8494,7 +8567,7 @@ func file_shares_shares_proto_rawDescGZIP() []byte {
 	return file_shares_shares_proto_rawDescData
 }
 
-var file_shares_shares_proto_msgTypes = make([]protoimpl.MessageInfo, 107)
+var file_shares_shares_proto_msgTypes = make([]protoimpl.MessageInfo, 108)
 var file_shares_shares_proto_goTypes = []any{
 	(*CodeNamesInfo)(nil),          // 0: shares.CodeNamesInfo
 	(*GetAllBsJgCodeNameResp)(nil), // 1: shares.GetAllBsJgCodeNameResp
@@ -8603,9 +8676,10 @@ var file_shares_shares_proto_goTypes = []any{
 	(*SharesAttachInfo)(nil),       // 104: shares.SharesAttachInfo
 	(*TaoshengInfo)(nil),           // 105: shares.TaoshengInfo
 	(*GetTaoshengResp)(nil),        // 106: shares.GetTaoshengResp
-	(*common.SimpSharInfo)(nil),    // 107: common.SimpSharInfo
-	(*anypb.Any)(nil),              // 108: google.protobuf.Any
-	(*common.Empty)(nil),           // 109: common.Empty
+	(*ChangeCodeReq)(nil),          // 107: shares.ChangeCodeReq
+	(*common.SimpSharInfo)(nil),    // 108: common.SimpSharInfo
+	(*anypb.Any)(nil),              // 109: google.protobuf.Any
+	(*common.Empty)(nil),           // 110: common.Empty
 }
 var file_shares_shares_proto_depIdxs = []int32{
 	62,  // 0: shares.GetAllBsJgCodeNameResp.list:type_name -> shares.CodeNameInfo
@@ -8645,7 +8719,7 @@ var file_shares_shares_proto_depIdxs = []int32{
 	43,  // 34: shares.GetSharesKlineResp.fyyx:type_name -> shares.GdsInfo
 	43,  // 35: shares.GetSharesKlineResp.gdsPl:type_name -> shares.GdsInfo
 	53,  // 36: shares.GetMyTeamDetailResp.list:type_name -> shares.SharesInfo
-	107, // 37: shares.GetHyRmResp.list:type_name -> common.SimpSharInfo
+	108, // 37: shares.GetHyRmResp.list:type_name -> common.SimpSharInfo
 	51,  // 38: shares.GetDailyCheckResp.list:type_name -> shares.DailyCheckInfo
 	12,  // 39: shares.SharesInfo.hy:type_name -> shares.TagInfo
 	53,  // 40: shares.Group.list:type_name -> shares.SharesInfo
@@ -8660,12 +8734,12 @@ var file_shares_shares_proto_depIdxs = []int32{
 	12,  // 49: shares.GetDayResp.hyTags:type_name -> shares.TagInfo
 	12,  // 50: shares.GetDayResp.tsTags:type_name -> shares.TagInfo
 	55,  // 51: shares.GetHyCodeResp.list:type_name -> shares.Group
-	108, // 52: shares.HyTimeData.data:type_name -> google.protobuf.Any
+	109, // 52: shares.HyTimeData.data:type_name -> google.protobuf.Any
 	84,  // 53: shares.GetHyTimeResp.data:type_name -> shares.HyTimeData
 	88,  // 54: shares.GetMyYdResp.list:type_name -> shares.MyYdInfo
 	55,  // 55: shares.GetHotYzCodesResp.list:type_name -> shares.Group
-	107, // 56: shares.GetHotYzCodesResp.hyListUp:type_name -> common.SimpSharInfo
-	107, // 57: shares.GetHotYzCodesResp.hyListDown:type_name -> common.SimpSharInfo
+	108, // 56: shares.GetHotYzCodesResp.hyListUp:type_name -> common.SimpSharInfo
+	108, // 57: shares.GetHotYzCodesResp.hyListDown:type_name -> common.SimpSharInfo
 	12,  // 58: shares.GetHotYzCodesResp.tags:type_name -> shares.TagInfo
 	12,  // 59: shares.GetHotYzCodesResp.tags1:type_name -> shares.TagInfo
 	95,  // 60: shares.GetTopResp.all:type_name -> shares.TblResp
@@ -8685,24 +8759,24 @@ var file_shares_shares_proto_depIdxs = []int32{
 	100, // 74: shares.GetTscResp.list:type_name -> shares.TscInfo
 	100, // 75: shares.SearchTscResp.list:type_name -> shares.TscInfo
 	105, // 76: shares.GetTaoshengResp.list:type_name -> shares.TaoshengInfo
-	109, // 77: shares.shares.GetGroup:input_type -> common.Empty
+	110, // 77: shares.shares.GetGroup:input_type -> common.Empty
 	75,  // 78: shares.shares.GetMyGroup:input_type -> shares.CodeReq
 	78,  // 79: shares.shares.UpsetGroupCode:input_type -> shares.UpsetGroupCodeReq
 	57,  // 80: shares.shares.Search:input_type -> shares.SearchReq
 	59,  // 81: shares.shares.Gets:input_type -> shares.GetsReq
 	65,  // 82: shares.shares.AddMyCode:input_type -> shares.AddMyCodeReq
 	67,  // 83: shares.shares.GetMyCode:input_type -> shares.GetMyCodeReq
-	109, // 84: shares.shares.GetMsg:input_type -> common.Empty
-	109, // 85: shares.shares.HaveNewMsg:input_type -> common.Empty
+	110, // 84: shares.shares.GetMsg:input_type -> common.Empty
+	110, // 85: shares.shares.HaveNewMsg:input_type -> common.Empty
 	73,  // 86: shares.shares.DeleteMyCode:input_type -> shares.DeleteMyCodeReq
 	74,  // 87: shares.shares.AddGroup:input_type -> shares.AddGroupReq
 	80,  // 88: shares.shares.GetLq:input_type -> shares.GetLqReq
 	4,   // 89: shares.shares.GetHejjw:input_type -> shares.GetHejjwReq
-	109, // 90: shares.shares.GetDailyCheck:input_type -> common.Empty
-	109, // 91: shares.shares.GetClmx:input_type -> common.Empty
+	110, // 90: shares.shares.GetDailyCheck:input_type -> common.Empty
+	110, // 91: shares.shares.GetClmx:input_type -> common.Empty
 	90,  // 92: shares.shares.GetMyYd:input_type -> shares.GetMyYdReq
 	49,  // 93: shares.shares.GetHyRm:input_type -> shares.GetHyRmReq
-	109, // 94: shares.shares.GetMyTeam:input_type -> common.Empty
+	110, // 94: shares.shares.GetMyTeam:input_type -> common.Empty
 	46,  // 95: shares.shares.GetMyTeamDetail:input_type -> shares.GetMyTeamDetailReq
 	45,  // 96: shares.shares.GetHyMmadd:input_type -> shares.GetHyMmaddReq
 	45,  // 97: shares.shares.GetAllZyb:input_type -> shares.GetHyMmaddReq
@@ -8728,8 +8802,8 @@ var file_shares_shares_proto_depIdxs = []int32{
 	69,  // 117: shares.shares.GetMyCode:output_type -> shares.GetMyCodeResp
 	71,  // 118: shares.shares.GetMsg:output_type -> shares.GetMsgResp
 	72,  // 119: shares.shares.HaveNewMsg:output_type -> shares.HaveNewMsgResp
-	109, // 120: shares.shares.DeleteMyCode:output_type -> common.Empty
-	109, // 121: shares.shares.AddGroup:output_type -> common.Empty
+	110, // 120: shares.shares.DeleteMyCode:output_type -> common.Empty
+	110, // 121: shares.shares.AddGroup:output_type -> common.Empty
 	81,  // 122: shares.shares.GetLq:output_type -> shares.GetLqResp
 	24,  // 123: shares.shares.GetHejjw:output_type -> shares.GetHejjwResp
 	52,  // 124: shares.shares.GetDailyCheck:output_type -> shares.GetDailyCheckResp
@@ -8748,7 +8822,7 @@ var file_shares_shares_proto_depIdxs = []int32{
 	29,  // 137: shares.shares.GetYyq:output_type -> shares.GetYyqResp
 	22,  // 138: shares.shares.GetMrtList:output_type -> shares.GetMrtListResp
 	20,  // 139: shares.shares.GetMrtCode:output_type -> shares.GetMrtCodeResp
-	109, // 140: shares.shares.UpsetMrtCode:output_type -> common.Empty
+	110, // 140: shares.shares.UpsetMrtCode:output_type -> common.Empty
 	15,  // 141: shares.shares.GetMrtDetail:output_type -> shares.GetMrtDetailResp
 	9,   // 142: shares.shares.GetZybHyKline:output_type -> shares.GetZybHyKlineResp
 	3,   // 143: shares.shares.GetLicence:output_type -> shares.GetLicenceResp
@@ -8771,7 +8845,7 @@ func file_shares_shares_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_shares_shares_proto_rawDesc), len(file_shares_shares_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   107,
+			NumMessages:   108,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
