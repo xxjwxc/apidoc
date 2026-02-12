@@ -875,6 +875,7 @@ type GetUserInfoResp struct {
 	SessionId   string                 `protobuf:"bytes,17,opt,name=sessionId,proto3" json:"sessionId" jsonschema_description:"用户sessionid 用于当前交互使用"` // 用户sessionid 用于当前交互使用
 	OverdueTime int64                  `protobuf:"varint,18,opt,name=overdueTime,proto3" json:"overdueTime" jsonschema_description:"逾期时间点(时间戳)"`      // 逾期时间点(时间戳)
 	Group       string                 `protobuf:"bytes,19,opt,name=group,proto3" json:"group" jsonschema_description:"我的分组"`                         // 我的分组
+	Tyk         bool                   `protobuf:"varint,20,opt,name=tyk,proto3" json:"tyk" jsonschema_description:"是否是体验用户"`                         // 是否是体验用户
 	// bool relogin = 19;// 是否重新登录:true 重新登录
 	KvList        []*UserKvInfo `protobuf:"bytes,26,rep,name=kvList,proto3" json:"kvList" jsonschema_description:"bool relogin = 19;// 是否重新登录:true 重新登录"` // 用户自定义信息
 	unknownFields protoimpl.UnknownFields
@@ -1042,6 +1043,13 @@ func (x *GetUserInfoResp) GetGroup() string {
 		return x.Group
 	}
 	return ""
+}
+
+func (x *GetUserInfoResp) GetTyk() bool {
+	if x != nil {
+		return x.Tyk
+	}
+	return false
 }
 
 func (x *GetUserInfoResp) GetKvList() []*UserKvInfo {
@@ -1596,7 +1604,7 @@ const file_shares_weixin_proto_rawDesc = "" +
 	"\rGetQrcodeResp\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\"(\n" +
 	"\x0eGetUserInfoReq\x12\x16\n" +
-	"\x06hexinv\x18\x01 \x01(\tR\x06hexinv\"\x97\x04\n" +
+	"\x06hexinv\x18\x01 \x01(\tR\x06hexinv\"\xa9\x04\n" +
 	"\x0fGetUserInfoResp\x12\x16\n" +
 	"\x06openid\x18\x01 \x01(\tR\x06openid\x12\x1a\n" +
 	"\bnickName\x18\x02 \x01(\tR\bnickName\x12\x1c\n" +
@@ -1619,7 +1627,8 @@ const file_shares_weixin_proto_rawDesc = "" +
 	"\x03msg\x18\x10 \x01(\tR\x03msg\x12\x1c\n" +
 	"\tsessionId\x18\x11 \x01(\tR\tsessionId\x12 \n" +
 	"\voverdueTime\x18\x12 \x01(\x03R\voverdueTime\x12\x14\n" +
-	"\x05group\x18\x13 \x01(\tR\x05group\x12*\n" +
+	"\x05group\x18\x13 \x01(\tR\x05group\x12\x10\n" +
+	"\x03tyk\x18\x14 \x01(\bR\x03tyk\x12*\n" +
 	"\x06kvList\x18\x1a \x03(\v2\x12.shares.UserKvInfoR\x06kvList\"\x90\x01\n" +
 	"\n" +
 	"UserKvInfo\x12\x10\n" +
