@@ -186,7 +186,7 @@ message GetMrtDetailReq{
 message GetMrtDetailResp{
     MrtInfo info = 1; // mrt信息
     repeated MrtLog docs = 2; // 操作列表
-    repeated MrtSharesInfo list = 3; // 持有列表
+    repeated Group list = 3; // 持有列表
 }
 
 // MrtInfo 股票信息
@@ -234,11 +234,13 @@ message UpsetMrtCodeReq{
     double num = 4; // 操作数量
     double price = 5; // 操作价格
     string doc = 6; // 描述
+    string group = 7;   // 分组
 }
 
 message GetMrtCodeReq{
     string code = 1;
     string mrt = 2; // id
+    string group = 3; // 分组
 }
 
 message GetMrtCodeResp{
@@ -571,6 +573,14 @@ message SharesInfo{
     int32 token = 20; // token 数
     bool isVip = 21; // 是否vip
     string py = 22; // 拼音
+    double star = 23; // 推荐星
+    repeated SharesInfoMsg msgs = 24;// 消息列表
+}
+
+message SharesInfoMsg{
+    string msg = 1; // 描述
+    string tm = 2; // 操作时间
+    string color = 3; // 颜色
 }
 
 // SharesInfoDetails 股票详细信息
@@ -983,4 +993,14 @@ message ChangeCodeReq{
     string code = 1; // 股票代码
     string key = 2; // 键
     string value = 3; // 值
+}
+
+message UpsetMrtInfoReq{
+    string code = 1; // 代码
+    string mrt = 2; // mrt
+    string group = 3; // 分组
+    int32 star = 4; // 星级
+    string msg = 5; // 消息
+    string groups = 6; // 分组,以;分隔
+
 }
