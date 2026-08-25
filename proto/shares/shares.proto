@@ -62,7 +62,7 @@ service shares {
     // rpc GetJgKline(GetSharesKlineReq) returns (GetJgKlineResp){} // 获取机构线
     rpc GetGzKline(GetSharesKlineReq) returns (GZPeResp){} // 获取股票联动线数据
     rpc GetHotHyName(GetHotHyNameReq) returns (GetHotHyNameResp){} // 获取热门行业  
-    rpc GetYyq(GetYyqReq) returns (GetYyqResp){} // 一眼清
+    // rpc GetYyq(GetYyqReq) returns (GetYyqResp){} // 一眼清
     ////////////////////////////////////////////////////////////////
     /////////////////////////名人堂////////////////////////////
     rpc GetMrtList(GetMrtListReq) returns (GetMrtListResp){} //
@@ -306,9 +306,10 @@ message MrtDoc {
 
 message KlineInfo {
     repeated string times = 1; // x轴数据
-    repeated double data1 = 2; // 数据
-    repeated double data2 = 3; // 数据
-    repeated double data3 = 4; // 数据
+    repeated string data1 = 2; // 数据
+    repeated string data2 = 3; // 数据
+    repeated string data3 = 4; // 数据
+    repeated string data4 = 5; // 数据
 }
 
 message GetYyqReq {

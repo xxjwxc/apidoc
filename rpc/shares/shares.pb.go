@@ -1958,10 +1958,11 @@ func (x *MrtDoc) GetType() string {
 
 type KlineInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Times         []string               `protobuf:"bytes,1,rep,name=times,proto3" json:"times" jsonschema_description:"x轴数据"`        // x轴数据
-	Data1         []float64              `protobuf:"fixed64,2,rep,packed,name=data1,proto3" json:"data1" jsonschema_description:"数据"` // 数据
-	Data2         []float64              `protobuf:"fixed64,3,rep,packed,name=data2,proto3" json:"data2" jsonschema_description:"数据"` // 数据
-	Data3         []float64              `protobuf:"fixed64,4,rep,packed,name=data3,proto3" json:"data3" jsonschema_description:"数据"` // 数据
+	Times         []string               `protobuf:"bytes,1,rep,name=times,proto3" json:"times" jsonschema_description:"x轴数据"` // x轴数据
+	Data1         []string               `protobuf:"bytes,2,rep,name=data1,proto3" json:"data1" jsonschema_description:"数据"`   // 数据
+	Data2         []string               `protobuf:"bytes,3,rep,name=data2,proto3" json:"data2" jsonschema_description:"数据"`   // 数据
+	Data3         []string               `protobuf:"bytes,4,rep,name=data3,proto3" json:"data3" jsonschema_description:"数据"`   // 数据
+	Data4         []string               `protobuf:"bytes,5,rep,name=data4,proto3" json:"data4" jsonschema_description:"数据"`   // 数据
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2003,23 +2004,30 @@ func (x *KlineInfo) GetTimes() []string {
 	return nil
 }
 
-func (x *KlineInfo) GetData1() []float64 {
+func (x *KlineInfo) GetData1() []string {
 	if x != nil {
 		return x.Data1
 	}
 	return nil
 }
 
-func (x *KlineInfo) GetData2() []float64 {
+func (x *KlineInfo) GetData2() []string {
 	if x != nil {
 		return x.Data2
 	}
 	return nil
 }
 
-func (x *KlineInfo) GetData3() []float64 {
+func (x *KlineInfo) GetData3() []string {
 	if x != nil {
 		return x.Data3
+	}
+	return nil
+}
+
+func (x *KlineInfo) GetData4() []string {
+	if x != nil {
+		return x.Data4
 	}
 	return nil
 }
@@ -7959,12 +7967,12 @@ func (x *ChangeCodeReq) GetValue() string {
 
 type UpsetMrtInfoReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code" jsonschema_description:"代码"`     // 代码
-	Mrt           string                 `protobuf:"bytes,2,opt,name=mrt,proto3" json:"mrt" jsonschema_description:"mrt"`      // mrt
-	Group         string                 `protobuf:"bytes,3,opt,name=group,proto3" json:"group" jsonschema_description:"分组"`   // 分组
-	Star          int32                  `protobuf:"varint,4,opt,name=star,proto3" json:"star" jsonschema_description:"星级"`    // 星级
-	Msg           string                 `protobuf:"bytes,5,opt,name=msg,proto3" json:"msg" jsonschema_description:"消息"`       // 消息
-	Groups        string                 `protobuf:"bytes,6,opt,name=groups,proto3" json:"groups" jsonschema_description:"分组"` // 分组
+	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code" jsonschema_description:"代码"`          // 代码
+	Mrt           string                 `protobuf:"bytes,2,opt,name=mrt,proto3" json:"mrt" jsonschema_description:"mrt"`           // mrt
+	Group         string                 `protobuf:"bytes,3,opt,name=group,proto3" json:"group" jsonschema_description:"分组"`        // 分组
+	Star          int32                  `protobuf:"varint,4,opt,name=star,proto3" json:"star" jsonschema_description:"星级"`         // 星级
+	Msg           string                 `protobuf:"bytes,5,opt,name=msg,proto3" json:"msg" jsonschema_description:"消息"`            // 消息
+	Groups        string                 `protobuf:"bytes,6,opt,name=groups,proto3" json:"groups" jsonschema_description:"分组,以;分隔"` // 分组,以;分隔
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8195,12 +8203,13 @@ const file_shares_shares_proto_rawDesc = "" +
 	"\x06MrtDoc\x12\x14\n" +
 	"\x05image\x18\x01 \x01(\tR\x05image\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\tR\x04type\"c\n" +
+	"\x04type\x18\x03 \x01(\tR\x04type\"y\n" +
 	"\tKlineInfo\x12\x14\n" +
 	"\x05times\x18\x01 \x03(\tR\x05times\x12\x14\n" +
-	"\x05data1\x18\x02 \x03(\x01R\x05data1\x12\x14\n" +
-	"\x05data2\x18\x03 \x03(\x01R\x05data2\x12\x14\n" +
-	"\x05data3\x18\x04 \x03(\x01R\x05data3\"\x1f\n" +
+	"\x05data1\x18\x02 \x03(\tR\x05data1\x12\x14\n" +
+	"\x05data2\x18\x03 \x03(\tR\x05data2\x12\x14\n" +
+	"\x05data3\x18\x04 \x03(\tR\x05data3\x12\x14\n" +
+	"\x05data4\x18\x05 \x03(\tR\x05data4\"\x1f\n" +
 	"\tGetYyqReq\x12\x12\n" +
 	"\x04days\x18\x02 \x01(\x05R\x04days\"\xfe\x04\n" +
 	"\n" +
@@ -8701,7 +8710,7 @@ const file_shares_shares_proto_rawDesc = "" +
 	"\x05group\x18\x03 \x01(\tR\x05group\x12\x12\n" +
 	"\x04star\x18\x04 \x01(\x05R\x04star\x12\x10\n" +
 	"\x03msg\x18\x05 \x01(\tR\x03msg\x12\x16\n" +
-	"\x06groups\x18\x06 \x01(\tR\x06groups2\xef\x0f\n" +
+	"\x06groups\x18\x06 \x01(\tR\x06groups2\xbc\x0f\n" +
 	"\x06shares\x121\n" +
 	"\bGetGroup\x12\r.common.Empty\x1a\x14.shares.GetGroupResp\"\x00\x127\n" +
 	"\n" +
@@ -8732,8 +8741,7 @@ const file_shares_shares_proto_rawDesc = "" +
 	"\fGetFundKline\x12\x19.shares.GetSharesKlineReq\x1a\x18.shares.GetFundKlineResp\"\x00\x12;\n" +
 	"\n" +
 	"GetGzKline\x12\x19.shares.GetSharesKlineReq\x1a\x10.shares.GZPeResp\"\x00\x12C\n" +
-	"\fGetHotHyName\x12\x17.shares.GetHotHyNameReq\x1a\x18.shares.GetHotHyNameResp\"\x00\x121\n" +
-	"\x06GetYyq\x12\x11.shares.GetYyqReq\x1a\x12.shares.GetYyqResp\"\x00\x12=\n" +
+	"\fGetHotHyName\x12\x17.shares.GetHotHyNameReq\x1a\x18.shares.GetHotHyNameResp\"\x00\x12=\n" +
 	"\n" +
 	"GetMrtList\x12\x15.shares.GetMrtListReq\x1a\x16.shares.GetMrtListResp\"\x00\x12=\n" +
 	"\n" +
@@ -8979,50 +8987,48 @@ var file_shares_shares_proto_depIdxs = []int32{
 	40,  // 101: shares.shares.GetFundKline:input_type -> shares.GetSharesKlineReq
 	40,  // 102: shares.shares.GetGzKline:input_type -> shares.GetSharesKlineReq
 	34,  // 103: shares.shares.GetHotHyName:input_type -> shares.GetHotHyNameReq
-	28,  // 104: shares.shares.GetYyq:input_type -> shares.GetYyqReq
-	21,  // 105: shares.shares.GetMrtList:input_type -> shares.GetMrtListReq
-	19,  // 106: shares.shares.GetMrtCode:input_type -> shares.GetMrtCodeReq
-	18,  // 107: shares.shares.UpsetMrtCode:input_type -> shares.UpsetMrtCodeReq
-	14,  // 108: shares.shares.GetMrtDetail:input_type -> shares.GetMrtDetailReq
-	8,   // 109: shares.shares.GetZybHyKline:input_type -> shares.GetZybHyKlineReq
-	2,   // 110: shares.shares.GetLicence:input_type -> shares.GetLicenceReq
-	100, // 111: shares.shares.GetTsc:input_type -> shares.GetTscReq
-	57,  // 112: shares.shares.GetGroup:output_type -> shares.GetGroupResp
-	78,  // 113: shares.shares.GetMyGroup:output_type -> shares.GetMyGroupResp
-	80,  // 114: shares.shares.UpsetGroupCode:output_type -> shares.UpsetGroupCodeResp
-	59,  // 115: shares.shares.Search:output_type -> shares.SearchResp
-	62,  // 116: shares.shares.Gets:output_type -> shares.GetsResp
-	67,  // 117: shares.shares.AddMyCode:output_type -> shares.AddMyCodeResp
-	70,  // 118: shares.shares.GetMyCode:output_type -> shares.GetMyCodeResp
-	72,  // 119: shares.shares.GetMsg:output_type -> shares.GetMsgResp
-	73,  // 120: shares.shares.HaveNewMsg:output_type -> shares.HaveNewMsgResp
-	112, // 121: shares.shares.DeleteMyCode:output_type -> common.Empty
-	112, // 122: shares.shares.AddGroup:output_type -> common.Empty
-	82,  // 123: shares.shares.GetLq:output_type -> shares.GetLqResp
-	24,  // 124: shares.shares.GetHejjw:output_type -> shares.GetHejjwResp
-	52,  // 125: shares.shares.GetDailyCheck:output_type -> shares.GetDailyCheckResp
-	6,   // 126: shares.shares.GetClmx:output_type -> shares.GetClmxResp
-	90,  // 127: shares.shares.GetMyYd:output_type -> shares.GetMyYdResp
-	50,  // 128: shares.shares.GetHyRm:output_type -> shares.GetHyRmResp
-	48,  // 129: shares.shares.GetMyTeam:output_type -> shares.GetMyTeamResp
-	47,  // 130: shares.shares.GetMyTeamDetail:output_type -> shares.GetMyTeamDetailResp
-	96,  // 131: shares.shares.GetHyMmadd:output_type -> shares.TblResp
-	96,  // 132: shares.shares.GetAllZyb:output_type -> shares.TblResp
-	41,  // 133: shares.shares.GetSharesKline:output_type -> shares.GetSharesKlineResp
-	42,  // 134: shares.shares.GetSharesKlineMore:output_type -> shares.GetSharesKlineMoreResp
-	30,  // 135: shares.shares.GetFundKline:output_type -> shares.GetFundKlineResp
-	44,  // 136: shares.shares.GetGzKline:output_type -> shares.GZPeResp
-	38,  // 137: shares.shares.GetHotHyName:output_type -> shares.GetHotHyNameResp
-	29,  // 138: shares.shares.GetYyq:output_type -> shares.GetYyqResp
-	22,  // 139: shares.shares.GetMrtList:output_type -> shares.GetMrtListResp
-	20,  // 140: shares.shares.GetMrtCode:output_type -> shares.GetMrtCodeResp
-	112, // 141: shares.shares.UpsetMrtCode:output_type -> common.Empty
-	15,  // 142: shares.shares.GetMrtDetail:output_type -> shares.GetMrtDetailResp
-	9,   // 143: shares.shares.GetZybHyKline:output_type -> shares.GetZybHyKlineResp
-	3,   // 144: shares.shares.GetLicence:output_type -> shares.GetLicenceResp
-	102, // 145: shares.shares.GetTsc:output_type -> shares.GetTscResp
-	112, // [112:146] is the sub-list for method output_type
-	78,  // [78:112] is the sub-list for method input_type
+	21,  // 104: shares.shares.GetMrtList:input_type -> shares.GetMrtListReq
+	19,  // 105: shares.shares.GetMrtCode:input_type -> shares.GetMrtCodeReq
+	18,  // 106: shares.shares.UpsetMrtCode:input_type -> shares.UpsetMrtCodeReq
+	14,  // 107: shares.shares.GetMrtDetail:input_type -> shares.GetMrtDetailReq
+	8,   // 108: shares.shares.GetZybHyKline:input_type -> shares.GetZybHyKlineReq
+	2,   // 109: shares.shares.GetLicence:input_type -> shares.GetLicenceReq
+	100, // 110: shares.shares.GetTsc:input_type -> shares.GetTscReq
+	57,  // 111: shares.shares.GetGroup:output_type -> shares.GetGroupResp
+	78,  // 112: shares.shares.GetMyGroup:output_type -> shares.GetMyGroupResp
+	80,  // 113: shares.shares.UpsetGroupCode:output_type -> shares.UpsetGroupCodeResp
+	59,  // 114: shares.shares.Search:output_type -> shares.SearchResp
+	62,  // 115: shares.shares.Gets:output_type -> shares.GetsResp
+	67,  // 116: shares.shares.AddMyCode:output_type -> shares.AddMyCodeResp
+	70,  // 117: shares.shares.GetMyCode:output_type -> shares.GetMyCodeResp
+	72,  // 118: shares.shares.GetMsg:output_type -> shares.GetMsgResp
+	73,  // 119: shares.shares.HaveNewMsg:output_type -> shares.HaveNewMsgResp
+	112, // 120: shares.shares.DeleteMyCode:output_type -> common.Empty
+	112, // 121: shares.shares.AddGroup:output_type -> common.Empty
+	82,  // 122: shares.shares.GetLq:output_type -> shares.GetLqResp
+	24,  // 123: shares.shares.GetHejjw:output_type -> shares.GetHejjwResp
+	52,  // 124: shares.shares.GetDailyCheck:output_type -> shares.GetDailyCheckResp
+	6,   // 125: shares.shares.GetClmx:output_type -> shares.GetClmxResp
+	90,  // 126: shares.shares.GetMyYd:output_type -> shares.GetMyYdResp
+	50,  // 127: shares.shares.GetHyRm:output_type -> shares.GetHyRmResp
+	48,  // 128: shares.shares.GetMyTeam:output_type -> shares.GetMyTeamResp
+	47,  // 129: shares.shares.GetMyTeamDetail:output_type -> shares.GetMyTeamDetailResp
+	96,  // 130: shares.shares.GetHyMmadd:output_type -> shares.TblResp
+	96,  // 131: shares.shares.GetAllZyb:output_type -> shares.TblResp
+	41,  // 132: shares.shares.GetSharesKline:output_type -> shares.GetSharesKlineResp
+	42,  // 133: shares.shares.GetSharesKlineMore:output_type -> shares.GetSharesKlineMoreResp
+	30,  // 134: shares.shares.GetFundKline:output_type -> shares.GetFundKlineResp
+	44,  // 135: shares.shares.GetGzKline:output_type -> shares.GZPeResp
+	38,  // 136: shares.shares.GetHotHyName:output_type -> shares.GetHotHyNameResp
+	22,  // 137: shares.shares.GetMrtList:output_type -> shares.GetMrtListResp
+	20,  // 138: shares.shares.GetMrtCode:output_type -> shares.GetMrtCodeResp
+	112, // 139: shares.shares.UpsetMrtCode:output_type -> common.Empty
+	15,  // 140: shares.shares.GetMrtDetail:output_type -> shares.GetMrtDetailResp
+	9,   // 141: shares.shares.GetZybHyKline:output_type -> shares.GetZybHyKlineResp
+	3,   // 142: shares.shares.GetLicence:output_type -> shares.GetLicenceResp
+	102, // 143: shares.shares.GetTsc:output_type -> shares.GetTscResp
+	111, // [111:144] is the sub-list for method output_type
+	78,  // [78:111] is the sub-list for method input_type
 	78,  // [78:78] is the sub-list for extension type_name
 	78,  // [78:78] is the sub-list for extension extendee
 	0,   // [0:78] is the sub-list for field type_name

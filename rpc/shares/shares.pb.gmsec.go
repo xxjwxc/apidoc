@@ -86,7 +86,7 @@ type SharesClient interface {
 	// rpc GetJgKline(GetSharesKlineReq) returns (GetJgKlineResp){} // 获取机构线
 	GetGzKline(ctx context.Context, in *GetSharesKlineReq, opts ...grpc.CallOption) (*GZPeResp, error)
 	GetHotHyName(ctx context.Context, in *GetHotHyNameReq, opts ...grpc.CallOption) (*GetHotHyNameResp, error)
-	GetYyq(ctx context.Context, in *GetYyqReq, opts ...grpc.CallOption) (*GetYyqResp, error)
+	// rpc GetYyq(GetYyqReq) returns (GetYyqResp){} // 一眼清
 	// //////////////////////////////////////////////////////////////
 	// ///////////////////////名人堂////////////////////////////
 	GetMrtList(ctx context.Context, in *GetMrtListReq, opts ...grpc.CallOption) (*GetMrtListResp, error)
@@ -492,20 +492,6 @@ func (c *sharesClient) GetHotHyName(ctx context.Context, in *GetHotHyNameReq, op
 	return out, nil
 }
 
-func (c *sharesClient) GetYyq(ctx context.Context, in *GetYyqReq, opts ...grpc.CallOption) (*GetYyqResp, error) {
-	conn, err := c.cc.Next()
-	if err != nil {
-		return nil, err
-	}
-	defer conn.Close()
-	out := new(GetYyqResp)
-	err = conn.Invoke(ctx, "/shares.shares/GetYyq", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *sharesClient) GetMrtList(ctx context.Context, in *GetMrtListReq, opts ...grpc.CallOption) (*GetMrtListResp, error) {
 	conn, err := c.cc.Next()
 	if err != nil {
@@ -664,7 +650,7 @@ type SharesServer interface {
 	// rpc GetJgKline(GetSharesKlineReq) returns (GetJgKlineResp){} // 获取机构线
 	GetGzKline(context.Context, *GetSharesKlineReq) (*GZPeResp, error)
 	GetHotHyName(context.Context, *GetHotHyNameReq) (*GetHotHyNameResp, error)
-	GetYyq(context.Context, *GetYyqReq) (*GetYyqResp, error)
+	// rpc GetYyq(GetYyqReq) returns (GetYyqResp){} // 一眼清
 	// //////////////////////////////////////////////////////////////
 	// ///////////////////////名人堂////////////////////////////
 	GetMrtList(context.Context, *GetMrtListReq) (*GetMrtListResp, error)
@@ -762,9 +748,6 @@ func (*UnimplementedSharesServer) GetGzKline(context.Context, *GetSharesKlineReq
 }
 func (*UnimplementedSharesServer) GetHotHyName(context.Context, *GetHotHyNameReq) (*GetHotHyNameResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHotHyName not implemented")
-}
-func (*UnimplementedSharesServer) GetYyq(context.Context, *GetYyqReq) (*GetYyqResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetYyq not implemented")
 }
 func (*UnimplementedSharesServer) GetMrtList(context.Context, *GetMrtListReq) (*GetMrtListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMrtList not implemented")
@@ -1260,24 +1243,6 @@ func _Shares_GetHotHyName_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Shares_GetYyq_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetYyqReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SharesServer).GetYyq(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/shares.shares/GetYyq",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SharesServer).GetYyq(ctx, req.(*GetYyqReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Shares_GetMrtList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetMrtListReq)
 	if err := dec(in); err != nil {
@@ -1511,10 +1476,6 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetHotHyName",
 			Handler:    _Shares_GetHotHyName_Handler,
-		},
-		{
-			MethodName: "GetYyq",
-			Handler:    _Shares_GetYyq_Handler,
 		},
 		{
 			MethodName: "GetMrtList",
