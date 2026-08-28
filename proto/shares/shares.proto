@@ -86,6 +86,9 @@ service shares {
     // GetTsc 获取搜索提示词
     rpc GetTsc(GetTscReq) returns (GetTscResp){}
     //////////////////////////////////////////////////////////////////
+    // 获取主题机会
+    rpc GetHotList(GetHotListRespReq) returns (GetHotListResp){}
+    
 }
 
 
@@ -1003,5 +1006,50 @@ message UpsetMrtInfoReq{
     int32 star = 4; // 星级
     string msg = 5; // 消息
     string groups = 6; // 分组,以;分隔
+}
 
+message GetHotListRespReq {
+    string code = 1;
+}
+
+message GetHotListResp{
+    repeated GainianInfo list = 1;
+}
+
+// GainianInfo 存入 zhangle_gainian_tbl.doc 的内容结构, 由主题详情转换而来
+message GainianInfo{ 
+    string code = 1; // code
+    string name = 2; // name
+    int32 days = 3; // 上榜天数
+    int32 hot = 4; // 热度
+    string hyCode = 5; // 行业代码
+    double percent = 6; // 涨跌幅
+    repeated string texts = 7; // 涨乐智见
+    repeated StockReason stocks = 8; // 关联个股代码
+    repeated GainianEvent events = 9; // 热点事件
+    repeated GainianNode nodes = 10; // 脉络发展
+}
+
+// StockReason 关联个股
+message StockReason{
+    string code = 1; // 交易代码
+    string name = 2; // name
+    double percent = 3; // 涨跌幅
+    string color = 4;// 颜色
+    string reason = 5; // reason
+    string url = 6; // url
+}
+
+// GainianEvent 热点事件
+message GainianEvent{
+    string title = 1; // 事件标题
+    string desc = 2; // 事件摘要(涨乐智见)
+    string date = 3; // 时间
+}
+
+// GainianNode 脉络发展节点
+message GainianNode{
+    string content = 1; // 节点内容
+    string time = 2; // 时间
+    string keyword = 3; // 关键字
 }

@@ -101,6 +101,9 @@ type SharesClient interface {
 	// ///////////////////////////////V2/////////////////////////////////////
 	// GetTsc 获取搜索提示词
 	GetTsc(ctx context.Context, in *GetTscReq, opts ...grpc.CallOption) (*GetTscResp, error)
+	// ////////////////////////////////////////////////////////////////
+	// 获取主题机会
+	GetHotList(ctx context.Context, in *GetHotListRespReq, opts ...grpc.CallOption) (*GetHotListResp, error)
 }
 
 type sharesClient struct {
@@ -590,6 +593,20 @@ func (c *sharesClient) GetTsc(ctx context.Context, in *GetTscReq, opts ...grpc.C
 	return out, nil
 }
 
+func (c *sharesClient) GetHotList(ctx context.Context, in *GetHotListRespReq, opts ...grpc.CallOption) (*GetHotListResp, error) {
+	conn, err := c.cc.Next()
+	if err != nil {
+		return nil, err
+	}
+	defer conn.Close()
+	out := new(GetHotListResp)
+	err = conn.Invoke(ctx, "/shares.shares/GetHotList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SharesServer is the server API for Shares service.
 type SharesServer interface {
 	// GetGroup 获取分组信息
@@ -665,6 +682,9 @@ type SharesServer interface {
 	// ///////////////////////////////V2/////////////////////////////////////
 	// GetTsc 获取搜索提示词
 	GetTsc(context.Context, *GetTscReq) (*GetTscResp, error)
+	// ////////////////////////////////////////////////////////////////
+	// 获取主题机会
+	GetHotList(context.Context, *GetHotListRespReq) (*GetHotListResp, error)
 }
 
 // UnimplementedSharesServer can be embedded to have forward compatible implementations.
@@ -769,6 +789,9 @@ func (*UnimplementedSharesServer) GetLicence(context.Context, *GetLicenceReq) (*
 }
 func (*UnimplementedSharesServer) GetTsc(context.Context, *GetTscReq) (*GetTscResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTsc not implemented")
+}
+func (*UnimplementedSharesServer) GetHotList(context.Context, *GetHotListRespReq) (*GetHotListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetHotList not implemented")
 }
 
 func RegisterSharesServer(s server.Server, srv SharesServer) {
@@ -1369,6 +1392,24 @@ func _Shares_GetTsc_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shares_GetHotList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHotListRespReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SharesServer).GetHotList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/shares.shares/GetHotList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SharesServer).GetHotList(ctx, req.(*GetHotListRespReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Shares_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "shares.shares",
 	HandlerType: (*SharesServer)(nil),
@@ -1504,6 +1545,10 @@ var _Shares_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTsc",
 			Handler:    _Shares_GetTsc_Handler,
+		},
+		{
+			MethodName: "GetHotList",
+			Handler:    _Shares_GetHotList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
